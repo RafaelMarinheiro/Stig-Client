@@ -471,6 +471,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016184100000398B0078B1D4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		0202F40517A05E920071D95C = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +574,7 @@
 		0202F46B17A05FC80071D95C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				016184100000398B0078B1D4 /* Settings */,
 				0202F46517A05FB50071D95C /* STBoardViewController.h */,
 				0202F46617A05FB50071D95C /* STBoardViewController.m */,
 				0202F46717A05FB50071D95C /* STSliderViewController.h */,

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "STOverlord.h"
-@interface STConfigViewController : UIViewController
+@interface STConfigViewController : UITableViewController
 - (IBAction)networkSwitchChanged:(UISwitch *)sender;
 - (IBAction)doneButtonPressed:(UIButton *)sender;
 

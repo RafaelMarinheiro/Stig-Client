@@ -176,7 +176,7 @@
         [self setRankingCriteria:crit];
     }else {
         id <STOverlord> overlord = [STHiveCluster spawnOverlord];
-        if (overlord.user) {
+        if (true) {
             if (buttonTag == 0) {
                 [self performSegueWithIdentifier:@"settingsSegue" sender:nil];
             }else if (buttonTag == 2) {

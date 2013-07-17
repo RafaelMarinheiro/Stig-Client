@@ -11,8 +11,12 @@
 @interface CircularButtonDisposerView : UIView
 
 @property (nonatomic, strong) NSNumber *disposeRadius; 
-@property (nonatomic, strong) NSNumber *disposeAngle; //Only supports pi/2 in this beta
-@property (nonatomic, strong) NSArray *viewsToDispose; //Only supports 5 in this beta
-@property (nonatomic, readonly) NSUInteger numberOfViewsToDispose;
+@property (nonatomic, strong) NSNumber *disposeAngle;
+@property (nonatomic) CGPoint disposeCenter;
+@property (nonatomic) float bounceRadiusDelta;
+@property (nonatomic) NSUInteger numberOfButtons;
+@property (nonatomic, strong) UIButton *mainButton;
+@property (nonatomic, strong) NSArray *buttons;
 @property (nonatomic, readonly, getter = isDisposing) BOOL disposing;
+@property (nonatomic, readonly, getter = isAnimating) BOOL animating;
 @end

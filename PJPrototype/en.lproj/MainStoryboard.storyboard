@@ -17,7 +17,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pLf-sw-v4l" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="7dl-bD-0cE"/>
                             <constraint firstItem="pLf-sw-v4l" firstAttribute="top" secondItem="16" secondAttribute="top" type="default" id="HdK-DR-gcS"/>

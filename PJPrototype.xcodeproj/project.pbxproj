@@ -56,7 +56,14 @@
 		0281A0B2176E184E00A4D2DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A0B1176E184E00A4D2DB /* QuartzCore.framework */; };
 		0281A0B4176E1F3200A4D2DB /* uk-board.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0281A0B3176E1F3200A4D2DB /* uk-board.jpg */; };
 		02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */; };
+<<<<<<< HEAD
 		0F9797F6179735FD003FD8BE /* Clarkson-Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F9797F4179735FD003FD8BE /* Clarkson-Delaunay.cpp */; };
+=======
+		02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3ED91797336B0055BB75 /* STPlace.m */; };
+		02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CF3EDB1797349E0055BB75 /* CoreLocation.framework */; };
+		02CF3EE0179738430055BB75 /* STLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EDF179738430055BB75 /* STLocation.m */; };
+		02CF3EE317973A0B0055BB75 /* STRanking.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EE217973A0B0055BB75 /* STRanking.m */; };
+>>>>>>> 6ecc360097b86705c0556af0e40fe931cf26e30d
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,8 +147,18 @@
 		0281A0B3176E1F3200A4D2DB /* uk-board.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "uk-board.jpg"; sourceTree = "<group>"; };
 		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonDisposerView.h; sourceTree = "<group>"; };
 		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		0F9797F4179735FD003FD8BE /* Clarkson-Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Clarkson-Delaunay.cpp"; sourceTree = "<group>"; };
 		0F9797F5179735FD003FD8BE /* Clarkson-Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Clarkson-Delaunay.h"; sourceTree = "<group>"; };
+=======
+		02CF3ED81797336B0055BB75 /* STPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlace.h; sourceTree = "<group>"; };
+		02CF3ED91797336B0055BB75 /* STPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlace.m; sourceTree = "<group>"; };
+		02CF3EDB1797349E0055BB75 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		02CF3EDE179738430055BB75 /* STLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocation.h; sourceTree = "<group>"; };
+		02CF3EDF179738430055BB75 /* STLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocation.m; sourceTree = "<group>"; };
+		02CF3EE117973A0B0055BB75 /* STRanking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRanking.h; sourceTree = "<group>"; };
+		02CF3EE217973A0B0055BB75 /* STRanking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRanking.m; sourceTree = "<group>"; };
+>>>>>>> 6ecc360097b86705c0556af0e40fe931cf26e30d
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */,
 				025E273B1794675E00CAE697 /* GLKit.framework in Frameworks */,
 				025E273C1794675E00CAE697 /* OpenGLES.framework in Frameworks */,
 				025E273217945F6100CAE697 /* MapKit.framework in Frameworks */,
@@ -167,6 +185,7 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
+				02CF3EDD1797382A0055BB75 /* Model */,
 				02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */,
 				02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */,
 				025E275017947F4400CAE697 /* STTypes.h */,
@@ -198,6 +217,7 @@
 		0281A044176E15DE00A4D2DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02CF3EDB1797349E0055BB75 /* CoreLocation.framework */,
 				025E27391794675E00CAE697 /* GLKit.framework */,
 				025E273A1794675E00CAE697 /* OpenGLES.framework */,
 				025E273117945F6100CAE697 /* MapKit.framework */,
@@ -323,6 +343,7 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		0F9797F717973602003FD8BE /* Delaunay */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +351,19 @@
 				0F9797F5179735FD003FD8BE /* Clarkson-Delaunay.h */,
 			);
 			name = Delaunay;
+=======
+		02CF3EDD1797382A0055BB75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02CF3ED81797336B0055BB75 /* STPlace.h */,
+				02CF3ED91797336B0055BB75 /* STPlace.m */,
+				02CF3EDE179738430055BB75 /* STLocation.h */,
+				02CF3EDF179738430055BB75 /* STLocation.m */,
+				02CF3EE117973A0B0055BB75 /* STRanking.h */,
+				02CF3EE217973A0B0055BB75 /* STRanking.m */,
+			);
+			name = Model;
+>>>>>>> 6ecc360097b86705c0556af0e40fe931cf26e30d
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +468,9 @@
 				025E274C1794760800CAE697 /* matrix.c in Sources */,
 				025E274F17947A0A00CAE697 /* MapOverlayRenderer.mm in Sources */,
 				02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */,
+				02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */,
+				02CF3EE0179738430055BB75 /* STLocation.m in Sources */,
+				02CF3EE317973A0B0055BB75 /* STRanking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

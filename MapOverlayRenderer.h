@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import "ESRenderer.h"
 #import "STTypes.h"
@@ -28,13 +29,17 @@
 	/* the shader program object */
 	GLuint program;
 
-@public
-    int numTriangles;
-    STTriangle * triangleArray;
-    STColor * colorArray;
+    int _allocatedTriangles;
+    int _numTriangles;
+    STTriangle * _triangleArray;
+    STColor * _colorArray;
+    
+    BOOL _needUpdate;
 }
 
+- (void) setupTest;
 - (void) render;
+- (void) setSampledPoints: (int)numberOfPoints withColors: (STColor *)colorArray withPoints:(STPoint *)pointArray;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end

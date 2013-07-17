@@ -9,6 +9,8 @@
 #import "MapOverlayRenderer.h"
 #import "Shaders.h"
 #import "matrix.h"
+#import "Clarkson-Delaunay.h"
+
 
 // uniform index
 enum {
@@ -39,8 +41,7 @@ enum {
 
         if (!context || ![EAGLContext setCurrentContext:context] || ![self loadShaders])
 		{
-
-            return nil;
+           return nil;
         }
 
 		// Create default framebuffer object. The backing will be allocated for the current layer in -resizeFromLayer
@@ -49,94 +50,112 @@ enum {
 		glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
-        [self setup];
-	}
 
+	}
+    _allocatedTriangles = -2;
+    _numTriangles = 0;
+    _triangleArray = nil;
+    _colorArray = nil;
+    _needUpdate = YES;
+    
 	return self;
 }
 
+- (void) setSampledPoints: (int)numberOfPoints withColors: (STColor *)colorArray withPoints:(STPoint *)pointArray{
+    
+    unsigned int * list = BuildTriangleIndexList(pointArray, (float)RAND_MAX, numberOfPoints, 2, 1, &_numTriangles);
+    
+    _numTriangles /= 3;
+    
+    if(_numTriangles > 0){
+        if(_numTriangles > _allocatedTriangles){
+            if(_triangleArray){
+                free(_triangleArray);
+                _triangleArray = nil;
+            }
+            if(_colorArray){
+                free(_colorArray);
+                _colorArray = nil;
+            }
+            _triangleArray =(STTriangle *) malloc(_numTriangles * sizeof(STTriangle));
+            _colorArray = (STColor *)malloc(3*_numTriangles * sizeof(STColor));
+            
+            _allocatedTriangles = _numTriangles;
+        }
+    }
+    for (int triangle = 0; triangle < _numTriangles; triangle++){
+        int a = list[3*triangle + 0];
+        int b = list[3*triangle + 1];
+        int c = list[3*triangle + 2];
+        _triangleArray[triangle] = STTriangleMake(pointArray[a],
+                                                  pointArray[b],
+                                                  pointArray[c]);
+        
+        _colorArray[3*triangle + 0] = colorArray[a];
+        _colorArray[3*triangle + 1] = colorArray[b];
+        _colorArray[3*triangle + 2] = colorArray[c];
+    }
 
+    free(list);
+     
+}
 
-- (void) setup {
-
+- (void) setupTest {
     float down = -1;
     float left = -1;
-    int steps = 10;
+    int steps = 5;
     float inc = 2.0/steps;
-    STPoint * pointArray = malloc((steps+1)*(steps+1)*sizeof(STPoint));
-    STColor * colArr = malloc((steps+1)*(steps+1)*sizeof(STColor));
+    STPoint * pointArray = (STPoint *) malloc(((steps+1)*(steps+1))*sizeof(STPoint));
+    STColor * colArr = (STColor *) malloc(((steps+1)*(steps+1))*sizeof(STColor));
 
+    int k = 0;
     for(int i = 0; i < steps+1; i++){
         for(int j = 0; j < steps+1; j++){
+
             pointArray[(steps+1)*i + j] = STPointMake(down, left);
             colArr[(steps+1)*i + j] = STColorMake(1.0, 0.0, 1.0, (rand()%256)/256.0);
             left += inc;
+            k++;
         }
         left = -1;
         down += inc;
     }
-    triangleArray = malloc(2*steps*steps*sizeof(STTriangle));
-
-    colorArray = malloc(2*3*steps*steps*sizeof(STColor));
-
-    numTriangles = 0;
-
-    for(int i = 0; i < steps; i++) {
-        for(int j = 0; j < steps; j++){
-            triangleArray[numTriangles] = STTriangleMake(pointArray[(steps+1)*i + j],
-                                                         pointArray[(steps+1)*i+(j+1)],
-                                                         pointArray[(steps+1)*(i+1) + j]);
-
-            colorArray[3*numTriangles + 0] = colArr[(steps+1)*i + j];
-            colorArray[3*numTriangles + 1] = colArr[(steps+1)*i + (j+1)];
-            colorArray[3*numTriangles + 2] = colArr[(steps+1)*(i+1) + j];
-
-            numTriangles++;
-
-            triangleArray[numTriangles] = STTriangleMake(pointArray[(steps+1)*(i+1) + (j+1)],
-                                                         pointArray[(steps+1)*i+(j+1)],
-                                                         pointArray[(steps+1)*(i+1) + j]);
-
-            colorArray[3*numTriangles + 0] = colArr[(steps+1)*(i+1) + (j+1)];
-            colorArray[3*numTriangles + 1] = colArr[(steps+1)*i + (j+1)];
-            colorArray[3*numTriangles + 2] = colArr[(steps+1)*(i+1) + j];
-            numTriangles++;
-        }
-    }
+    [self setSampledPoints:k withColors:colArr withPoints:pointArray];
+    free(pointArray);
+    free(colArr);
 }
 
 - (void)render {
+    if(_needUpdate){
+        [EAGLContext setCurrentContext:context];
 
-    [EAGLContext setCurrentContext:context];
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+        
+        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
+        glViewport(0, 0, backingWidth, backingHeight);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
-    glViewport(0, 0, backingWidth, backingHeight);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+        if(_numTriangles > 0){
+            // use shader program
+            glUseProgram(program);
+            
+            // update attribute values
+            glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, _triangleArray);
+            glEnableVertexAttribArray(ATTRIB_VERTEX);
+            glVertexAttribPointer(ATTRIB_COLOR, 4, GL_FLOAT, GL_TRUE, 0, _colorArray); //enable the normalized flag
+            glEnableVertexAttribArray(ATTRIB_COLOR);
+            
+            glDrawArrays(GL_TRIANGLES, 0, 3*_numTriangles);
+            
+        }
 
-	// use shader program
-	glUseProgram(program);
-
-	// handle viewing matrices
-	GLfloat proj[16];
-	// setup projection matrix (orthographic)
-	mat4f_LoadOrtho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f, proj);
-
-	// update uniform values
-	glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX], 1, GL_FALSE, proj);
-
-	// update attribute values
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, triangleArray);
-	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_FLOAT, 1, 0, colorArray); //enable the normalized flag
-    glEnableVertexAttribArray(ATTRIB_COLOR);
-
-	// draw
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3*numTriangles);
-
-    glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
-    [context presentRenderbuffer:GL_RENDERBUFFER];
+        glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+        [context presentRenderbuffer:GL_RENDERBUFFER];
+    }
+    _needUpdate = NO;
 }
 
 - (BOOL)loadShaders {
@@ -149,14 +168,14 @@ enum {
 
 	// create and compile vertex shader
 	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"vsh"];
-	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
+	if (!compileShader(&vertShader, GL_VERTEX_SHADER, (GLsizei)1, vertShaderPathname)) {
 		destroyShaders(vertShader, fragShader, program);
 		return NO;
 	}
 
 	// create and compile fragment shader
 	fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"fsh"];
-	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
+	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, (GLsizei)1, fragShaderPathname)) {
 		destroyShaders(vertShader, fragShader, program);
 		return NO;
 	}
@@ -179,8 +198,8 @@ enum {
 	}
 
 	// get uniform locations
-	uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(program, "modelViewProjectionMatrix");
-
+	// uniforms[UNIFORM_ENUM] = glGetUniformLocation(program, "<UNIFORM_PARAMETER_NAME>");
+    
 	// release vertex and fragment shaders
 	if (vertShader) {
 		glDeleteShader(vertShader);
@@ -237,8 +256,10 @@ enum {
 	if ([EAGLContext currentContext] == context)
         [EAGLContext setCurrentContext:nil];
 	
-	
 	context = nil;
+    
+    if(_triangleArray) free(_triangleArray);
+    if(_colorArray) free(_colorArray);
 	
 }
 

@@ -11,15 +11,13 @@
 		025E27381794620300CAE697 /* MagicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E27371794620300CAE697 /* MagicView.m */; };
 		025E273B1794675E00CAE697 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E27391794675E00CAE697 /* GLKit.framework */; };
 		025E273C1794675E00CAE697 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E273A1794675E00CAE697 /* OpenGLES.framework */; };
-		025E273F17946C5B00CAE697 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E273E17946C4600CAE697 /* ES2Renderer.m */; };
 		025E274317946C9F00CAE697 /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E274217946C9F00CAE697 /* Shaders.m */; };
 		025E274617946F4300CAE697 /* template.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 025E274417946F4300CAE697 /* template.fsh */; };
 		025E274717946F4300CAE697 /* template.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 025E274517946F4300CAE697 /* template.vsh */; };
 		025E274817946FB100CAE697 /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274417946F4300CAE697 /* template.fsh */; };
 		025E274917946FB100CAE697 /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274517946F4300CAE697 /* template.vsh */; };
 		025E274C1794760800CAE697 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 025E274B1794760800CAE697 /* matrix.c */; };
-		025E274F17947A0A00CAE697 /* MapOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E274E17947A0A00CAE697 /* MapOverlayRenderer.m */; };
-		025E27521794860A00CAE697 /* STTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E27511794860A00CAE697 /* STTypes.m */; };
+		025E274F17947A0A00CAE697 /* MapOverlayRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 025E274E17947A0A00CAE697 /* MapOverlayRenderer.mm */; };
 		0281A046176E15DE00A4D2DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A045176E15DE00A4D2DB /* UIKit.framework */; };
 		0281A048176E15DE00A4D2DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A047176E15DE00A4D2DB /* Foundation.framework */; };
 		0281A04A176E15DE00A4D2DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A049176E15DE00A4D2DB /* CoreGraphics.framework */; };
@@ -58,6 +56,7 @@
 		0281A0B2176E184E00A4D2DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A0B1176E184E00A4D2DB /* QuartzCore.framework */; };
 		0281A0B4176E1F3200A4D2DB /* uk-board.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0281A0B3176E1F3200A4D2DB /* uk-board.jpg */; };
 		02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */; };
+		0F9797F6179735FD003FD8BE /* Clarkson-Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F9797F4179735FD003FD8BE /* Clarkson-Delaunay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,8 +65,6 @@
 		025E27371794620300CAE697 /* MagicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicView.m; sourceTree = "<group>"; };
 		025E27391794675E00CAE697 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		025E273A1794675E00CAE697 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		025E273D17946C4600CAE697 /* ES2Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
-		025E273E17946C4600CAE697 /* ES2Renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ES2Renderer.m; sourceTree = "<group>"; };
 		025E274017946C8600CAE697 /* ESRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		025E274117946C9F00CAE697 /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
 		025E274217946C9F00CAE697 /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
@@ -76,7 +73,7 @@
 		025E274A1794760800CAE697 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
 		025E274B1794760800CAE697 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlayRenderer.h; sourceTree = "<group>"; };
-		025E274E17947A0A00CAE697 /* MapOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapOverlayRenderer.m; sourceTree = "<group>"; };
+		025E274E17947A0A00CAE697 /* MapOverlayRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapOverlayRenderer.mm; sourceTree = "<group>"; };
 		025E275017947F4400CAE697 /* STTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTypes.h; sourceTree = "<group>"; };
 		025E27511794860A00CAE697 /* STTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTypes.m; sourceTree = "<group>"; };
 		0281A042176E15DE00A4D2DB /* PJPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PJPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +140,8 @@
 		0281A0B3176E1F3200A4D2DB /* uk-board.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "uk-board.jpg"; sourceTree = "<group>"; };
 		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonDisposerView.h; sourceTree = "<group>"; };
 		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
+		0F9797F4179735FD003FD8BE /* Clarkson-Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Clarkson-Delaunay.cpp"; sourceTree = "<group>"; };
+		0F9797F5179735FD003FD8BE /* Clarkson-Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Clarkson-Delaunay.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,13 +175,12 @@
 				025E27371794620300CAE697 /* MagicView.m */,
 				025E274017946C8600CAE697 /* ESRenderer.h */,
 				025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */,
-				025E274E17947A0A00CAE697 /* MapOverlayRenderer.m */,
-				025E273D17946C4600CAE697 /* ES2Renderer.h */,
-				025E273E17946C4600CAE697 /* ES2Renderer.m */,
+				025E274E17947A0A00CAE697 /* MapOverlayRenderer.mm */,
 				025E274A1794760800CAE697 /* matrix.h */,
 				025E274B1794760800CAE697 /* matrix.c */,
 				025E274117946C9F00CAE697 /* Shaders.h */,
 				025E274217946C9F00CAE697 /* Shaders.m */,
+				0F9797F717973602003FD8BE /* Delaunay */,
 				0281A04B176E15DE00A4D2DB /* PJPrototype */,
 				0281A044176E15DE00A4D2DB /* Frameworks */,
 				0281A043176E15DE00A4D2DB /* Products */,
@@ -325,6 +323,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		0F9797F717973602003FD8BE /* Delaunay */ = {
+			isa = PBXGroup;
+			children = (
+				0F9797F4179735FD003FD8BE /* Clarkson-Delaunay.cpp */,
+				0F9797F5179735FD003FD8BE /* Clarkson-Delaunay.h */,
+			);
+			name = Delaunay;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -398,7 +405,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025E273F17946C5B00CAE697 /* ES2Renderer.m in Sources */,
 				0281A052176E15DE00A4D2DB /* main.m in Sources */,
 				0281A056176E15DE00A4D2DB /* AppDelegate.m in Sources */,
 				0281A062176E15DE00A4D2DB /* FirstViewController.m in Sources */,
@@ -409,8 +415,8 @@
 				0281A09A176E169D00A4D2DB /* UIControl+MGEvents.m in Sources */,
 				0281A09B176E169D00A4D2DB /* UIResponder+FirstResponder.m in Sources */,
 				0281A09C176E169D00A4D2DB /* UIView+MGEasyFrame.m in Sources */,
-				0281A09D176E169D00A4D2DB /* MGBlockWrapper.m in Sources */,
 				0281A09E176E169D00A4D2DB /* MGBox.m in Sources */,
+				0281A09D176E169D00A4D2DB /* MGBlockWrapper.m in Sources */,
 				0281A09F176E169D00A4D2DB /* MGButton.m in Sources */,
 				0281A0A0176E169D00A4D2DB /* MGLayoutManager.m in Sources */,
 				0281A0A1176E169D00A4D2DB /* MGLine.m in Sources */,
@@ -422,11 +428,11 @@
 				0281A0A9176E16EB00A4D2DB /* BoardsViewController.m in Sources */,
 				025E27381794620300CAE697 /* MagicView.m in Sources */,
 				025E274317946C9F00CAE697 /* Shaders.m in Sources */,
+				0F9797F6179735FD003FD8BE /* Clarkson-Delaunay.cpp in Sources */,
 				025E274617946F4300CAE697 /* template.fsh in Sources */,
 				025E274717946F4300CAE697 /* template.vsh in Sources */,
 				025E274C1794760800CAE697 /* matrix.c in Sources */,
-				025E274F17947A0A00CAE697 /* MapOverlayRenderer.m in Sources */,
-				025E27521794860A00CAE697 /* STTypes.m in Sources */,
+				025E274F17947A0A00CAE697 /* MapOverlayRenderer.mm in Sources */,
 				02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

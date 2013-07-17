@@ -20,7 +20,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="V4g-vm-ocH" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hPF-Ph-YNO"/>
                             <constraint firstItem="V4g-vm-ocH" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="m6N-ty-OAr"/>

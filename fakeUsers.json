@@ -1,22 +1,124 @@
 {
-	"users":[
-		{
-		    "name": "Lucas Tenório",
-		    "img": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-prn1/149355_370413206352814_945257565_n.jpg",
-		    "location": {
-		                    "lat": -0.34000,
-		                    "lon": -0.800
-		                },
-		    "place":1 
-		},
-		{
-		    "name": "Kaiser Wilhelm II",
-		    "img": "http://www.bbc.co.uk/history/historic_figures/images/kaiser_wilhelm.jpg",
-		    "location": {
-		                    "lat": -0.34000,
-		                    "lon": -0.800
-		                },
-		    "place":1 
-		}
-	]
+    "users":[
+        {
+            "id": 1,
+            "name": "Lucas Tenório",
+            "img": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-prn1/149355_370413206352814_945257565_n.jpg",
+            "location": {
+                    "lat": -34.873264,
+                    "lon": -8.064217
+                    },
+            "place": 1 
+        },
+        {
+            "id": 2,
+            "name": "Fanny Chien",
+            "img": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash4/486205_10200446463940087_289185559_n.jpg",
+            "location": {
+                    "lat": -34.873264,
+                    "lon": -8.064217
+                    },
+            "place": 1 
+        },
+        {
+            "id": 3,
+            "name": "Rafael Nunes",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/275080_100001946475949_14815985_n.jpg",
+            "location": {
+                    "lat": -34.88415,
+                    "lon": -8.095323
+                    },
+            "place": 2 
+        },
+        {
+            "id": 4,
+            "name": "Rafael Marinheiro",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/371650_100001738378453_2074098121_n.jpg",
+            "location": {
+                    "lat": -34.873264,
+                    "lon": -8.064217
+                    },
+            "place": 1 
+        },
+        {
+            "id": 5,
+            "name": "Gustavo Stor",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/203413_100000064904757_1244495731_n.jpg",
+            "location": {
+                    "lat": -34.873264,
+                    "lon": -8.064217
+                    },
+            "place": 1 
+        },
+        {
+            "id": 6,
+            "name": "Pollyanna Diniz",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/371700_735333710_559204890_n.jpg",
+            "location": {
+                    "lat": -34.89652,
+                    "lon": -8.114874
+                    },
+            "place": 3 
+        },
+        {
+            "id": 7,
+            "name": "Cecília Eroy",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/274213_100003081490410_1566640840_n.jpg",
+            "location": {
+                    "lat": -34.88415,
+                    "lon": -8.095323
+                    },
+            "place": 2 
+        },
+        {
+            "id": 8,
+            "name": "Raphael D'Emery",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/203284_698590727_237701168_n.jpg",
+            "location": {
+                    "lat": -34.89652,
+                    "lon": -8.114874
+                    },
+            "place": 3 
+        },
+        {
+            "id": 9,
+            "name": "Pedro Diniz",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c141.41.518.518/s160x160/398498_410313102365823_2080952135_n.jpg",
+            "location": {
+                    "lat": -34.88415,
+                    "lon": -8.095323
+                    },
+            "place":2 
+        },
+        {
+            "id": 10,
+            "name": "Arthur Braga",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c22.52.375.375/s160x160/1004041_10201179302782868_1600500332_n.jpg",
+            "location": {
+                    "lat": -34.89652,
+                    "lon": -8.114874
+                    },
+            "place": 3 
+        },
+        {
+            "id": 11,
+            "name": "Robert Seall",
+            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c33.33.413.413/s160x160/551838_10150640907429499_1518204351_n.jpg",
+            "location": {
+                    "lat": -34.88415,
+                    "lon": -8.095323
+                    },
+            "place": 2 
+        },
+        {
+            "id": 12,
+            "name": "Kaiser Wilhelm II",
+            "img": "http://www.bbc.co.uk/history/historic_figures/images/kaiser_wilhelm.jpg",
+            "location": {
+                    "lat": -34.873264,
+                    "lon": -8.064217
+                        },
+            "place": 1
+        }
+    ]
 }

@@ -20,14 +20,19 @@ typedef void(^STOverlordErrorBlock)(NSError *error);
 //@protocol STOverlordOperation;
 
 @interface STOverlord : NSObject
+
+
 @property (nonatomic, strong,readonly) STLocation *userLocation;
+
+
++ (id) sharedInstance;
 //Ideally, all the information return should be cached by the Overlord, so if if you know there is a high probability for you
 //to need something in the future, just ask the Overlord to resolve the information you need and send nil as a completion block,
 //the next time you ask for the same thing, the Overlord should have your information really fast
 
 //Convenience methods, the default importance is STOverlordOperationImportanceNormal and the default requestNew is NO 
 - (void) resolveUserById:(NSNumber *)userId
-              completion:(void (^)(STUser *place)) completionBlock
+              completion:(void (^)(STUser *user)) completionBlock
                    error:(STOverlordErrorBlock) errorBlock;
 - (void) resolveBoardCommentById:(NSNumber *) commentId
                       completion:(void (^)(STBoardComment *place)) completionBlock

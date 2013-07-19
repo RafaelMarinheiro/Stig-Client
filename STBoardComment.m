@@ -18,9 +18,11 @@
         STBoardComment *comment = [[STBoardComment alloc] init];
         comment.commentId = json[@"id"];
         comment.userId = json[@"user_id"];
-        comment.text = json[@"text"];
-        comment.stickers = json[@"stickers"];
-        comment.timestamp = nil; //Needs to sinthesize date from string format
+        comment.commentText = json[@"text"];
+        comment.commentStickers = json[@"stickers"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"YYYY-MM-DD hh:mm:ss";
+        comment.commentTimestamp = [formatter dateFromString:json[@"timestamp"]]; //Needs to sinthesize date from string format
     }
     return nil;
 }

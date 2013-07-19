@@ -12,8 +12,6 @@
 		025E273B1794675E00CAE697 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E27391794675E00CAE697 /* GLKit.framework */; };
 		025E273C1794675E00CAE697 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E273A1794675E00CAE697 /* OpenGLES.framework */; };
 		025E274317946C9F00CAE697 /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E274217946C9F00CAE697 /* Shaders.m */; };
-		025E274617946F4300CAE697 /* template.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 025E274417946F4300CAE697 /* template.fsh */; };
-		025E274717946F4300CAE697 /* template.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 025E274517946F4300CAE697 /* template.vsh */; };
 		025E274817946FB100CAE697 /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274417946F4300CAE697 /* template.fsh */; };
 		025E274917946FB100CAE697 /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274517946F4300CAE697 /* template.vsh */; };
 		025E274C1794760800CAE697 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 025E274B1794760800CAE697 /* matrix.c */; };
@@ -56,6 +54,10 @@
 		0281A0B2176E184E00A4D2DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A0B1176E184E00A4D2DB /* QuartzCore.framework */; };
 		0281A0B4176E1F3200A4D2DB /* uk-board.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0281A0B3176E1F3200A4D2DB /* uk-board.jpg */; };
 		028AB788179965310015D1E6 /* STOverlordOperationSearchFakePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */; };
+		028AB78B179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m in Sources */ = {isa = PBXBuildFile; fileRef = 028AB78A179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m */; };
+		028AB790179992B70015D1E6 /* fakeComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78D179992B70015D1E6 /* fakeComments.json */; };
+		028AB791179992B70015D1E6 /* fakePlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78E179992B70015D1E6 /* fakePlaces.json */; };
+		028AB792179992B70015D1E6 /* fakeUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78F179992B70015D1E6 /* fakeUsers.json */; };
 		02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */; };
 		02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3ED91797336B0055BB75 /* STPlace.m */; };
 		02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CF3EDB1797349E0055BB75 /* CoreLocation.framework */; };
@@ -147,6 +149,11 @@
 		0281A0B3176E1F3200A4D2DB /* uk-board.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "uk-board.jpg"; sourceTree = "<group>"; };
 		028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlordOperationSearchFakePlace.h; sourceTree = "<group>"; };
 		028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationSearchFakePlace.m; sourceTree = "<group>"; };
+		028AB789179983170015D1E6 /* STOverlordOperationGetUserByIDFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlordOperationGetUserByIDFake.h; sourceTree = "<group>"; };
+		028AB78A179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationGetUserByIDFake.m; sourceTree = "<group>"; };
+		028AB78D179992B70015D1E6 /* fakeComments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeComments.json; sourceTree = "<group>"; };
+		028AB78E179992B70015D1E6 /* fakePlaces.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakePlaces.json; sourceTree = "<group>"; };
+		028AB78F179992B70015D1E6 /* fakeUsers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeUsers.json; sourceTree = "<group>"; };
 		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonDisposerView.h; sourceTree = "<group>"; };
 		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		02CF3ED81797336B0055BB75 /* STPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlace.h; sourceTree = "<group>"; };
@@ -190,10 +197,9 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
-				028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */,
-				028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */,
-				02CF3EEF1798D9360055BB75 /* STOverlord.h */,
-				02CF3EF01798D9360055BB75 /* STOverlord.m */,
+				028AB78D179992B70015D1E6 /* fakeComments.json */,
+				028AB78E179992B70015D1E6 /* fakePlaces.json */,
+				028AB78F179992B70015D1E6 /* fakeUsers.json */,
 				02CF3EE61798B0070055BB75 /* STBoardViewController.h */,
 				02CF3EE71798B0070055BB75 /* STBoardViewController.m */,
 				02CF3EDD1797382A0055BB75 /* Model */,
@@ -352,9 +358,23 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		028AB78C1799831F0015D1E6 /* Fake Overlord Operations */ = {
+			isa = PBXGroup;
+			children = (
+				028AB789179983170015D1E6 /* STOverlordOperationGetUserByIDFake.h */,
+				028AB78A179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m */,
+				028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */,
+				028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */,
+			);
+			name = "Fake Overlord Operations";
+			sourceTree = "<group>";
+		};
 		02CF3EDD1797382A0055BB75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				028AB78C1799831F0015D1E6 /* Fake Overlord Operations */,
+				02CF3EEF1798D9360055BB75 /* STOverlord.h */,
+				02CF3EF01798D9360055BB75 /* STOverlord.m */,
 				02CF3ED81797336B0055BB75 /* STPlace.h */,
 				02CF3ED91797336B0055BB75 /* STPlace.m */,
 				02CF3EDE179738430055BB75 /* STLocation.h */,
@@ -420,6 +440,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028AB790179992B70015D1E6 /* fakeComments.json in Resources */,
+				028AB791179992B70015D1E6 /* fakePlaces.json in Resources */,
+				028AB792179992B70015D1E6 /* fakeUsers.json in Resources */,
 				025E274817946FB100CAE697 /* template.fsh in Resources */,
 				025E274917946FB100CAE697 /* template.vsh in Resources */,
 				0281A050176E15DE00A4D2DB /* InfoPlist.strings in Resources */,
@@ -465,8 +488,6 @@
 				0281A0A9176E16EB00A4D2DB /* BoardsViewController.m in Sources */,
 				025E27381794620300CAE697 /* MagicView.m in Sources */,
 				025E274317946C9F00CAE697 /* Shaders.m in Sources */,
-				025E274617946F4300CAE697 /* template.fsh in Sources */,
-				025E274717946F4300CAE697 /* template.vsh in Sources */,
 				025E274C1794760800CAE697 /* matrix.c in Sources */,
 				025E27521794860A00CAE697 /* STTypes.m in Sources */,
 				02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */,
@@ -478,6 +499,7 @@
 				02CF3EEE1798C1280055BB75 /* STUser.m in Sources */,
 				02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */,
 				028AB788179965310015D1E6 /* STOverlordOperationSearchFakePlace.m in Sources */,
+				028AB78B179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,11 +8,15 @@
 
 #import "AppDelegate.h"
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.overlord = [STOverlord sharedInstance];
+    [self.overlord searchPlaceBySearchTerm:nil completion:^(NSArray *places,NSUInteger page){
+        NSLog(@"%@", places);
+    }error:nil];
     return YES;
 }
 							

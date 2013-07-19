@@ -16,13 +16,15 @@
 @property (nonatomic, strong) STLocation *location;
 @property (nonatomic, strong) NSString *searchTerm;
 @property (nonatomic) NSUInteger pageNumber;
-@property (nonatomic, strong) void (^completionBlock)(STPlace *place);
+@property (nonatomic, strong) void (^completionBlock)(NSArray *places, NSUInteger page);
 @property (nonatomic, strong) STOverlordErrorBlock errorBlock;
 @property (nonatomic, readonly) id output;
 - (id) initWithLocation:(STLocation *)location
              searchTerm:(NSString *) searchTerm
              pageNumber:(NSUInteger) pageNumber
-             importance:(STOverlordOperationImportance) importance;
+             importance:(STOverlordOperationImportance) importance
+             completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
+                  error:(STOverlordErrorBlock) errorBlock;
 
 - (BOOL) run;
 - (void) runCompletionBlock;

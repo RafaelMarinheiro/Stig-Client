@@ -8,6 +8,7 @@
 
 #import "STOverlord.h"
 #import "STOverlordOperationSearchFakePlace.h"
+#import "STOverlordOperationGetUserByIDFake.h"
 //First implementation of the Overlord, completely naive, should be better but fuck it...
 @implementation STOverlord {
     dispatch_queue_t _highImportanceQueue;
@@ -64,11 +65,49 @@
 
 #pragma mark-
 #pragma mark Creating Operations
-- (void) searchPlaceBySearchTerm:(NSString *)term importance:(STOverlordOperationImportance)importance requestNew:(BOOL)requestNew completion:(void (^)(NSArray *, NSUInteger))completionBlock error:(void (^)(NSError *))errorBlock {
-    STOverlordOperationSearchFakePlace *operation = [[STOverlordOperationSearchFakePlace alloc] initWithLocation:self.userLocation
-                                                                                                      searchTerm:term
-                                                                                                      pageNumber:0
-                                                                                                      importance:importance];
+- (void) searchPlaceBySearchTerm:(NSString *) term
+                      completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
+                           error:(STOverlordErrorBlock) errorBlock {
+    [self searchPlaceBySearchTerm:term
+                       importance:STOverlordOperationImportanceNormal
+                       requestNew:YES
+                       completion:completionBlock
+                            error:errorBlock];
+}
+- (void) searchPlaceBySearchTerm:(NSString *)term
+                      importance:(STOverlordOperationImportance)importance
+                      requestNew:(BOOL)requestNew
+                      completion:(void (^)(NSArray *, NSUInteger))completionBlock
+                           error:(void (^)(NSError *))errorBlock {
+    STOverlordOperationSearchFakePlace *operation = [[STOverlordOperationSearchFakePlace alloc]
+                                                     initWithLocation:self.userLocation
+                                                     searchTerm:term
+                                                     pageNumber:0
+                                                     importance:importance
+                                                     completion:completionBlock
+                                                     error:errorBlock];
+    [self runOperation:operation];
+}
+- (void) resolveUserById:(NSNumber *)userId
+              completion:(void (^)(STUser *))completionBlock
+                   error:(STOverlordErrorBlock)errorBlock {
+    [self resolveUserById:userId
+               importance:STOverlordOperationImportanceNormal
+               requestNew:YES
+               completion:completionBlock
+                    error:errorBlock];
+}
+- (void) resolveUserById:(NSNumber *)userId
+              importance:(STOverlordOperationImportance)importance
+              requestNew:(BOOL)requestNew
+              completion:(void (^)(STUser *))completionBlock
+                   error:(STOverlordErrorBlock)errorBlock {
+    
+    STOverlordOperationGetUserByIDFake *operation = [[STOverlordOperationGetUserByIDFake alloc]
+                                                     initWithUserId:userId
+                                                     importance:importance
+                                                     completion:completionBlock
+                                                     error:errorBlock];
     [self runOperation:operation];
 }
 @end

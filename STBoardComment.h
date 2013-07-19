@@ -13,9 +13,9 @@
 
 @property (nonatomic, strong) NSNumber *commentId;
 @property (nonatomic, strong) NSNumber *userId;
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) NSArray *stickers;
-@property (nonatomic, strong) NSDate *timestamp;
+@property (nonatomic, strong) NSString *commentText;
+@property (nonatomic, strong) NSArray *commentStickers;
+@property (nonatomic, strong) NSDate *commentTimestamp;
 + (STBoardComment *) boardCommentFromJSONData:(id) json;
 + (STBoardComment *) boardCommentWithId:(NSNumber *)commentId andJSONData:(id)json;
 @end

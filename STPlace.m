@@ -13,9 +13,10 @@
     if ([NSJSONSerialization isValidJSONObject:json]) {
         NSDictionary *mainDictionary = json;
         STPlace *place = [[STPlace alloc] init];
-        place.name = mainDictionary[@"name"];
+        place.placeId = mainDictionary[@"id"];
+        place.placeName = mainDictionary[@"name"];
         place.imageURL = mainDictionary[@"url"];
-        place.description = mainDictionary[@"description"];
+        place.placeDescription = mainDictionary[@"description"];
         place.location = [STLocation locationFromJSONData:mainDictionary[@"location"]];
         place.friends =  mainDictionary[@"friends"];
         place.stickers = mainDictionary[@"stickers"];
@@ -23,5 +24,8 @@
         return place;
     }
     return nil;
+}
+- (NSString *) description {
+    return [NSString stringWithFormat:@"[%@: %@, %@]",self.placeId, self.placeName, self.placeDescription];
 }
 @end

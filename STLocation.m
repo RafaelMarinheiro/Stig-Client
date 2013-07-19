@@ -32,5 +32,7 @@
     return CLLocationCoordinate2DMake([[self latitude] doubleValue], [[self longitude] doubleValue]);
 }
 
-
+- (NSString *) description {
+    return [NSString stringWithFormat:@"[%@ %@]",self.latitude, self.longitude];
+}
 @end

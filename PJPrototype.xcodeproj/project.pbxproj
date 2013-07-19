@@ -55,6 +55,7 @@
 		0281A0B0176E180600A4D2DB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A0AF176E180600A4D2DB /* CoreMedia.framework */; };
 		0281A0B2176E184E00A4D2DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A0B1176E184E00A4D2DB /* QuartzCore.framework */; };
 		0281A0B4176E1F3200A4D2DB /* uk-board.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0281A0B3176E1F3200A4D2DB /* uk-board.jpg */; };
+		028AB788179965310015D1E6 /* STOverlordOperationSearchFakePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */; };
 		02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */; };
 		02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3ED91797336B0055BB75 /* STPlace.m */; };
 		02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CF3EDB1797349E0055BB75 /* CoreLocation.framework */; };
@@ -144,6 +145,8 @@
 		0281A0AF176E180600A4D2DB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0281A0B1176E184E00A4D2DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0281A0B3176E1F3200A4D2DB /* uk-board.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "uk-board.jpg"; sourceTree = "<group>"; };
+		028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlordOperationSearchFakePlace.h; sourceTree = "<group>"; };
+		028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationSearchFakePlace.m; sourceTree = "<group>"; };
 		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonDisposerView.h; sourceTree = "<group>"; };
 		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		02CF3ED81797336B0055BB75 /* STPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlace.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
+				028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */,
+				028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */,
 				02CF3EEF1798D9360055BB75 /* STOverlord.h */,
 				02CF3EF01798D9360055BB75 /* STOverlord.m */,
 				02CF3EE61798B0070055BB75 /* STBoardViewController.h */,
@@ -472,6 +477,7 @@
 				02CF3EEB1798B2760055BB75 /* STBoardComment.m in Sources */,
 				02CF3EEE1798C1280055BB75 /* STUser.m in Sources */,
 				02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */,
+				028AB788179965310015D1E6 /* STOverlordOperationSearchFakePlace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,22 @@
+{
+	"users":[
+		{
+		    "name": "Lucas Tenório",
+		    "img": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-prn1/149355_370413206352814_945257565_n.jpg",
+		    "location": {
+		                    "lat": -0.34000,
+		                    "lon": -0.800
+		                },
+		    "place":1 
+		},
+		{
+		    "name": "Kaiser Wilhelm II",
+		    "img": "http://www.bbc.co.uk/history/historic_figures/images/kaiser_wilhelm.jpg",
+		    "location": {
+		                    "lat": -0.34000,
+		                    "lon": -0.800
+		                },
+		    "place":1 
+		}
+	]
+}

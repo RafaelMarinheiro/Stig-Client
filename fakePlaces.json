@@ -1,0 +1,22 @@
+{
+	"places":[
+		{
+			"id": 1,
+	        "name": "Burburinho",
+	        "img": "http://4.bp.blogspot.com/_xHFLSZFNZ9M/TJVJ8q6OgBI/AAAAAAAA9vA/wB8DPDEuLgs/s1600/burburinho.jpg",
+	        "description": "Comedoria mais legal da cidade!",
+	        "location": {
+	                        "lat": -0.34000,
+	                        "lon": -0.80000
+	                    },
+	        "friends": [1,2,3,4,5],
+	        "stickers": [2,3],
+	        "ranking": {
+	                        "distance": 300,
+	                        "social": 500,
+	                        "buzz": 300,
+	                        "overall": 350
+	                    }   
+	    }
+	]
+}

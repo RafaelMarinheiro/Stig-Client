@@ -9,7 +9,7 @@
 #import "STOOResolveCommentsByIdFake.h"
 
 @implementation STOOResolveCommentsByIdFake
-- (id) initWithBoardCommentId:(NSNumber *) commentId importance:(STOverlordOperationImportance) importance completion:(void (^)(STBoardComment *comment)) completionBlock error:(STOErrorBlock) errorBlock {
+- (id) initWithBoardCommentId:(NSNumber *) commentId importance:(STOverlordOperationImportance) importance completion:(void (^)(STBoardComment *comment)) completionBlock error:(STOOErrorBlock) errorBlock {
     self = [super init];
     if (self) {
         _importance = importance;

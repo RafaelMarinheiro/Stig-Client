@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.overlord = [STOverlord sharedInstance];
-    [self.overlord searchPlaceBySearchTerm:nil completion:^(NSArray *places,NSUInteger page){
+    [self.overlord getPlacesWithSearchTerm:nil completion:^(NSArray *places,NSUInteger page){
         for (STPlace *place in places) {
             NSLog(@"Loaded place: %@", place);
             for (NSNumber *userId in place.friends) {

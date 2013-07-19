@@ -9,7 +9,7 @@
 #import "STOOResolveUserByIDFake.h"
 
 @implementation STOOResolveUserByIDFake
-- (id) initWithUserId:(NSNumber *) userId importance:(STOverlordOperationImportance) importance completion:(void (^)(STUser *user)) completionBlock error:(STOErrorBlock) errorBlock {
+- (id) initWithUserId:(NSNumber *) userId importance:(STOverlordOperationImportance) importance completion:(void (^)(STUser *user)) completionBlock error:(STOOErrorBlock) errorBlock {
     self = [super init];
     if (self) {
         _importance = importance;

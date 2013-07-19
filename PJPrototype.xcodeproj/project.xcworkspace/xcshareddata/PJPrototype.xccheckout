@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>18A4C440-EA93-4971-BBD3-0836DC195086</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PJPrototype</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>80BC4D1D-4141-4A1D-AD94-85470D6B4770</key>
+		<string>https://github.com/RafaelMarinheiro/Stig-Client</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PJPrototype.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>80BC4D1D-4141-4A1D-AD94-85470D6B4770</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RafaelMarinheiro/Stig-Client</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>80BC4D1D-4141-4A1D-AD94-85470D6B4770</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>80BC4D1D-4141-4A1D-AD94-85470D6B4770</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PJPrototype</string>
+		</dict>
+	</array>
+</dict>
+</plist>

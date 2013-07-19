@@ -66,16 +66,16 @@
 
 #pragma mark-
 #pragma mark Creating Operations
-- (void) searchPlaceBySearchTerm:(NSString *) term
+- (void) getPlacesWithSearchTerm:(NSString *) term
                       completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                           error:(STOErrorBlock) errorBlock {
-    [self searchPlaceBySearchTerm:term
+                           error:(STOOErrorBlock) errorBlock {
+    [self getPlacesWithSearchTerm:term
                        importance:STOverlordOperationImportanceNormal
                        requestNew:YES
                        completion:completionBlock
                             error:errorBlock];
 }
-- (void) searchPlaceBySearchTerm:(NSString *)term
+- (void) getPlacesWithSearchTerm:(NSString *)term
                       importance:(STOverlordOperationImportance)importance
                       requestNew:(BOOL)requestNew
                       completion:(void (^)(NSArray *, NSUInteger))completionBlock
@@ -91,7 +91,7 @@
 }
 - (void) resolveUserById:(NSNumber *)userId
               completion:(void (^)(STUser *))completionBlock
-                   error:(STOErrorBlock)errorBlock {
+                   error:(STOOErrorBlock)errorBlock {
     [self resolveUserById:userId
                importance:STOverlordOperationImportanceNormal
                requestNew:YES
@@ -102,7 +102,7 @@
               importance:(STOverlordOperationImportance)importance
               requestNew:(BOOL)requestNew
               completion:(void (^)(STUser *))completionBlock
-                   error:(STOErrorBlock)errorBlock {
+                   error:(STOOErrorBlock)errorBlock {
     
     STOOResolveUserByIDFake *operation = [[STOOResolveUserByIDFake alloc]
                                                      initWithUserId:userId
@@ -111,7 +111,11 @@
                                                      error:errorBlock];
     [self runOperation:operation];
 }
-- (void) resolveBoardCommentById:(NSNumber *)commentId importance:(STOverlordOperationImportance)importance requestNew:(BOOL)requestNew completion:(void (^)(STBoardComment *))completionBlock error:(STOErrorBlock)errorBlock {
+- (void) resolveBoardCommentById:(NSNumber *)commentId
+                      importance:(STOverlordOperationImportance)importance
+                      requestNew:(BOOL)requestNew
+                      completion:(void (^)(STBoardComment *))completionBlock
+                           error:(STOOErrorBlock)errorBlock {
     STOOResolveCommentsByIdFake *operation = [[STOOResolveCommentsByIdFake alloc]
                                                          initWithBoardCommentId:commentId
                                                          importance:importance

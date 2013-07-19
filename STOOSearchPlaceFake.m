@@ -10,7 +10,7 @@
 
 @implementation STOOSearchPlaceFake
 - (id) initWithLocation:(STLocation *)location searchTerm:(NSString *)searchTerm pageNumber:(NSUInteger)pageNumber importance:(STOverlordOperationImportance)importance completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                  error:(STOErrorBlock) errorBlock{
+                  error:(STOOErrorBlock) errorBlock{
     self = [super init];
     if (self) {
         self.location =location;

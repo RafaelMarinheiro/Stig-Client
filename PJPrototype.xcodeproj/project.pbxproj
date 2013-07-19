@@ -62,6 +62,10 @@
 		02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CF3EDB1797349E0055BB75 /* CoreLocation.framework */; };
 		02CF3EE0179738430055BB75 /* STLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EDF179738430055BB75 /* STLocation.m */; };
 		02CF3EE317973A0B0055BB75 /* STRanking.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EE217973A0B0055BB75 /* STRanking.m */; };
+		02CF3EE81798B0070055BB75 /* STBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EE71798B0070055BB75 /* STBoardViewController.m */; };
+		02CF3EEB1798B2760055BB75 /* STBoardComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EEA1798B2760055BB75 /* STBoardComment.m */; };
+		02CF3EEE1798C1280055BB75 /* STUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EED1798C1280055BB75 /* STUser.m */; };
+		02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EF01798D9360055BB75 /* STOverlord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +158,14 @@
 		02CF3EDF179738430055BB75 /* STLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocation.m; sourceTree = "<group>"; };
 		02CF3EE117973A0B0055BB75 /* STRanking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRanking.h; sourceTree = "<group>"; };
 		02CF3EE217973A0B0055BB75 /* STRanking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRanking.m; sourceTree = "<group>"; };
+		02CF3EE61798B0070055BB75 /* STBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardViewController.h; sourceTree = "<group>"; };
+		02CF3EE71798B0070055BB75 /* STBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardViewController.m; sourceTree = "<group>"; };
+		02CF3EE91798B2760055BB75 /* STBoardComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardComment.h; sourceTree = "<group>"; };
+		02CF3EEA1798B2760055BB75 /* STBoardComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardComment.m; sourceTree = "<group>"; };
+		02CF3EEC1798C1280055BB75 /* STUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUser.h; sourceTree = "<group>"; };
+		02CF3EED1798C1280055BB75 /* STUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUser.m; sourceTree = "<group>"; };
+		02CF3EEF1798D9360055BB75 /* STOverlord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlord.h; sourceTree = "<group>"; };
+		02CF3EF01798D9360055BB75 /* STOverlord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +192,10 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
+				02CF3EEF1798D9360055BB75 /* STOverlord.h */,
+				02CF3EF01798D9360055BB75 /* STOverlord.m */,
+				02CF3EE61798B0070055BB75 /* STBoardViewController.h */,
+				02CF3EE71798B0070055BB75 /* STBoardViewController.m */,
 				02CF3EDD1797382A0055BB75 /* Model */,
 				02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */,
 				02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */,
@@ -348,6 +364,10 @@
 				02CF3EDF179738430055BB75 /* STLocation.m */,
 				02CF3EE117973A0B0055BB75 /* STRanking.h */,
 				02CF3EE217973A0B0055BB75 /* STRanking.m */,
+				02CF3EE91798B2760055BB75 /* STBoardComment.h */,
+				02CF3EEA1798B2760055BB75 /* STBoardComment.m */,
+				02CF3EEC1798C1280055BB75 /* STUser.h */,
+				02CF3EED1798C1280055BB75 /* STUser.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -458,6 +478,10 @@
 				02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */,
 				02CF3EE0179738430055BB75 /* STLocation.m in Sources */,
 				02CF3EE317973A0B0055BB75 /* STRanking.m in Sources */,
+				02CF3EE81798B0070055BB75 /* STBoardViewController.m in Sources */,
+				02CF3EEB1798B2760055BB75 /* STBoardComment.m in Sources */,
+				02CF3EEE1798C1280055BB75 /* STUser.m in Sources */,
+				02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

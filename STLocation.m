@@ -8,6 +8,8 @@
 
 #import "STLocation.h"
 
+
+
 @implementation STLocation
 + (STLocation *) locationFromJSONData:(id)json {
     if ([NSJSONSerialization isValidJSONObject:json]) {
@@ -16,7 +18,19 @@
         location.latitude = mainDictionary[@"lat"];
         location.longitude = mainDictionary[@"lon"];
         return location;
+        
     }
     return nil;
 }
++ (STLocation *)locationFromCLLocationCoordinate2D:(CLLocationCoordinate2D) location{
+    STLocation *newLocation = [[STLocation alloc] init];
+    newLocation.longitude = [NSNumber numberWithDouble:location.longitude];
+    newLocation.latitude = [NSNumber numberWithDouble:location.latitude];
+    return newLocation;
+}
+- (CLLocationCoordinate2D) locationCoordinate {
+    return CLLocationCoordinate2DMake([[self latitude] doubleValue], [[self longitude] doubleValue]);
+}
+
+
 @end

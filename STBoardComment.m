@@ -21,8 +21,8 @@
         comment.commentText = json[@"text"];
         comment.commentStickers = json[@"stickers"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"YYYY-MM-DD hh:mm:ss";
-        comment.commentTimestamp = [formatter dateFromString:json[@"timestamp"]]; //Needs to sinthesize date from string format
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        comment.commentTimestamp = [formatter dateFromString:json[@"timestamp"]];
     }
     return nil;
 }
@@ -38,5 +38,7 @@
     }
     return nil;
 }
-
+- (NSString *) description {
+    return [NSString stringWithFormat:@"[%@: %@, %@, %@]",self.commentId,self.userId,self.commentText,self.commentTimestamp];
+}
 @end

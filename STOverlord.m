@@ -9,6 +9,7 @@
 #import "STOverlord.h"
 #import "STOverlordOperationSearchFakePlace.h"
 #import "STOverlordOperationGetUserByIDFake.h"
+#import "STOverlordOperationGetCommentsByIdFake.h"
 //First implementation of the Overlord, completely naive, should be better but fuck it...
 @implementation STOverlord {
     dispatch_queue_t _highImportanceQueue;
@@ -108,6 +109,14 @@
                                                      importance:importance
                                                      completion:completionBlock
                                                      error:errorBlock];
+    [self runOperation:operation];
+}
+- (void) resolveBoardCommentById:(NSNumber *)commentId importance:(STOverlordOperationImportance)importance requestNew:(BOOL)requestNew completion:(void (^)(STBoardComment *))completionBlock error:(STOverlordErrorBlock)errorBlock {
+    STOverlordOperationGetCommentsByIdFake *operation = [[STOverlordOperationGetCommentsByIdFake alloc]
+                                                         initWithBoardCommentId:commentId
+                                                         importance:importance
+                                                         completion:completionBlock
+                                                         error:errorBlock];
     [self runOperation:operation];
 }
 @end

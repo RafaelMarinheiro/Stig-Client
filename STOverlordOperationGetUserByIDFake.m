@@ -30,7 +30,7 @@
         NSDictionary *mainDictionary = json;
         NSArray *usersJSON = mainDictionary[@"users"];
         for (NSDictionary *userDictionary in usersJSON) {
-            NSNumber *userId = userDictionary[@"user_id"];
+            NSNumber *userId = userDictionary[@"id"];
             if ([userId isEqualToNumber:self.userId]) {
                 STUser *user = [STUser userFromJSONData:userDictionary];
                 _output = user;

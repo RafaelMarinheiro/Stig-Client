@@ -58,6 +58,7 @@
 		028AB790179992B70015D1E6 /* fakeComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78D179992B70015D1E6 /* fakeComments.json */; };
 		028AB791179992B70015D1E6 /* fakePlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78E179992B70015D1E6 /* fakePlaces.json */; };
 		028AB792179992B70015D1E6 /* fakeUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 028AB78F179992B70015D1E6 /* fakeUsers.json */; };
+		028AB7961799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.m in Sources */ = {isa = PBXBuildFile; fileRef = 028AB7951799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.m */; };
 		02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */; };
 		02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3ED91797336B0055BB75 /* STPlace.m */; };
 		02CF3EDC1797349E0055BB75 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CF3EDB1797349E0055BB75 /* CoreLocation.framework */; };
@@ -71,20 +72,20 @@
 
 /* Begin PBXFileReference section */
 		025E273117945F6100CAE697 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		025E27361794620300CAE697 /* MagicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicView.h; sourceTree = "<group>"; };
-		025E27371794620300CAE697 /* MagicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicView.m; sourceTree = "<group>"; };
+		025E27361794620300CAE697 /* MagicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicView.h; path = ../MagicView.h; sourceTree = "<group>"; };
+		025E27371794620300CAE697 /* MagicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicView.m; path = ../MagicView.m; sourceTree = "<group>"; };
 		025E27391794675E00CAE697 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		025E273A1794675E00CAE697 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		025E274017946C8600CAE697 /* ESRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
-		025E274117946C9F00CAE697 /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
-		025E274217946C9F00CAE697 /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
+		025E274017946C8600CAE697 /* ESRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ESRenderer.h; path = ../ESRenderer.h; sourceTree = "<group>"; };
+		025E274117946C9F00CAE697 /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shaders.h; path = ../Shaders.h; sourceTree = "<group>"; };
+		025E274217946C9F00CAE697 /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Shaders.m; path = ../Shaders.m; sourceTree = "<group>"; };
 		025E274417946F4300CAE697 /* template.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.fsh; sourceTree = "<group>"; };
 		025E274517946F4300CAE697 /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.vsh; sourceTree = "<group>"; };
-		025E274A1794760800CAE697 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
-		025E274B1794760800CAE697 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
-		025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlayRenderer.h; sourceTree = "<group>"; };
-		025E275017947F4400CAE697 /* STTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTypes.h; sourceTree = "<group>"; };
-		025E27511794860A00CAE697 /* STTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTypes.m; sourceTree = "<group>"; };
+		025E274A1794760800CAE697 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = matrix.h; path = ../matrix.h; sourceTree = "<group>"; };
+		025E274B1794760800CAE697 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = matrix.c; path = ../matrix.c; sourceTree = "<group>"; };
+		025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapOverlayRenderer.h; path = ../MapOverlayRenderer.h; sourceTree = "<group>"; };
+		025E275017947F4400CAE697 /* STTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STTypes.h; path = ../STTypes.h; sourceTree = "<group>"; };
+		025E27511794860A00CAE697 /* STTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STTypes.m; path = ../STTypes.m; sourceTree = "<group>"; };
 		0281A042176E15DE00A4D2DB /* PJPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PJPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0281A045176E15DE00A4D2DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0281A047176E15DE00A4D2DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -151,11 +152,13 @@
 		028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationSearchFakePlace.m; sourceTree = "<group>"; };
 		028AB789179983170015D1E6 /* STOverlordOperationGetUserByIDFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlordOperationGetUserByIDFake.h; sourceTree = "<group>"; };
 		028AB78A179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationGetUserByIDFake.m; sourceTree = "<group>"; };
-		028AB78D179992B70015D1E6 /* fakeComments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeComments.json; sourceTree = "<group>"; };
-		028AB78E179992B70015D1E6 /* fakePlaces.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakePlaces.json; sourceTree = "<group>"; };
-		028AB78F179992B70015D1E6 /* fakeUsers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fakeUsers.json; sourceTree = "<group>"; };
-		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularButtonDisposerView.h; sourceTree = "<group>"; };
-		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
+		028AB78D179992B70015D1E6 /* fakeComments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fakeComments.json; path = ../fakeComments.json; sourceTree = "<group>"; };
+		028AB78E179992B70015D1E6 /* fakePlaces.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fakePlaces.json; path = ../fakePlaces.json; sourceTree = "<group>"; };
+		028AB78F179992B70015D1E6 /* fakeUsers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fakeUsers.json; path = ../fakeUsers.json; sourceTree = "<group>"; };
+		028AB7941799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlordOperationGetCommentsByIdFake.h; sourceTree = "<group>"; };
+		028AB7951799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlordOperationGetCommentsByIdFake.m; sourceTree = "<group>"; };
+		02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircularButtonDisposerView.h; path = ../CircularButtonDisposerView.h; sourceTree = "<group>"; };
+		02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircularButtonDisposerView.m; path = ../CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		02CF3ED81797336B0055BB75 /* STPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlace.h; sourceTree = "<group>"; };
 		02CF3ED91797336B0055BB75 /* STPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlace.m; sourceTree = "<group>"; };
 		02CF3EDB1797349E0055BB75 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -163,8 +166,8 @@
 		02CF3EDF179738430055BB75 /* STLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocation.m; sourceTree = "<group>"; };
 		02CF3EE117973A0B0055BB75 /* STRanking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STRanking.h; sourceTree = "<group>"; };
 		02CF3EE217973A0B0055BB75 /* STRanking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STRanking.m; sourceTree = "<group>"; };
-		02CF3EE61798B0070055BB75 /* STBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardViewController.h; sourceTree = "<group>"; };
-		02CF3EE71798B0070055BB75 /* STBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardViewController.m; sourceTree = "<group>"; };
+		02CF3EE61798B0070055BB75 /* STBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STBoardViewController.h; path = ../STBoardViewController.h; sourceTree = "<group>"; };
+		02CF3EE71798B0070055BB75 /* STBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STBoardViewController.m; path = ../STBoardViewController.m; sourceTree = "<group>"; };
 		02CF3EE91798B2760055BB75 /* STBoardComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardComment.h; sourceTree = "<group>"; };
 		02CF3EEA1798B2760055BB75 /* STBoardComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardComment.m; sourceTree = "<group>"; };
 		02CF3EEC1798C1280055BB75 /* STUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUser.h; sourceTree = "<group>"; };
@@ -197,24 +200,6 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
-				028AB78D179992B70015D1E6 /* fakeComments.json */,
-				028AB78E179992B70015D1E6 /* fakePlaces.json */,
-				028AB78F179992B70015D1E6 /* fakeUsers.json */,
-				02CF3EE61798B0070055BB75 /* STBoardViewController.h */,
-				02CF3EE71798B0070055BB75 /* STBoardViewController.m */,
-				02CF3EDD1797382A0055BB75 /* Model */,
-				02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */,
-				02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */,
-				025E275017947F4400CAE697 /* STTypes.h */,
-				025E27511794860A00CAE697 /* STTypes.m */,
-				025E27361794620300CAE697 /* MagicView.h */,
-				025E27371794620300CAE697 /* MagicView.m */,
-				025E274017946C8600CAE697 /* ESRenderer.h */,
-				025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */,
-				025E274A1794760800CAE697 /* matrix.h */,
-				025E274B1794760800CAE697 /* matrix.c */,
-				025E274117946C9F00CAE697 /* Shaders.h */,
-				025E274217946C9F00CAE697 /* Shaders.m */,
 				0281A04B176E15DE00A4D2DB /* PJPrototype */,
 				0281A044176E15DE00A4D2DB /* Frameworks */,
 				0281A043176E15DE00A4D2DB /* Products */,
@@ -251,6 +236,7 @@
 			children = (
 				0281A054176E15DE00A4D2DB /* AppDelegate.h */,
 				0281A055176E15DE00A4D2DB /* AppDelegate.m */,
+				02CF3EDD1797382A0055BB75 /* Model */,
 				0281A0AC176E174B00A4D2DB /* Controller */,
 				0281A0AB176E173D00A4D2DB /* Resources */,
 				0281A0AA176E172500A4D2DB /* View */,
@@ -262,8 +248,6 @@
 		0281A04C176E15DE00A4D2DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				025E274417946F4300CAE697 /* template.fsh */,
-				025E274517946F4300CAE697 /* template.vsh */,
 				0281A04D176E15DE00A4D2DB /* PJPrototype-Info.plist */,
 				0281A04E176E15DE00A4D2DB /* InfoPlist.strings */,
 				0281A051176E15DE00A4D2DB /* main.m */,
@@ -327,6 +311,9 @@
 		0281A0AA176E172500A4D2DB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				028AB7931799A3760015D1E6 /* Overlay additional classes */,
+				02AF4AE51794E2AD005479C7 /* CircularButtonDisposerView.h */,
+				02AF4AE61794E2AD005479C7 /* CircularButtonDisposerView.m */,
 				0281A05D176E15DE00A4D2DB /* MainStoryboard.storyboard */,
 				0281A073176E169D00A4D2DB /* MGBox */,
 			);
@@ -336,6 +323,11 @@
 		0281A0AB176E173D00A4D2DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				025E274417946F4300CAE697 /* template.fsh */,
+				025E274517946F4300CAE697 /* template.vsh */,
+				028AB78D179992B70015D1E6 /* fakeComments.json */,
+				028AB78E179992B70015D1E6 /* fakePlaces.json */,
+				028AB78F179992B70015D1E6 /* fakeUsers.json */,
 				0281A0B3176E1F3200A4D2DB /* uk-board.jpg */,
 				0281A063176E15DE00A4D2DB /* first.png */,
 				0281A065176E15DE00A4D2DB /* first@2x.png */,
@@ -354,6 +346,8 @@
 				0281A068176E15DE00A4D2DB /* SecondViewController.m */,
 				0281A0A7176E16EB00A4D2DB /* BoardsViewController.h */,
 				0281A0A8176E16EB00A4D2DB /* BoardsViewController.m */,
+				02CF3EE61798B0070055BB75 /* STBoardViewController.h */,
+				02CF3EE71798B0070055BB75 /* STBoardViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -365,8 +359,27 @@
 				028AB78A179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m */,
 				028AB786179965310015D1E6 /* STOverlordOperationSearchFakePlace.h */,
 				028AB787179965310015D1E6 /* STOverlordOperationSearchFakePlace.m */,
+				028AB7941799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.h */,
+				028AB7951799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.m */,
 			);
 			name = "Fake Overlord Operations";
+			sourceTree = "<group>";
+		};
+		028AB7931799A3760015D1E6 /* Overlay additional classes */ = {
+			isa = PBXGroup;
+			children = (
+				025E275017947F4400CAE697 /* STTypes.h */,
+				025E27511794860A00CAE697 /* STTypes.m */,
+				025E27361794620300CAE697 /* MagicView.h */,
+				025E27371794620300CAE697 /* MagicView.m */,
+				025E274017946C8600CAE697 /* ESRenderer.h */,
+				025E274D17947A0A00CAE697 /* MapOverlayRenderer.h */,
+				025E274A1794760800CAE697 /* matrix.h */,
+				025E274B1794760800CAE697 /* matrix.c */,
+				025E274117946C9F00CAE697 /* Shaders.h */,
+				025E274217946C9F00CAE697 /* Shaders.m */,
+			);
+			name = "Overlay additional classes";
 			sourceTree = "<group>";
 		};
 		02CF3EDD1797382A0055BB75 /* Model */ = {
@@ -387,6 +400,7 @@
 				02CF3EED1798C1280055BB75 /* STUser.m */,
 			);
 			name = Model;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,6 +514,7 @@
 				02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */,
 				028AB788179965310015D1E6 /* STOverlordOperationSearchFakePlace.m in Sources */,
 				028AB78B179983170015D1E6 /* STOverlordOperationGetUserByIDFake.m in Sources */,
+				028AB7961799A7720015D1E6 /* STOverlordOperationGetCommentsByIdFake.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

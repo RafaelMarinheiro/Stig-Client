@@ -15,7 +15,16 @@
 {
     self.overlord = [STOverlord sharedInstance];
     [self.overlord searchPlaceBySearchTerm:nil completion:^(NSArray *places,NSUInteger page){
-        NSLog(@"%@", places);
+        for (STPlace *place in places) {
+            NSLog(@"Loaded place: %@", place);
+            for (NSNumber *userId in place.friends) {
+                [[STOverlord sharedInstance] resolveUserById:userId completion:^(STUser *user){
+                    NSLog(@"Loaded user:%@", user);
+                }error:^(NSError *error){
+                    NSLog(@"Failed to load user with id:%@ %@", userId,error);
+                }];
+            }
+        }
     }error:nil];
     return YES;
 }

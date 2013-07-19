@@ -14,6 +14,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+#import "STPlace.h"
+
 @interface MapOverlayRenderer : NSObject <ESRenderer>
 {
 @private
@@ -29,17 +31,31 @@
 	/* the shader program object */
 	GLuint program;
 
-    int _allocatedTriangles;
-    int _numTriangles;
-    STTriangle * _triangleArray;
-    STColor * _colorArray;
+    //Interest points
+    int _placeNumber;
+    STPoint _latlon[60];
+    float _score[240];
     
+    //Positioning
+    STPoint _mapBottomRight;
+    STPoint _mapTopLeft;
+    STPoint _mapPosition;
+    
+    //Map criteria
+    //0 -> Location
+    //1 -> Social
+    //2 -> Buzz
+    //3 -> Overall
+    int _criteria;
+    
+    GLfloat __screen[8];
+
     BOOL _needUpdate;
 }
 
 - (void) setupTest;
 - (void) render;
-- (void) setSampledPoints: (int)numberOfPoints withColors: (STColor *)colorArray withPoints:(STPoint *)pointArray;
+- (void) setPlaces: (NSArray *) place;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end

@@ -9,11 +9,11 @@
 
 #import <UIKit/UIKit.h>
 #import "QuartzCore/CAEAGLLayer.h"
-//#import "MapOverlayRenderer.h"
+#import "MapOverlayRenderer.h"
 
 @interface MagicView : UIView {
-    CAEAGLLayer *mylayer;
-    //MapOverlayRenderer *renderer;
+    //CAEAGLLayer *mylayer;
+    MapOverlayRenderer *renderer;
     NSTimer *animationTimer;
 }
 

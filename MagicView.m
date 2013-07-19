@@ -27,15 +27,15 @@
 }
 - (void) layoutSubviews
 {
-	//[renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
+	[renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
     [self drawView:nil];
 }
 - (void) config {
     self.backgroundColor = [UIColor clearColor];
-    mylayer = (CAEAGLLayer*)self.layer;
+    //mylayer = (CAEAGLLayer*)self.layer;
 
-    //renderer = [[MapOverlayRenderer alloc] init];
-    //[renderer setupTest];
+    renderer = [[MapOverlayRenderer alloc] init];
+    [renderer setupTest];
     [self startRender];
     
 }
@@ -44,7 +44,7 @@
 }
 - (void) drawView:(id)sender
 {
-    //[renderer render];
+    [renderer render];
     
 }
 

@@ -35,7 +35,7 @@
     mylayer = (CAEAGLLayer*)self.layer;
 
     renderer = [[MapOverlayRenderer alloc] init];
-
+    [renderer setupTest];
     [self startRender];
     
 }

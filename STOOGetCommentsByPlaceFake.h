@@ -1,5 +1,5 @@
 //
-//  STOverlordOperationSearchFakePlace.h
+//  STOverlordOperationGetCommentsByPlaceFake.h
 //  PJPrototype
 //
 //  Created by Lucas Tenório on 19/07/13.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "STOverlord.h"
 
-@interface STOverlordOperationSearchFakePlace : NSObject <STOverlordOperation>
+@interface STOOGetCommentsByPlaceFake : NSObject <STOverlordOperation>
 @property (nonatomic, readonly) STOverlordOperationImportance importance;
 @property (nonatomic, readonly, getter = isCacheable) BOOL cacheable;
 
@@ -17,14 +17,14 @@
 @property (nonatomic, strong) NSString *searchTerm;
 @property (nonatomic) NSUInteger pageNumber;
 @property (nonatomic, strong) void (^completionBlock)(NSArray *places, NSUInteger page);
-@property (nonatomic, strong) STOverlordErrorBlock errorBlock;
+@property (nonatomic, strong) STOErrorBlock errorBlock;
 @property (nonatomic, readonly) id output;
 - (id) initWithLocation:(STLocation *)location
              searchTerm:(NSString *) searchTerm
              pageNumber:(NSUInteger) pageNumber
              importance:(STOverlordOperationImportance) importance
              completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                  error:(STOverlordErrorBlock) errorBlock;
+                  error:(STOErrorBlock) errorBlock;
 
 - (BOOL) run;
 - (void) runCompletionBlock;

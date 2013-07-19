@@ -16,7 +16,7 @@ typedef enum{
     STOverlordOperationImportanceNormal,    //Should be used for normal operations, like loading the comments related to a place
     STOverlordOperationImportanceLow        //Should be used for low level operations, like caching the previous comments or other informations
 }STOverlordOperationImportance;
-typedef void(^STOverlordErrorBlock)(NSError *error);
+typedef void(^STOErrorBlock)(NSError *error);
 //@protocol STOverlordOperation;
 
 @interface STOverlord : NSObject
@@ -33,49 +33,49 @@ typedef void(^STOverlordErrorBlock)(NSError *error);
 //Convenience methods, the default importance is STOverlordOperationImportanceNormal and the default requestNew is NO 
 - (void) resolveUserById:(NSNumber *)userId
               completion:(void (^)(STUser *user)) completionBlock
-                   error:(STOverlordErrorBlock) errorBlock;
+                   error:(STOErrorBlock) errorBlock;
 - (void) resolveBoardCommentById:(NSNumber *) commentId
                       completion:(void (^)(STBoardComment *place)) completionBlock
-                           error:(STOverlordErrorBlock) errorBlock;
+                           error:(STOErrorBlock) errorBlock;
 - (void) resolvePlaceById:(NSNumber *) placeId
                completion:(void (^)(STPlace *place)) completionBlock
                     error:(void (^)(NSError *error)) errorBlock;
 - (void) searchPlaceBySearchTerm:(NSString *) term
                       completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                           error:(STOverlordErrorBlock) errorBlock;
+                           error:(STOErrorBlock) errorBlock;
 - (void) getCommentsFromPlace:(STPlace *) place
                  withStickers:(NSArray *) stickers
                    completion:(void (^)(NSArray *comments)) completionBlock
-                        error:(STOverlordErrorBlock) errorBlock;
+                        error:(STOErrorBlock) errorBlock;
 
 
 - (void) resolveUserById:(NSNumber *)userId
               importance:(STOverlordOperationImportance) importance
               requestNew:(BOOL) requestNew
               completion:(void (^)(STUser *place)) completionBlock
-                   error:(STOverlordErrorBlock) errorBlock;
+                   error:(STOErrorBlock) errorBlock;
 
 - (void) resolveBoardCommentById:(NSNumber *) commentId
                       importance:(STOverlordOperationImportance) importance
                       requestNew:(BOOL) requestNew
                       completion:(void (^)(STBoardComment *place)) completionBlock
-                           error:(STOverlordErrorBlock) errorBlock;
+                           error:(STOErrorBlock) errorBlock;
 - (void) resolvePlaceById:(NSNumber *) placeId
                importance:(STOverlordOperationImportance) importance
                requestNew:(BOOL) requestNew
                completion:(void (^)(STPlace *place)) completionBlock
-                    error:(STOverlordErrorBlock) errorBlock;
+                    error:(STOErrorBlock) errorBlock;
 - (void) searchPlaceBySearchTerm:(NSString *) term
                     importance:(STOverlordOperationImportance) importance
                     requestNew:(BOOL) requestNew
                     completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                         error:(STOverlordErrorBlock) errorBlock;
+                         error:(STOErrorBlock) errorBlock;
 - (void) getCommentsFromPlace:(STPlace *) place
                  withStickers:(NSArray *) stickers
                    importance:(STOverlordOperationImportance) importance
                    requestNew:(BOOL) requestNew
                    completion:(void (^)(NSArray *comments)) completionBlock
-                        error:(STOverlordErrorBlock) errorBlock;
+                        error:(STOErrorBlock) errorBlock;
 - (void)updateLocation:(STLocation *) location;
 - (void) updateCaches; //The Overlord will re-cache everything, he will use STOverlordImportanceLow to do this
 - (void) deleteCaches; //If memory is low, call this. This may occur, because the overlord will try to cache everything it resolves

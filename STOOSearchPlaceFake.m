@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
-#import "STOverlordOperationSearchFakePlace.h"
+#import "STOOSearchPlaceFake.h"
 
-@implementation STOverlordOperationSearchFakePlace
+@implementation STOOSearchPlaceFake
 - (id) initWithLocation:(STLocation *)location searchTerm:(NSString *)searchTerm pageNumber:(NSUInteger)pageNumber importance:(STOverlordOperationImportance)importance completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                  error:(STOverlordErrorBlock) errorBlock{
+                  error:(STOErrorBlock) errorBlock{
     self = [super init];
     if (self) {
         self.location =location;

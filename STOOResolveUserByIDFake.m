@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
-#import "STOverlordOperationGetUserByIDFake.h"
+#import "STOOResolveUserByIDFake.h"
 
-@implementation STOverlordOperationGetUserByIDFake
-- (id) initWithUserId:(NSNumber *) userId importance:(STOverlordOperationImportance) importance completion:(void (^)(STUser *user)) completionBlock error:(STOverlordErrorBlock) errorBlock {
+@implementation STOOResolveUserByIDFake
+- (id) initWithUserId:(NSNumber *) userId importance:(STOverlordOperationImportance) importance completion:(void (^)(STUser *user)) completionBlock error:(STOErrorBlock) errorBlock {
     self = [super init];
     if (self) {
         _importance = importance;

@@ -7,9 +7,9 @@
 //
 
 #import "STOverlord.h"
-#import "STOverlordOperationSearchFakePlace.h"
-#import "STOverlordOperationGetUserByIDFake.h"
-#import "STOverlordOperationGetCommentsByIdFake.h"
+#import "STOOSearchPlaceFake.h"
+#import "STOOResolveUserByIDFake.h"
+#import "STOOResolveCommentsByIdFake.h"
 //First implementation of the Overlord, completely naive, should be better but fuck it...
 @implementation STOverlord {
     dispatch_queue_t _highImportanceQueue;
@@ -68,7 +68,7 @@
 #pragma mark Creating Operations
 - (void) searchPlaceBySearchTerm:(NSString *) term
                       completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                           error:(STOverlordErrorBlock) errorBlock {
+                           error:(STOErrorBlock) errorBlock {
     [self searchPlaceBySearchTerm:term
                        importance:STOverlordOperationImportanceNormal
                        requestNew:YES
@@ -80,7 +80,7 @@
                       requestNew:(BOOL)requestNew
                       completion:(void (^)(NSArray *, NSUInteger))completionBlock
                            error:(void (^)(NSError *))errorBlock {
-    STOverlordOperationSearchFakePlace *operation = [[STOverlordOperationSearchFakePlace alloc]
+    STOOSearchPlaceFake *operation = [[STOOSearchPlaceFake alloc]
                                                      initWithLocation:self.userLocation
                                                      searchTerm:term
                                                      pageNumber:0
@@ -91,7 +91,7 @@
 }
 - (void) resolveUserById:(NSNumber *)userId
               completion:(void (^)(STUser *))completionBlock
-                   error:(STOverlordErrorBlock)errorBlock {
+                   error:(STOErrorBlock)errorBlock {
     [self resolveUserById:userId
                importance:STOverlordOperationImportanceNormal
                requestNew:YES
@@ -102,17 +102,17 @@
               importance:(STOverlordOperationImportance)importance
               requestNew:(BOOL)requestNew
               completion:(void (^)(STUser *))completionBlock
-                   error:(STOverlordErrorBlock)errorBlock {
+                   error:(STOErrorBlock)errorBlock {
     
-    STOverlordOperationGetUserByIDFake *operation = [[STOverlordOperationGetUserByIDFake alloc]
+    STOOResolveUserByIDFake *operation = [[STOOResolveUserByIDFake alloc]
                                                      initWithUserId:userId
                                                      importance:importance
                                                      completion:completionBlock
                                                      error:errorBlock];
     [self runOperation:operation];
 }
-- (void) resolveBoardCommentById:(NSNumber *)commentId importance:(STOverlordOperationImportance)importance requestNew:(BOOL)requestNew completion:(void (^)(STBoardComment *))completionBlock error:(STOverlordErrorBlock)errorBlock {
-    STOverlordOperationGetCommentsByIdFake *operation = [[STOverlordOperationGetCommentsByIdFake alloc]
+- (void) resolveBoardCommentById:(NSNumber *)commentId importance:(STOverlordOperationImportance)importance requestNew:(BOOL)requestNew completion:(void (^)(STBoardComment *))completionBlock error:(STOErrorBlock)errorBlock {
+    STOOResolveCommentsByIdFake *operation = [[STOOResolveCommentsByIdFake alloc]
                                                          initWithBoardCommentId:commentId
                                                          importance:importance
                                                          completion:completionBlock

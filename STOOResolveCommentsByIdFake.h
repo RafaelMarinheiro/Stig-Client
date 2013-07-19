@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "STOverlord.h"
 
-@interface STOverlordOperationGetCommentsByIdFake : NSObject <STOverlordOperation>
+@interface STOOResolveCommentsByIdFake : NSObject <STOverlordOperation>
 @property (nonatomic, readonly) STOverlordOperationImportance importance;
 @property (nonatomic, readonly, getter = isCacheable) BOOL cacheable;
 @property (nonatomic, readonly) NSNumber *commentId;
 @property (nonatomic, strong) void (^completionBlock)(STBoardComment *comment);
-@property (nonatomic, strong) STOverlordErrorBlock errorBlock;
+@property (nonatomic, strong) STOErrorBlock errorBlock;
 @property (nonatomic, readonly) id output;
 - (id) initWithBoardCommentId:(NSNumber *) commentId
            importance:(STOverlordOperationImportance) importance
            completion:(void (^)(STBoardComment *comment)) completionBlock
-                error:(STOverlordErrorBlock) errorBlock;
+                error:(STOErrorBlock) errorBlock;
 - (BOOL) run; 
 - (void) runCompletionBlock;
 - (void) runErrorBlock;

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
-#import "STOverlordOperationGetCommentsByIdFake.h"
+#import "STOOResolveCommentsByIdFake.h"
 
-@implementation STOverlordOperationGetCommentsByIdFake
-- (id) initWithBoardCommentId:(NSNumber *) commentId importance:(STOverlordOperationImportance) importance completion:(void (^)(STBoardComment *comment)) completionBlock error:(STOverlordErrorBlock) errorBlock {
+@implementation STOOResolveCommentsByIdFake
+- (id) initWithBoardCommentId:(NSNumber *) commentId importance:(STOverlordOperationImportance) importance completion:(void (^)(STBoardComment *comment)) completionBlock error:(STOErrorBlock) errorBlock {
     self = [super init];
     if (self) {
         _importance = importance;

@@ -37,8 +37,8 @@
     float _score[240];
     
     //Positioning
-    STPoint _mapBottomRight;
-    STPoint _mapTopLeft;
+    STPoint _mapBottomLeft;
+    STPoint _mapTopRight;
     STPoint _mapPosition;
     
     //Map criteria

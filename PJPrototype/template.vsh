@@ -6,11 +6,11 @@ precision highp float;
 //Interest points
 uniform int placeNumber;
 uniform vec2 latlon[50];
-uniform vec4 score[50];
+uniform vec2 score[50];
 
 //Map positioning
-uniform vec2 mapBottomRight;
-uniform vec2 mapTopLeft;
+uniform vec2 mapBottomLeft;
+uniform vec2 mapTopRight;
 uniform vec2 mapPosition;
 
 //Map criteria
@@ -21,8 +21,7 @@ uniform vec2 mapPosition;
 uniform int criteria;
 
 //Screen size attributes
-uniform float screenWidth;
-uniform float screenHeight;
+uniform vec2 screenSize;
 
 attribute vec4 position;
 void main()

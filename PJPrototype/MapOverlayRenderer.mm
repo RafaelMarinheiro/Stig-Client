@@ -20,16 +20,15 @@ enum FILTER_MODE{
 
 // uniform index
 enum {
-	UNIFORM_SCREEN_HEIGHT,
-    UNIFORM_SCREEN_WIDTH,
+	UNIFORM_SCREEN_SIZE,
     
     UNIFORM_PLACE_NUMBER,
     UNIFORM_LATLON_BUFFER,
     UNIFORM_SCORE_BUFFER,
     UNIFORM_CRITERIA,
     
-    UNIFORM_MAP_BOTTOMRIGHT,
-    UNIFORM_MAP_TOPLEFT,
+    UNIFORM_MAP_BOTTOMLEFT,
+    UNIFORM_MAP_TOPRIGHT,
     UNIFORM_MAP_POSITION,
     
     NUM_UNIFORMS
@@ -118,8 +117,7 @@ enum {
             // use shader program
             glUseProgram(program);
         
-        glUniform1f(uniforms[UNIFORM_SCREEN_HEIGHT], backingHeight*1.0f);
-        glUniform1f(uniforms[UNIFORM_SCREEN_WIDTH], backingWidth*1.0f);
+        glUniform2f(uniforms[UNIFORM_SCREEN_SIZE], backingWidth*1.0f, backingHeight*1.0f);
         
             // update attribute values
             glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, __screen);
@@ -177,12 +175,11 @@ enum {
 	// get uniform locations
     uniforms[UNIFORM_PLACE_NUMBER] = glGetUniformLocation(program, "placeNumber");
     uniforms[UNIFORM_LATLON_BUFFER] = glGetUniformLocation(program, "latlon");
-    uniforms[UNIFORM_MAP_BOTTOMRIGHT] = glGetUniformLocation(program, "mapBottomRight");
-    uniforms[UNIFORM_MAP_TOPLEFT] = glGetUniformLocation(program, "mapTopLeft");
+    uniforms[UNIFORM_MAP_BOTTOMLEFT] = glGetUniformLocation(program, "mapBottomLeft");
+    uniforms[UNIFORM_MAP_TOPRIGHT] = glGetUniformLocation(program, "mapTopRight");
     uniforms[UNIFORM_MAP_POSITION] = glGetUniformLocation(program, "mapPosition");
     uniforms[UNIFORM_CRITERIA] = glGetUniformLocation(program, "criteria");
-	uniforms[UNIFORM_SCREEN_HEIGHT] = glGetUniformLocation(program, "screenHeight");
-    uniforms[UNIFORM_SCREEN_WIDTH] = glGetUniformLocation(program, "screenWidth");
+	uniforms[UNIFORM_SCREEN_SIZE] = glGetUniformLocation(program, "screenSize");
     
 	// release vertex and fragment shaders
 	if (vertShader) {
@@ -244,10 +241,7 @@ enum {
         [EAGLContext setCurrentContext:nil];
 	
 	context = nil;
-    
-    if(_triangleArray) free(_triangleArray);
-    if(_colorArray) free(_colorArray);
-	
+    	
 }
 
 @end

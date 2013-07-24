@@ -61,6 +61,10 @@
 		0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */; };
 		0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */; };
 		0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4AA17A0609E0071D95C /* STBoardCommentView.m */; };
+		0FA3EC6917A0656A0013F3DB /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC6817A0656A0013F3DB /* Shaders.m */; };
+		0FA3EC7117A066100013F3DB /* MagicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7017A066100013F3DB /* MagicView.m */; };
+		0FA3EC7417A066200013F3DB /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7217A066200013F3DB /* matrix.c */; };
+		0FA3EC7617A066370013F3DB /* MapOverlayRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7517A066370013F3DB /* MapOverlayRenderer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +151,16 @@
 		0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		0202F4A917A0609E0071D95C /* STBoardCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentView.h; sourceTree = "<group>"; };
 		0202F4AA17A0609E0071D95C /* STBoardCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentView.m; sourceTree = "<group>"; };
+		0FA3EC6717A0656A0013F3DB /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		0FA3EC6817A0656A0013F3DB /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
+		0FA3EC6B17A065CE0013F3DB /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		0FA3EC6C17A065CE0013F3DB /* MapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlayRenderer.h; sourceTree = "<group>"; };
+		0FA3EC6E17A065E70013F3DB /* STTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTypes.h; sourceTree = "<group>"; };
+		0FA3EC6F17A066100013F3DB /* MagicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicView.h; sourceTree = "<group>"; };
+		0FA3EC7017A066100013F3DB /* MagicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicView.m; sourceTree = "<group>"; };
+		0FA3EC7217A066200013F3DB /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
+		0FA3EC7317A066200013F3DB /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		0FA3EC7517A066370013F3DB /* MapOverlayRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapOverlayRenderer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +234,9 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FA3EC6D17A065D80013F3DB /* Types */,
+				0FA3EC6617A0654E0013F3DB /* Shaders */,
+				0FA3EC6517A065410013F3DB /* Matrix */,
 				0202F4A617A060670071D95C /* AFNetworking */,
 				0202F48917A0602E0071D95C /* Resources */,
 				0202F41917A05E920071D95C /* Stig-Info.plist */,
@@ -282,6 +299,9 @@
 		0202F46C17A05FF70071D95C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0FA3EC6F17A066100013F3DB /* MagicView.h */,
+				0FA3EC7017A066100013F3DB /* MagicView.m */,
+				0FA3EC6A17A065B60013F3DB /* MapOverlay */,
 				0202F4A717A0609E0071D95C /* CircularButtonDisposerView.h */,
 				0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */,
 				0202F4A917A0609E0071D95C /* STBoardCommentView.h */,
@@ -336,6 +356,42 @@
 				0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		0FA3EC6517A065410013F3DB /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC7217A066200013F3DB /* matrix.c */,
+				0FA3EC7317A066200013F3DB /* matrix.h */,
+			);
+			name = Matrix;
+			sourceTree = "<group>";
+		};
+		0FA3EC6617A0654E0013F3DB /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC6717A0656A0013F3DB /* Shaders.h */,
+				0FA3EC6817A0656A0013F3DB /* Shaders.m */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		0FA3EC6A17A065B60013F3DB /* MapOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC7517A066370013F3DB /* MapOverlayRenderer.mm */,
+				0FA3EC6B17A065CE0013F3DB /* ESRenderer.h */,
+				0FA3EC6C17A065CE0013F3DB /* MapOverlayRenderer.h */,
+			);
+			name = MapOverlay;
+			sourceTree = "<group>";
+		};
+		0FA3EC6D17A065D80013F3DB /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC6E17A065E70013F3DB /* STTypes.h */,
+			);
+			name = Types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +501,10 @@
 				0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */,
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
+				0FA3EC6917A0656A0013F3DB /* Shaders.m in Sources */,
+				0FA3EC7117A066100013F3DB /* MagicView.m in Sources */,
+				0FA3EC7417A066200013F3DB /* matrix.c in Sources */,
+				0FA3EC7617A066370013F3DB /* MapOverlayRenderer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +619,7 @@
 				0202F43317A05E920071D95C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

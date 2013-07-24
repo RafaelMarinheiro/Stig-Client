@@ -15,7 +15,6 @@
 		025E274817946FB100CAE697 /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274417946F4300CAE697 /* template.fsh */; };
 		025E274917946FB100CAE697 /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025E274517946F4300CAE697 /* template.vsh */; };
 		025E274C1794760800CAE697 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 025E274B1794760800CAE697 /* matrix.c */; };
-		025E27521794860A00CAE697 /* STTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 025E27511794860A00CAE697 /* STTypes.m */; };
 		0281A046176E15DE00A4D2DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A045176E15DE00A4D2DB /* UIKit.framework */; };
 		0281A048176E15DE00A4D2DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A047176E15DE00A4D2DB /* Foundation.framework */; };
 		0281A04A176E15DE00A4D2DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0281A049176E15DE00A4D2DB /* CoreGraphics.framework */; };
@@ -69,6 +68,8 @@
 		02CF3EEB1798B2760055BB75 /* STBoardComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EEA1798B2760055BB75 /* STBoardComment.m */; };
 		02CF3EEE1798C1280055BB75 /* STUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EED1798C1280055BB75 /* STUser.m */; };
 		02CF3EF11798D9360055BB75 /* STOverlord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF3EF01798D9360055BB75 /* STOverlord.m */; };
+		0FF472B31799C839002BBE75 /* MapOverlayRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0FF472B21799C839002BBE75 /* MapOverlayRenderer.mm */; };
+		0FF472B61799C871002BBE75 /* Clarkson-Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FF472B41799C871002BBE75 /* Clarkson-Delaunay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,9 @@
 		02CF3EED1798C1280055BB75 /* STUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUser.m; sourceTree = "<group>"; };
 		02CF3EEF1798D9360055BB75 /* STOverlord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOverlord.h; sourceTree = "<group>"; };
 		02CF3EF01798D9360055BB75 /* STOverlord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOverlord.m; sourceTree = "<group>"; };
+		0FF472B21799C839002BBE75 /* MapOverlayRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapOverlayRenderer.mm; sourceTree = "<group>"; };
+		0FF472B41799C871002BBE75 /* Clarkson-Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Clarkson-Delaunay.cpp"; sourceTree = "<group>"; };
+		0FF472B51799C871002BBE75 /* Clarkson-Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Clarkson-Delaunay.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,8 @@
 		0281A039176E15DE00A4D2DB = {
 			isa = PBXGroup;
 			children = (
+				0FF472B41799C871002BBE75 /* Clarkson-Delaunay.cpp */,
+				0FF472B51799C871002BBE75 /* Clarkson-Delaunay.h */,
 				0281A04B176E15DE00A4D2DB /* PJPrototype */,
 				0281A044176E15DE00A4D2DB /* Frameworks */,
 				0281A043176E15DE00A4D2DB /* Products */,
@@ -373,6 +379,7 @@
 		028AB7931799A3760015D1E6 /* Overlay additional classes */ = {
 			isa = PBXGroup;
 			children = (
+				0FF472B21799C839002BBE75 /* MapOverlayRenderer.mm */,
 				025E275017947F4400CAE697 /* STTypes.h */,
 				025E27511794860A00CAE697 /* STTypes.m */,
 				025E27361794620300CAE697 /* MagicView.h */,
@@ -508,7 +515,6 @@
 				025E27381794620300CAE697 /* MagicView.m in Sources */,
 				025E274317946C9F00CAE697 /* Shaders.m in Sources */,
 				025E274C1794760800CAE697 /* matrix.c in Sources */,
-				025E27521794860A00CAE697 /* STTypes.m in Sources */,
 				02AF4AE71794E2AD005479C7 /* CircularButtonDisposerView.m in Sources */,
 				02CF3EDA1797336B0055BB75 /* STPlace.m in Sources */,
 				02CF3EE0179738430055BB75 /* STLocation.m in Sources */,
@@ -521,6 +527,8 @@
 				028AB78B179983170015D1E6 /* STOOResolveUserByIDFake.m in Sources */,
 				028AB7961799A7720015D1E6 /* STOOResolveCommentsByIdFake.m in Sources */,
 				028AB7991799AC5A0015D1E6 /* STOOGetCommentsByPlaceFake.m in Sources */,
+				0FF472B31799C839002BBE75 /* MapOverlayRenderer.mm in Sources */,
+				0FF472B61799C871002BBE75 /* Clarkson-Delaunay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

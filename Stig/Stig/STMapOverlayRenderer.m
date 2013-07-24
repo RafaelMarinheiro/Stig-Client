@@ -6,17 +6,12 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
-#import "MapOverlayRenderer.h"
+#import "STMapOverlayRenderer.h"
+
+
 #import "Shaders.h"
 #import "matrix.h"
 
-
-enum FILTER_MODE{
-    ST_LOCATION,
-    ST_SOCIAL,
-    ST_BUZZ,
-    ST_OVERALL
-};
 
 // uniform index
 enum {
@@ -42,11 +37,11 @@ enum {
 	NUM_ATTRIBUTES
 };
 
-@interface MapOverlayRenderer (PrivateMethods)
+@interface STMapOverlayRenderer (PrivateMethods)
 - (BOOL) loadShaders;
 @end
 
-@implementation MapOverlayRenderer
+@implementation STMapOverlayRenderer
 
 // Create an ES 2.0 context
 - (id <ESRenderer>) init
@@ -69,7 +64,7 @@ enum {
 
 	}
     _needUpdate = YES;
-    
+    _placeNumber = 0;
     __screen[0] =  -1;
     __screen[1] =  -1;
     __screen[2] =  1;
@@ -79,19 +74,31 @@ enum {
     __screen[6] =  1;
     __screen[7] =  1;
     
-	return self;
+    return self;
 }
 
-- (void) setPlaces:(NSArray *)places{
-    for (int i = 0; i < [places count]; i++) {
-        STPlace * place = [places objectAtIndex:i];
-        _latlon[i] = STPointMake([place.location.latitude floatValue], [place.location.longitude floatValue]);
-        
-        _score[4*i + 0] = [place.ranking.distance floatValue];
-        _score[4*i + 1] = [place.ranking.social floatValue];
-        _score[4*i + 2] = [place.ranking.buzz floatValue];
-        _score[4*i + 3] = [place.ranking.overall floatValue];
+- (void) setMapRegion:(MKCoordinateRegion)region{
+    _mapBottomLeft = STPointMake(region.center.latitude - region.span.latitudeDelta, region.center.longitude-region.span.longitudeDelta);
+     _mapTopRight = STPointMake(region.center.latitude + region.span.latitudeDelta, region.center.longitude+region.span.longitudeDelta);
+}
+
+- (void) setUserLocation:(CLLocation *)location{
+    _mapPosition = STPointMake([location coordinate].latitude, [location coordinate].longitude);
+}
+
+- (BOOL) addRelevantPlace:(STPlace *)place{
+    if(_placeNumber >= 30){
+        return NO;
     }
+    _latlon[2*_placeNumber+0] = [place coordinate].latitude;
+    _latlon[2*_placeNumber+1] = [place coordinate].longitude;
+    
+    _placeNumber++;
+    return YES;
+}
+
+- (void) setCriteria:(STRankingCriteria)criteria{
+    _criteria = criteria;
 }
 
 - (void) setupTest {
@@ -99,9 +106,7 @@ enum {
 }
 
 
-
 - (void)render {
-    printf("%d\n", GL_MAX_VERTEX_UNIFORM_VECTORS);
     if(_needUpdate){
         [EAGLContext setCurrentContext:context];
 
@@ -114,18 +119,21 @@ enum {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-            // use shader program
-            glUseProgram(program);
+        // use shader program
+        glUseProgram(program);
         
         glUniform2f(uniforms[UNIFORM_SCREEN_SIZE], backingWidth*1.0f, backingHeight*1.0f);
+        glUniform2f(uniforms[UNIFORM_MAP_BOTTOMLEFT], _mapBottomLeft.x, _mapBottomLeft.y);
+        glUniform2f(uniforms[UNIFORM_MAP_TOPRIGHT], _mapTopRight.x, _mapTopRight.y);
         
-            // update attribute values
-            glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, __screen);
-            glEnableVertexAttribArray(ATTRIB_VERTEX);
-//            glVertexAttribPointer(ATTRIB_COLOR, 4, GL_FLOAT, GL_TRUE, 0, _colorArray); //enable the normalized flag
-//            glEnableVertexAttribArray(ATTRIB_COLOR);
-            
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        NSLog(@"LOCAIS: %d", _placeNumber);
+        glUniform1i(uniforms[UNIFORM_PLACE_NUMBER], _placeNumber);
+        glUniform2fv(uniforms[UNIFORM_LATLON_BUFFER], _placeNumber, _latlon);
+        
+        // update attribute values
+        glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, __screen);
+        glEnableVertexAttribArray(ATTRIB_VERTEX);            
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
         [context presentRenderbuffer:GL_RENDERBUFFER];
@@ -140,7 +148,6 @@ enum {
 
 	// create shader program
 	program = glCreateProgram();
-
 	// create and compile vertex shader
 	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"vsh"];
 	if (!compileShader(&vertShader, GL_VERTEX_SHADER, (GLsizei)1, vertShaderPathname)) {
@@ -201,9 +208,8 @@ enum {
     [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
 	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
-
-
-    printf("%d %d\n", backingWidth, backingHeight);
+    
+    NSLog(@"WIDTH: %d - HEIGHT: %d", backingWidth, backingHeight);
     
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{

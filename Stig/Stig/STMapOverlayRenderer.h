@@ -16,7 +16,7 @@
 
 #import "STPlace.h"
 
-@interface MapOverlayRenderer : NSObject <ESRenderer>
+@interface STMapOverlayRenderer : NSObject <ESRenderer>
 {
 @private
 	EAGLContext *context;
@@ -33,7 +33,7 @@
 
     //Interest points
     int _placeNumber;
-    STPoint _latlon[60];
+    float _latlon[120];
     float _score[240];
     
     //Positioning
@@ -53,9 +53,13 @@
     BOOL _needUpdate;
 }
 
+- (void) setMapRegion: (MKCoordinateRegion) region;
+- (void) setUserLocation: (CLLocation *) location;
+- (BOOL) addRelevantPlace: (STPlace *) place;
+- (void) setCriteria: (STRankingCriteria) criteria;
+
 - (void) setupTest;
 - (void) render;
-- (void) setPlaces: (NSArray *) place;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end

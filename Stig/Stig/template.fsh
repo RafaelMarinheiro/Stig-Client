@@ -23,10 +23,16 @@ uniform int criteria;
 //Screen size attributes
 uniform vec2 screenSize;
 
+const float PI = acos(-1.0);
+
+float degToRad(in float deg){
+    return (deg*PI)/180.0;
+}
+
 float latlonSqDistance(in vec2 latlon1, in vec2 latlon2){
     float earthRadius = 6371.0;
-    vec2 dif = vec2((latlon2.y-latlon1.y) * cos((latlon1.x+latlon2.x)/2.0), (latlon2.x-latlon1.x));
-    return dot(dif, dif)*earthRadius*earthRadius;
+    vec2 dif = vec2(degToRad(latlon2.y-latlon1.y) * cos(degToRad(latlon1.x+latlon2.x)/2.0), degToRad(latlon2.x-latlon1.x));
+    return earthRadius * earthRadius * dot(dif, dif);
 }
 
 float gaussian(in float sqDist, in float radius){
@@ -35,34 +41,62 @@ float gaussian(in float sqDist, in float radius){
 }
 
 vec2 computeCoordinates(in vec2 pixelCoordinates){
-    return vec2(mix(mapBottomLeft.x, mapTopRight.x, pixelCoordinates.x), mix(mapBottomLeft.y, mapTopRight.y, pixelCoordinates.y));
+    return vec2(mix(mapBottomLeft.x, mapTopRight.x, pixelCoordinates.y), mix(mapBottomLeft.y, mapTopRight.y, pixelCoordinates.x));
 }
+
+//"lon": -34.88415,
+//"lat": -8.095323
 
 void main()
 {
     vec4 score = vec4(0.0, 0.0, 0.0, 0.0);
-    
     vec2 pixelCoordinates = vec2(gl_FragCoord.x/screenSize.x, gl_FragCoord.y/screenSize.y);
+    vec2 pixelLatlon = computeCoordinates(pixelCoordinates);
     
-    vec2 latlon = computeCoordinates(pixelCoordinates);
+    if(pixelLatlon.y < -34.873264){
+        gl_FragColor = vec4(1, 0, 0, 0.7);
+    } else{
+        gl_FragColor = vec4(0, 1, 0, 0.7);
+    }
+    return;
     
-
-    vec2 p = vec2(gl_FragCoord.x*1.0, gl_FragCoord.y*1.0);
+    int menor = -1;
+    float distToPixel = 1000.0;
+    for(int i = 0; i < placeNumber; i++){
+        vec4 placeScore;
+        float ndistToPixel = latlonSqDistance(pixelLatlon, latlon[i]);
+        if(ndistToPixel < distToPixel){
+            distToPixel = ndistToPixel;
+            menor = i;
+        }
+        //Location
+        float distToUser = latlonSqDistance(mapPosition, latlon[i]);
+        placeScore.x = 0.5*gaussian(distToPixel, 1000.0);
+        
+        //Social
+        placeScore.y = 0.5*gaussian(distToPixel, 1000.0);
+        
+        //Buzz
+        placeScore.z = 0.5*gaussian(distToPixel, 1000.0);
+        
+        //Overall
+        placeScore.w = 0.5*gaussian(distToPixel, 1000.0);
+        
+        score = score + placeScore;
+    }
     
-    vec2 c1 = vec2(0.75*screenWidth, 0.75*screenHeight);
-    vec2 c2 = vec2(0.4*screenWidth, 0.6*screenHeight);
-    vec2 c3 = vec2(0.7*screenWidth, 0.4*screenHeight);
-    
-    
-    float a = 0.7*gaussian(distance(p, c1)*distance(p, c1), 0.25*screenHeight);
-    float b = 0.7*gaussian(distance(p, c2)*distance(p, c2), 60.0);
-    float c = 0.7*gaussian(distance(p, c3)*distance(p, c3), 80.0);
-    //b= 0.0, c = 0.0;
-    float alpha = clamp(a+b+c, 0.0, 1.0);
+    if(menor == -1){
+        gl_FragColor = vec4(0, 0, 0, 0.7);
+    } else if(menor == 0){
+        gl_FragColor = vec4(1, 0, 0, 0.7);
+    } else if(menor == 1){
+        gl_FragColor = vec4(0, 1, 0, 0.7);
+    } else if(menor == 2){
+        gl_FragColor = vec4(0, 0, 1, 0.7);
+    }
+    return;
+    float alpha = clamp(score.x, 0.0, 1.0);
     
     gl_FragColor = vec4(1, 0, 0, alpha);
-    
-    if(alpha == 0.0){
-        gl_FragColor = vec4(0.0, 0.0, 1.0, 0.0);
-    }
+
 }

@@ -1,0 +1,185 @@
+{
+    "comments":[
+        {
+            "id":1,
+            "user_id": 12,
+            "place_id":1,
+            "text": "Lugar muito massa",
+            "stickers":[1,2],
+            "timestamp": "2013-06-19 23:30:45",
+            "reply": null
+        },
+        {
+            "id":2,
+            "user_id": 2,
+            "place_id":1,
+            "text": "Nem tanto assim visse ?",
+            "stickers":[4,5],
+            "timestamp": "2013-06-19 23:30:59",
+            "reply": 1
+        },
+        {
+            "id":3,
+            "user_id": 2,
+            "place_id":1,
+            "text": "Lugar lotado e poucas opções de bebida",
+            "stickers":[4,5],
+            "timestamp": "2013-06-19 23:31:45",
+            "reply": null
+        },
+        {
+            "id":4,
+            "user_id": 5,
+            "place_id":1,
+            "text": "Tem muita gente e a música não está muito boa :/",
+            "stickers":[3,4],
+            "timestamp": "2013-06-19 23:37:52",
+            "reply": null
+        },
+        {
+            "id":5,
+            "user_id": 5,
+            "place_id":1,
+            "text": "Agora teve uma confusão aqui por causa de bebida. Não recomendo muito virem pra cá não...",
+            "stickers":[5],
+            "timestamp": "2013-06-19 23:41:17",
+            "reply": 4
+        },
+        {
+            "id":6,
+            "user_id": 4,
+            "place_id":1,
+            "text": "Tem gente legal, apesar de tudo",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:46:33",
+            "reply": 5
+        },
+        {
+            "id":7,
+            "user_id": 5,
+            "place_id":1,
+            "text": "Mas ser envolvido em confusão não È muito bom. Principalmente quando você não tem culpa de nada",
+            "stickers":[2,5],
+            "timestamp": "2013-06-19 23:46:33",
+            "reply": 6
+        },
+        {
+            "id":8,
+            "user_id": 3,
+            "place_id":2,
+            "text": "Muito legal aqui. Tá cheio de gente animada e com músicas muito boas mesmo! :D",
+            "stickers":[2,3],
+            "timestamp": "2013-06-19 23:36:03",
+            "reply": null
+        },
+        {
+            "id":9,
+            "user_id": 7,
+            "place_id":2,
+            "text": "Também tem drinks muito gostosos e o cardápio é bem variado :)",
+            "stickers":[5],
+            "timestamp": "2013-06-19 23:41:27",
+            "reply": 8
+        },
+        {
+            "id":10,
+            "user_id": 9,
+            "place_id":2,
+            "text": "Tá meio cheio, mas a galera é bem animada",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:43:55",
+            "reply": null
+        },
+        {
+            "id":11,
+            "user_id": 7,
+            "place_id":2,
+            "text": "Pena que o atendimento do bar tá um pouco ruim :/",
+            "stickers":[1,5],
+            "timestamp": "2013-06-19 23:45:02",
+            "reply": 10
+        },
+        {
+            "id":12,
+            "user_id": 3,
+            "place_id":2,
+            "text": "Pelo menos tem a galera pra conversar. Dá pra esperar o atendimento de boa",
+            "stickers":[2,5],
+            "timestamp": "2013-06-19 23:47:11",
+            "reply": 11
+        },
+        {
+            "id":13,
+            "user_id": 7,
+            "place_id":2,
+            "text": "É verdade",
+            "stickers":[2,5],
+            "timestamp": "2013-06-19 23:47:56",
+            "reply": 12
+        },
+        {
+            "id":14,
+            "user_id": 11,
+            "place_id":2,
+            "text": "Não tem fila para entrar!",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:49:44",
+            "reply": null
+        },
+        {
+            "id":15,
+            "user_id": 7,
+            "place_id":2,
+            "text": "Também estava meio apreenssivo, mas tava tranquilo quando cheguei ;)",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:52:14",
+            "reply": 14
+        },
+        {
+            "id":16,
+            "user_id": 6,
+            "place_id":3,
+            "text": "Grande diversidade de drinks e cover de coldplay muito bom!",
+            "stickers":[2,5],
+            "timestamp": "2013-06-19 23:32:41",
+            "reply": null
+        },
+        {
+            "id":17,
+            "user_id": 8,
+            "place_id":3,
+            "text": "Tem uma fila enorme esperando para entrar, estou aqui já faz quase 1 hora esperando --'",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:34:51",
+            "reply": null
+        },
+        {
+            "id":18,
+            "user_id": 10,
+            "place_id":3,
+            "text": "Pode ir pra outro lugar então. O atendimento está péssimo e não tem tanta gente interessante aqui...",
+            "stickers":[1,2],
+            "timestamp": "2013-06-19 23:36:47",
+            "reply": 17
+        },
+        {
+            "id":19,
+            "user_id": 6,
+            "place_id":3,
+            "text": "Tem muita gente e pouco espaço. Uma menina já passou mal aqui dentro",
+            "stickers":[2],
+            "timestamp": "2013-06-19 23:39:23",
+            "reply": 18
+        },
+        {
+            "id":20,
+            "user_id": 8,
+            "place_id":3,
+            "text": "Finalmente entrei. O lugar tem algumas pessoas legais e a música tá boa mesmo",
+            "stickers":[2,3],
+            "timestamp": "2013-06-19 23:34:51",
+            "reply": null
+        }
+
+    ]
+}

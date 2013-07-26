@@ -6,28 +6,19 @@
 //  Copyright (c) 2013 Stig inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "QuartzCore/CAEAGLLayer.h"
-#import "STMapOverlayRenderer.h"
+#import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
+#import "STTypes.h"
 
-@interface STMapOverlayView : UIView
-{
-@private
-    STMapOverlayRenderer *renderer;
-}
+@interface STMapOverlayView : MKOverlayView
 
-#pragma mark -
-#pragma mark Data methods
++ (STRankingCriteria) criteria;
++ (void) setCriteria: (STRankingCriteria) criteria;
 
-- (void) setMapRegion: (MKCoordinateRegion) region;
-- (void) setUserLocation: (CLLocation *) location;
-- (BOOL) addRelevantPlace: (STPlace *) place;
-- (void) setCriteria: (STRankingCriteria) criteria;
+- (id)initWithOverlay:(id <MKOverlay>)overlay;
 
-#pragma mark -
-#pragma mark Draw Methods
-
-- (void) drawView:(id)sender;
-
+- (void)drawMapRect:(MKMapRect)mapRect
+          zoomScale:(MKZoomScale)zoomScale
+                  inContext:(CGContextRef)ctx;
 
 @end

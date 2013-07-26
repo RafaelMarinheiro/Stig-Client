@@ -7,65 +7,122 @@
 //
 
 #import "STMapOverlayView.h"
+#import "STPlace.h"
 
 @implementation STMapOverlayView
 
+static STRankingCriteria _criteria = ST_BUZZ;
 
-#pragma mark -
-#pragma mark Init Methods
++ (STRankingCriteria) criteria{
+    return _criteria;
+}
 
-- (id)initWithFrame:(CGRect)frame
++ (void) setCriteria:(STRankingCriteria)criteria{
+    _criteria = criteria;
+}
+
+- (id)initWithOverlay:(id <MKOverlay>)overlay
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self config];
+    return [super initWithOverlay:overlay];
+}
+
+- (double) computeRelevance{
+    double buzz = [((STPlace*)self.overlay).ranking.buzz doubleValue]/1000;
+    double social = [((STPlace*)self.overlay).ranking.social doubleValue]/1000;
+    
+    if([STMapOverlayView criteria] == ST_BUZZ){
+        return 0.9*buzz;
+    } else if([STMapOverlayView criteria] == ST_SOCIAL){
+        return 0.9*social;
+    } else{
+        double rank = [((STPlace*)self.overlay).ranking.buzz doubleValue]/1000;
+        return 0.45*(buzz+social);
     }
-    return self;
+    return 0.5;
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self config];
+- (double) computeRadius{
+    return 1.0;
+}
+
+- (void)drawMapRect:(MKMapRect)mapRect
+          zoomScale:(MKZoomScale)zoomScale
+          inContext:(CGContextRef)ctx
+{
+    // Get the overlay bounding rectangle.
+    MKMapRect  theMapRect = [self.overlay boundingMapRect];
+    CGRect theRect = [self rectForMapRect:theMapRect];
+
+    CGPoint center;
+    center = CGPointMake(CGRectGetMidX(theRect), CGRectGetMidY(theRect));
+    double radius = (CGRectGetMaxX(theRect) - CGRectGetMidX(theRect))*[self computeRadius];
+    if(zoomScale < 0.0005){
+        return;
     }
-    return self;
-}
+    
+    
+    CGContextClipToRect(ctx, theRect);
+    
+    // Set up the gradient color and location information.
+    CGColorSpaceRef myColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGFloat locations[5] = {0.0, 0.25, 0.50, 0.75, 1.0};
 
-- (void) layoutSubviews
-{
-	[renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
-    [self drawView:nil];
-}
-- (void) config {
-    self.backgroundColor = [UIColor clearColor];
-    renderer = [[STMapOverlayRenderer alloc] init];
-}
-
-+(Class)layerClass {
-    return [CAEAGLLayer class];
-}
-
-#pragma mark -
-#pragma mark Data methods
-
-- (void) setMapRegion: (MKCoordinateRegion) region{
-    [renderer setMapRegion:region];
-}
-- (void) setUserLocation: (CLLocation *) location{
-    [renderer setUserLocation:location];
-}
-- (BOOL) addRelevantPlace: (STPlace *) place{
-    return [renderer addRelevantPlace:place];
-}
-- (void) setCriteria: (STRankingCriteria) criteria{
-    [renderer setCriteria:criteria];
-}
-
-#pragma mark -
-#pragma mark Draw Methods
-- (void) drawView:(id)sender
-{
-    [renderer render];
+    if([STMapOverlayView criteria] == ST_BUZZ){
+         CGFloat components[20] = {
+                                    0.87, 0.23, 0.16, 1.0*[self computeRelevance],
+                                    0.87, 0.23, 0.16, 0.8*[self computeRelevance],
+                                    0.87, 0.23, 0.16, 0.35*[self computeRelevance],
+                                    0.87, 0.23, 0.16, 0.1*[self computeRelevance],
+                                    0.87, 0.23, 0.16, 0.0*[self computeRelevance]
+                                 };
+        
+        // Create the gradient.
+        CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 5);
+        
+        // Draw.
+        CGContextDrawRadialGradient(ctx, myGradient, center, 0, center, radius, kCGGradientDrawsBeforeStartLocation);
+        
+        // Clean up.
+        CGColorSpaceRelease(myColorSpace);
+        CGGradientRelease(myGradient);
+    } else if([STMapOverlayView criteria] == ST_SOCIAL){
+        CGFloat components[20] = {
+                                    1.0, 0.65, 0.25, 1.0*[self computeRelevance],
+                                    1.0, 0.65, 0.25, 0.8*[self computeRelevance],
+                                    1.0, 0.65, 0.25, 0.35*[self computeRelevance],
+                                    1.0, 0.65, 0.25, 0.1*[self computeRelevance],
+                                    1.0, 0.65, 0.25, 0.0*[self computeRelevance]
+                                };
+        
+        // Create the gradient.
+        CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 5);
+        
+        // Draw.
+        CGContextDrawRadialGradient(ctx, myGradient, center, 0, center, radius, kCGGradientDrawsBeforeStartLocation);
+        
+        // Clean up.
+        CGColorSpaceRelease(myColorSpace);
+        CGGradientRelease(myGradient);
+    } else{
+        CGFloat components[20] = {
+                            1.0, 0.0, 0.0, 1.0*[self computeRelevance],
+                            1.0, 0.0, 0.0, 0.8*[self computeRelevance],
+                            1.0, 0.0, 0.0, 0.35*[self computeRelevance],
+                            1.0, 0.0, 0.0, 0.1*[self computeRelevance],
+                            1.0, 0.0, 0.0, 0.0*[self computeRelevance]
+                        };
+        
+        // Create the gradient.
+        CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 5);
+        
+        // Draw.
+        CGContextDrawRadialGradient(ctx, myGradient, center, 0, center, radius, kCGGradientDrawsBeforeStartLocation);
+        
+        // Clean up.
+        CGColorSpaceRelease(myColorSpace);
+        CGGradientRelease(myGradient);
+    }
+    
 }
 
 @end

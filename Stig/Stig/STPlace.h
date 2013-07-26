@@ -16,7 +16,7 @@
 
 
 
-@interface STPlace : NSObject <MKAnnotation>
+@interface STPlace : NSObject <MKOverlay>
 @property (nonatomic, strong) NSNumber *placeId;
 @property (nonatomic, strong) NSString *placeName;
 @property (nonatomic, strong) NSString *imageURL;
@@ -27,6 +27,8 @@
 @property (nonatomic, strong) STRanking *ranking;
 + (STPlace *) placeFromJSONData:(id) json;
 - (CLLocationCoordinate2D) coordinate;
+- (MKMapRect) boundingMapRect;
+- (MKCircle *) circle;
 - (NSString *) title;
 - (NSString *) subtitle;
 @end

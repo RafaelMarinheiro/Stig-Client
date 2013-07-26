@@ -33,6 +33,15 @@
             [self.mapView addAnnotations:self.places];
             [self.mapView setRegion:[self regionFromAnnotations:self.places]];
             [self.tableView reloadData];
+            NSLog(@"imageMover object is: %@", self.mapOverlayView);
+            [self.mapOverlayView setMapRegion:[self.mapView region]];
+            [self.mapOverlayView setUserLocation:[[self.mapView userLocation] location]];
+            for (int i = 0; i < [self.places count]; i++) {
+                STPlace * place = [self.places objectAtIndex:i];
+                NSLog([place placeName]);
+                [self.mapOverlayView addRelevantPlace:place];
+            }
+            [self.mapOverlayView drawView:nil];
         }error:^(NSError *error) {
             NSLog(@"ERROR LOADING PLACES DATA !");
         }];

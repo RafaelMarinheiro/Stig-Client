@@ -31,6 +31,15 @@
 - (CLLocationCoordinate2D) coordinate{
     return [self.location locationCoordinate];
 }
+
+- (MKMapRect) boundingMapRect{
+    return [[self circle] boundingMapRect];
+}
+
+- (MKCircle *) circle{
+    return [MKCircle circleWithCenterCoordinate:[self coordinate] radius:1000];
+}
+
 - (NSString *) title {
     return self.placeName;
 }

@@ -69,6 +69,13 @@
 		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
 		02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE5ECA17A330FD00FDC09F /* STStickerListView.m */; };
+		0FA3EC7417A066200013F3DB /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7217A066200013F3DB /* matrix.c */; };
+		0FA3EC7617A066370013F3DB /* STMapOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7517A066370013F3DB /* STMapOverlayRenderer.m */; };
+		0FA3EC7917A06C080013F3DB /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7817A06C080013F3DB /* STMapOverlayView.m */; };
+		0FA3EC7E17A074F90013F3DB /* STTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC7D17A074F90013F3DB /* STTypes.m */; };
+		0FA3EC7F17A076F00013F3DB /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3EC6817A0656A0013F3DB /* Shaders.m */; };
+		0FA3EC8017A07A670013F3DB /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47517A060280071D95C /* template.fsh */; };
+		0FA3EC8117A07A6A0013F3DB /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47617A060280071D95C /* template.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,8 +133,8 @@
 		0202F47217A060280071D95C /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		0202F47317A060280071D95C /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		0202F47417A060280071D95C /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
-		0202F47517A060280071D95C /* template.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.fsh; sourceTree = "<group>"; };
-		0202F47617A060280071D95C /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.vsh; sourceTree = "<group>"; };
+		0202F47517A060280071D95C /* template.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		0202F47617A060280071D95C /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		0202F47717A060280071D95C /* fakeComments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fakeComments.json; sourceTree = "<group>"; };
 		0202F47817A060280071D95C /* fakePlaces.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fakePlaces.json; sourceTree = "<group>"; };
 		0202F47917A060280071D95C /* fakeUsers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fakeUsers.json; sourceTree = "<group>"; };
@@ -164,6 +171,17 @@
 		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EC917A330FD00FDC09F /* STStickerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerListView.h; sourceTree = "<group>"; };
 		02BE5ECA17A330FD00FDC09F /* STStickerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerListView.m; sourceTree = "<group>"; };
+		0FA3EC6717A0656A0013F3DB /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		0FA3EC6817A0656A0013F3DB /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
+		0FA3EC6B17A065CE0013F3DB /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		0FA3EC6C17A065CE0013F3DB /* STMapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayRenderer.h; sourceTree = "<group>"; };
+		0FA3EC6E17A065E70013F3DB /* STTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTypes.h; sourceTree = "<group>"; };
+		0FA3EC7217A066200013F3DB /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
+		0FA3EC7317A066200013F3DB /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		0FA3EC7517A066370013F3DB /* STMapOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayRenderer.m; sourceTree = "<group>"; };
+		0FA3EC7717A06C080013F3DB /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
+		0FA3EC7817A06C080013F3DB /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
+		0FA3EC7D17A074F90013F3DB /* STTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTypes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +255,9 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FA3EC6D17A065D80013F3DB /* Types */,
+				0FA3EC6617A0654E0013F3DB /* Shaders */,
+				0FA3EC6517A065410013F3DB /* Matrix */,
 				0202F4A617A060670071D95C /* AFNetworking */,
 				0202F48917A0602E0071D95C /* Resources */,
 				0202F41917A05E920071D95C /* Stig-Info.plist */,
@@ -299,6 +320,7 @@
 		0202F46C17A05FF70071D95C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0FA3EC6A17A065B60013F3DB /* MapOverlay */,
 				0202F4A717A0609E0071D95C /* CircularButtonDisposerView.h */,
 				0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */,
 				0202F4A917A0609E0071D95C /* STBoardCommentView.h */,
@@ -328,8 +350,6 @@
 				0202F47217A060280071D95C /* cross@2x.png */,
 				0202F47317A060280071D95C /* list.png */,
 				0202F47417A060280071D95C /* list@2x.png */,
-				0202F47517A060280071D95C /* template.fsh */,
-				0202F47617A060280071D95C /* template.vsh */,
 				0202F47717A060280071D95C /* fakeComments.json */,
 				0202F47817A060280071D95C /* fakePlaces.json */,
 				0202F47917A060280071D95C /* fakeUsers.json */,
@@ -362,6 +382,55 @@
 				0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		0FA3EC6517A065410013F3DB /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC7217A066200013F3DB /* matrix.c */,
+				0FA3EC7317A066200013F3DB /* matrix.h */,
+			);
+			name = Matrix;
+			sourceTree = "<group>";
+		};
+		0FA3EC6617A0654E0013F3DB /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0202F47517A060280071D95C /* template.fsh */,
+				0202F47617A060280071D95C /* template.vsh */,
+				0FA3EC6717A0656A0013F3DB /* Shaders.h */,
+				0FA3EC6817A0656A0013F3DB /* Shaders.m */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		0FA3EC6A17A065B60013F3DB /* MapOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC7A17A071200013F3DB /* Renderer */,
+				0FA3EC7717A06C080013F3DB /* STMapOverlayView.h */,
+				0FA3EC7817A06C080013F3DB /* STMapOverlayView.m */,
+			);
+			name = MapOverlay;
+			sourceTree = "<group>";
+		};
+		0FA3EC6D17A065D80013F3DB /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC6E17A065E70013F3DB /* STTypes.h */,
+				0FA3EC7D17A074F90013F3DB /* STTypes.m */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
+		0FA3EC7A17A071200013F3DB /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3EC7517A066370013F3DB /* STMapOverlayRenderer.m */,
+				0FA3EC6B17A065CE0013F3DB /* ESRenderer.h */,
+				0FA3EC6C17A065CE0013F3DB /* STMapOverlayRenderer.h */,
+			);
+			name = Renderer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +509,8 @@
 				02BE5EC617A3307300FDC09F /* tagfila 91x91px.png in Resources */,
 				02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */,
 				02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */,
+				0FA3EC8017A07A670013F3DB /* template.fsh in Resources */,
+				0FA3EC8117A07A6A0013F3DB /* template.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +535,6 @@
 				0202F45417A05EF90071D95C /* STOOGetCommentsByPlaceFake.m in Sources */,
 				0202F45517A05EF90071D95C /* STOOResolvePlaceByIdFake.m in Sources */,
 				0202F46917A05FB50071D95C /* STBoardViewController.m in Sources */,
-				0202F46A17A05FB50071D95C /* STPlacesViewController.m in Sources */,
 				0202F48317A060290071D95C /* template.fsh in Sources */,
 				0202F48417A060290071D95C /* template.vsh in Sources */,
 				0202F49D17A060610071D95C /* AFHTTPClient.m in Sources */,
@@ -479,6 +549,13 @@
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
 				02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */,
+				0FA3EC7417A066200013F3DB /* matrix.c in Sources */,
+				0FA3EC7617A066370013F3DB /* STMapOverlayRenderer.m in Sources */,
+				0FA3EC7917A06C080013F3DB /* STMapOverlayView.m in Sources */,
+				0FA3EC7E17A074F90013F3DB /* STTypes.m in Sources */,
+				0FA3EC7F17A076F00013F3DB /* Shaders.m in Sources */,
+				0202F46A17A05FB50071D95C /* STPlacesViewController.m in Sources */,
+>>>>>>> MapOverlay
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

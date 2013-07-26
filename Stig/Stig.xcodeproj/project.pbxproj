@@ -61,6 +61,14 @@
 		0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */; };
 		0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */; };
 		0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4AA17A0609E0071D95C /* STBoardCommentView.m */; };
+		02BE5EBC17A3289700FDC09F /* STStickerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBB17A3289700FDC09F /* STStickerListView.xib */; };
+		02BE5EC317A3307300FDC09F /* acessotag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */; };
+		02BE5EC417A3307300FDC09F /* cardápiotags 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */; };
+		02BE5EC517A3307300FDC09F /* moneytag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */; };
+		02BE5EC617A3307300FDC09F /* tagfila 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC017A3307300FDC09F /* tagfila 91x91px.png */; };
+		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
+		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
+		02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE5ECA17A330FD00FDC09F /* STStickerListView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +155,15 @@
 		0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		0202F4A917A0609E0071D95C /* STBoardCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentView.h; sourceTree = "<group>"; };
 		0202F4AA17A0609E0071D95C /* STBoardCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentView.m; sourceTree = "<group>"; };
+		02BE5EBB17A3289700FDC09F /* STStickerListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STStickerListView.xib; sourceTree = "<group>"; };
+		02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "acessotag 91x91px.png"; sourceTree = "<group>"; };
+		02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardápiotags 91x91px.png"; sourceTree = "<group>"; };
+		02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moneytag 91x91px.png"; sourceTree = "<group>"; };
+		02BE5EC017A3307300FDC09F /* tagfila 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagfila 91x91px.png"; sourceTree = "<group>"; };
+		02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tagmusic91x91px.png; sourceTree = "<group>"; };
+		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
+		02BE5EC917A330FD00FDC09F /* STStickerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerListView.h; sourceTree = "<group>"; };
+		02BE5ECA17A330FD00FDC09F /* STStickerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerListView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +304,9 @@
 				0202F4A917A0609E0071D95C /* STBoardCommentView.h */,
 				0202F4AA17A0609E0071D95C /* STBoardCommentView.m */,
 				0202F45717A05F330071D95C /* MainStoryboard.storyboard */,
+				02BE5EBB17A3289700FDC09F /* STStickerListView.xib */,
+				02BE5EC917A330FD00FDC09F /* STStickerListView.h */,
+				02BE5ECA17A330FD00FDC09F /* STStickerListView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -294,6 +314,12 @@
 		0202F48917A0602E0071D95C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */,
+				02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */,
+				02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */,
+				02BE5EC017A3307300FDC09F /* tagfila 91x91px.png */,
+				02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */,
+				02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */,
 				0202F46D17A060270071D95C /* check.png */,
 				0202F46E17A060270071D95C /* check@2x.png */,
 				0202F46F17A060270071D95C /* clock.png */,
@@ -407,6 +433,13 @@
 				0202F48617A060290071D95C /* fakePlaces.json in Resources */,
 				0202F48717A060290071D95C /* fakeUsers.json in Resources */,
 				0202F48817A060290071D95C /* uk-board.jpg in Resources */,
+				02BE5EBC17A3289700FDC09F /* STStickerListView.xib in Resources */,
+				02BE5EC317A3307300FDC09F /* acessotag 91x91px.png in Resources */,
+				02BE5EC417A3307300FDC09F /* cardápiotags 91x91px.png in Resources */,
+				02BE5EC517A3307300FDC09F /* moneytag 91x91px.png in Resources */,
+				02BE5EC617A3307300FDC09F /* tagfila 91x91px.png in Resources */,
+				02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */,
+				02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +478,7 @@
 				0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */,
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
+				02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +593,7 @@
 				0202F43317A05E920071D95C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

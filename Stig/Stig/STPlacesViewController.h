@@ -15,4 +15,11 @@
 @property (nonatomic,readonly) BOOL showingMap;
 - (IBAction)switchViews:(UIBarButtonItem *)sender;
 
+
+
+
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropperConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
+@property (nonatomic, readonly) BOOL showingDropper;
 @end

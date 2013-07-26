@@ -10,7 +10,7 @@
                 <navigationController definesPresentationContext="YES" id="wjR-LJ-aVm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="kF1-hW-frl">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.44705882670000002" green="0.28627452250000002" blue="0.89019608500000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.68235294120000001" green="0.70980392160000005" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="dK9-Pj-bfG" kind="relationship" relationship="rootViewController" id="ast-XP-0qJ"/>
@@ -18,7 +18,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55c-ck-lsc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-607" y="234"/>
+            <point key="canvasLocation" x="-611" y="257"/>
         </scene>
         <!--Places View Controller-->
         <scene sceneID="LHF-uR-UjS">
@@ -54,17 +54,42 @@
                                     <outlet property="delegate" destination="dK9-Pj-bfG" id="Cbr-oI-u6p"/>
                                 </connections>
                             </tableView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-nn-CKF"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-nn-CKF">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="481" id="SSq-Q0-YeS"/>
+                                </constraints>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-vj-CKs">
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-ch-ORd">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Wcl-xU-C1J"/>
+                                            <constraint firstAttribute="width" constant="250" type="user" id="bDY-Cd-aex"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" type="user" id="0Bi-Jx-MfY"/>
+                                    <constraint firstItem="Pal-ch-ORd" firstAttribute="centerX" secondItem="eFm-vj-CKs" secondAttribute="centerX" type="default" id="c6E-Pv-YpF"/>
+                                    <constraint firstItem="Pal-ch-ORd" firstAttribute="centerY" secondItem="eFm-vj-CKs" secondAttribute="centerY" type="default" id="qBp-nH-Tjv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="sMt-nn-CKF" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="8zf-vr-cjN"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="J3m-Yj-dLP"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="LiJ-By-Vcz"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="M5M-99-wOJ"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="bottom" secondItem="vat-i7-LeV" secondAttribute="bottom" type="user" id="MMR-4h-HTe"/>
-                            <constraint firstItem="sMt-nn-CKF" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="ZA1-0s-jeU"/>
+                            <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-100" type="user" id="aIk-J5-OsX"/>
+                            <constraint firstAttribute="trailing" secondItem="eFm-vj-CKs" secondAttribute="trailing" type="user" id="b6u-hD-gsR"/>
+                            <constraint firstItem="eFm-vj-CKs" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="user" id="nVy-Qs-AX1"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="okn-r0-SUF"/>
-                            <constraint firstAttribute="bottom" secondItem="sMt-nn-CKF" secondAttribute="bottom" type="user" id="rDn-nu-AY7"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="sgv-lf-fUs"/>
                         </constraints>
                     </view>
@@ -76,6 +101,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dropperConstraint" destination="aIk-J5-OsX" id="IT0-0C-PT3"/>
+                        <outlet property="dropperLabel" destination="Pal-ch-ORd" id="8dE-3p-gAH"/>
                         <outlet property="mapView" destination="sMt-nn-CKF" id="kTQ-tr-oxq"/>
                         <outlet property="tableView" destination="YLf-e8-RnH" id="b6T-TF-vFw"/>
                     </connections>
@@ -184,6 +211,31 @@
     <resources>
         <image name="list.png" width="20" height="18"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="STBoardCommentView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="commentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="STBoardViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
+        </class>
+        <class className="STPlacesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchViews:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="dropperConstraint" candidateClass="NSLayoutConstraint"/>
+                <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

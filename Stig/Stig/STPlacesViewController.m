@@ -23,6 +23,7 @@
 {
     [super viewDidLoad];
     _showingMap = YES;
+    _showingDropper = NO;
     if (!self.places) {
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
@@ -48,7 +49,43 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - Dropper Movement
+
+- (void) showDropper {
+    if (!self.showingDropper) {
+        [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.dropperConstraint.constant = 5.0;
+            [self.view layoutIfNeeded];
+        }completion:^(BOOL completed){
+            [UIView animateWithDuration:0.1 animations:^{
+                self.dropperConstraint.constant = 0.0;
+                [self.view layoutIfNeeded];
+            }completion:^(BOOL completed){
+
+            }];
+        }];
+        _showingDropper = YES;
+    }
+    
+}
+-(void) hideDropper {
+    if (self.showingDropper) {
+        [UIView animateWithDuration:0.20 animations:^{
+            self.dropperConstraint.constant = -100.0;
+            [self.view layoutIfNeeded];
+        }];
+        _showingDropper = NO;
+    }
+}
+
 #pragma mark - MapView Delegate
+- (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [self.mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
+    view.selected = NO;
+    STPlace *place = (STPlace *)view.annotation;
+    [self.dropperLabel setText:place.placeName];
+    [self showDropper];
+}
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     NSString * identifier = @"Pin";
     MKAnnotationView *pin =(MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
@@ -56,7 +93,7 @@
     if (!pin){
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
-        pin.canShowCallout = YES;
+        //pin.canShowCallout = YES;
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;
@@ -98,6 +135,11 @@
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
     MKCoordinateSpan s = MKCoordinateSpanMake(deltaLatitude + 0.02, deltaLongitude + 0.02);
     return MKCoordinateRegionMake(coordinate, s);
+}
+- (void) mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    if (!animated) {
+        [self hideDropper];
+    }
 }
 #pragma mark - Table view data source
 

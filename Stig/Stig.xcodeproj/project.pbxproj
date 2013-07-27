@@ -76,6 +76,7 @@
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
 		0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE9E7F17A44BF500722EA6 /* STDropperView.m */; };
+		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,6 +180,7 @@
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
 		0FEE9E7E17A44BF500722EA6 /* STDropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDropperView.h; sourceTree = "<group>"; };
 		0FEE9E7F17A44BF500722EA6 /* STDropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDropperView.m; sourceTree = "<group>"; };
+		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FEE9E8317A4691E00722EA6 /* callout.png */,
 				029E2D2917A44452008F4AA2 /* barra_topo_stig.png */,
 				029E2D2817A44324008F4AA2 /* Sticker Icons */,
 				0202F4A617A060670071D95C /* AFNetworking */,
@@ -501,6 +504,7 @@
 				029E2D2617A4431E008F4AA2 /* icone_music_44.png in Resources */,
 				029E2D2717A4431E008F4AA2 /* icone_people_44.png in Resources */,
 				029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */,
+				0FEE9E8417A4691E00722EA6 /* callout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

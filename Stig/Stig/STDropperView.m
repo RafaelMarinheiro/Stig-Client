@@ -34,12 +34,15 @@
     _state = STDropperViewStateHidden;
 }
 
+#define ZOID_ZERO -535
+
 -(void) hide: (void (^)(BOOL completed)) completion{
     self.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.20 animations:^{
-        self.constraint.constant = -600.0;
+        self.constraint.constant = ZOID_ZERO;
         [self.superview layoutIfNeeded];
     }];
+    if(completion) completion(YES);
 }
 
 -(void) showBasicInformation: (void (^)(BOOL completed)) completion{
@@ -49,20 +52,20 @@
     }
     _state = STDropperViewStateAnimating;
     if(down){
-        self.constraint.constant = -200;
+        self.constraint.constant = ZOID_ZERO + 105;
     } else{
-        self.constraint.constant = -200;
+        self.constraint.constant = ZOID_ZERO + 95;
     }
     [UIView animateWithDuration:0.30 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.superview layoutIfNeeded];
     }completion:^(BOOL completed){
-        self.constraint.constant = -535;
+        self.constraint.constant = ZOID_ZERO + 100;
         [UIView animateWithDuration:0.15 animations:^{
             [self.superview layoutIfNeeded];
         }completion:^(BOOL completed){
             _state = STDropperViewStateBasicInformation;
             self.userInteractionEnabled = YES;
-            completion(YES);
+            if(completion) completion(YES);
         }];
     }];
 }

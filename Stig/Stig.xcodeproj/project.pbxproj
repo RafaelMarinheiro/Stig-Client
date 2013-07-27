@@ -67,6 +67,7 @@
 		02BE5EC617A3307300FDC09F /* tagfila 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC017A3307300FDC09F /* tagfila 91x91px.png */; };
 		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
+		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +160,8 @@
 		02BE5EC017A3307300FDC09F /* tagfila 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagfila 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tagmusic91x91px.png; sourceTree = "<group>"; };
 		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
+		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
+		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,8 +363,8 @@
 		0FCDEDEB17A33AB4007E67F8 /* MapOverlay */ = {
 			isa = PBXGroup;
 			children = (
-				0FCDEDE817A33AAF007E67F8 /* STMapOverlayView.h */,
-				0FCDEDE917A33AAF007E67F8 /* STMapOverlayView.m */,
+				02DF29A017A34C6F003316C1 /* STMapOverlayView.h */,
+				02DF29A117A34C6F003316C1 /* STMapOverlayView.m */,
 			);
 			name = MapOverlay;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */,
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
+				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

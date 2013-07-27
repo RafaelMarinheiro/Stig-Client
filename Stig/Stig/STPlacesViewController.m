@@ -25,6 +25,7 @@
     [super viewDidLoad];
     _showingMap = YES;
     _showingDropper = NO;
+    self.buttonDisposer.disposeToTheRight = NO;
     if (!self.places) {
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){

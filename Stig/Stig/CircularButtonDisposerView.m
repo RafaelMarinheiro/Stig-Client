@@ -30,6 +30,8 @@
     return self;
 }
 - (void) config {
+    _disposeToTheRight = YES;
+    _disposeToTheBottom = NO;
     _disposing = NO;
     _animating = NO;
     self.disposeRadius = @100.0;
@@ -94,12 +96,20 @@
         }];
     }
 }
+
 #pragma mark -
 #pragma mark Transform Calculation
 - (CGAffineTransform) transformForPosition:(NSUInteger) position withDisposeRadius: (float) disposeRadius disposeAngle:(float) disposeAngle andAnimationCenter:(CGPoint) center {
     float theta = (disposeAngle / (self.numberOfButtons - 1)) * position;
     float deltaX = cosf(theta) * disposeRadius;
     float deltaY = - sinf(theta) * disposeRadius;
+
+    if (!self.disposeToTheRight) {
+        deltaX = -deltaX;
+    }
+    if (self.disposeToTheBottom){
+        deltaY = -deltaY;
+    }
 
     return CGAffineTransformMakeTranslation(deltaX, deltaY);
 }

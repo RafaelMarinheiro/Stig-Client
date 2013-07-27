@@ -21,6 +21,8 @@ typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
 @property (nonatomic, strong) NSArray *buttons;
 @property (nonatomic, readonly, getter = isDisposing) BOOL disposing;
 @property (nonatomic, readonly, getter = isAnimating) BOOL animating;
+@property (nonatomic) BOOL disposeToTheRight;
+@property (nonatomic) BOOL disposeToTheBottom;
 @property (nonatomic, strong) STButtonCallBack callback;
 
 @end

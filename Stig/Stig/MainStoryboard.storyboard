@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wjR-LJ-aVm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wjR-LJ-aVm">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -59,67 +59,19 @@
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-ch-ORd">
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="511-Ch-Ubf"/>
                                             <constraint firstAttribute="width" constant="250" type="user" id="bDY-Cd-aex"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="acessotag 91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Fu-TR-VWU">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="5Id-RO-aAD"/>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="Yxd-dh-ctK"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="moneytag 91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="oCs-IU-a8f">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="iSw-GV-I4k"/>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="pvD-uf-qJI"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cardápiotags 91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="gBf-V8-Bqm">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="6vG-e0-hSo"/>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="MW5-nJ-1g7"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tagfila 91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="0DZ-Y4-7tQ">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="Lks-dV-CDA"/>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="g8u-Al-ijg"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tagpessoa 91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vxi-ld-nNc">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="1Ev-jU-Rzd"/>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="CuG-KX-rc5"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tagmusic91x91px.png" translatesAutoresizingMaskIntoConstraints="NO" id="YIe-Cd-Dn4">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" type="user" id="dAi-qf-rkd"/>
-                                            <constraint firstAttribute="width" constant="44" type="user" id="eVS-u4-QQM"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" type="user" id="0Bi-Jx-MfY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Vxi-ld-nNc" secondAttribute="trailing" constant="7" id="3ZE-fa-M9B"/>
-                                    <constraint firstItem="Vxi-ld-nNc" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="65y-4q-E67"/>
-                                    <constraint firstItem="0DZ-Y4-7tQ" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Atz-Ly-6z1"/>
-                                    <constraint firstItem="gBf-V8-Bqm" firstAttribute="leading" secondItem="eFm-vj-CKs" secondAttribute="leading" constant="59" id="EPO-Zp-Nc0"/>
-                                    <constraint firstItem="Vxi-ld-nNc" firstAttribute="leading" secondItem="YIe-Cd-Dn4" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="HPH-SD-oDF"/>
-                                    <constraint firstItem="4Fu-TR-VWU" firstAttribute="leading" secondItem="eFm-vj-CKs" secondAttribute="leading" constant="8" id="IgV-hU-8bC"/>
-                                    <constraint firstItem="0DZ-Y4-7tQ" firstAttribute="leading" secondItem="oCs-IU-a8f" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="TzL-t9-2kY"/>
                                     <constraint firstItem="Pal-ch-ORd" firstAttribute="centerX" secondItem="eFm-vj-CKs" secondAttribute="centerX" type="default" id="c6E-Pv-YpF"/>
-                                    <constraint firstItem="oCs-IU-a8f" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="f9t-Xh-TKj"/>
-                                    <constraint firstItem="oCs-IU-a8f" firstAttribute="leading" secondItem="gBf-V8-Bqm" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="fS8-pk-UAf"/>
                                     <constraint firstItem="Pal-ch-ORd" firstAttribute="top" secondItem="eFm-vj-CKs" secondAttribute="top" constant="20" symbolic="YES" type="default" id="fdi-Iw-o9W"/>
-                                    <constraint firstItem="YIe-Cd-Dn4" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="grj-E5-kzg"/>
-                                    <constraint firstItem="4Fu-TR-VWU" firstAttribute="top" secondItem="eFm-vj-CKs" secondAttribute="top" constant="49" id="iSq-wo-WAu"/>
-                                    <constraint firstItem="4Fu-TR-VWU" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="l71-1a-BZ5"/>
-                                    <constraint firstItem="gBf-V8-Bqm" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="w42-kF-7xp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOK-UN-Eej" customClass="CircularButtonDisposerView">
@@ -137,14 +89,14 @@
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="LiJ-By-Vcz"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="M5M-99-wOJ"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="bottom" secondItem="vat-i7-LeV" secondAttribute="bottom" type="user" id="MMR-4h-HTe"/>
+                            <constraint firstAttribute="trailing" secondItem="VOK-UN-Eej" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Sgz-Vo-bJM"/>
                             <constraint firstAttribute="bottom" secondItem="VOK-UN-Eej" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="WOv-mI-M1m"/>
-                            <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-100" type="user" id="aIk-J5-OsX"/>
+                            <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="aIk-J5-OsX"/>
                             <constraint firstAttribute="trailing" secondItem="eFm-vj-CKs" secondAttribute="trailing" type="user" id="b6u-hD-gsR"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="bottom" secondItem="vat-i7-LeV" secondAttribute="bottom" type="default" id="iNS-kZ-XWe"/>
                             <constraint firstItem="eFm-vj-CKs" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="user" id="nVy-Qs-AX1"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="okn-r0-SUF"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="sgv-lf-fUs"/>
-                            <constraint firstItem="VOK-UN-Eej" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="vKM-xJ-iAt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KWQ-EH-Aqe">
@@ -264,13 +216,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="acessotag 91x91px.png" width="91" height="91"/>
-        <image name="cardápiotags 91x91px.png" width="91" height="91"/>
         <image name="list.png" width="20" height="18"/>
-        <image name="moneytag 91x91px.png" width="91" height="91"/>
-        <image name="tagfila 91x91px.png" width="91" height="91"/>
-        <image name="tagmusic91x91px.png" width="91" height="91"/>
-        <image name="tagpessoa 91x91px.png" width="91" height="91"/>
     </resources>
     <classes>
         <class className="CircularButtonDisposerView" superclassName="UIView">

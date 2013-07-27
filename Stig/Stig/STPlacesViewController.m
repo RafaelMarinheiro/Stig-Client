@@ -59,8 +59,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+
 - (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
-    
+    [self collapseDisposers];
 }
 - (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
     if (disposer == self.filterButtonDisposer) {
@@ -101,7 +103,7 @@
         }
     }
 }
-
+#pragma mark - Disposer States
 - (void) collapseDisposers {
     [self.suggestionButton setAlpha:1.0];
     [self.suggestionButton setUserInteractionEnabled:YES];
@@ -165,6 +167,7 @@
     _selectedPlace = place;
     [self.dropperLabel setText:place.placeName];
     [self showDropper];
+    [self collapseDisposers];
 }
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     NSString * identifier = @"Pin";

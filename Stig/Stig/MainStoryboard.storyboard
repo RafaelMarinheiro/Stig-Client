@@ -178,10 +178,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOK-UN-Eej" customClass="CircularButtonDisposerView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" type="user" id="afA-Ql-W2W"/>
-                                    <constraint firstAttribute="width" constant="60" type="user" id="cwX-K8-mEL"/>
+                                    <constraint firstAttribute="height" constant="50" type="user" id="afA-Ql-W2W"/>
+                                    <constraint firstAttribute="width" constant="50" type="user" id="cwX-K8-mEL"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="barra_topo_stig.png" translatesAutoresizingMaskIntoConstraints="NO" id="5uZ-fx-lch">
@@ -189,16 +189,41 @@
                                     <constraint firstAttribute="height" constant="40" type="user" id="iBY-gc-eSM"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlr-jU-oa5" customClass="CircularButtonDisposerView">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" type="user" id="6zx-2v-Lo8"/>
+                                    <constraint firstAttribute="width" constant="50" type="user" id="jdX-3S-7dN"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjF-QA-eJT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="0Fh-pU-TdB"/>
+                                    <constraint firstAttribute="width" constant="50" type="user" id="Qjk-QR-TlP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="suggest_me_50.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hlr-jU-oa5" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="1gf-Jx-vIX"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="top" secondItem="5uZ-fx-lch" secondAttribute="bottom" type="user" id="7xQ-Lt-iez"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="BpB-n1-g1x"/>
                             <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-535" type="user" id="C96-Xe-syl" userLabel="Dropping Constraint"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="Djd-jf-q1I"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="GsY-tC-cEJ"/>
+                            <constraint firstAttribute="bottom" secondItem="hlr-jU-oa5" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MxC-qf-qKt"/>
                             <constraint firstAttribute="trailing" secondItem="VOK-UN-Eej" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Sgz-Vo-bJM"/>
+                            <constraint firstAttribute="bottom" secondItem="GjF-QA-eJT" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VkL-6J-40N"/>
                             <constraint firstAttribute="bottom" secondItem="VOK-UN-Eej" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="WOv-mI-M1m"/>
+                            <constraint firstItem="GjF-QA-eJT" firstAttribute="centerX" secondItem="sMt-nn-CKF" secondAttribute="centerX" type="default" id="XpQ-pg-oV6"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="Yg0-UG-WbX"/>
                             <constraint firstAttribute="trailing" secondItem="eFm-vj-CKs" secondAttribute="trailing" type="user" id="b6u-hD-gsR"/>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="iAy-6x-6Xi"/>
@@ -208,10 +233,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="KWQ-EH-Aqe"/>
                     <connections>
-                        <outlet property="buttonDisposer" destination="VOK-UN-Eej" id="Beh-ZI-TyZ"/>
                         <outlet property="dropperLabel" destination="Pal-ch-ORd" id="8dE-3p-gAH"/>
                         <outlet property="dropperView" destination="eFm-vj-CKs" id="ugz-os-bNv"/>
+                        <outlet property="filterButtonDisposer" destination="hlr-jU-oa5" id="VKt-0f-ASZ"/>
                         <outlet property="mapView" destination="sMt-nn-CKF" id="kTQ-tr-oxq"/>
+                        <outlet property="optionsButtonDisposer" destination="VOK-UN-Eej" id="7JZ-aE-zcy"/>
+                        <outlet property="suggestionButton" destination="GjF-QA-eJT" id="HUa-Af-6Yx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JnL-KN-Nna" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -324,49 +351,8 @@
         <image name="icone_money_44.png" width="44" height="44"/>
         <image name="icone_music_44.png" width="44" height="44"/>
         <image name="icone_people_44.png" width="44" height="44"/>
+        <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STBoardViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-        </class>
-        <class className="STDropperView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDropperView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accessButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImage"/>
-                <relationship kind="outlet" name="constraint" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="drinkButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="moneyButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="musicButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="peopleButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="queueButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STPlacesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonDisposer" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dropperView" candidateClass="STDropperView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

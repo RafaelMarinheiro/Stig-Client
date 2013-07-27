@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
+@protocol CircularButtonDisposerDelegate;
+
 @interface CircularButtonDisposerView : UIView
 
-
+@property (nonatomic, weak) id <CircularButtonDisposerDelegate> delegate;
 @property (nonatomic, strong) NSNumber *disposeRadius; 
 @property (nonatomic, strong) NSNumber *disposeAngle;
 @property (nonatomic) CGPoint disposeCenter;
@@ -18,12 +19,20 @@ typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
 @property (nonatomic) NSUInteger numberOfButtons;
 @property (nonatomic, strong) UIButton *mainButton;
 @property (nonatomic, strong) NSArray *buttons;
+@property (nonatomic) BOOL shouldRotateMainButton;
 @property (nonatomic, readonly, getter = isDisposing) BOOL disposing;
 @property (nonatomic, readonly, getter = isAnimating) BOOL animating;
 @property (nonatomic) BOOL disposeToTheRight;
 @property (nonatomic) BOOL disposeToTheBottom;
-@property (nonatomic, strong) STButtonCallBack callback;
 
 -(void) toggleDispose;
 
+@end
+
+
+@protocol CircularButtonDisposerDelegate <NSObject>
+@optional
+- (void) circularButtonDisposerView:(CircularButtonDisposerView *) disposer buttonPressed:(NSUInteger) buttonTag;
+- (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *) disposer;
+- (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *) disposer;
 @end

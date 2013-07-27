@@ -79,27 +79,16 @@
 
 - (void) showDropper {
     if (!self.showingDropper) {
-        [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.dropperConstraint.constant = 5.0;
-            [self.view layoutIfNeeded];
-        }completion:^(BOOL completed){
-            [UIView animateWithDuration:0.1 animations:^{
-                self.dropperConstraint.constant = 0.0;
-                [self.view layoutIfNeeded];
-            }completion:^(BOOL completed){
-
-            }];
+        [self.dropperView showBasicInformation:^(BOOL completed){
+            _showingDropper = YES;
         }];
-        _showingDropper = YES;
     }
 }
 -(void) hideDropper {
     if (self.showingDropper) {
-        [UIView animateWithDuration:0.20 animations:^{
-            self.dropperConstraint.constant = -100.0;
-            [self.view layoutIfNeeded];
+        [self.dropperView hide: ^(BOOL completed){
+            _showingDropper = NO;
         }];
-        _showingDropper = NO;
     }
 }
 

@@ -75,6 +75,7 @@
 		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
+		0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE9E7F17A44BF500722EA6 /* STDropperView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +177,8 @@
 		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
 		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
+		0FEE9E7E17A44BF500722EA6 /* STDropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDropperView.h; sourceTree = "<group>"; };
+		0FEE9E7F17A44BF500722EA6 /* STDropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDropperView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,11 +317,11 @@
 			isa = PBXGroup;
 			children = (
 				0FCDEDEB17A33AB4007E67F8 /* MapOverlay */,
-				0202F4A717A0609E0071D95C /* CircularButtonDisposerView.h */,
-				0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */,
+				0FEE9E8117A44C0000722EA6 /* CircularButtonDisposer */,
 				0202F4A917A0609E0071D95C /* STBoardCommentView.h */,
 				0202F4AA17A0609E0071D95C /* STBoardCommentView.m */,
 				0202F45717A05F330071D95C /* MainStoryboard.storyboard */,
+				0FEE9E8217A44C0F00722EA6 /* Dropper */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -396,6 +399,24 @@
 				02DF29A117A34C6F003316C1 /* STMapOverlayView.m */,
 			);
 			name = MapOverlay;
+			sourceTree = "<group>";
+		};
+		0FEE9E8117A44C0000722EA6 /* CircularButtonDisposer */ = {
+			isa = PBXGroup;
+			children = (
+				0202F4A717A0609E0071D95C /* CircularButtonDisposerView.h */,
+				0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */,
+			);
+			name = CircularButtonDisposer;
+			sourceTree = "<group>";
+		};
+		0FEE9E8217A44C0F00722EA6 /* Dropper */ = {
+			isa = PBXGroup;
+			children = (
+				0FEE9E7E17A44BF500722EA6 /* STDropperView.h */,
+				0FEE9E7F17A44BF500722EA6 /* STDropperView.m */,
+			);
+			name = Dropper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,6 +540,7 @@
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
 				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
+				0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

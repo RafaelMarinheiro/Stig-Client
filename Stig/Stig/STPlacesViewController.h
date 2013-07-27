@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "STOverlord.h"
 #import "STMapOverlayView.h"
+#import "CircularButtonDisposerView.h"
 @interface STPlacesViewController : UIViewController <MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet STMapOverlayView *mapOverlayView;
@@ -20,8 +21,7 @@
 
 
 
-
-
+@property (weak, nonatomic) IBOutlet CircularButtonDisposerView *buttonDisposer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropperConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
 @property (nonatomic, readonly) BOOL showingDropper;

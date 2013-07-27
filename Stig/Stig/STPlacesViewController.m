@@ -8,6 +8,7 @@
 
 #import "STPlacesViewController.h"
 #import "STBoardViewController.h"
+#import "STMapOverlayView.h"
 
 @interface STPlacesViewController ()
 
@@ -31,21 +32,36 @@
             [self sortPlaces];
             [self.mapView setDelegate:self];
             [self.mapView addAnnotations:self.places];
+            [self.mapView addOverlays:self.places];
             [self.mapView setRegion:[self regionFromAnnotations:self.places]];
             [self.tableView reloadData];
-            NSLog(@"imageMover object is: %@", self.mapOverlayView);
-            [self.mapOverlayView setMapRegion:[self.mapView region]];
-            [self.mapOverlayView setUserLocation:[[self.mapView userLocation] location]];
-            for (int i = 0; i < [self.places count]; i++) {
-                STPlace * place = [self.places objectAtIndex:i];
-                NSLog([place placeName]);
-                [self.mapOverlayView addRelevantPlace:place];
-            }
-            [self.mapOverlayView drawView:nil];
         }error:^(NSError *error) {
             NSLog(@"ERROR LOADING PLACES DATA !");
         }];
     }
+    
+    
+    self.buttonDisposer.callback = ^(NSUInteger tag) {
+        STRankingCriteria crit;
+        if(tag == 0){
+            crit = ST_SOCIAL;
+        } else if(tag == 2){
+            crit = ST_BUZZ;
+        } else{
+            crit = ST_OVERALL;
+        }
+        if([STMapOverlayView criteria] != crit){
+            [STMapOverlayView setCriteria:crit];
+            for (id st in [self.mapView overlays]) {
+                if([st isKindOfClass:[STPlace class]]){
+                    id view = [self.mapView viewForOverlay:st];
+                    [view setNeedsDisplay];
+                }
+                
+            }
+        }
+
+    };
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -150,6 +166,16 @@
         [self hideDropper];
     }
 }
+
+#pragma mark - MapOverlay Delegate Methods
+
+- (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay{
+    if([overlay isKindOfClass: [STPlace class]]){
+        return [[STMapOverlayView alloc] initWithOverlay:overlay];
+    }
+    return nil;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

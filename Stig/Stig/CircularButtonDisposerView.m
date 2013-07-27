@@ -46,7 +46,9 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         button.tag = i;
         button.frame = frame;
+        
         [button setTitle:[NSString stringWithFormat:@"%d",i] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(disposedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         [buttons addObject:button];
     }
@@ -74,7 +76,9 @@
     return CGRectContainsPoint(self.bounds, point);
 }
 - (void) disposedButtonPressed:(UIButton *) button {
-    
+    if (self.callback) {
+        self.callback(button.tag);
+    }
 }
 - (void) mainButtonPressed:(UIButton *) sender {
     if (![self isDisposing]) {

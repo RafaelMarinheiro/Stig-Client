@@ -13,7 +13,7 @@
             "stickers": [2,3],
             "ranking": {
                             "distance": 300,
-                            "social": 500,
+                            "social": 1000,
                             "buzz": 300,
                             "overall": 200
                     }   
@@ -32,7 +32,7 @@
             "ranking": {
                             "distance": 440,
                             "social": 590,
-                            "buzz": 410,
+                            "buzz": 500,
                             "overall": 700
                     }   
         },
@@ -50,7 +50,7 @@
             "ranking": {
                             "distance": 340,
                             "social": 400,
-                            "buzz": 350,
+                            "buzz": 1000,
                             "overall": 360
                     }   
         }

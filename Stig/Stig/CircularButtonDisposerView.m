@@ -8,7 +8,7 @@
 
 #import "CircularButtonDisposerView.h"
 
-@implementation CircularButtonDisposerView;
+@implementation CircularButtonDisposerView
 
 #pragma mark -
 #pragma mark Initialization
@@ -45,7 +45,7 @@
     NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:self.numberOfButtons];
 
     for (int i =0; i < self.numberOfButtons; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i;
         button.frame = frame;
         
@@ -55,25 +55,28 @@
         [buttons addObject:button];
     }
     self.buttons = buttons;
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
  
-    button.frame = frame;
-    [button setEnabled:YES];
-    [button setUserInteractionEnabled:YES];
-    [button setImage:[UIImage imageNamed:@"uk-board.jpg"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:button];
+    self.mainButton.frame = frame;
+    [self.mainButton setEnabled:YES];
+    [self.mainButton setUserInteractionEnabled:YES];
+    [self.mainButton setImage:[UIImage imageNamed:@"uk-board.jpg"] forState:UIControlStateNormal];
+    [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
 }
 #pragma mark -
 #pragma mark User Reaction
 - (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     if (self.isDisposing) {
-        float radius = [self.disposeRadius floatValue];
-        
-        CGRect disposeRect = CGRectMake(0.0, - radius, self.frame.size.width + radius, self.frame.size.height + radius);
-        BOOL result = CGRectContainsPoint(disposeRect, point);
-        return result;
+        for(int i = 0; i < self.numberOfButtons; i++){
+            CGPoint the_point = [[self.buttons objectAtIndex:i] convertPoint:point fromView:self];
+            if([[self.buttons objectAtIndex:i] pointInside:the_point withEvent:event]){
+                return YES;
+            }
+        }
+        CGPoint the_point = [self.mainButton convertPoint:point fromView:self];
+        return [self.mainButton pointInside:the_point withEvent:event];
     }
     return CGRectContainsPoint(self.bounds, point);
 }
@@ -82,19 +85,24 @@
         self.callback(button.tag);
     }
 }
-- (void) mainButtonPressed:(UIButton *) sender {
+
+-(void) toggleDispose{
     if (![self isDisposing]) {
         
-        [sender setUserInteractionEnabled:NO];
+        [self.mainButton setUserInteractionEnabled:NO];
         [self dispose:^(BOOL completed){
-            [sender setUserInteractionEnabled:YES];
+            [self.mainButton setUserInteractionEnabled:YES];
         }];
     } else {
-        [sender setUserInteractionEnabled:NO];
+        [self.mainButton setUserInteractionEnabled:NO];
         [self hideButtons:^(BOOL completed){
-            [sender setUserInteractionEnabled:YES];
+            [self.mainButton setUserInteractionEnabled:YES];
         }];
     }
+}
+
+- (void) mainButtonPressed:(UIButton *) sender {
+    [self toggleDispose];
 }
 
 #pragma mark -

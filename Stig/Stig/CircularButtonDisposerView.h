@@ -11,7 +11,6 @@ typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
 @interface CircularButtonDisposerView : UIView
 
 
-
 @property (nonatomic, strong) NSNumber *disposeRadius; 
 @property (nonatomic, strong) NSNumber *disposeAngle;
 @property (nonatomic) CGPoint disposeCenter;
@@ -24,5 +23,7 @@ typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
 @property (nonatomic) BOOL disposeToTheRight;
 @property (nonatomic) BOOL disposeToTheBottom;
 @property (nonatomic, strong) STButtonCallBack callback;
+
+-(void) toggleDispose;
 
 @end

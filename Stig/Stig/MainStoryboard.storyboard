@@ -31,10 +31,10 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-nn-CKF"/>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-vj-CKs" customClass="STDropperView">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tH-vh-wqc" userLabel="Background ImageView"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="callout.png" translatesAutoresizingMaskIntoConstraints="NO" id="7tH-vh-wqc" userLabel="Background ImageView"/>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-ch-ORd">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="511-Ch-Ubf"/>
+                                            <constraint firstAttribute="height" constant="21" type="user" id="511-Ch-Ubf"/>
                                             <constraint firstAttribute="width" constant="250" type="user" id="bDY-Cd-aex"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
@@ -144,27 +144,27 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="575" type="user" id="0Bi-Jx-MfY"/>
                                     <constraint firstItem="XnT-MZ-yZB" firstAttribute="leading" secondItem="eM1-9a-fkJ" secondAttribute="trailing" type="user" id="5yD-VH-yzU"/>
-                                    <constraint firstItem="WGg-oH-gRO" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="6Y3-Si-1iS"/>
                                     <constraint firstItem="7tH-vh-wqc" firstAttribute="top" secondItem="eFm-vj-CKs" secondAttribute="top" type="default" id="808-QC-Ju2"/>
                                     <constraint firstItem="1Dh-Fg-Rgg" firstAttribute="leading" secondItem="qg8-av-Lsk" secondAttribute="trailing" type="user" id="BSv-5L-A3H"/>
-                                    <constraint firstItem="eM1-9a-fkJ" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FhI-di-i8G"/>
-                                    <constraint firstItem="qg8-av-Lsk" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JHM-BD-ofK"/>
+                                    <constraint firstItem="eM1-9a-fkJ" firstAttribute="top" secondItem="XnT-MZ-yZB" secondAttribute="top" type="user" id="Cgh-4O-dCN"/>
                                     <constraint firstItem="qg8-av-Lsk" firstAttribute="leading" secondItem="XnT-MZ-yZB" secondAttribute="trailing" type="user" id="Jxl-lc-Yvd"/>
                                     <constraint firstItem="Pal-ch-ORd" firstAttribute="centerX" secondItem="7tH-vh-wqc" secondAttribute="centerX" type="default" id="NOD-ae-wNg"/>
                                     <constraint firstAttribute="trailing" secondItem="7tH-vh-wqc" secondAttribute="trailing" type="user" id="ONQ-q5-elm"/>
                                     <constraint firstItem="7tH-vh-wqc" firstAttribute="leading" secondItem="eFm-vj-CKs" secondAttribute="leading" type="default" id="Ogj-CC-JJk"/>
-                                    <constraint firstItem="1Dh-Fg-Rgg" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="TDt-17-ASg"/>
+                                    <constraint firstItem="WGg-oH-gRO" firstAttribute="top" secondItem="K4b-5n-pAe" secondAttribute="top" type="user" id="WCE-c3-Yep"/>
                                     <constraint firstAttribute="bottom" secondItem="7tH-vh-wqc" secondAttribute="bottom" type="user" id="cKL-GQ-xmC"/>
                                     <constraint firstItem="eM1-9a-fkJ" firstAttribute="leading" secondItem="K4b-5n-pAe" secondAttribute="trailing" type="user" id="e4y-MT-3q3"/>
-                                    <constraint firstItem="Pal-ch-ORd" firstAttribute="top" secondItem="eFm-vj-CKs" secondAttribute="top" constant="20" symbolic="YES" type="default" id="fdi-Iw-o9W"/>
-                                    <constraint firstItem="XnT-MZ-yZB" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="nwM-Bt-LaP"/>
+                                    <constraint firstItem="1Dh-Fg-Rgg" firstAttribute="top" secondItem="qg8-av-Lsk" secondAttribute="top" type="user" id="mYr-8c-hlC"/>
+                                    <constraint firstAttribute="bottom" secondItem="XnT-MZ-yZB" secondAttribute="bottom" constant="7" type="user" id="noD-hz-11O"/>
+                                    <constraint firstItem="WGg-oH-gRO" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="o5T-Eu-qZo"/>
                                     <constraint firstItem="K4b-5n-pAe" firstAttribute="leading" secondItem="WGg-oH-gRO" secondAttribute="trailing" type="user" id="r94-ht-iYX"/>
                                     <constraint firstItem="WGg-oH-gRO" firstAttribute="leading" secondItem="eFm-vj-CKs" secondAttribute="leading" constant="28" type="user" id="set-Js-Jtf"/>
-                                    <constraint firstItem="K4b-5n-pAe" firstAttribute="top" secondItem="Pal-ch-ORd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="utw-UN-xQi"/>
+                                    <constraint firstItem="XnT-MZ-yZB" firstAttribute="top" secondItem="qg8-av-Lsk" secondAttribute="top" type="user" id="u3B-oh-Cnl"/>
+                                    <constraint firstItem="K4b-5n-pAe" firstAttribute="top" secondItem="eM1-9a-fkJ" secondAttribute="top" type="user" id="uwz-wR-KnF"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="accessButton" destination="WGg-oH-gRO" id="XxP-O1-gk4"/>
@@ -194,7 +194,7 @@
                         <constraints>
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="top" secondItem="5uZ-fx-lch" secondAttribute="bottom" type="user" id="7xQ-Lt-iez"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="BpB-n1-g1x"/>
-                            <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-60" type="user" id="C96-Xe-syl" userLabel="Dropping Constraint"/>
+                            <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-535" type="user" id="C96-Xe-syl" userLabel="Dropping Constraint"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="Djd-jf-q1I"/>
                             <constraint firstItem="5uZ-fx-lch" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="GsY-tC-cEJ"/>
                             <constraint firstAttribute="trailing" secondItem="VOK-UN-Eej" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Sgz-Vo-bJM"/>
@@ -317,6 +317,7 @@
     </scenes>
     <resources>
         <image name="barra_topo_stig.png" width="640" height="94"/>
+        <image name="callout.png" width="640" height="1150"/>
         <image name="icone_acesso_44.png" width="44" height="44"/>
         <image name="icone_drink_44.png" width="44" height="44"/>
         <image name="icone_fila_44.png" width="44" height="44"/>
@@ -324,6 +325,48 @@
         <image name="icone_music_44.png" width="44" height="44"/>
         <image name="icone_people_44.png" width="44" height="44"/>
     </resources>
+    <classes>
+        <class className="CircularButtonDisposerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="STBoardCommentView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="commentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="STBoardViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
+        </class>
+        <class className="STDropperView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDropperView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accessButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImage"/>
+                <relationship kind="outlet" name="constraint" candidateClass="NSLayoutConstraint"/>
+                <relationship kind="outlet" name="drinkButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="moneyButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="musicButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="peopleButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="queueButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="STPlacesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonDisposer" candidateClass="CircularButtonDisposerView"/>
+                <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dropperView" candidateClass="STDropperView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

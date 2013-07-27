@@ -39,7 +39,7 @@
 -(void) hide: (void (^)(BOOL completed)) completion{
     self.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.20 animations:^{
-        self.constraint.constant = ZOID_ZERO;
+        self.viewConstraint.constant = ZOID_ZERO;
         [self.superview layoutIfNeeded];
     }];
     if(completion) completion(YES);
@@ -52,14 +52,14 @@
     }
     _state = STDropperViewStateAnimating;
     if(down){
-        self.constraint.constant = ZOID_ZERO + 105;
+        self.viewConstraint.constant = ZOID_ZERO + 105;
     } else{
-        self.constraint.constant = ZOID_ZERO + 95;
+        self.viewConstraint.constant = ZOID_ZERO + 95;
     }
     [UIView animateWithDuration:0.30 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.superview layoutIfNeeded];
     }completion:^(BOOL completed){
-        self.constraint.constant = ZOID_ZERO + 100;
+        self.viewConstraint.constant = ZOID_ZERO + 100;
         [UIView animateWithDuration:0.15 animations:^{
             [self.superview layoutIfNeeded];
         }completion:^(BOOL completed){
@@ -71,8 +71,67 @@
 }
 
 
+
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer{
-    NSLog(@"YEAAAAAH");
+    
+    CGPoint translation = [recognizer translationInView:self];
+    
+    if([recognizer state] == UIGestureRecognizerStateBegan){
+        if(self.delegate){
+            [self.delegate dragStarted];
+        }
+        _state = STDropperViewStateDragging;
+    }
+    
+    if(_state == STDropperViewStateDragging){
+        if(translation.y < 0) return;
+        
+        self.viewConstraint.constant = ZOID_ZERO + 100 + translation.y;
+        [self.superview layoutIfNeeded];
+        
+        if(translation.y >= 328){
+            _state = STDropperViewStateAnimating;
+                
+            [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.viewConstraint.constant = ZOID_ZERO + 95;
+                self.userInteractionEnabled = NO;
+                [self.superview layoutIfNeeded];
+            }completion:^(BOOL completed){
+                self.viewConstraint.constant = ZOID_ZERO + 100;
+                [UIView animateWithDuration:0.10 animations:^{
+                    [self.superview layoutIfNeeded];
+                }completion:^(BOOL completed){
+
+                    self.userInteractionEnabled = YES;
+                    _state = STDropperViewStateBasicInformation;
+                    if(self.delegate){
+                        [self.delegate dragCompleted];
+                    }
+                }];
+            }];
+
+        } else if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
+            
+            _state = STDropperViewStateAnimating;
+            
+            self.viewConstraint.constant = ZOID_ZERO + 95;
+            self.userInteractionEnabled = NO;
+            [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self.superview layoutIfNeeded];
+            }completion:^(BOOL completed){
+                self.viewConstraint.constant = ZOID_ZERO + 100;
+                [UIView animateWithDuration:0.10 animations:^{
+                    [self.superview layoutIfNeeded];
+                }completion:^(BOOL completed){
+                    self.userInteractionEnabled = YES;
+                    _state = STDropperViewStateBasicInformation;
+                    if(self.delegate){
+                        [self.delegate dragCancelled];
+                    }
+                }];
+            }];
+        }
+    }
 }
 
 

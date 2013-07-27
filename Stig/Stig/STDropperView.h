@@ -16,8 +16,17 @@ typedef enum{
     STDropperViewStateFullInformation
 } STDropperViewState;
 
-@interface STDropperView : UIView
+@protocol STDropperViewDelegate <NSObject>
 
+- (void) dragStarted;
+- (void) dragCancelled;
+- (void) dragCompleted;
+- (void) dragMoveWithPercentage: (NSNumber *) percentage;
+
+@end
+
+@interface STDropperView : UIView
+@property (nonatomic, weak) id <STDropperViewDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UILabel * placeNameLabel;
 @property (nonatomic, weak) IBOutlet UIButton * musicButton;
 @property (nonatomic, weak) IBOutlet UIButton * drinkButton;
@@ -26,10 +35,14 @@ typedef enum{
 @property (nonatomic, weak) IBOutlet UIButton * peopleButton;
 @property (nonatomic, weak) IBOutlet UIButton * accessButton;
 @property (nonatomic, weak) IBOutlet UIImage * backgroundImage;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *boxViewConstraint;
 @property (nonatomic, readonly) STDropperViewState state;
 
 -(void) hide: (void (^)(BOOL completed)) completion;
 -(void) showBasicInformation: (void (^)(BOOL completed)) completion;
 
 @end
+
+
+

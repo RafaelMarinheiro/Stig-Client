@@ -12,17 +12,13 @@
 #import "CircularButtonDisposerView.h"
 @interface STPlacesViewController : UIViewController <MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet STMapOverlayView *mapOverlayView;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
-@property (nonatomic, weak) IBOutlet UITableView*tableView;
 @property (nonatomic, strong) NSArray *places;
 @property (nonatomic,readonly) BOOL showingMap;
-- (IBAction)switchViews:(UIBarButtonItem *)sender;
-
-
 
 @property (weak, nonatomic) IBOutlet CircularButtonDisposerView *buttonDisposer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropperConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
+- (IBAction)stickerButtonPressed:(UIButton *)sender;
 @property (nonatomic, readonly) BOOL showingDropper;
 @end

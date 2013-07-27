@@ -11,12 +11,14 @@
 #import "STMapOverlayView.h"
 
 @interface STPlacesViewController ()
-
+    
 @end
 
 
 
-@implementation STPlacesViewController
+@implementation STPlacesViewController {
+    STPlace *_selectedPlace;
+}
 
 
 
@@ -30,12 +32,10 @@
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
             self.places = places;
-            [self sortPlaces];
             [self.mapView setDelegate:self];
             [self.mapView addAnnotations:self.places];
             [self.mapView addOverlays:self.places];
             [self.mapView setRegion:[self regionFromAnnotations:self.places]];
-            [self.tableView reloadData];
         }error:^(NSError *error) {
             NSLog(@"ERROR LOADING PLACES DATA !");
         }];
@@ -92,7 +92,6 @@
         }];
         _showingDropper = YES;
     }
-    
 }
 -(void) hideDropper {
     if (self.showingDropper) {
@@ -109,6 +108,7 @@
     [self.mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
     view.selected = NO;
     STPlace *place = (STPlace *)view.annotation;
+    _selectedPlace = place;
     [self.dropperLabel setText:place.placeName];
     [self showDropper];
 }
@@ -119,7 +119,6 @@
     if (!pin){
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
-        //pin.canShowCallout = YES;
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;
@@ -152,7 +151,6 @@
             maxLongitude = annotation.coordinate.longitude;
         }
     }
-
     CLLocationDegrees deltaLatitude = maxLatitude - minLatitude;
 
     CLLocationDegrees deltaLongitude = maxLongitude - minLogitude;
@@ -177,89 +175,15 @@
     return nil;
 }
 
-#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (self.places) {
-        return [self.places count];
-    }
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Teste";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    STPlace *place = self.places[indexPath.row];
-    cell.textLabel.text = place.placeName;
-    cell.detailTextLabel.text = place.placeDescription;
-    cell.contentView.backgroundColor = [self colorForRanking:place.ranking];
-    // Configure the cell...
-    
-    return cell;
-}
-- (void) sortPlaces {
-    NSArray *sorted  = [self.places sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
-        if ([a isKindOfClass:[STPlace class]] && [b isKindOfClass:[STPlace class]]){
-            
-            STPlace *first = a;
-            STPlace *second = b;
-            float left = [first.ranking.overall floatValue];
-            float right = [second.ranking.overall floatValue];
-            if (left < right) {
-                return NSOrderedDescending;
-            }else if (left == right){
-                return NSOrderedSame;
-            } else {
-                return NSOrderedAscending;
-            }
-        } else {
-            
-        }
-        return NSOrderedSame;
-    }];
-    self.places = sorted;
-}
-- (UIColor *) colorForRanking:(STRanking *) ranking {
-    UIColor *baseColor = [UIColor colorWithRed:114.0/255.0 green:73.0/255.0 blue:227.0/255.0 alpha:1.0];
-    CGFloat alpha = [ranking.overall floatValue]/1000.0 + 0.2;
-    return [baseColor colorWithAlphaComponent:alpha];
-}
-
-#pragma mark - Table view delegate
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70.0;
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
-    [self pushBoardViewControllerWithPlace:self.places[indexPath.row]];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-- (IBAction)switchViews:(UIBarButtonItem *)sender {
-    if (self.showingMap) {
-        [UIView transitionFromView:self.mapView toView:self.tableView duration:0.7 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionCurlUp completion:nil];
-
-        _showingMap = NO;
-    } else {
-        [UIView transitionFromView:self.tableView toView:self.mapView duration:0.7 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionCurlDown
-                        completion:nil];
-
-        _showingMap = YES;
-    }
-
-}
 #pragma mark - Pushing View Controller
 - (void) pushBoardViewControllerWithPlace:(STPlace *)place {
     STBoardViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"STBoardViewControllerID"];
     viewController.place = place;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+- (IBAction)stickerButtonPressed:(UIButton *)sender {
+    [self pushBoardViewControllerWithPlace:_selectedPlace];
 }
 @end

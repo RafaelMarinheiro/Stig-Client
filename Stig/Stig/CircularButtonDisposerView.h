@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^STButtonCallBack)(NSUInteger buttonPressed);
 @interface CircularButtonDisposerView : UIView
+
+
 
 @property (nonatomic, strong) NSNumber *disposeRadius; 
 @property (nonatomic, strong) NSNumber *disposeAngle;
@@ -19,4 +21,6 @@
 @property (nonatomic, strong) NSArray *buttons;
 @property (nonatomic, readonly, getter = isDisposing) BOOL disposing;
 @property (nonatomic, readonly, getter = isAnimating) BOOL animating;
+@property (nonatomic, strong) STButtonCallBack callback;
+
 @end

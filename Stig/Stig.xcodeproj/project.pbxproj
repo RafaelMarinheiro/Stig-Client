@@ -69,6 +69,7 @@
 		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
 		02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE5ECA17A330FD00FDC09F /* STStickerListView.m */; };
+		0FCDEDEA17A33AAF007E67F8 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCDEDE917A33AAF007E67F8 /* STMapOverlayView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +165,8 @@
 		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EC917A330FD00FDC09F /* STStickerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerListView.h; sourceTree = "<group>"; };
 		02BE5ECA17A330FD00FDC09F /* STStickerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerListView.m; sourceTree = "<group>"; };
+		0FCDEDE817A33AAF007E67F8 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
+		0FCDEDE917A33AAF007E67F8 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +302,7 @@
 		0202F46C17A05FF70071D95C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0FCDEDEB17A33AB4007E67F8 /* MapOverlay */,
 				0202F4A717A0609E0071D95C /* CircularButtonDisposerView.h */,
 				0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */,
 				0202F4A917A0609E0071D95C /* STBoardCommentView.h */,
@@ -362,6 +366,15 @@
 				0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		0FCDEDEB17A33AB4007E67F8 /* MapOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				0FCDEDE817A33AAF007E67F8 /* STMapOverlayView.h */,
+				0FCDEDE917A33AAF007E67F8 /* STMapOverlayView.m */,
+			);
+			name = MapOverlay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +492,7 @@
 				0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */,
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
 				02BE5ECB17A330FD00FDC09F /* STStickerListView.m in Sources */,
+				0FCDEDEA17A33AAF007E67F8 /* STMapOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

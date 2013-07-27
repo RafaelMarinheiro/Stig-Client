@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wjR-LJ-aVm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wjR-LJ-aVm">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -54,11 +54,7 @@
                                     <outlet property="delegate" destination="dK9-Pj-bfG" id="Cbr-oI-u6p"/>
                                 </connections>
                             </tableView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-nn-CKF">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="481" id="SSq-Q0-YeS"/>
-                                </constraints>
-                            </mapView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-nn-CKF"/>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-vj-CKs">
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-ch-ORd">
@@ -78,6 +74,13 @@
                                     <constraint firstItem="Pal-ch-ORd" firstAttribute="centerY" secondItem="eFm-vj-CKs" secondAttribute="centerY" type="default" id="qBp-nH-Tjv"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOK-UN-Eej" customClass="CircularButtonDisposerView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" type="user" id="afA-Ql-W2W"/>
+                                    <constraint firstAttribute="width" constant="60" type="user" id="cwX-K8-mEL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -86,11 +89,14 @@
                             <constraint firstItem="sMt-nn-CKF" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="LiJ-By-Vcz"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="default" id="M5M-99-wOJ"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="bottom" secondItem="vat-i7-LeV" secondAttribute="bottom" type="user" id="MMR-4h-HTe"/>
+                            <constraint firstAttribute="bottom" secondItem="VOK-UN-Eej" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="WOv-mI-M1m"/>
                             <constraint firstItem="eFm-vj-CKs" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" constant="-100" type="user" id="aIk-J5-OsX"/>
                             <constraint firstAttribute="trailing" secondItem="eFm-vj-CKs" secondAttribute="trailing" type="user" id="b6u-hD-gsR"/>
+                            <constraint firstItem="sMt-nn-CKF" firstAttribute="bottom" secondItem="vat-i7-LeV" secondAttribute="bottom" type="default" id="iNS-kZ-XWe"/>
                             <constraint firstItem="eFm-vj-CKs" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" type="user" id="nVy-Qs-AX1"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="top" secondItem="vat-i7-LeV" secondAttribute="top" type="user" id="okn-r0-SUF"/>
                             <constraint firstItem="YLf-e8-RnH" firstAttribute="trailing" secondItem="vat-i7-LeV" secondAttribute="trailing" type="default" id="sgv-lf-fUs"/>
+                            <constraint firstItem="VOK-UN-Eej" firstAttribute="leading" secondItem="vat-i7-LeV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="vKM-xJ-iAt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KWQ-EH-Aqe">
@@ -101,6 +107,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonDisposer" destination="VOK-UN-Eej" id="Beh-ZI-TyZ"/>
                         <outlet property="dropperConstraint" destination="aIk-J5-OsX" id="IT0-0C-PT3"/>
                         <outlet property="dropperLabel" destination="Pal-ch-ORd" id="8dE-3p-gAH"/>
                         <outlet property="mapView" destination="sMt-nn-CKF" id="kTQ-tr-oxq"/>
@@ -212,6 +219,12 @@
         <image name="list.png" width="20" height="18"/>
     </resources>
     <classes>
+        <class className="CircularButtonDisposerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
+        </class>
+        <class className="MKOverlayView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MKOverlayView.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -225,12 +238,17 @@
         <class className="STBoardViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
         </class>
+        <class className="STMapOverlayView" superclassName="MKOverlayView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STMapOverlayView.h"/>
+        </class>
         <class className="STPlacesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
             <relationships>
                 <relationship kind="action" name="switchViews:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="buttonDisposer" candidateClass="CircularButtonDisposerView"/>
                 <relationship kind="outlet" name="dropperConstraint" candidateClass="NSLayoutConstraint"/>
                 <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapOverlayView" candidateClass="STMapOverlayView"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

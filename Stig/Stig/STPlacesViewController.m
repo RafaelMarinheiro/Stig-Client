@@ -165,6 +165,10 @@
 - (void) mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     if (!animated) {
         [self hideDropper];
+        if([self.buttonDisposer isDisposing]){
+            [self.buttonDisposer toggleDispose];
+        }
+        
     }
 }
 

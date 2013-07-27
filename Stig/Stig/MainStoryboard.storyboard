@@ -347,13 +347,14 @@
             <relationships>
                 <relationship kind="outlet" name="accessButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="backgroundImage" candidateClass="UIImage"/>
-                <relationship kind="outlet" name="constraint" candidateClass="NSLayoutConstraint"/>
+                <relationship kind="outlet" name="boxViewConstraint" candidateClass="NSLayoutConstraint"/>
                 <relationship kind="outlet" name="drinkButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="moneyButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="musicButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="peopleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="queueButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="viewConstraint" candidateClass="NSLayoutConstraint"/>
             </relationships>
         </class>
         <class className="STPlacesViewController" superclassName="UIViewController">

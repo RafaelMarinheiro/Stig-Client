@@ -718,58 +718,6 @@
         <image name="suggest_me_50@2x.png" width="100" height="100"/>
         <image name="text-bottom-bar.png" width="640" height="94"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STBoardViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="stickersView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topBatTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STDropperView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDropperView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accessButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImage"/>
-                <relationship kind="outlet" name="boxViewConstraint" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="drinkButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="moneyButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="musicButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="peopleButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="queueButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="viewConstraint" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="STPlacesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dropperView" candidateClass="STDropperView"/>
-                <relationship kind="outlet" name="filterButtonDisposer" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="optionsButtonDisposer" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="suggestionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

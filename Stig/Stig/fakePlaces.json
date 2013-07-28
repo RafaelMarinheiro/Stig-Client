@@ -1,58 +1,107 @@
 {
     "places":[
-        {
-            "id": 1,
-            "name": "Bar Burburinho",
-            "img": "http://4.bp.blogspot.com/_xHFLSZFNZ9M/TJVJ8q6OgBI/AAAAAAAA9vA/wB8DPDEuLgs/s1600/burburinho.jpg",
-            "description": "Comedoria mais legal da cidade!",
-            "location": {
-                            "lon": -34.873264,
-                            "lat": -8.064217
-                    },
-            "friends": [1,2,4,5,12],
-            "stickers": [2,3],
-            "ranking": {
-                            "distance": 300,
-                            "social": 1000,
-                            "buzz": 300,
-                            "overall": 200
-                    }   
-        },
-        {
-            "id": 2,
-            "name": "The Gentleman Loser Pub",
-            "img": "http://www.gentlemanloser.com.br/wp-content/uploads/2011/11/1.jpg",
-            "description": "Ótimo ambiente para beber e conversar com os amigos!",
-            "location": {
-                            "lon": -34.88415,
-                            "lat": -8.095323
-                    },
-            "friends": [3,7,9,11],
-            "stickers": [1,2,3],
-            "ranking": {
-                            "distance": 440,
-                            "social": 590,
-                            "buzz": 500,
-                            "overall": 700
-                    }   
-        },
-        {
-            "id": 3,
-            "name": "UK Pub",
-            "img": "http://www.ukpub.com.br/img/galeria/d3a39736b88f9fa2947a42f02431f3b3.jpg",
-            "description": "Shows de gêneros variados e bebida de qualidade!",
-            "location": {
-                            "lon": -34.89652,
-                            "lat": -8.114874
-                    },
-            "friends": [6,8,10],
-            "stickers": [1,2,3],
-            "ranking": {
-                            "distance": 340,
-                            "social": 400,
-                            "buzz": 1000,
-                            "overall": 360
-                    }   
-        }
-    ]
+              {
+              "id": 1,
+              "name": "Bar Burburinho",
+              "img": "http://4.bp.blogspot.com/_xHFLSZFNZ9M/TJVJ8q6OgBI/AAAAAAAA9vA/wB8DPDEuLgs/s1600/burburinho.jpg",
+              "description": "Comedoria mais legal da cidade!",
+              "location": {
+              "lat": -8.064217,
+              "lon": -34.873264
+              },
+              "friends": [1,2,4,5,12],
+              "stickers": [2,3],
+              "ranking": {
+              "social": 500,
+              "buzz": 300,
+              "overall": 380
+              }
+              },
+              {
+              "id": 2,
+              "name": "The Gentleman Loser Pub",
+              "img": "http://www.gentlemanloser.com.br/wp-content/uploads/2011/11/1.jpg",
+              "description": "”timo ambiente para beber e conversar com os amigos!",
+              "location": {
+              "lat": -8.095323,
+              "lon": -34.88415
+              },
+              "friends": [3,7,9,11],
+              "stickers": [1,2,3],
+              "ranking": {
+              "social": 590,
+              "buzz": 410,
+              "overall": 460
+              }
+              },
+              {
+              "id": 3,
+              "name": "UK Pub",
+              "img": "http://www.ukpub.com.br/img/galeria/d3a39736b88f9fa2947a42f02431f3b3.jpg",
+              "description": "Shows de gÍneros variados e bebida de qualidade!",
+              "location": {
+              "lat": -8.114874,
+              "lon": -34.89652
+              },
+              "friends": [6,8,10],
+              "stickers": [1,2,3],
+              "ranking": {
+              "social": 400,
+              "buzz": 350,
+              "overall": 360
+              }
+              },
+              {
+              "id": 4,
+              "name": "Iguana Café",
+              "img": "https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/58159_444595985625337_1459920669_n.jpg",
+              "description": "Uma balada com decoraÁ„o tem·tica Mexicana. Muy caliente!",
+              "location": {
+              "lat": -8.094606,
+              "lon": -34.884272
+              },
+              "friends": [13,14,15,19],
+              "stickers": [1,2,4,6],
+              "ranking": {
+              "social": 410,
+              "buzz": 370,
+              "overall": 385
+              }
+              },
+              {
+              "id": 5,
+              "name": "Underground Pub",
+              "img": "https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/1040190_478516292241610_1706012180_o.jpg",
+              "description": "Ambiente muito legal e diferente!",
+              "location": {
+              "lat": -8.097,
+              "lon": -34.883556
+              },
+              "friends": [16,21,22,24],
+              "stickers": [1,4,5],
+              "ranking": {
+              "social": 430,
+              "buzz": 380,
+              "overall": 395
+              }
+              },
+              {
+              "id": 6,
+              "name": "Dona Carolina",
+              "img": "http://www.bardonacarolina.com.br/arquivos/bancodeimagens/thumbs/800X/d9111f55872209916b67e4f5cb067155.jpg",
+              "description": "EspaÁo aconchegante, boa m˙sica e card·pio diversificado.",
+              "location": {
+              "lat": -8.104421,
+              "lon": -34.887219
+              },
+              "friends": [17,18,20,23],
+              "stickers": [1,3,4,6],
+              "ranking": {
+              "social": 420,
+              "buzz": 385,
+              "overall": 400
+              }
+              }
+              ]
+    
 }

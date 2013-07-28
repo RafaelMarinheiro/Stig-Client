@@ -88,8 +88,10 @@
         static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
+        
         [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
-
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [imageView setClipsToBounds:YES];
         [cell.contentView addSubview:imageView];
         return cell;
     }

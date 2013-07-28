@@ -299,6 +299,7 @@
 				029E2D5417A4AD66008F4AA2 /* barra_topo_stig_name.png */,
 				029E2D5017A4AD04008F4AA2 /* MarketingScript.ttf */,
 				029E2D4E17A49FD5008F4AA2 /* text-bottom-bar.png */,
+				0FEE9E8717A4B31700722EA6 /* pino_40.png */,
 				029E2D4717A496F6008F4AA2 /* icon_list.png */,
 				029E2D4117A47936008F4AA2 /* suggest_me_50.png */,
 				029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */,
@@ -600,6 +601,7 @@
 				029E2D5117A4AD04008F4AA2 /* MarketingScript.ttf in Resources */,
 				029E2D5517A4AD66008F4AA2 /* barra_topo_stig_name.png in Resources */,
 				029E2D5717A4B2D5008F4AA2 /* back_botao_44.png in Resources */,
+				0FEE9E8817A4B31700722EA6 /* pino_40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

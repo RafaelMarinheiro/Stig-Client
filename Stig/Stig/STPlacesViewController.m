@@ -61,27 +61,33 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void) suggestSomething: (UIButton *) button{
-    int suggestion = rand()%([self.places count]);
-    
-    STPlace * place = [self.places objectAtIndex:suggestion];
-    _selectedPlace = place;
-    
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(place.coordinate, 1000, 1000);
-    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
-    [self.mapView setRegion:adjustedRegion animated:YES];
-    
-    
-    [self.dropperLabel setText:place.placeName];
-    [self showDropper];
-    //[self pushBoardViewControllerWithPlace:place];
-    NSLog(@"WOHOOOO");
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+# pragma mark - Suggestion Button
+
+- (void) suggestSomething: (UIButton *) button{
+    double k = -1;
+    _selectedPlace = nil;
+    
+    for(int i = 0; i < [self.places count]; i++){
+        STPlace * place = [self.places objectAtIndex:i];
+        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
+            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
+            _selectedPlace = place;
+        }
+    }
+
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_selectedPlace.coordinate, 1000, 1000);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+    [self.mapView setRegion:adjustedRegion animated:YES];
+    
+    
+    [self.dropperLabel setText:_selectedPlace.placeName];
+    [self showDropper];
 }
 
 #pragma mark - DropperView Delegate Methods
@@ -204,12 +210,21 @@
     [self collapseDisposers];
 }
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    NSString * identifier = @"Pin";
-    MKAnnotationView *pin =(MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-
-    if (!pin){
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
+//    NSString * identifier = @"Pin";
+//    MKAnnotationView *pin = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//
+//    if (!pin){
+//        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+//        ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
+//        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//    }
+//    return pin;
+    NSString * identifier = @"StigPin";
+    MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if(!pin){
+        pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        pin.image = [UIImage imageNamed:@"pino_40"];
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;

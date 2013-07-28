@@ -11,7 +11,7 @@
 
 @implementation STMapOverlayView
 
-static STRankingCriteria _criteria = ST_SOCIAL;
+static STRankingCriteria _criteria = ST_OVERALL;
 
 + (STRankingCriteria) criteria{
     return _criteria;

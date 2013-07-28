@@ -93,6 +93,7 @@
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
         [imageView setClipsToBounds:YES];
         [cell.contentView addSubview:imageView];
+        [cell.contentView sendSubviewToBack:imageView];
         return cell;
     }
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";

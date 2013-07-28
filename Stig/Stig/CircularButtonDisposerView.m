@@ -144,7 +144,7 @@
         }
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
-
+            view.hidden = NO;
             
             
 
@@ -191,6 +191,7 @@
                 } completion:^(BOOL completed){
                     _disposing = NO;
                     _animating = NO;
+                    view.hidden = YES;
                     completion(completed);
                 }];
             }];

@@ -69,11 +69,11 @@ static STRankingCriteria _criteria = ST_SOCIAL;
 
     if([STMapOverlayView criteria] == ST_BUZZ){
          CGFloat components[20] = {
-                                    0.9, 0.1, 0.1, 1.0*[self computeRelevance],
-                                    0.9, 0.1, 0.1, 0.8*[self computeRelevance],
-                                    0.9, 0.1, 0.1, 0.35*[self computeRelevance],
-                                    0.9, 0.1, 0.1, 0.1*[self computeRelevance],
-                                    0.9, 0.1, 0.1, 0.0*[self computeRelevance]
+                                    0.3, 0.78, 0.68, 0.9	*[self computeRelevance],
+                                    0.3, 0.78, 0.68, 0.8*[self computeRelevance],
+                                    0.3, 0.78, 0.68, 0.35*[self computeRelevance],
+                                    0.3, 0.78, 0.68, 0.1*[self computeRelevance],
+                                    0.3, 0.78, 0.68, 0.0*[self computeRelevance]
                                  };
         
         // Create the gradient.
@@ -87,12 +87,12 @@ static STRankingCriteria _criteria = ST_SOCIAL;
         CGGradientRelease(myGradient);
     } else if([STMapOverlayView criteria] == ST_SOCIAL){
         CGFloat components[20] = {
-                                    0.4, 0.7, 0.9, 1.0*[self computeRelevance],
-                                    0.4, 0.7, 0.9, 0.8*[self computeRelevance],
-                                    0.4, 0.7, 0.9, 0.35*[self computeRelevance],
-                                    0.4, 0.7, 0.9, 0.1*[self computeRelevance],
-                                    0.4, 0.7, 0.9, 0.0*[self computeRelevance]
-                                };
+            1.00, 0.3, 0.1, 1.0*[self computeRelevance],
+            1.00, 0.3, 0.1, 0.8*[self computeRelevance],
+            1.00, 0.3, 0.1, 0.35*[self computeRelevance],
+            1.00, 0.3, 0.1, 0.1*[self computeRelevance],
+            1.00, 0.3, 0.1, 0.0*[self computeRelevance]
+        };
         
         // Create the gradient.
         CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 5);
@@ -105,12 +105,12 @@ static STRankingCriteria _criteria = ST_SOCIAL;
         CGGradientRelease(myGradient);
     } else{
         CGFloat components[20] = {
-                            0.19, 0.6, 1, 1.0*[self computeRelevance],
-                            0.19, 0.6, 1, 0.8*[self computeRelevance],
-                            0.19, 0.6, 1, 0.35*[self computeRelevance],
-                            0.19, 0.6, 1, 0.1*[self computeRelevance],
-                            0.19, 0.6, 1, 0.0*[self computeRelevance]
-                        };
+            0.45, 0.01, 0.7, 1.0*[self computeRelevance],
+            0.45, 0.01, 0.7, 0.8*[self computeRelevance],
+            0.45, 0.01, 0.7, 0.35*[self computeRelevance],
+            0.45, 0.01, 0.7, 0.1*[self computeRelevance],
+            0.45, 0.01, 0.7, 0.0*[self computeRelevance]
+        };
         
         // Create the gradient.
         CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 5);

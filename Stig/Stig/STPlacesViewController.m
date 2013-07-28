@@ -223,8 +223,9 @@
     MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
     if(!pin){
-        pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        pin.image = [UIImage imageNamed:@"pino_40"];
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        //pin.image = [UIImage imageNamed:@"pino_40"];
+        [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorPurple];
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;

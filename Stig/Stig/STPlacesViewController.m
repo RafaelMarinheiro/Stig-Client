@@ -27,9 +27,11 @@
     [super viewDidLoad];
     _showingMap = YES;
     _showingDropper = NO;
+    self.dropperView.delegate = self;
     self.filterButtonDisposer.delegate = self;
     self.optionsButtonDisposer.delegate = self;
     self.optionsButtonDisposer.disposeToTheRight = NO;
+    self.optionsButtonDisposer.shouldRotateMainButton = YES;
     if (!self.places) {
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
@@ -46,7 +48,7 @@
     UIButton *filterMainButton = self.filterButtonDisposer.mainButton;
     NSArray *filterButtons = self.filterButtonDisposer.buttons;
     [filterMainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
-    [filterButtons[0] setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
+    [filterButtons[0] setImage:[UIImage imageNamed:@"filter-stiger-44"] forState:UIControlStateNormal];
     [filterButtons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
     [filterButtons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
 
@@ -58,9 +60,27 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
+#pragma mark - DropperView Delegate Methods
+- (void) dragStarted {
+    [self collapseDisposers];
+}
+- (void) dragCancelled {
 
-
+}
+- (void) dragCompleted {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", _selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+    [alert show];
+}
+- (void) dragMoveWithPercentage:(NSNumber *)percentage {
+    
+}
+#pragma mark - Circular Disposer Delegate Methods
 - (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
     [self collapseDisposers];
 }
@@ -79,7 +99,7 @@
         [self optionsDisposed];
     }
 }
-
+#pragma mark - Disposer Buttons Pressed
 - (void) optionsPressed:(NSUInteger) optionNumber {
     
 }
@@ -137,11 +157,7 @@
     [self.optionsButtonDisposer setAlpha:0.3];
     [self.optionsButtonDisposer setUserInteractionEnabled:NO];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark - Dropper Movement
 
 - (void) showDropper {

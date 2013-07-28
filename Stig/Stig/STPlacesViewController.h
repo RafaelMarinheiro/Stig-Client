@@ -12,7 +12,7 @@
 #import "CircularButtonDisposerView.h"
 #import "STDropperView.h"
 
-@interface STPlacesViewController : UIViewController <MKMapViewDelegate, CircularButtonDisposerDelegate>
+@interface STPlacesViewController : UIViewController <MKMapViewDelegate, CircularButtonDisposerDelegate, STDropperViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *places;

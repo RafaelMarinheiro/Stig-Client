@@ -80,6 +80,10 @@
 		029E2D3E17A475EA008F4AA2 /* filter-social-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D3817A475EA008F4AA2 /* filter-social-44@2x.png */; };
 		029E2D4317A47936008F4AA2 /* suggest_me_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4117A47936008F4AA2 /* suggest_me_50.png */; };
 		029E2D4417A47936008F4AA2 /* suggest_me_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */; };
+		029E2D4617A495B0008F4AA2 /* barra_topo_stig_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4517A495B0008F4AA2 /* barra_topo_stig_name.png */; };
+		029E2D4817A496F6008F4AA2 /* icon_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4717A496F6008F4AA2 /* icon_list.png */; };
+		029E2D4A17A4976E008F4AA2 /* filter-stiger-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4917A4976E008F4AA2 /* filter-stiger-44.png */; };
+		029E2D4D17A497F4008F4AA2 /* STListPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */; };
 		02BE5EC317A3307300FDC09F /* acessotag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */; };
 		02BE5EC417A3307300FDC09F /* cardápiotags 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */; };
 		02BE5EC517A3307300FDC09F /* moneytag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */; };
@@ -194,6 +198,11 @@
 		029E2D3817A475EA008F4AA2 /* filter-social-44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-social-44@2x.png"; sourceTree = "<group>"; };
 		029E2D4117A47936008F4AA2 /* suggest_me_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suggest_me_50.png; sourceTree = "<group>"; };
 		029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "suggest_me_50@2x.png"; sourceTree = "<group>"; };
+		029E2D4517A495B0008F4AA2 /* barra_topo_stig_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig_name.png; sourceTree = "<group>"; };
+		029E2D4717A496F6008F4AA2 /* icon_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_list.png; sourceTree = "<group>"; };
+		029E2D4917A4976E008F4AA2 /* filter-stiger-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-stiger-44.png"; sourceTree = "<group>"; };
+		029E2D4B17A497F4008F4AA2 /* STListPlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STListPlacesViewController.h; sourceTree = "<group>"; };
+		029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STListPlacesViewController.m; sourceTree = "<group>"; };
 		02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "acessotag 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardápiotags 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moneytag 91x91px.png"; sourceTree = "<group>"; };
@@ -278,6 +287,8 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				029E2D4717A496F6008F4AA2 /* icon_list.png */,
+				029E2D4517A495B0008F4AA2 /* barra_topo_stig_name.png */,
 				029E2D4117A47936008F4AA2 /* suggest_me_50.png */,
 				029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */,
 				029E2D3F17A4760D008F4AA2 /* Filter Icons */,
@@ -340,6 +351,8 @@
 				0202F46617A05FB50071D95C /* STBoardViewController.m */,
 				0202F46717A05FB50071D95C /* STPlacesViewController.h */,
 				0202F46817A05FB50071D95C /* STPlacesViewController.m */,
+				029E2D4B17A497F4008F4AA2 /* STListPlacesViewController.h */,
+				029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -426,6 +439,7 @@
 		029E2D3F17A4760D008F4AA2 /* Filter Icons */ = {
 			isa = PBXGroup;
 			children = (
+				029E2D4917A4976E008F4AA2 /* filter-stiger-44.png */,
 				029E2D3317A475EA008F4AA2 /* filter_yellow_50.png */,
 				029E2D3417A475EA008F4AA2 /* filter_yellow_50@2x.png */,
 				029E2D3517A475EA008F4AA2 /* filter-buzz-44.png */,
@@ -569,6 +583,9 @@
 				029E2D3E17A475EA008F4AA2 /* filter-social-44@2x.png in Resources */,
 				029E2D4317A47936008F4AA2 /* suggest_me_50.png in Resources */,
 				029E2D4417A47936008F4AA2 /* suggest_me_50@2x.png in Resources */,
+				029E2D4617A495B0008F4AA2 /* barra_topo_stig_name.png in Resources */,
+				029E2D4817A496F6008F4AA2 /* icon_list.png in Resources */,
+				029E2D4A17A4976E008F4AA2 /* filter-stiger-44.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +626,7 @@
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
 				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
 				0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */,
+				029E2D4D17A497F4008F4AA2 /* STListPlacesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

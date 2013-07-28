@@ -18,19 +18,9 @@
     STOverlord *_overlord;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView headerViewForSection:0];
     self.userNameFont = [UIFont fontWithName:@"Futura" size:15.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:13.0];
     _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
@@ -59,7 +49,7 @@
     }
 }
 - (void) requestData{
-    NSLog(@"request data");
+    NSLog(@"request data %@", self.place);
         self.title = self.place.placeName;
         [_overlord getCommentsFromPlace:self.place withStickers:@[@3,@1,@2] pageNumber:0 completion:^(NSArray *comments, NSUInteger pageNumber){
             _comments = [[NSMutableDictionary alloc] initWithCapacity:[comments count]];
@@ -105,6 +95,7 @@
     }
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     STBoardComment *comment = self.comments[indexPath];
     STUser *user = self.commentsUsers[indexPath];
     

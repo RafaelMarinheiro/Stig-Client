@@ -27,7 +27,7 @@
     _loadedPlace = NO;
     _loadedComments = NO;
     _overlord = [STOverlord sharedInstance];
-    
+    [self.topBatTitle setText:self.place.placeName];
     [self requestData];
 }
 
@@ -112,7 +112,8 @@
     return cell;
 }
 - (void) setHeightForComment:(STBoardComment *) comment AtIndexPath:(NSIndexPath *)indexPath{
-    NSString *text = [NSString stringWithFormat:@"hehehe%@",comment.commentText];
+    
+    NSString *text = [NSString stringWithFormat:@"hehehe\n%@\nhihihi",comment.commentText];
     
     CGSize stringSize = [text sizeWithFont:self.commentFont constrainedToSize:CGSizeMake(230.0, 9999) lineBreakMode:NSLineBreakByWordWrapping];
     stringSize.height = MAX(stringSize.height, 40.0);
@@ -173,4 +174,12 @@
     
 }
 
+- (IBAction)stickerButtonPressed:(UIButton *)sender {
+
+    self.stickersView.hidden = !self.stickersView.hidden;
+}
+
+- (IBAction)backButtonPressed:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

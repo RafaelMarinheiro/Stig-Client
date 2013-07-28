@@ -280,14 +280,143 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CK3-iF-o5n">
+                                                    <subviews>
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDz-Sa-o2z" userLabel="Stickers View">
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UN5-Yj-Bt1">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="2h8-cH-i79"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="JrR-2c-vns"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_acesso_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="2fm-du-XdX"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izM-ey-gfn">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="JIY-9h-vbr"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="Qcj-hs-0Dp"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_drink_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="DG4-k9-FRe"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTp-Pg-V14">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="bwL-0X-Uhq"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="eF4-8r-dP8"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_money_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="Ing-pK-BQw"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3M3-Oi-tXz">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="Qgd-bH-lc3"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="xlr-fD-fF6"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_fila_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="pDo-Ta-jCp"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gto-PM-6GE">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="ada-TC-jj8"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="vqK-0z-gEl"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_music_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="BLA-uO-q0Y"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-o9-kS3">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="44" type="user" id="LEj-Mw-pfV"/>
+                                                                        <constraint firstAttribute="height" constant="44" type="user" id="xDT-8w-8ii"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <state key="normal" image="icone_people_44.png">
+                                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <state key="highlighted">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="n1R-tp-4kj"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="3M3-Oi-tXz" secondAttribute="trailing" constant="116" id="1b3-Lw-bGo"/>
+                                                                <constraint firstItem="UN5-Yj-Bt1" firstAttribute="leading" secondItem="lDz-Sa-o2z" secondAttribute="leading" constant="28" id="50x-vg-V7Y"/>
+                                                                <constraint firstAttribute="trailing" secondItem="gxz-o9-kS3" secondAttribute="trailing" constant="28" id="55T-2d-RvU"/>
+                                                                <constraint firstAttribute="trailing" secondItem="gto-PM-6GE" secondAttribute="trailing" constant="72" id="BnN-9s-cn4"/>
+                                                                <constraint firstItem="3M3-Oi-tXz" firstAttribute="top" secondItem="iTp-Pg-V14" secondAttribute="top" type="default" id="Cx3-Za-cg4"/>
+                                                                <constraint firstItem="gxz-o9-kS3" firstAttribute="centerY" secondItem="lDz-Sa-o2z" secondAttribute="centerY" type="default" id="Hof-cn-MHC"/>
+                                                                <constraint firstItem="iTp-Pg-V14" firstAttribute="leading" secondItem="lDz-Sa-o2z" secondAttribute="leading" constant="116" id="PxU-Vo-Q5j"/>
+                                                                <constraint firstItem="gto-PM-6GE" firstAttribute="top" secondItem="gxz-o9-kS3" secondAttribute="top" type="default" id="Qcn-Ja-AUE"/>
+                                                                <constraint firstAttribute="height" constant="50" type="user" id="UTF-dd-IgV"/>
+                                                                <constraint firstItem="iTp-Pg-V14" firstAttribute="top" secondItem="izM-ey-gfn" secondAttribute="top" type="default" id="WfK-us-bfO"/>
+                                                                <constraint firstItem="izM-ey-gfn" firstAttribute="top" secondItem="UN5-Yj-Bt1" secondAttribute="top" type="default" id="hEl-vk-1Kb"/>
+                                                                <constraint firstItem="izM-ey-gfn" firstAttribute="leading" secondItem="lDz-Sa-o2z" secondAttribute="leading" constant="72" id="rKH-Rv-HmP"/>
+                                                                <constraint firstItem="3M3-Oi-tXz" firstAttribute="top" secondItem="gto-PM-6GE" secondAttribute="top" type="default" id="vyw-uL-jP9"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="lDz-Sa-o2z" firstAttribute="trailing" secondItem="CK3-iF-o5n" secondAttribute="trailing" type="default" id="CTk-Ko-ST6"/>
+                                                        <constraint firstItem="lDz-Sa-o2z" firstAttribute="top" secondItem="CK3-iF-o5n" secondAttribute="top" type="default" id="Gtl-BV-jmr"/>
+                                                        <constraint firstItem="lDz-Sa-o2z" firstAttribute="leading" secondItem="CK3-iF-o5n" secondAttribute="leading" type="default" id="USX-6k-xzi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lDz-Sa-o2z" secondAttribute="bottom" constant="50" id="oJg-4C-XMv"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="CK3-iF-o5n" firstAttribute="leading" secondItem="5dA-29-tZF" secondAttribute="leading" type="default" id="Ikr-Y7-m61"/>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="top" secondItem="5dA-29-tZF" secondAttribute="top" constant="10" id="MeZ-W9-Xzt"/>
                                             <constraint firstItem="CK3-iF-o5n" firstAttribute="trailing" secondItem="5dA-29-tZF" secondAttribute="trailing" type="default" id="Zrg-6k-GEJ"/>
                                             <constraint firstItem="CK3-iF-o5n" firstAttribute="centerY" secondItem="5dA-29-tZF" secondAttribute="centerY" type="default" id="qED-oW-sMJ"/>
                                         </constraints>
@@ -353,17 +482,220 @@
                                     <outlet property="delegate" destination="x2V-Yo-eIf" id="Lh7-Us-6Gf"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEU-W5-VQw" userLabel="Stickers View">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYO-7Z-R9s">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="RPL-rK-ce1"/>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="t7o-ae-M8g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_acesso_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="afs-aG-XeF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbG-pC-jWn">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="fIb-RF-egj"/>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="wMn-1O-JkV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_drink_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="Py6-06-5Zn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNW-5f-EMV">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="ddi-PR-566"/>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="uqA-e2-4An"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_money_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="Q7c-Z2-dCc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hiw-hT-U34">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="FKD-2V-Ydt"/>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="rle-54-AKN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_fila_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="Hpb-Q1-o6p"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LE-JG-dci">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="58d-PS-htm"/>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="ohL-yn-9Df"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_music_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="DsY-Dx-QCq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gS-6h-tyP">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" type="user" id="ZeH-C7-k7A"/>
+                                            <constraint firstAttribute="height" constant="44" type="user" id="eCA-y9-m8M"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="icone_people_44.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stickerButtonPressed:" destination="dK9-Pj-bfG" eventType="touchUpInside" id="TBz-MD-KsS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9LE-JG-dci" secondAttribute="trailing" constant="72" id="3ZR-uy-d7j"/>
+                                    <constraint firstAttribute="trailing" secondItem="5gS-6h-tyP" secondAttribute="trailing" constant="28" id="7Lq-OC-zPM"/>
+                                    <constraint firstItem="DYO-7Z-R9s" firstAttribute="leading" secondItem="YEU-W5-VQw" secondAttribute="leading" constant="28" id="APj-fG-MlG"/>
+                                    <constraint firstItem="bbG-pC-jWn" firstAttribute="centerY" secondItem="YEU-W5-VQw" secondAttribute="centerY" type="default" id="HYB-bn-9GG"/>
+                                    <constraint firstItem="9LE-JG-dci" firstAttribute="top" secondItem="5gS-6h-tyP" secondAttribute="top" type="default" id="LgX-MI-PGE"/>
+                                    <constraint firstItem="bbG-pC-jWn" firstAttribute="leading" secondItem="YEU-W5-VQw" secondAttribute="leading" constant="72" id="Tuc-v5-jd1"/>
+                                    <constraint firstItem="Hiw-hT-U34" firstAttribute="top" secondItem="9LE-JG-dci" secondAttribute="top" type="default" id="YrC-Uc-sJI"/>
+                                    <constraint firstItem="bbG-pC-jWn" firstAttribute="top" secondItem="DYO-7Z-R9s" secondAttribute="top" type="default" id="ZLj-R2-C4t"/>
+                                    <constraint firstAttribute="height" constant="50" type="user" id="ffE-A5-CaY"/>
+                                    <constraint firstItem="oNW-5f-EMV" firstAttribute="top" secondItem="bbG-pC-jWn" secondAttribute="top" type="default" id="haB-57-Zhb"/>
+                                    <constraint firstItem="oNW-5f-EMV" firstAttribute="leading" secondItem="YEU-W5-VQw" secondAttribute="leading" constant="116" id="n6Z-HS-pfR"/>
+                                    <constraint firstItem="Hiw-hT-U34" firstAttribute="top" secondItem="oNW-5f-EMV" secondAttribute="top" type="default" id="vn9-GW-tqV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hiw-hT-U34" secondAttribute="trailing" constant="116" id="yQE-nl-dU6"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text-bottom-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="CaF-SN-dbP">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" type="user" id="2s4-eD-wL1"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type a comment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d2I-7G-UEQ">
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbs-iZ-UzO">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" type="user" id="1c8-5W-MMa"/>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="h5D-f9-tFx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="S">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stickerButtonPressed:" destination="x2V-Yo-eIf" eventType="touchUpInside" id="Sp3-kV-IbI"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="barra_topo_stig.png" translatesAutoresizingMaskIntoConstraints="NO" id="S0w-pr-3fL" userLabel="Top Bar">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" type="user" id="dL0-Kc-xe6"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlo-7f-HWP">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="SzX-2R-Ygq"/>
+                                    <constraint firstAttribute="width" constant="44" type="user" id="WDb-du-8Fz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="back_botao_44.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="x2V-Yo-eIf" eventType="touchUpInside" id="zD5-U8-HwF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2g-hw-VrI">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="177" id="44Y-sB-erK"/>
+                                    <constraint firstAttribute="height" constant="28" id="raw-y3-5Ir"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="top" secondItem="h9Q-5u-yck" secondAttribute="top" type="default" id="9ja-XH-dgc"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="bottom" secondItem="h9Q-5u-yck" secondAttribute="bottom" type="default" id="CvC-bY-WJg"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="default" id="SsB-zf-xdB"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="default" id="U51-JP-PAY"/>
+                            <constraint firstItem="CaF-SN-dbP" firstAttribute="top" secondItem="mTr-Jz-y3M" secondAttribute="bottom" type="user" id="2sD-e7-qvH"/>
+                            <constraint firstItem="S0w-pr-3fL" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="3Tm-BS-ggZ"/>
+                            <constraint firstAttribute="trailing" secondItem="d2I-7G-UEQ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="6DV-NG-Q6k"/>
+                            <constraint firstItem="S0w-pr-3fL" firstAttribute="top" secondItem="h9Q-5u-yck" secondAttribute="top" type="user" id="7rD-5I-25N"/>
+                            <constraint firstAttribute="trailing" secondItem="YEU-W5-VQw" secondAttribute="trailing" type="user" id="CL3-NV-Udq"/>
+                            <constraint firstItem="dlo-7f-HWP" firstAttribute="centerY" secondItem="h2g-hw-VrI" secondAttribute="centerY" type="default" id="Cjk-K4-HCN"/>
+                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="top" secondItem="h9Q-5u-yck" secondAttribute="top" constant="47" type="user" id="FN5-xK-fwC"/>
+                            <constraint firstItem="S0w-pr-3fL" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="Hyl-OH-o1W"/>
+                            <constraint firstItem="CaF-SN-dbP" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="default" id="Imu-bv-X0P"/>
+                            <constraint firstItem="h2g-hw-VrI" firstAttribute="centerX" secondItem="S0w-pr-3fL" secondAttribute="centerX" type="default" id="Isy-mw-Pcp"/>
+                            <constraint firstItem="CaF-SN-dbP" firstAttribute="top" secondItem="YEU-W5-VQw" secondAttribute="bottom" type="user" id="OQC-Dq-Bx7"/>
+                            <constraint firstItem="dlo-7f-HWP" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="default" id="P36-Pd-bfw"/>
+                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="user" id="SsB-zf-xdB"/>
+                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="U51-JP-PAY"/>
+                            <constraint firstItem="d2I-7G-UEQ" firstAttribute="leading" secondItem="vbs-iZ-UzO" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="VAx-5W-E89"/>
+                            <constraint firstItem="CaF-SN-dbP" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="default" id="XI0-13-uMt"/>
+                            <constraint firstAttribute="bottom" secondItem="vbs-iZ-UzO" secondAttribute="bottom" constant="1" id="Z8A-To-mAg"/>
+                            <constraint firstItem="S0w-pr-3fL" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="user" id="cFh-mc-5Ww"/>
+                            <constraint firstItem="h2g-hw-VrI" firstAttribute="centerY" secondItem="S0w-pr-3fL" secondAttribute="centerY" type="default" id="drz-Eg-oq7"/>
+                            <constraint firstItem="S0w-pr-3fL" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="user" id="gqL-0f-bXv"/>
+                            <constraint firstItem="YEU-W5-VQw" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="hzx-aK-aA8"/>
+                            <constraint firstItem="vbs-iZ-UzO" firstAttribute="baseline" secondItem="d2I-7G-UEQ" secondAttribute="baseline" type="default" id="jUn-Uc-g0v"/>
+                            <constraint firstItem="vbs-iZ-UzO" firstAttribute="centerY" secondItem="d2I-7G-UEQ" secondAttribute="centerY" type="default" id="vdp-tD-koy"/>
+                            <constraint firstItem="vbs-iZ-UzO" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="default" id="xHC-Ip-siI"/>
+                            <constraint firstAttribute="bottom" secondItem="CaF-SN-dbP" secondAttribute="bottom" type="user" id="yiP-nv-KwF"/>
+                            <constraint firstItem="YEU-W5-VQw" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="z9J-a6-5Yo"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="stickersView" destination="YEU-W5-VQw" id="cTW-eV-LUh"/>
                         <outlet property="tableView" destination="mTr-Jz-y3M" id="44B-g5-5Lg"/>
+                        <outlet property="topBatTitle" destination="h2g-hw-VrI" id="oFU-xO-t47"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRW-eb-FSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -372,6 +704,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back_botao_44.png" width="44" height="44"/>
+        <image name="barra_topo_stig.png" width="640" height="94"/>
         <image name="barra_topo_stig_name.png" width="640" height="94"/>
         <image name="callout.png" width="640" height="1150"/>
         <image name="icon_list.png" width="80" height="80"/>
@@ -382,55 +716,8 @@
         <image name="icone_music_44.png" width="44" height="44"/>
         <image name="icone_people_44.png" width="44" height="44"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
+        <image name="text-bottom-bar.png" width="640" height="94"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STBoardViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="STDropperView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDropperView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accessButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImage"/>
-                <relationship kind="outlet" name="boxViewConstraint" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="drinkButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="moneyButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="musicButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="peopleButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="queueButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="viewConstraint" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="STPlacesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dropperLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dropperView" candidateClass="STDropperView"/>
-                <relationship kind="outlet" name="filterButtonDisposer" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="optionsButtonDisposer" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="suggestionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

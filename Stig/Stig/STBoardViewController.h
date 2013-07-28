@@ -21,5 +21,10 @@
 @property (nonatomic, strong) UIFont *userNameFont;
 @property (nonatomic, readonly) NSMutableDictionary *comments;
 @property (nonatomic, readonly) NSMutableDictionary *commentsUsers;
+@property (weak, nonatomic) IBOutlet UIView *stickersView;
+@property (weak, nonatomic) IBOutlet UILabel *topBatTitle;
+- (IBAction)stickerButtonPressed:(UIButton *)sender;
+- (IBAction)backButtonPressed:(UIButton *)sender;
+
 
 @end

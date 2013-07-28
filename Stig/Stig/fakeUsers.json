@@ -1,124 +1,244 @@
 {
-    "users":[
-        {
-            "id": 1,
-            "name": "Lucas Tenório",
-            "img": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-prn1/149355_370413206352814_945257565_n.jpg",
-            "location": {
-                    "lat": -34.873264,
-                    "lon": -8.064217
-                    },
-            "place": 1 
-        },
-        {
-            "id": 2,
-            "name": "Fanny Chien",
-            "img": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash4/486205_10200446463940087_289185559_n.jpg",
-            "location": {
-                    "lat": -34.873264,
-                    "lon": -8.064217
-                    },
-            "place": 1 
-        },
-        {
-            "id": 3,
-            "name": "Rafael Nunes",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/275080_100001946475949_14815985_n.jpg",
-            "location": {
-                    "lat": -34.88415,
-                    "lon": -8.095323
-                    },
-            "place": 2 
-        },
-        {
-            "id": 4,
-            "name": "Rafael Marinheiro",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/371650_100001738378453_2074098121_n.jpg",
-            "location": {
-                    "lat": -34.873264,
-                    "lon": -8.064217
-                    },
-            "place": 1 
-        },
-        {
-            "id": 5,
-            "name": "Gustavo Stor",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/203413_100000064904757_1244495731_n.jpg",
-            "location": {
-                    "lat": -34.873264,
-                    "lon": -8.064217
-                    },
-            "place": 1 
-        },
-        {
-            "id": 6,
-            "name": "Pollyanna Diniz",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/371700_735333710_559204890_n.jpg",
-            "location": {
-                    "lat": -34.89652,
-                    "lon": -8.114874
-                    },
-            "place": 3 
-        },
-        {
-            "id": 7,
-            "name": "Cecília Eroy",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/274213_100003081490410_1566640840_n.jpg",
-            "location": {
-                    "lat": -34.88415,
-                    "lon": -8.095323
-                    },
-            "place": 2 
-        },
-        {
-            "id": 8,
-            "name": "Raphael D'Emery",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/203284_698590727_237701168_n.jpg",
-            "location": {
-                    "lat": -34.89652,
-                    "lon": -8.114874
-                    },
-            "place": 3 
-        },
-        {
-            "id": 9,
-            "name": "Pedro Diniz",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c141.41.518.518/s160x160/398498_410313102365823_2080952135_n.jpg",
-            "location": {
-                    "lat": -34.88415,
-                    "lon": -8.095323
-                    },
-            "place":2 
-        },
-        {
-            "id": 10,
-            "name": "Arthur Braga",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c22.52.375.375/s160x160/1004041_10201179302782868_1600500332_n.jpg",
-            "location": {
-                    "lat": -34.89652,
-                    "lon": -8.114874
-                    },
-            "place": 3 
-        },
-        {
-            "id": 11,
-            "name": "Robert Seall",
-            "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c33.33.413.413/s160x160/551838_10150640907429499_1518204351_n.jpg",
-            "location": {
-                    "lat": -34.88415,
-                    "lon": -8.095323
-                    },
-            "place": 2 
-        },
-        {
-            "id": 12,
-            "name": "Kaiser Wilhelm II",
-            "img": "http://www.bbc.co.uk/history/historic_figures/images/kaiser_wilhelm.jpg",
-            "location": {
-                    "lat": -34.873264,
-                    "lon": -8.064217
-                        },
-            "place": 1
-        }
-    ]
+    "users": [
+              {
+              "id": 1,
+              "name": "Lucas Tenório",
+              "img": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-prn1/149355_370413206352814_945257565_n.jpg",
+              "location": {
+              "lat": -34.873264,
+              "lon": -8.064217
+              },
+              "place": 1
+              },
+              {
+              "id": 2,
+              "name": "Fanny Chien",
+              "img": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash4/486205_10200446463940087_289185559_n.jpg",
+              "location": {
+              "lat": -34.873264,
+              "lon": -8.064217
+              },
+              "place": 1
+              },
+              {
+              "id": 3,
+              "name": "Rafael Nunes",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/275080_100001946475949_14815985_n.jpg",
+              "location": {
+              "lat": -34.88415,
+              "lon": -8.095323
+              },
+              "place": 2
+              },
+              {
+              "id": 4,
+              "name": "Rafael Marinheiro",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/371650_100001738378453_2074098121_n.jpg",
+              "location": {
+              "lat": -34.873264,
+              "lon": -8.064217
+              },
+              "place": 1
+              },
+              {
+              "id": 5,
+              "name": "Gustavo Stor",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/203413_100000064904757_1244495731_n.jpg",
+              "location": {
+              "lat": -34.873264,
+              "lon": -8.064217
+              },
+              "place": 1
+              },
+              {
+              "id": 6,
+              "name": "Pollyanna Diniz",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/371700_735333710_559204890_n.jpg",
+              "location": {
+              "lat": -34.89652,
+              "lon": -8.114874
+              },
+              "place": 3
+              },
+              {
+              "id": 7,
+              "name": "Cecília Eroy",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/274213_100003081490410_1566640840_n.jpg",
+              "location": {
+              "lat": -34.88415,
+              "lon": -8.095323
+              },
+              "place": 2
+              },
+              {
+              "id": 8,
+              "name": "Raphael D'Emery",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/203284_698590727_237701168_n.jpg",
+              "location": {
+              "lat": -34.89652,
+              "lon": -8.114874
+              },
+              "place": 3
+              },
+              {
+              "id": 9,
+              "name": "Pedro Diniz",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c141.41.518.518/s160x160/398498_410313102365823_2080952135_n.jpg",
+              "location": {
+              "lat": -34.88415,
+              "lon": -8.095323
+              },
+              "place": 2
+              },
+              {
+              "id": 10,
+              "name": "Arthur Braga",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c22.52.375.375/s160x160/1004041_10201179302782868_1600500332_n.jpg",
+              "location": {
+              "lat": -34.89652,
+              "lon": -8.114874
+              },
+              "place": 3
+              },
+              {
+              "id": 11,
+              "name": "Robert Seall",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c33.33.413.413/s160x160/551838_10150640907429499_1518204351_n.jpg",
+              "location": {
+              "lat": -34.88415,
+              "lon": -8.095323
+              },
+              "place": 2
+              },
+              {
+              "id": 12,
+              "name": "Kaiser Wilhelm II",
+              "img": "http://www.bbc.co.uk/history/historic_figures/images/kaiser_wilhelm.jpg",
+              "location": {
+              "lat": -34.873264,
+              "lon": -8.064217
+              },
+              "place": 1
+              },
+              {
+              "id": 13,
+              "name": "Nicolle Cysneiros",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c39.220.488.488/s160x160/580710_471059252942258_675615351_n.jpg",
+              "location": {
+              "lat": -34.884272,
+              "lon": -8.094606
+              },
+              "place": 4
+              },
+              {
+              "id": 14,
+              "name": "Ermano Arruda",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/c125.31.387.387/s160x160/252621_417933658247769_1487978617_n.jpg",
+              "location": {
+              "lat": -34.884272,
+              "lon": -8.094606
+              },
+              "place": 4
+              },
+              {
+              "id": 15,
+              "name": "Luiz Neto",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c14.14.172.172/s160x160/993344_679662628717615_846616928_n.jpg",
+              "location": {
+              "lat": -34.884272,
+              "lon": -8.094606
+              },
+              "place": 4
+              },
+              {
+              "id": 16,
+              "name": "Tulio Lages",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/c48.48.607.607/s160x160/1005755_668081493221526_1349396800_n.jpg",
+              "location": {
+              "lat": -34.883556,
+              "lon": -8.097
+              },
+              "place": 5
+              },
+              {
+              "id": 17,
+              "name": "Pedro Torres",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c18.19.222.222/s160x160/71485_414773841952751_1878449482_n.jpg",
+              "location": {
+              "lat": -34.887219,
+              "lon": -8.104421
+              },
+              "place": 6
+              },
+              {
+              "id": 18,
+              "name": "Daniel Oliveira",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c42.42.528.528/s160x160/998703_492160850852863_1172596167_n.jpg",
+              "location": {
+              "lat": -34.887219,
+              "lon": -8.104421
+              },
+              "place": 6
+              },
+              {
+              "id": 19,
+              "name": "Rafael Lucena",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c0.11.160.160/945429_465521316855299_350660559_n.jpg",
+              "location": {
+              "lat": -34.884272,
+              "lon": -8.094606
+              },
+              "place": 4
+              },
+              {
+              "id": 20,
+              "name": "Sarah Cristina",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c66.66.828.828/s160x160/68588_485097594890677_193562648_n.jpg",
+              "location": {
+              "lat": -34.887219,
+              "lon": -8.104421
+              },
+              "place": 6
+              },
+              {
+              "id": 21,
+              "name": "Igor Vinícius",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c36.218.546.546/s160x160/1013744_509769485760082_277788234_n.jpg",
+              "location": {
+              "lat": -34.883556,
+              "lon": -8.097
+              },
+              "place": 5
+              },
+              {
+              "id": 22,
+              "name": "Leandro Farias",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c0.48.180.180/s160x160/556588_342671102477233_1454174060_a.jpg",
+              "location": {
+              "lat": -34.883556,
+              "lon": -8.097
+              },
+              "place": 5
+              },
+              {
+              "id": 23,
+              "name": "Rubens Lopes",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c73.65.815.815/s160x160/935815_4935615678102_985951639_n.jpg",
+              "location": {
+              "lat": -34.887219,
+              "lon": -8.104421
+              },
+              "place": 6
+              },
+              {
+              "id": 24,
+              "name": "Robertson Novelino",
+              "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/c18.14.175.175/s160x160/320297_534429776614541_486617282_n.jpg",
+              "location": {
+              "lat": -34.883556,
+              "lon": -8.097
+              },
+              "place": 5
+              }
+              ]
 }

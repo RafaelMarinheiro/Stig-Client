@@ -52,7 +52,7 @@
     [filterButtons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
     [filterButtons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
 
-    
+    [self.suggestionButton addTarget:self action:@selector(suggestSomething:) forControlEvents:UIControlEventTouchUpInside];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -60,10 +60,34 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+# pragma mark - Suggestion Button
+
+- (void) suggestSomething: (UIButton *) button{
+    double k = -1;
+    _selectedPlace = nil;
+    
+    for(int i = 0; i < [self.places count]; i++){
+        STPlace * place = [self.places objectAtIndex:i];
+        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
+            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
+            _selectedPlace = place;
+        }
+    }
+
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_selectedPlace.coordinate, 1000, 1000);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+    [self.mapView setRegion:adjustedRegion animated:YES];
+    
+    
+    [self.dropperLabel setText:_selectedPlace.placeName];
+    [self showDropper];
 }
 
 #pragma mark - DropperView Delegate Methods
@@ -106,11 +130,11 @@
 - (void) filterPressed:(NSUInteger) filterNumber {
     STRankingCriteria crit;
     if(filterNumber == 0){
-        crit = ST_SOCIAL;
-    } else if(filterNumber == 2){
+        crit = ST_OVERALL;
+    } else if(filterNumber == 1){
         crit = ST_BUZZ;
     } else{
-        crit = ST_OVERALL;
+        crit = ST_SOCIAL;
     }
     if([STMapOverlayView criteria] != crit){
         [STMapOverlayView setCriteria:crit];
@@ -186,12 +210,21 @@
     [self collapseDisposers];
 }
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    NSString * identifier = @"Pin";
-    MKAnnotationView *pin =(MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-
-    if (!pin){
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
+//    NSString * identifier = @"Pin";
+//    MKAnnotationView *pin = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//
+//    if (!pin){
+//        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+//        ((MKPinAnnotationView *)pin).pinColor = MKPinAnnotationColorPurple;
+//        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//    }
+//    return pin;
+    NSString * identifier = @"StigPin";
+    MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if(!pin){
+        pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        pin.image = [UIImage imageNamed:@"pino_40"];
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;

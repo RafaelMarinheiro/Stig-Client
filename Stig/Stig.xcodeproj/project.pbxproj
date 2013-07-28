@@ -96,6 +96,7 @@
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
 		0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE9E7F17A44BF500722EA6 /* STDropperView.m */; };
 		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
+		0FEE9E8817A4B31700722EA6 /* pino_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8717A4B31700722EA6 /* pino_40.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +221,7 @@
 		0FEE9E7E17A44BF500722EA6 /* STDropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDropperView.h; sourceTree = "<group>"; };
 		0FEE9E7F17A44BF500722EA6 /* STDropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDropperView.m; sourceTree = "<group>"; };
 		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
+		0FEE9E8717A4B31700722EA6 /* pino_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pino_40.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

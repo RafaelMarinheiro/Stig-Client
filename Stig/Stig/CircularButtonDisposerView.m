@@ -30,17 +30,18 @@
     return self;
 }
 - (void) config {
+    _shouldRotateMainButton = NO;
     _disposeToTheRight = YES;
     _disposeToTheBottom = NO;
     _disposing = NO;
     _animating = NO;
-    self.disposeRadius = @100.0;
+    self.disposeRadius = @70.0;
     self.disposeAngle = @(M_PI/2.0);
     self.disposeCenter = CGPointMake(30.0, 30.0);
     self.numberOfButtons = 3;
     self.bounceRadiusDelta = 5.0;
     
-    CGRect frame = CGRectMake(0.0, 0.0, 60.0, 60.0);
+    CGRect frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
 
     NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:self.numberOfButtons];
 
@@ -49,18 +50,23 @@
         button.tag = i;
         button.frame = frame;
         
-        [button setTitle:[NSString stringWithFormat:@"%d",i] forState:UIControlStateNormal];
+        //[button setTitle:[NSString stringWithFormat:@"%d",i] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(disposedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         [buttons addObject:button];
     }
     self.buttons = buttons;
+
+    [self.buttons[0] setImage:[UIImage imageNamed:@"filter-config.png"] forState:UIControlStateNormal];
+    [self.buttons[1] setImage:[UIImage imageNamed:@"filter-historico.png"] forState:UIControlStateNormal];
+    [self.buttons[2] setImage:[UIImage imageNamed:@"filter-me.png"] forState:UIControlStateNormal];
+    
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
  
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
-    [self.mainButton setImage:[UIImage imageNamed:@"uk-board.jpg"] forState:UIControlStateNormal];
+    [self.mainButton setImage:[UIImage imageNamed:@"filter-main.png"] forState:UIControlStateNormal];
     [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
@@ -81,8 +87,8 @@
     return CGRectContainsPoint(self.bounds, point);
 }
 - (void) disposedButtonPressed:(UIButton *) button {
-    if (self.callback) {
-        self.callback(button.tag);
+    if (self.delegate) {
+        [self.delegate circularButtonDisposerView:self buttonPressed:button.tag];
     }
 }
 
@@ -126,8 +132,22 @@
 - (void) dispose:(void (^)(BOOL completed)) completion{
     if (!self.disposing && !self.animating) {
         _animating = YES;
+        if (self.delegate) {
+            [self.delegate circularButtonDisposerViewWillDispose:self];
+        }
+        if (self.shouldRotateMainButton) {
+            CGAffineTransform mainTransform = CGAffineTransformMakeRotation(M_PI/ 4.1);
+
+            [UIView animateWithDuration:0.20 animations:^{
+                self.mainButton.transform = mainTransform;
+            }];
+        }
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
+
+            
+            
+
             CGAffineTransform translation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             CGAffineTransform bounceTranslation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] - self.bounceRadiusDelta disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;
@@ -152,6 +172,14 @@
 - (void) hideButtons:(void (^)(BOOL completed)) completion{
     if (self.disposing && !self.animating) {
         _animating = YES;
+        if (self.delegate) {
+            [self.delegate circularButtonDisposerViewWillHide:self];
+        }
+        if (self.shouldRotateMainButton) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.mainButton.transform = CGAffineTransformIdentity;
+            }];
+        }
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
             float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;

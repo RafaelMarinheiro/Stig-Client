@@ -11,9 +11,10 @@
 #import "STOverlord.h"
 #import "UIImageView+AFNetworking.h"
 #import "STBoardCommentView.h"
-@interface STBoardViewController : UITableViewController
+@interface STBoardViewController : UIViewController
 
 @property (nonatomic, strong) STPlace *place;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL loadedPlace;
 @property (nonatomic, readonly) BOOL loadedComments;
 @property (nonatomic, strong) UIFont *commentFont;

@@ -27,7 +27,11 @@
     [super viewDidLoad];
     _showingMap = YES;
     _showingDropper = NO;
-    self.buttonDisposer.disposeToTheRight = NO;
+    self.dropperView.delegate = self;
+    self.filterButtonDisposer.delegate = self;
+    self.optionsButtonDisposer.delegate = self;
+    self.optionsButtonDisposer.disposeToTheRight = NO;
+    self.optionsButtonDisposer.shouldRotateMainButton = YES;
     if (!self.places) {
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
@@ -41,40 +45,119 @@
         }];
     }
     
-    
-    self.buttonDisposer.callback = ^(NSUInteger tag) {
-        STRankingCriteria crit;
-        if(tag == 0){
-            crit = ST_SOCIAL;
-        } else if(tag == 2){
-            crit = ST_BUZZ;
-        } else{
-            crit = ST_OVERALL;
-        }
-        if([STMapOverlayView criteria] != crit){
-            [STMapOverlayView setCriteria:crit];
-            for (id st in [self.mapView overlays]) {
-                if([st isKindOfClass:[STPlace class]]){
-                    id view = [self.mapView viewForOverlay:st];
-                    [view setNeedsDisplay];
-                }
-                
-            }
-        }
+    UIButton *filterMainButton = self.filterButtonDisposer.mainButton;
+    NSArray *filterButtons = self.filterButtonDisposer.buttons;
+    [filterMainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
+    [filterButtons[0] setImage:[UIImage imageNamed:@"filter-stiger-44"] forState:UIControlStateNormal];
+    [filterButtons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
+    [filterButtons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
 
-    };
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - DropperView Delegate Methods
+- (void) dragStarted {
+    [self collapseDisposers];
+}
+- (void) dragCancelled {
+
+}
+- (void) dragCompleted {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", _selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+    [alert show];
+}
+- (void) dragMoveWithPercentage:(NSNumber *)percentage {
+    
+}
+#pragma mark - Circular Disposer Delegate Methods
+- (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
+    [self collapseDisposers];
+}
+- (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
+    if (disposer == self.filterButtonDisposer) {
+        [self filterPressed:buttonTag];
+    } else {
+        [self optionsPressed:buttonTag];
+    }
+}
+
+- (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {
+    if (disposer == self.filterButtonDisposer) {
+        [self filterDisposed];
+    }else {
+        [self optionsDisposed];
+    }
+}
+#pragma mark - Disposer Buttons Pressed
+- (void) optionsPressed:(NSUInteger) optionNumber {
+    
+}
+- (void) filterPressed:(NSUInteger) filterNumber {
+    STRankingCriteria crit;
+    if(filterNumber == 0){
+        crit = ST_SOCIAL;
+    } else if(filterNumber == 2){
+        crit = ST_BUZZ;
+    } else{
+        crit = ST_OVERALL;
+    }
+    if([STMapOverlayView criteria] != crit){
+        [STMapOverlayView setCriteria:crit];
+        for (id st in [self.mapView overlays]) {
+            if([st isKindOfClass:[STPlace class]]){
+                id view = [self.mapView viewForOverlay:st];
+                [view setNeedsDisplay];
+            }
+
+        }
+    }
+}
+#pragma mark - Disposer States
+- (void) collapseDisposers {
+    [self.suggestionButton setAlpha:1.0];
+    [self.suggestionButton setUserInteractionEnabled:YES];
+    if ([self.filterButtonDisposer isDisposing]) {
+        [self.filterButtonDisposer toggleDispose];
+    }
+    [self.filterButtonDisposer setAlpha:1.0];
+    [self.filterButtonDisposer setUserInteractionEnabled:YES];
+    if ([self.optionsButtonDisposer isDisposing]) {
+        [self.optionsButtonDisposer toggleDispose];
+    }
+    [self.optionsButtonDisposer setAlpha:1.0];
+    [self.optionsButtonDisposer setUserInteractionEnabled:YES];
+}
+- (void) optionsDisposed {
+    [self.suggestionButton setAlpha:0.2];
+    [self.suggestionButton setUserInteractionEnabled:NO];
+    if ([self.filterButtonDisposer isDisposing]) {
+        [self.filterButtonDisposer toggleDispose];
+    }
+    [self.filterButtonDisposer setAlpha:0.2];
+    [self.filterButtonDisposer setUserInteractionEnabled:NO];
+    
+}
+- (void) filterDisposed {
+    [self.suggestionButton setAlpha:0.3];
+    [self.suggestionButton setUserInteractionEnabled:NO];
+    if ([self.optionsButtonDisposer isDisposing]) {
+        [self.optionsButtonDisposer toggleDispose];
+    }
+    [self.optionsButtonDisposer setAlpha:0.3];
+    [self.optionsButtonDisposer setUserInteractionEnabled:NO];
+}
+
 #pragma mark - Dropper Movement
 
 - (void) showDropper {
@@ -100,6 +183,7 @@
     _selectedPlace = place;
     [self.dropperLabel setText:place.placeName];
     [self showDropper];
+    [self collapseDisposers];
 }
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     NSString * identifier = @"Pin";
@@ -152,10 +236,7 @@
 - (void) mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     if (!animated) {
         [self hideDropper];
-        if([self.buttonDisposer isDisposing]){
-            [self.buttonDisposer toggleDispose];
-        }
-        
+        [self collapseDisposers];
     }
 }
 

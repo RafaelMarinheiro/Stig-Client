@@ -12,19 +12,21 @@
     NSAttributedString *_commentString;
 }
 - (void) populateCommentWithText:(NSString *) commentText userName:(NSString *)userName userImageURL:(NSString *) userImageURL andTimestamp:(NSDate *)timestamp {
-    UIColor *nameColor = [UIColor colorWithRed:114.0/255.0 green:73.0/255.0 blue:227.0/255.0 alpha:1.0];
+    UIColor *nameColor = [UIColor colorWithRed:48.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1.0];
+
+    UIColor *commentColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
     
     NSDictionary *nameAttributes = @{NSFontAttributeName:self.userNameFont,
                                      NSForegroundColorAttributeName:nameColor};
     
     NSDictionary *commentAttributes = @{NSFontAttributeName:self.commentFont,
-                                        NSForegroundColorAttributeName:[UIColor blackColor]};
+                                        NSForegroundColorAttributeName:commentColor};
     NSAttributedString *commentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", commentText] attributes:commentAttributes];
 
     NSString *time = [self niceTimeInterval:[timestamp timeIntervalSinceNow]];
     
     NSDictionary *timeAttributes = @{NSFontAttributeName:[self.commentFont fontWithSize:13.0],
-                                     NSForegroundColorAttributeName:[[UIColor blackColor] colorWithAlphaComponent:0.7]};
+                                     NSForegroundColorAttributeName:[commentColor colorWithAlphaComponent:0.8]};
 
     NSAttributedString *timeString = [[NSAttributedString alloc] initWithString:time attributes:timeAttributes];
 

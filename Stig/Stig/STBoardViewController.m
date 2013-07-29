@@ -21,14 +21,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.userNameFont = [UIFont fontWithName:@"Futura" size:15.0];
-    self.commentFont =  [UIFont fontWithName:@"Helvetica" size:13.0];
+    self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
+    self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
     _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
     _loadedPlace = NO;
     _loadedComments = NO;
     _overlord = [STOverlord sharedInstance];
     [self.topBatTitle setText:self.place.placeName];
     [self requestData];
+
+
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,24 +177,59 @@
 #pragma mark - Table view delegate
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSNumber *height = [_heightsDictionary objectForKey:indexPath];
-
-    NSLog(@"height %@ %@",height,_heightsDictionary);
     if (height) {
         return [height floatValue];
     }
     return 100.0;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
 - (IBAction)stickerButtonPressed:(UIButton *)sender {
-
     self.stickersView.hidden = !self.stickersView.hidden;
 }
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField  {
+    [textField resignFirstResponder];
+    return YES;
+}
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {
+    //self.view.transform = CGAffineTransformMakeTranslation(0.0, -300.0);
+    return YES;
+}
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+    //self.view.transform = CGAffineTransformIdentity;
+    return YES;
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)n
+{
+
+    NSDictionary* userInfo = [n userInfo];
+    NSNumber *number = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    double duration = [number doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        [self.view setTransform:CGAffineTransformIdentity];
+    }];
+}
+
+- (void)keyboardWillShow:(NSNotification *)n
+{
+    
+
+    NSDictionary* userInfo = [n userInfo];
+
+    NSNumber *number = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    double duration = [number doubleValue];
+    // get the size of the keyboard
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    [UIView animateWithDuration:duration animations:^{
+        [self.view setTransform:CGAffineTransformMakeTranslation(0.0, -keyboardSize.height)];
+    }];
+    // resize the noteView
+    
 }
 @end

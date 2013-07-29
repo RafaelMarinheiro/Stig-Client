@@ -40,6 +40,10 @@
             [self.mapView addAnnotations:self.places];
             [self.mapView addOverlays:self.places];
             [self.mapView setRegion:[self regionFromAnnotations:self.places]];
+            [self sortPlaces];
+            STPlace *lastPlace = [self.places lastObject];
+            //[self.tableView setBackgroundColor:[UIColor blackColor]];
+            [self.tableView reloadData];
         }error:^(NSError *error) {
             NSLog(@"ERROR LOADING PLACES DATA !");
         }];
@@ -48,7 +52,7 @@
     UIButton *filterMainButton = self.filterButtonDisposer.mainButton;
     NSArray *filterButtons = self.filterButtonDisposer.buttons;
     [filterMainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
-    [filterButtons[0] setImage:[UIImage imageNamed:@"filter-stiger-44"] forState:UIControlStateNormal];
+    [filterButtons[0] setImage:[UIImage imageNamed:@"Intercarlation.png"] forState:UIControlStateNormal];
     [filterButtons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
     [filterButtons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
 
@@ -293,5 +297,122 @@
 }
 - (IBAction)stickerButtonPressed:(UIButton *)sender {
     [self pushBoardViewControllerWithPlace:_selectedPlace];
+}
+- (IBAction)switcherButtonPressed:(UIButton *)sender {
+    if (self.showingMap) {
+        [self hideDropper];
+        [sender setImage:[UIImage imageNamed:@"icon_map.png"] forState:UIControlStateNormal];
+        self.suggestionButton.hidden = YES;
+        self.filterButtonDisposer.hidden = YES;
+        [UIView transitionFromView:self.mapView toView:self.tableView duration:0.5 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL completed) {
+            _showingMap = NO;
+        }];
+    }else{
+        self.suggestionButton.hidden = NO;
+        self.filterButtonDisposer.hidden = NO;
+        [sender setImage:[UIImage imageNamed:@"icon_list.png"] forState:UIControlStateNormal];
+        [UIView transitionFromView:self.tableView toView:self.mapView duration:0.5 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL completed) {
+            _showingMap = YES;
+        }];
+    }
+}
+
+#pragma mark - Table View Data Source Methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.places) {
+        return [self.places count];
+    }
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    if ([indexPath row]==0) {
+//        static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
+//
+//        [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
+//        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+//        [imageView setClipsToBounds:YES];
+//        [cell.contentView addSubview:imageView];
+//        [cell.contentView sendSubviewToBack:imageView];
+//        return cell;
+//    }
+//    static NSString *CellIdentifier = @"STBoardCommentIdentifier";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//
+//    STBoardComment *comment = self.comments[indexPath];
+//    STUser *user = self.commentsUsers[indexPath];
+//
+//    if (user&&comment) {
+//        STBoardCommentView *commentView =(STBoardCommentView *) [cell.contentView viewWithTag:100];
+//        commentView.commentFont = self.commentFont;
+//        commentView.userNameFont = self.userNameFont;
+//        [commentView populateCommentWithText:comment.commentText userName:user.userName userImageURL:user.userImageURL andTimestamp:comment.commentTimestamp];
+//    } else {
+//        [self requestDataForIndexPath:indexPath];
+//
+//        NSLog(@"User: %@, COmment %@", user, comment);
+//    }
+//    return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    }
+    STPlace *place = self.places[indexPath.row];
+    [cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:20.0]];
+    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+    [cell.textLabel setText:place.placeName];
+    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    [cell.textLabel setTextColor:[UIColor blackColor]];
+    //[cell.detailTextLabel setText:place.placeDescription];
+    return cell;
+}
+- (UIColor *) colorForRanking:(STRanking *) ranking {
+    float max = [((STPlace *) self.places[0]).ranking.overall floatValue];
+
+   // UIColor *baseColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:1.0];
+    UIColor *baseColor = [UIColor colorWithRed:242.0/255.0 green:242.0/255.0 blue:242.0/255.0 alpha:1.0];
+    CGFloat alpha = [ranking.overall floatValue]/max + 0.05;
+    return [baseColor colorWithAlphaComponent:alpha];
+}
+- (void) sortPlaces {
+    NSArray *sorted  = [self.places sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
+        if ([a isKindOfClass:[STPlace class]] && [b isKindOfClass:[STPlace class]]){
+
+            STPlace *first = a;
+            STPlace *second = b;
+            float left = [first.ranking.overall floatValue];
+            float right = [second.ranking.overall floatValue];
+            if (left < right) {
+                return NSOrderedDescending;
+            }else if (left == right){
+                return NSOrderedSame;
+            } else {
+                return NSOrderedAscending;
+            }
+        } else {
+
+        }
+        return NSOrderedSame;
+    }];
+    self.places = sorted;
+}
+#pragma mark - Table View Delegate Methods
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 75.0;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    STPlace *place = self.places[indexPath.row];
+    [self pushBoardViewControllerWithPlace:place];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

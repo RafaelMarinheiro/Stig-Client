@@ -11,7 +11,7 @@
 #import "STOverlord.h"
 #import "UIImageView+AFNetworking.h"
 #import "STBoardCommentView.h"
-@interface STBoardViewController : UIViewController
+@interface STBoardViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) STPlace *place;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

@@ -61,6 +61,12 @@
 		0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */; };
 		0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */; };
 		0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4AA17A0609E0071D95C /* STBoardCommentView.m */; };
+		027E13D117A5EA8B00C44DC7 /* icon_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D017A5EA8B00C44DC7 /* icon_map.png */; };
+		027E13D517A5FEC900C44DC7 /* Button Back-peao.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D217A5FEC800C44DC7 /* Button Back-peao.png */; };
+		027E13D617A5FEC900C44DC7 /* Intercarlation.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D317A5FEC800C44DC7 /* Intercarlation.png */; };
+		027E13D717A5FEC900C44DC7 /* Sticker Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D417A5FEC900C44DC7 /* Sticker Icon.png */; };
+		027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D817A60B9100C44DC7 /* Button Back NOVO.png */; };
+		027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */; };
 		029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2917A44452008F4AA2 /* barra_topo_stig.png */; };
 		029E2D2F17A46AE1008F4AA2 /* filter-config.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2B17A46AE1008F4AA2 /* filter-config.png */; };
 		029E2D3017A46AE1008F4AA2 /* filter-historico.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2C17A46AE1008F4AA2 /* filter-historico.png */; };
@@ -183,6 +189,12 @@
 		0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		0202F4A917A0609E0071D95C /* STBoardCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentView.h; sourceTree = "<group>"; };
 		0202F4AA17A0609E0071D95C /* STBoardCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentView.m; sourceTree = "<group>"; };
+		027E13D017A5EA8B00C44DC7 /* icon_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_map.png; sourceTree = "<group>"; };
+		027E13D217A5FEC800C44DC7 /* Button Back-peao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back-peao.png"; sourceTree = "<group>"; };
+		027E13D317A5FEC800C44DC7 /* Intercarlation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intercarlation.png; sourceTree = "<group>"; };
+		027E13D417A5FEC900C44DC7 /* Sticker Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon.png"; sourceTree = "<group>"; };
+		027E13D817A60B9100C44DC7 /* Button Back NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back NOVO.png"; sourceTree = "<group>"; };
+		027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon NOVO.png"; sourceTree = "<group>"; };
 		029E2D2917A44452008F4AA2 /* barra_topo_stig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig.png; sourceTree = "<group>"; };
 		029E2D2B17A46AE1008F4AA2 /* filter-config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-config.png"; sourceTree = "<group>"; };
 		029E2D2C17A46AE1008F4AA2 /* filter-historico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-historico.png"; sourceTree = "<group>"; };
@@ -295,11 +307,17 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				027E13D817A60B9100C44DC7 /* Button Back NOVO.png */,
+				027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */,
+				027E13D217A5FEC800C44DC7 /* Button Back-peao.png */,
+				027E13D317A5FEC800C44DC7 /* Intercarlation.png */,
+				027E13D417A5FEC900C44DC7 /* Sticker Icon.png */,
 				029E2D5617A4B2D5008F4AA2 /* back_botao_44.png */,
 				029E2D5417A4AD66008F4AA2 /* barra_topo_stig_name.png */,
 				029E2D5017A4AD04008F4AA2 /* MarketingScript.ttf */,
 				029E2D4E17A49FD5008F4AA2 /* text-bottom-bar.png */,
 				0FEE9E8717A4B31700722EA6 /* pino_40.png */,
+				027E13D017A5EA8B00C44DC7 /* icon_map.png */,
 				029E2D4717A496F6008F4AA2 /* icon_list.png */,
 				029E2D4117A47936008F4AA2 /* suggest_me_50.png */,
 				029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */,
@@ -602,6 +620,12 @@
 				029E2D6117A4DE23008F4AA2 /* icone_money_44.png in Resources */,
 				029E2D6217A4DE23008F4AA2 /* icone_music_44.png in Resources */,
 				029E2D6317A4DE23008F4AA2 /* icone_people_44.png in Resources */,
+				027E13D117A5EA8B00C44DC7 /* icon_map.png in Resources */,
+				027E13D517A5FEC900C44DC7 /* Button Back-peao.png in Resources */,
+				027E13D617A5FEC900C44DC7 /* Intercarlation.png in Resources */,
+				027E13D717A5FEC900C44DC7 /* Sticker Icon.png in Resources */,
+				027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */,
+				027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

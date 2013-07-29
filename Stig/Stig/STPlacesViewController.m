@@ -229,7 +229,7 @@
     if(!pin){
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         //pin.image = [UIImage imageNamed:@"pino_40"];
-        [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorPurple];
+        [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pin;

@@ -8,6 +8,7 @@
 
 #import "STBoardCommentView.h"
 
+
 @implementation STBoardCommentView{
     NSAttributedString *_commentString;
 }
@@ -24,29 +25,51 @@
     NSAttributedString *commentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", commentText] attributes:commentAttributes];
 
     NSString *time = [self niceTimeInterval:[timestamp timeIntervalSinceNow]];
+
+
+
+    NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
+
+    [mutParaStyle setAlignment:NSTextAlignmentRight];
+
+    
     
     NSDictionary *timeAttributes = @{NSFontAttributeName:[self.commentFont fontWithSize:13.0],
-                                     NSForegroundColorAttributeName:[commentColor colorWithAlphaComponent:0.8]};
+                                     NSForegroundColorAttributeName:[commentColor colorWithAlphaComponent:0.8],NSParagraphStyleAttributeName:mutParaStyle};
+
+
 
     NSAttributedString *timeString = [[NSAttributedString alloc] initWithString:time attributes:timeAttributes];
 
     NSMutableAttributedString *nameString = [[NSMutableAttributedString alloc] initWithString:userName attributes:nameAttributes];
 
     
-
+    
     [nameString appendAttributedString:commentString];
     [nameString appendAttributedString:timeString];
     _commentString = nameString;
     self.commentLabel.attributedText = nameString;
+    self.stickersView.stickers = [self randomSticker];
     [self.commentLabel sizeToFit];
-    
     [self.userImageView setImageWithURL:[NSURL URLWithString:userImageURL]];
+    
+    
+    
 }
 - (CGFloat) cellHeight {
     CGRect rect = [_commentString boundingRectWithSize:CGSizeMake(230.0, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
     return 2.0*10.0 + rect.size.height;
 }
 
+- (NSArray *) randomSticker {
+    NSMutableArray *toReturn = [NSMutableArray arrayWithCapacity:6];
+    int count = rand() % 7;
+    for (int i = 0; i<count; i++) {
+        int n = rand() % 6;
+        [toReturn addObject:@(n)];
+    }
+    return toReturn;
+}
 
 - (NSString *) niceTimeInterval:(NSTimeInterval) time {
     time = - time;

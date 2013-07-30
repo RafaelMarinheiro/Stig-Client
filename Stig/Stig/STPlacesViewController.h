@@ -11,6 +11,7 @@
 #import "STMapOverlayView.h"
 #import "CircularButtonDisposerView.h"
 #import "STDropperView.h"
+#import "STStickersView.h"
 
 @interface STPlacesViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, CircularButtonDisposerDelegate, STDropperViewDelegate>
 
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet CircularButtonDisposerView *filterButtonDisposer;
 @property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
 @property (weak, nonatomic) IBOutlet STDropperView *dropperView;
+@property (weak, nonatomic) IBOutlet STStickersView *stickersView;
 
 @property (weak, nonatomic) IBOutlet UIButton *listSwitcherButton;
 

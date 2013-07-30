@@ -151,6 +151,7 @@
             CGAffineTransform translation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             CGAffineTransform bounceTranslation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] - self.bounceRadiusDelta disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;
+            deltaTiming *=M_PI;
             [UIView animateWithDuration:0.1 + deltaTiming delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 view.transform = translation;
             }completion:^(BOOL completed){
@@ -183,6 +184,7 @@
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
             float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;
+            deltaTiming *=M_PI;
             [UIView animateWithDuration:0.1+deltaTiming animations:^{
                 view.transform = CGAffineTransformRotate(view.transform, M_PI);
             }completion:^(BOOL completed){

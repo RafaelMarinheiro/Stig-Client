@@ -67,6 +67,8 @@
 		027E13D717A5FEC900C44DC7 /* Sticker Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D417A5FEC900C44DC7 /* Sticker Icon.png */; };
 		027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D817A60B9100C44DC7 /* Button Back NOVO.png */; };
 		027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */; };
+		0298D66417A71F46000E9557 /* STStickersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298D66317A71F46000E9557 /* STStickersView.m */; };
+		0298D66717A77DD0000E9557 /* STStickerSelectionControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */; };
 		029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2917A44452008F4AA2 /* barra_topo_stig.png */; };
 		029E2D2F17A46AE1008F4AA2 /* filter-config.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2B17A46AE1008F4AA2 /* filter-config.png */; };
 		029E2D3017A46AE1008F4AA2 /* filter-historico.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2C17A46AE1008F4AA2 /* filter-historico.png */; };
@@ -195,6 +197,10 @@
 		027E13D417A5FEC900C44DC7 /* Sticker Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon.png"; sourceTree = "<group>"; };
 		027E13D817A60B9100C44DC7 /* Button Back NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back NOVO.png"; sourceTree = "<group>"; };
 		027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon NOVO.png"; sourceTree = "<group>"; };
+		0298D66217A71F46000E9557 /* STStickersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickersView.h; sourceTree = "<group>"; };
+		0298D66317A71F46000E9557 /* STStickersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickersView.m; sourceTree = "<group>"; };
+		0298D66517A77DCF000E9557 /* STStickerSelectionControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerSelectionControl.h; sourceTree = "<group>"; };
+		0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerSelectionControl.m; sourceTree = "<group>"; };
 		029E2D2917A44452008F4AA2 /* barra_topo_stig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig.png; sourceTree = "<group>"; };
 		029E2D2B17A46AE1008F4AA2 /* filter-config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-config.png"; sourceTree = "<group>"; };
 		029E2D2C17A46AE1008F4AA2 /* filter-historico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-historico.png"; sourceTree = "<group>"; };
@@ -396,6 +402,10 @@
 				0202F4AA17A0609E0071D95C /* STBoardCommentView.m */,
 				0202F45717A05F330071D95C /* MainStoryboard.storyboard */,
 				0FEE9E8217A44C0F00722EA6 /* Dropper */,
+				0298D66217A71F46000E9557 /* STStickersView.h */,
+				0298D66317A71F46000E9557 /* STStickersView.m */,
+				0298D66517A77DCF000E9557 /* STStickerSelectionControl.h */,
+				0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -667,6 +677,8 @@
 				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
 				0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */,
 				029E2D4D17A497F4008F4AA2 /* STListPlacesViewController.m in Sources */,
+				0298D66417A71F46000E9557 /* STStickersView.m in Sources */,
+				0298D66717A77DD0000E9557 /* STStickerSelectionControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

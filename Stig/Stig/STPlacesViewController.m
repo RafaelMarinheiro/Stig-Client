@@ -9,6 +9,7 @@
 #import "STPlacesViewController.h"
 #import "STBoardViewController.h"
 #import "STMapOverlayView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface STPlacesViewController ()
     
@@ -27,6 +28,10 @@
     [super viewDidLoad];
     _showingMap = YES;
     _showingDropper = NO;
+    
+    self.stickersView.stickers = @[@0,@1,@2,@3,@4,@5];
+//    [self.stickersView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.stickersView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
     self.dropperView.delegate = self;
     self.filterButtonDisposer.delegate = self;
     self.optionsButtonDisposer.delegate = self;
@@ -224,10 +229,12 @@
 //    }
 //    return pin;
     NSString * identifier = @"StigPin";
+    
     MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
     if(!pin){
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         //pin.image = [UIImage imageNamed:@"pino_40"];
         [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -304,14 +311,14 @@
         [sender setImage:[UIImage imageNamed:@"icon_map.png"] forState:UIControlStateNormal];
         self.suggestionButton.hidden = YES;
         self.filterButtonDisposer.hidden = YES;
-        [UIView transitionFromView:self.mapView toView:self.tableView duration:0.5 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL completed) {
+        [UIView transitionFromView:self.mapView toView:self.tableView duration:0.40 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL completed) {
             _showingMap = NO;
         }];
     }else{
         self.suggestionButton.hidden = NO;
         self.filterButtonDisposer.hidden = NO;
         [sender setImage:[UIImage imageNamed:@"icon_list.png"] forState:UIControlStateNormal];
-        [UIView transitionFromView:self.tableView toView:self.mapView duration:0.5 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL completed) {
+        [UIView transitionFromView:self.tableView toView:self.mapView duration:0.40 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL completed) {
             _showingMap = YES;
         }];
     }

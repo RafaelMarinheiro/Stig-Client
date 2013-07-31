@@ -35,7 +35,7 @@
 		0202F46217A05F7D0071D95C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F46117A05F7C0071D95C /* MapKit.framework */; };
 		0202F46417A05F850071D95C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F46317A05F850071D95C /* QuartzCore.framework */; };
 		0202F46917A05FB50071D95C /* STBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46617A05FB50071D95C /* STBoardViewController.m */; };
-		0202F46A17A05FB50071D95C /* STPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46817A05FB50071D95C /* STPlacesViewController.m */; };
+		0202F46A17A05FB50071D95C /* STPlacesMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46817A05FB50071D95C /* STPlacesMainViewController.m */; };
 		0202F47B17A060290071D95C /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46D17A060270071D95C /* check.png */; };
 		0202F47C17A060290071D95C /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46E17A060270071D95C /* check@2x.png */; };
 		0202F47D17A060290071D95C /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46F17A060270071D95C /* clock.png */; };
@@ -44,8 +44,6 @@
 		0202F48017A060290071D95C /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47217A060280071D95C /* cross@2x.png */; };
 		0202F48117A060290071D95C /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47317A060280071D95C /* list.png */; };
 		0202F48217A060290071D95C /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47417A060280071D95C /* list@2x.png */; };
-		0202F48317A060290071D95C /* template.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 0202F47517A060280071D95C /* template.fsh */; };
-		0202F48417A060290071D95C /* template.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 0202F47617A060280071D95C /* template.vsh */; };
 		0202F48517A060290071D95C /* fakeComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47717A060280071D95C /* fakeComments.json */; };
 		0202F48617A060290071D95C /* fakePlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47817A060280071D95C /* fakePlaces.json */; };
 		0202F48717A060290071D95C /* fakeUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0202F47917A060280071D95C /* fakeUsers.json */; };
@@ -61,6 +59,12 @@
 		0202F4A517A060610071D95C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */; };
 		0202F4AB17A0609E0071D95C /* CircularButtonDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */; };
 		0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F4AA17A0609E0071D95C /* STBoardCommentView.m */; };
+		024549D117A8420000D4D558 /* STPlacesMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D017A8420000D4D558 /* STPlacesMapViewController.m */; };
+		024549D417A8462900D4D558 /* STPlacesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D317A8462900D4D558 /* STPlacesListViewController.m */; };
+		024549D717A865D600D4D558 /* STCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D617A865D600D4D558 /* STCalloutViewController.m */; };
+		024549DA17A8A63A00D4D558 /* STDraggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D917A8A63A00D4D558 /* STDraggerViewController.m */; };
+		024549DC17A8D44700D4D558 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024549DB17A8D44700D4D558 /* MobileCoreServices.framework */; };
+		024549DE17A8D44E00D4D558 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */; };
 		027E13D117A5EA8B00C44DC7 /* icon_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D017A5EA8B00C44DC7 /* icon_map.png */; };
 		027E13D517A5FEC900C44DC7 /* Button Back-peao.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D217A5FEC800C44DC7 /* Button Back-peao.png */; };
 		027E13D617A5FEC900C44DC7 /* Intercarlation.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D317A5FEC800C44DC7 /* Intercarlation.png */; };
@@ -84,7 +88,6 @@
 		029E2D4417A47936008F4AA2 /* suggest_me_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */; };
 		029E2D4817A496F6008F4AA2 /* icon_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4717A496F6008F4AA2 /* icon_list.png */; };
 		029E2D4A17A4976E008F4AA2 /* filter-stiger-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4917A4976E008F4AA2 /* filter-stiger-44.png */; };
-		029E2D4D17A497F4008F4AA2 /* STListPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */; };
 		029E2D4F17A49FD5008F4AA2 /* text-bottom-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D4E17A49FD5008F4AA2 /* text-bottom-bar.png */; };
 		029E2D5117A4AD04008F4AA2 /* MarketingScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D5017A4AD04008F4AA2 /* MarketingScript.ttf */; };
 		029E2D5517A4AD66008F4AA2 /* barra_topo_stig_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D5417A4AD66008F4AA2 /* barra_topo_stig_name.png */; };
@@ -152,8 +155,8 @@
 		0202F46317A05F850071D95C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0202F46517A05FB50071D95C /* STBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardViewController.h; sourceTree = "<group>"; };
 		0202F46617A05FB50071D95C /* STBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardViewController.m; sourceTree = "<group>"; };
-		0202F46717A05FB50071D95C /* STPlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesViewController.h; sourceTree = "<group>"; };
-		0202F46817A05FB50071D95C /* STPlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesViewController.m; sourceTree = "<group>"; };
+		0202F46717A05FB50071D95C /* STPlacesMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesMainViewController.h; sourceTree = "<group>"; };
+		0202F46817A05FB50071D95C /* STPlacesMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesMainViewController.m; sourceTree = "<group>"; };
 		0202F46D17A060270071D95C /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		0202F46E17A060270071D95C /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		0202F46F17A060270071D95C /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
@@ -191,6 +194,16 @@
 		0202F4A817A0609E0071D95C /* CircularButtonDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularButtonDisposerView.m; sourceTree = "<group>"; };
 		0202F4A917A0609E0071D95C /* STBoardCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentView.h; sourceTree = "<group>"; };
 		0202F4AA17A0609E0071D95C /* STBoardCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentView.m; sourceTree = "<group>"; };
+		024549CF17A8420000D4D558 /* STPlacesMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesMapViewController.h; sourceTree = "<group>"; };
+		024549D017A8420000D4D558 /* STPlacesMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesMapViewController.m; sourceTree = "<group>"; };
+		024549D217A8462900D4D558 /* STPlacesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesListViewController.h; sourceTree = "<group>"; };
+		024549D317A8462900D4D558 /* STPlacesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesListViewController.m; sourceTree = "<group>"; };
+		024549D517A865D500D4D558 /* STCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCalloutViewController.h; sourceTree = "<group>"; };
+		024549D617A865D600D4D558 /* STCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCalloutViewController.m; sourceTree = "<group>"; };
+		024549D817A8A63A00D4D558 /* STDraggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDraggerViewController.h; sourceTree = "<group>"; };
+		024549D917A8A63A00D4D558 /* STDraggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDraggerViewController.m; sourceTree = "<group>"; };
+		024549DB17A8D44700D4D558 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		027E13D017A5EA8B00C44DC7 /* icon_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_map.png; sourceTree = "<group>"; };
 		027E13D217A5FEC800C44DC7 /* Button Back-peao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back-peao.png"; sourceTree = "<group>"; };
 		027E13D317A5FEC800C44DC7 /* Intercarlation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intercarlation.png; sourceTree = "<group>"; };
@@ -216,8 +229,6 @@
 		029E2D4217A47936008F4AA2 /* suggest_me_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "suggest_me_50@2x.png"; sourceTree = "<group>"; };
 		029E2D4717A496F6008F4AA2 /* icon_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_list.png; sourceTree = "<group>"; };
 		029E2D4917A4976E008F4AA2 /* filter-stiger-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-stiger-44.png"; sourceTree = "<group>"; };
-		029E2D4B17A497F4008F4AA2 /* STListPlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STListPlacesViewController.h; sourceTree = "<group>"; };
-		029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STListPlacesViewController.m; sourceTree = "<group>"; };
 		029E2D4E17A49FD5008F4AA2 /* text-bottom-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text-bottom-bar.png"; sourceTree = "<group>"; };
 		029E2D5017A4AD04008F4AA2 /* MarketingScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarketingScript.ttf; sourceTree = "<group>"; };
 		029E2D5417A4AD66008F4AA2 /* barra_topo_stig_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig_name.png; sourceTree = "<group>"; };
@@ -247,6 +258,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024549DE17A8D44E00D4D558 /* SystemConfiguration.framework in Frameworks */,
+				024549DC17A8D44700D4D558 /* MobileCoreServices.framework in Frameworks */,
 				0202F46417A05F850071D95C /* QuartzCore.framework in Frameworks */,
 				0202F46217A05F7D0071D95C /* MapKit.framework in Frameworks */,
 				0202F46017A05F780071D95C /* OpenGLES.framework in Frameworks */,
@@ -282,6 +295,8 @@
 		0202F41017A05E920071D95C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */,
+				024549DB17A8D44700D4D558 /* MobileCoreServices.framework */,
 				0202F46317A05F850071D95C /* QuartzCore.framework */,
 				0202F46117A05F7C0071D95C /* MapKit.framework */,
 				0202F45F17A05F780071D95C /* OpenGLES.framework */,
@@ -385,10 +400,16 @@
 			children = (
 				0202F46517A05FB50071D95C /* STBoardViewController.h */,
 				0202F46617A05FB50071D95C /* STBoardViewController.m */,
-				0202F46717A05FB50071D95C /* STPlacesViewController.h */,
-				0202F46817A05FB50071D95C /* STPlacesViewController.m */,
-				029E2D4B17A497F4008F4AA2 /* STListPlacesViewController.h */,
-				029E2D4C17A497F4008F4AA2 /* STListPlacesViewController.m */,
+				0202F46717A05FB50071D95C /* STPlacesMainViewController.h */,
+				0202F46817A05FB50071D95C /* STPlacesMainViewController.m */,
+				024549CF17A8420000D4D558 /* STPlacesMapViewController.h */,
+				024549D017A8420000D4D558 /* STPlacesMapViewController.m */,
+				024549D217A8462900D4D558 /* STPlacesListViewController.h */,
+				024549D317A8462900D4D558 /* STPlacesListViewController.m */,
+				024549D517A865D500D4D558 /* STCalloutViewController.h */,
+				024549D617A865D600D4D558 /* STCalloutViewController.m */,
+				024549D817A8A63A00D4D558 /* STDraggerViewController.h */,
+				024549D917A8A63A00D4D558 /* STDraggerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -660,9 +681,7 @@
 				0202F45417A05EF90071D95C /* STOOGetCommentsByPlaceFake.m in Sources */,
 				0202F45517A05EF90071D95C /* STOOResolvePlaceByIdFake.m in Sources */,
 				0202F46917A05FB50071D95C /* STBoardViewController.m in Sources */,
-				0202F46A17A05FB50071D95C /* STPlacesViewController.m in Sources */,
-				0202F48317A060290071D95C /* template.fsh in Sources */,
-				0202F48417A060290071D95C /* template.vsh in Sources */,
+				0202F46A17A05FB50071D95C /* STPlacesMainViewController.m in Sources */,
 				0202F49D17A060610071D95C /* AFHTTPClient.m in Sources */,
 				0202F49E17A060610071D95C /* AFHTTPRequestOperation.m in Sources */,
 				0202F49F17A060610071D95C /* AFImageRequestOperation.m in Sources */,
@@ -676,9 +695,12 @@
 				0202F4AC17A0609E0071D95C /* STBoardCommentView.m in Sources */,
 				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
 				0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */,
-				029E2D4D17A497F4008F4AA2 /* STListPlacesViewController.m in Sources */,
 				0298D66417A71F46000E9557 /* STStickersView.m in Sources */,
 				0298D66717A77DD0000E9557 /* STStickerSelectionControl.m in Sources */,
+				024549D117A8420000D4D558 /* STPlacesMapViewController.m in Sources */,
+				024549D417A8462900D4D558 /* STPlacesListViewController.m in Sources */,
+				024549D717A865D600D4D558 /* STCalloutViewController.m in Sources */,
+				024549DA17A8A63A00D4D558 /* STDraggerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

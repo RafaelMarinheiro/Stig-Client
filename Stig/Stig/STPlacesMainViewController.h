@@ -8,18 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "STOverlord.h"
-#import "STMapOverlayView.h"
 #import "CircularButtonDisposerView.h"
 #import "STDropperView.h"
 #import "STStickersView.h"
+#import "STDraggerViewController.h"
+#import "STPlacesMapViewController.h"
+#import "STPlacesListViewController.h"
 
-@interface STPlacesViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, CircularButtonDisposerDelegate, STDropperViewDelegate>
+@interface STPlacesMainViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, CircularButtonDisposerDelegate, STDropperViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *listViewContainer;
 
+@property (weak, nonatomic) IBOutlet UIView *mapViewContainer;
 @property (nonatomic, strong) NSArray *places;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
-
+@property (nonatomic, strong) STDraggerViewController *draggerViewController;
+@property (nonatomic, strong)  STPlacesListViewController *listViewController;
 @property (nonatomic,readonly) BOOL showingMap;
 @property (nonatomic, readonly) BOOL showingDropper;
 

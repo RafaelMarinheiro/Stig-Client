@@ -35,7 +35,6 @@ static STRankingCriteria _criteria = ST_OVERALL;
     } else if([STMapOverlayView criteria] == ST_SOCIAL){
         return 0.9*social;
     } else{
-        double rank = [((STPlace*)self.overlay).ranking.buzz doubleValue]/1000;
         return 0.45*(buzz+social);
     }
     return 0.5;

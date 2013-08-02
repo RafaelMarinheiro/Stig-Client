@@ -39,7 +39,7 @@
     self.disposeAngle = @(M_PI/2.0);
     self.disposeCenter = CGPointMake(30.0, 30.0);
     self.numberOfButtons = 3;
-    self.bounceRadiusDelta = 5.0;
+    self.bounceRadiusDelta = 3.0;
     
     CGRect frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
 
@@ -54,6 +54,7 @@
         [button addTarget:self action:@selector(disposedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         [buttons addObject:button];
+        button.hidden = YES;
     }
     self.buttons = buttons;
 
@@ -66,8 +67,8 @@
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
-    [self.mainButton setImage:[UIImage imageNamed:@"filter-main.png"] forState:UIControlStateNormal];
-    [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.mainButton setImage:[UIImage imageNamed:@"icon_filter_black@2x.png"] forState:UIControlStateNormal];
+    [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
 }
@@ -82,7 +83,13 @@
             }
         }
         CGPoint the_point = [self.mainButton convertPoint:point fromView:self];
-        return [self.mainButton pointInside:the_point withEvent:event];
+        BOOL inside =  [self.mainButton pointInside:the_point withEvent:event];
+        if (!inside) {
+            if (self.disposing) {
+                [self toggleDispose];
+            }
+        }
+        return inside;
     }
     return CGRectContainsPoint(self.bounds, point);
 }
@@ -150,12 +157,12 @@
 
             CGAffineTransform translation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             CGAffineTransform bounceTranslation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] - self.bounceRadiusDelta disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
-            float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;
-            deltaTiming *=M_PI;
-            [UIView animateWithDuration:0.1 + deltaTiming delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            float deltaTiming = (i +0.0)/ 100.0;
+            deltaTiming *=2*M_PI;
+            [UIView animateWithDuration:0.1 + deltaTiming delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 view.transform = translation;
             }completion:^(BOOL completed){
-                [UIView animateWithDuration:0.05 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+                [UIView animateWithDuration:0.05 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     view.transform = bounceTranslation;
                 }completion:^(BOOL completed){
                     [UIView animateWithDuration:0.05 animations:^{
@@ -183,12 +190,12 @@
         }
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
-            float deltaTiming = (i +0.0)*(i +0.0)/ 100.0;
-            deltaTiming *=M_PI;
+            float deltaTiming = (i +0.0)/ 100.0;
+            deltaTiming *=2*M_PI;
             [UIView animateWithDuration:0.1+deltaTiming animations:^{
                 view.transform = CGAffineTransformRotate(view.transform, M_PI);
             }completion:^(BOOL completed){
-                [UIView animateWithDuration:0.1+deltaTiming animations:^{
+                [UIView animateWithDuration:0.1 animations:^{
                     view.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL completed){
                     _disposing = NO;

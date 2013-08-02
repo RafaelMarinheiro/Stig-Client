@@ -72,7 +72,6 @@
 		027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D817A60B9100C44DC7 /* Button Back NOVO.png */; };
 		027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */; };
 		0298D66417A71F46000E9557 /* STStickersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298D66317A71F46000E9557 /* STStickersView.m */; };
-		0298D66717A77DD0000E9557 /* STStickerSelectionControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */; };
 		029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2917A44452008F4AA2 /* barra_topo_stig.png */; };
 		029E2D2F17A46AE1008F4AA2 /* filter-config.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2B17A46AE1008F4AA2 /* filter-config.png */; };
 		029E2D3017A46AE1008F4AA2 /* filter-historico.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2C17A46AE1008F4AA2 /* filter-historico.png */; };
@@ -105,6 +104,10 @@
 		02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC117A3307300FDC09F /* tagmusic91x91px.png */; };
 		02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
+		02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */; };
+		02EEE91A17A9666A009B1C37 /* STStickerSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91917A9666A009B1C37 /* STStickerSelectorView.m */; };
+		02EEE91F17A979B2009B1C37 /* icon_filter_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EEE91E17A979B2009B1C37 /* icon_filter_black@2x.png */; };
+		02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA597717AB653500FC9151 /* STCheckInAnimationView.m */; };
 		0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE9E7F17A44BF500722EA6 /* STDropperView.m */; };
 		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
 		0FEE9E8817A4B31700722EA6 /* pino_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8717A4B31700722EA6 /* pino_40.png */; };
@@ -212,8 +215,6 @@
 		027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon NOVO.png"; sourceTree = "<group>"; };
 		0298D66217A71F46000E9557 /* STStickersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickersView.h; sourceTree = "<group>"; };
 		0298D66317A71F46000E9557 /* STStickersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickersView.m; sourceTree = "<group>"; };
-		0298D66517A77DCF000E9557 /* STStickerSelectionControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerSelectionControl.h; sourceTree = "<group>"; };
-		0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerSelectionControl.m; sourceTree = "<group>"; };
 		029E2D2917A44452008F4AA2 /* barra_topo_stig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig.png; sourceTree = "<group>"; };
 		029E2D2B17A46AE1008F4AA2 /* filter-config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-config.png"; sourceTree = "<group>"; };
 		029E2D2C17A46AE1008F4AA2 /* filter-historico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-historico.png"; sourceTree = "<group>"; };
@@ -247,6 +248,13 @@
 		02BE5EC217A3307300FDC09F /* tagpessoa 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tagpessoa 91x91px.png"; sourceTree = "<group>"; };
 		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
+		02EEE91517A953FC009B1C37 /* STLinearLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLinearLayoutView.h; sourceTree = "<group>"; };
+		02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLinearLayoutView.m; sourceTree = "<group>"; };
+		02EEE91817A9666A009B1C37 /* STStickerSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerSelectorView.h; sourceTree = "<group>"; };
+		02EEE91917A9666A009B1C37 /* STStickerSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerSelectorView.m; sourceTree = "<group>"; };
+		02EEE91E17A979B2009B1C37 /* icon_filter_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_filter_black@2x.png"; sourceTree = "<group>"; };
+		02FA597617AB653500FC9151 /* STCheckInAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCheckInAnimationView.h; sourceTree = "<group>"; };
+		02FA597717AB653500FC9151 /* STCheckInAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCheckInAnimationView.m; sourceTree = "<group>"; };
 		0FEE9E7E17A44BF500722EA6 /* STDropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDropperView.h; sourceTree = "<group>"; };
 		0FEE9E7F17A44BF500722EA6 /* STDropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDropperView.m; sourceTree = "<group>"; };
 		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02EEE91E17A979B2009B1C37 /* icon_filter_black@2x.png */,
 				027E13D817A60B9100C44DC7 /* Button Back NOVO.png */,
 				027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */,
 				027E13D217A5FEC800C44DC7 /* Button Back-peao.png */,
@@ -425,8 +434,12 @@
 				0FEE9E8217A44C0F00722EA6 /* Dropper */,
 				0298D66217A71F46000E9557 /* STStickersView.h */,
 				0298D66317A71F46000E9557 /* STStickersView.m */,
-				0298D66517A77DCF000E9557 /* STStickerSelectionControl.h */,
-				0298D66617A77DCF000E9557 /* STStickerSelectionControl.m */,
+				02EEE91517A953FC009B1C37 /* STLinearLayoutView.h */,
+				02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */,
+				02EEE91817A9666A009B1C37 /* STStickerSelectorView.h */,
+				02EEE91917A9666A009B1C37 /* STStickerSelectorView.m */,
+				02FA597617AB653500FC9151 /* STCheckInAnimationView.h */,
+				02FA597717AB653500FC9151 /* STCheckInAnimationView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -657,6 +670,7 @@
 				027E13D717A5FEC900C44DC7 /* Sticker Icon.png in Resources */,
 				027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */,
 				027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */,
+				02EEE91F17A979B2009B1C37 /* icon_filter_black@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,11 +710,13 @@
 				02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */,
 				0FEE9E8017A44BF500722EA6 /* STDropperView.m in Sources */,
 				0298D66417A71F46000E9557 /* STStickersView.m in Sources */,
-				0298D66717A77DD0000E9557 /* STStickerSelectionControl.m in Sources */,
 				024549D117A8420000D4D558 /* STPlacesMapViewController.m in Sources */,
 				024549D417A8462900D4D558 /* STPlacesListViewController.m in Sources */,
 				024549D717A865D600D4D558 /* STCalloutViewController.m in Sources */,
 				024549DA17A8A63A00D4D558 /* STDraggerViewController.m in Sources */,
+				02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */,
+				02EEE91A17A9666A009B1C37 /* STStickerSelectorView.m in Sources */,
+				02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

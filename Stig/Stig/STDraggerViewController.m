@@ -8,7 +8,11 @@
 
 #import "STDraggerViewController.h"
 
+
+
 static CGFloat const STDraggerShowingHeight = 100.0;
+static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 30.0;
+static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 100.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
 
 static CGFloat const STDraggerTotalHeight = 501.0;
@@ -77,8 +81,6 @@ static CGFloat const STDraggerTotalHeight = 501.0;
 
 
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer{
-
-    NSLog(@"called");
     CGPoint translation = [recognizer translationInView:self.view];
     if([recognizer state] == UIGestureRecognizerStateBegan){
         _state = STDraggerStateDragging;
@@ -89,15 +91,21 @@ static CGFloat const STDraggerTotalHeight = 501.0;
         self.verticalSpaceConstraint.constant = -(translation.y + STDraggerShowingHeight);
         [self.view layoutIfNeeded];
 
+        if (-self.verticalSpaceConstraint.constant >= STDraggerPercentageInitial) {
+            CGFloat percentage = (-self.verticalSpaceConstraint.constant-STDraggerPercentageInitial)/STDraggerPercentageFinal;
+            NSLog(@"Percentage: %0.2f %0.2f %0.2f", percentage,-self.verticalSpaceConstraint.constant,STDraggerPercentageInitial);
+            [self.calloutViewController changeForPercentage:percentage];
+        }
         if(translation.y >= 328){
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
                 //NOTIFY DELEGATE
+                [self.calloutViewController changeForPercentage:0.0];
             }];
             
 
         } else if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
-                //NOTIFY DELEGATE SHIT WENT DOWN
+                [self.calloutViewController changeForPercentage:0.0];
             }];
         }
     }

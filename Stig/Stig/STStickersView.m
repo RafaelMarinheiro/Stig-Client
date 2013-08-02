@@ -7,8 +7,10 @@
 //
 
 #import "STStickersView.h"
-
-@implementation STStickersView
+#import "STLinearLayoutView.h"
+@implementation STStickersView {
+    STLinearLayoutView *_layoutView;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,55 +35,46 @@
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
     //self.translatesAutoresizingMaskIntoConstraints = NO;
 }
-- (void) emptyStickers {
-    for (UIView *view in self.subviews) {
-        [view removeFromSuperview];
-    }
-}
 - (void) processStickers {
-    if (self.stickers) {
-        NSUInteger stickersCount = [self.stickers count];
-        for (int i = 0; i < stickersCount; i++) {
-            NSNumber *stickerId = self.stickers[i];
-            UIImageView *sticker = [self imageViewForStickerId:stickerId];
-            sticker.translatesAutoresizingMaskIntoConstraints = NO;
-            [self addSubview:sticker];
-            NSNumber *rightPadding =[NSNumber numberWithFloat:( STStickerEdgeDistance + i*STStickerSize.width + i*STSTickerSeparatorDistance)];
-            NSNumber *upperPadding = [NSNumber numberWithFloat:STStickerEdgeDistance];
-            NSNumber *height =[NSNumber numberWithFloat:STStickerSize.height];
-            NSNumber *width = [NSNumber numberWithFloat:STStickerSize.width];
-
-            [self addConstraints:[NSLayoutConstraint
-                                  constraintsWithVisualFormat:@"V:|-upperPadding-[sticker(height)]"
-                                  options:0
-                                  metrics:@{@"upperPadding":upperPadding,
-                                        @"height":height}
-                                  views:NSDictionaryOfVariableBindings(sticker)]];
-            [self addConstraints:[NSLayoutConstraint
-                                  constraintsWithVisualFormat:@"H:|-rightPadding-[sticker(width)]"
-                                  options:0
-                                  metrics:@{@"rightPadding":rightPadding,
-                                  @"width":width}
-                                  views:NSDictionaryOfVariableBindings(sticker)]];
-
-            
-        }
+    
+    NSUInteger stickersCount = [self.stickers count];
+    NSMutableArray *imageViews = [NSMutableArray arrayWithCapacity:stickersCount];
+    for (int i = 0; i < stickersCount; i++) {
+        NSNumber *stickerId = self.stickers[i];
+        UIImageView *sticker = [self imageViewForStickerId:stickerId];
+        [imageViews addObject:sticker];
     }
+    _layoutView = [[STLinearLayoutView alloc] initWithViews:imageViews viewSize:CGSizeMake(30.0, 30.0) viewSeparator:0.0 andEdgeSeparator:0.0];
+    [self addSubview:_layoutView];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_layoutView
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1
+                                                           constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_layoutView
+                                                     attribute:NSLayoutAttributeCenterY
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterY
+                                                    multiplier:1
+                                                      constant:0]];
+
 }
 - (void) setStickers:(NSArray *)stickers {
-    _stickers = stickers;
-    [self emptyStickers];
-    [self processStickers];
-    [self invalidateIntrinsicContentSize];
+    if (!_layoutView) {
+        _stickers = stickers;
+        [self processStickers];
+        [self invalidateIntrinsicContentSize];
+    }
 }
 - (CGSize) intrinsicContentSize {
-    NSUInteger stickerCount = [self.stickers count];
-    CGFloat width = 2*STStickerEdgeDistance + stickerCount*STStickerSize.width;
-    if (stickerCount) {
-        width+=(stickerCount-1)*STSTickerSeparatorDistance;
+    if (_layoutView) {
+        return [_layoutView intrinsicContentSize];
+    }else{
+        return [super intrinsicContentSize];
     }
-    CGFloat height = 2*STStickerEdgeDistance + MIN(stickerCount, 1) * STStickerSize.height;
-    return CGSizeMake(width, height);
 }
 - (UIImageView *) imageViewForStickerId:(NSNumber *) stickerId {
     UIImage *image = [UIImage imageNamed:[self imageNameForStickerId:stickerId]];

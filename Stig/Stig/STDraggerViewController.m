@@ -11,17 +11,38 @@
 
 
 static CGFloat const STDraggerShowingHeight = 100.0;
-static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 30.0;
-static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 100.0;
+static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
+static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
 
-static CGFloat const STDraggerTotalHeight = 501.0;
+//static CGFloat const STDraggerTotalHeight = 501.0;
 @interface STDraggerViewController ()
 
 @end
 
 @implementation STDraggerViewController
 
+- (CGFloat) showingHeight {
+    return 100.0;
+}
+- (CGFloat) animationInitialHeight {
+    return [self showingHeight] + 50.0;
+}
+- (CGFloat) animationFinalHeight {
+    CGFloat totalFrameHeight = self.view.frame.size.height;
+    return totalFrameHeight * 0.8;
+}
+- (CGFloat) animationPercentage {
+    CGFloat constraintConstant = -self.verticalSpaceConstraint.constant;
+    NSLog(@"[%0.2f] [%0.2f] [%0.2f]", [self animationInitialHeight], constraintConstant ,[self animationFinalHeight]);
+    if (constraintConstant <= [self animationInitialHeight]) {
+        return 0.0;
+    }else if (constraintConstant >= [self animationFinalHeight]){
+        return 1.0;
+    }else {
+        return (constraintConstant - [self animationInitialHeight]) / ([self animationFinalHeight] - [self animationInitialHeight]);
+    }
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,10 +58,7 @@ static CGFloat const STDraggerTotalHeight = 501.0;
     _state = STDraggerStateHidden;
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];
-
-    NSLog(@"dragger constraint : %@", self.verticalSpaceConstraint);
     [self.draggedView addGestureRecognizer:self.dragGestureRecognizer];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,12 +109,16 @@ static CGFloat const STDraggerTotalHeight = 501.0;
         self.verticalSpaceConstraint.constant = -(translation.y + STDraggerShowingHeight);
         [self.view layoutIfNeeded];
 
-        if (-self.verticalSpaceConstraint.constant >= STDraggerPercentageInitial) {
-            CGFloat percentage = (-self.verticalSpaceConstraint.constant-STDraggerPercentageInitial)/STDraggerPercentageFinal;
-            NSLog(@"Percentage: %0.2f %0.2f %0.2f", percentage,-self.verticalSpaceConstraint.constant,STDraggerPercentageInitial);
-            [self.calloutViewController changeForPercentage:percentage];
-        }
-        if(translation.y >= 328){
+        CGFloat percentage = [self animationPercentage];
+        [self.calloutViewController changeForPercentage:percentage];
+//        if (-self.verticalSpaceConstraint.constant >= STDraggerPercentageInitial) {
+//            CGFloat percentage = (-self.verticalSpaceConstraint.constant-STDraggerPercentageInitial)/STDraggerPercentageFinal;
+//            [self.calloutViewController changeForPercentage:percentage];
+//        }
+
+    
+        //NSLog(@"dragger view size: %@ %0.2f", NSStringFromCGSize(self.view.frame.size), percentage);
+        if(percentage >= 1.0){
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
                 //NOTIFY DELEGATE
                 [self.calloutViewController changeForPercentage:0.0];

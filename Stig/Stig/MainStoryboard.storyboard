@@ -761,7 +761,7 @@
                             <constraint firstItem="6o7-p4-xb2" firstAttribute="leading" secondItem="5cR-hR-OOY" secondAttribute="leading" type="default" id="mjW-5k-Ewo"/>
                             <constraint firstItem="hK5-FG-afl" firstAttribute="trailing" secondItem="5cR-hR-OOY" secondAttribute="trailing" type="user" id="nqo-fT-ULW"/>
                             <constraint firstItem="fuO-Ys-Tcb" firstAttribute="top" secondItem="OYt-WJ-3KV" secondAttribute="bottom" type="user" id="uGl-y3-pBg"/>
-                            <constraint firstItem="OYt-WJ-3KV" firstAttribute="top" secondItem="6o7-p4-xb2" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="uaN-Vy-eF8"/>
+                            <constraint firstItem="OYt-WJ-3KV" firstAttribute="top" secondItem="6o7-p4-xb2" secondAttribute="bottom" constant="18" type="user" id="uaN-Vy-eF8"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

@@ -67,7 +67,7 @@
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
-    [self.mainButton setImage:[UIImage imageNamed:@"icon_filter_black@2x.png"] forState:UIControlStateNormal];
+    [self.mainButton setImage:[UIImage imageNamed:@"filter-main.png"] forState:UIControlStateNormal];
     [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
@@ -168,9 +168,11 @@
                     [UIView animateWithDuration:0.05 animations:^{
                         view.transform = translation;
                     } completion:^(BOOL completed) {
-                        _disposing = YES;
-                        _animating = NO;
-                        completion(completed);
+                        if (i == self.numberOfButtons -1) {
+                            _disposing = YES;
+                            _animating = NO;
+                            completion(completed);
+                        }
                     }];
                 }];
             }];
@@ -198,10 +200,12 @@
                 [UIView animateWithDuration:0.1 animations:^{
                     view.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL completed){
-                    _disposing = NO;
-                    _animating = NO;
                     view.hidden = YES;
-                    completion(completed);
+                    if (i == self.numberOfButtons - 1) {
+                        _disposing = NO;
+                        _animating = NO;
+                        completion(completed);
+                    }
                 }];
             }];
         }

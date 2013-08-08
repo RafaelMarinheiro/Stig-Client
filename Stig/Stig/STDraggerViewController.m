@@ -10,7 +10,7 @@
 
 
 
-static CGFloat const STDraggerShowingHeight = 100.0;
+static CGFloat const STDraggerShowingHeight = 150.0;
 static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
 static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
@@ -23,7 +23,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 @implementation STDraggerViewController
 
 - (CGFloat) showingHeight {
-    return 100.0;
+    return 150.0;
 }
 - (CGFloat) animationInitialHeight {
     return [self showingHeight] + 50.0;
@@ -120,7 +120,6 @@ static CGFloat const STDraggerBounceDelta = 5.0;
         //NSLog(@"dragger view size: %@ %0.2f", NSStringFromCGSize(self.view.frame.size), percentage);
         if(percentage >= 1.0){
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
-                //NOTIFY DELEGATE
                 [self.calloutViewController changeForPercentage:0.0];
             }];
             
@@ -142,6 +141,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 - (void) showDraggerWithCompletion:(void (^)(BOOL completed) )completion {
     if (self.state == STDraggerStateHidden) {
         _state = STDraggerStateAnimating;
+        [self draggerWillShowCallout];
         [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.verticalSpaceConstraint.constant = -(STDraggerShowingHeight + STDraggerBounceDelta);
             [self.view layoutIfNeeded];
@@ -151,6 +151,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
                 [self.view layoutIfNeeded];
             }completion:^(BOOL completed){
                 _state = STDraggerStateShowing;
+                [self draggerDidShowCallout];
                 if (completion) {
                     completion(completed);
                 }
@@ -161,12 +162,13 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 - (void) hideDraggerWithCompletion:(void (^)(BOOL completed) )completion {
     if (self.state == STDraggerStateShowing) {
         _state = STDraggerStateAnimating;
-
+        [self draggerWillHideCallout];
         [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.verticalSpaceConstraint.constant = 0.0;
             [self.view layoutIfNeeded];
         }completion:^(BOOL completed){
             _state = STDraggerStateHidden;
+            [self draggerDidHideCallout];
             if (completion) {
                 completion(completed);
             }
@@ -177,7 +179,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 - (void) moveDraggerToShowingPositionWithCompletion:( void (^)(BOOL completed)) completion {
     if (self.state == STDraggerStateDragging) {
         _state = STDraggerStateAnimating;
-
+        
         [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.verticalSpaceConstraint.constant = -(STDraggerShowingHeight - STDraggerBounceDelta);
             [self.view layoutIfNeeded];
@@ -195,4 +197,25 @@ static CGFloat const STDraggerBounceDelta = 5.0;
     }
 }
 
+#pragma mark - Delegate Notification
+- (void) draggerWillShowCallout {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerWillShowCallout:)]) {
+        [self.delegate draggerViewControllerWillShowCallout:self];
+    }
+}
+- (void) draggerDidShowCallout {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerDidShowCallout:)]) {
+        [self.delegate draggerViewControllerDidShowCallout:self];
+    }
+}
+- (void) draggerWillHideCallout {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerWillHideCallout:)]) {
+        [self.delegate draggerViewControllerWillHideCallout:self];
+    }
+}
+- (void) draggerDidHideCallout {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerDidHideCallout:)]) {
+        [self.delegate draggerViewControllerDidHideCallout:self];
+    }
+}
 @end

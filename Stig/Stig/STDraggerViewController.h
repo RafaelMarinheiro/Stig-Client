@@ -18,6 +18,7 @@ typedef enum {
     STDraggerStateDragging,
     STDraggerStateAnimating
 } STDraggerState;
+@protocol STDraggerViewControllerDelegate;
 
 @interface STDraggerViewController : UIViewController <STPlacesMapViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalSpaceConstraint;
@@ -25,6 +26,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *draggedView;
 @property (nonatomic) STDraggerState state;
+@property (nonatomic, weak) id <STDraggerViewControllerDelegate> delegate;
 - (IBAction)toggleDragger:(id)sender;
 - (void) toggleShowingDragger;
 - (void) showDraggerWithCompletion:(void (^)(BOOL completed) )completion;
@@ -33,4 +35,13 @@ typedef enum {
 @property (nonatomic, strong) NSArray *places;
 @property (nonatomic, strong) STCalloutViewController *calloutViewController;
 @property (nonatomic, strong) STPlacesMapViewController *mapViewController;
+@end
+
+@protocol STDraggerViewControllerDelegate <NSObject>
+
+- (void) draggerViewControllerWillShowCallout:(STDraggerViewController *) draggerViewController;
+- (void) draggerViewControllerDidShowCallout:(STDraggerViewController *) draggerViewController;
+- (void) draggerViewControllerWillHideCallout:(STDraggerViewController *) draggerViewController;
+- (void) draggerViewControllerDidHideCallout:(STDraggerViewController *) draggerViewController;
+
 @end

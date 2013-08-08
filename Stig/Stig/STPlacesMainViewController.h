@@ -15,7 +15,7 @@
 #import "STPlacesMapViewController.h"
 #import "STPlacesListViewController.h"
 
-@interface STPlacesMainViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, CircularButtonDisposerDelegate, STDropperViewDelegate>
+@interface STPlacesMainViewController : UIViewController <CircularButtonDisposerDelegate, STDraggerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *listViewContainer;
 
 @property (weak, nonatomic) IBOutlet UIView *mapViewContainer;
@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *suggestionButton;
 @property (weak, nonatomic) IBOutlet CircularButtonDisposerView *optionsButtonDisposer;
 @property (weak, nonatomic) IBOutlet CircularButtonDisposerView *filterButtonDisposer;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
 @property (weak, nonatomic) IBOutlet STDropperView *dropperView;
 @property (weak, nonatomic) IBOutlet STStickersView *stickersView;

@@ -65,6 +65,8 @@
 		024549DA17A8A63A00D4D558 /* STDraggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D917A8A63A00D4D558 /* STDraggerViewController.m */; };
 		024549DC17A8D44700D4D558 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024549DB17A8D44700D4D558 /* MobileCoreServices.framework */; };
 		024549DE17A8D44E00D4D558 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */; };
+		026CAE4C17B3E3DB00DDD540 /* plus_yellow_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE4A17B3E3DB00DDD540 /* plus_yellow_50.png */; };
+		026CAE4D17B3E3DB00DDD540 /* plus_yellow_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */; };
 		027E13D117A5EA8B00C44DC7 /* icon_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D017A5EA8B00C44DC7 /* icon_map.png */; };
 		027E13D517A5FEC900C44DC7 /* Button Back-peao.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D217A5FEC800C44DC7 /* Button Back-peao.png */; };
 		027E13D617A5FEC900C44DC7 /* Intercarlation.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D317A5FEC800C44DC7 /* Intercarlation.png */; };
@@ -97,6 +99,8 @@
 		029E2D6117A4DE23008F4AA2 /* icone_money_44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D5B17A4DE23008F4AA2 /* icone_money_44.png */; };
 		029E2D6217A4DE23008F4AA2 /* icone_music_44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D5C17A4DE23008F4AA2 /* icone_music_44.png */; };
 		029E2D6317A4DE23008F4AA2 /* icone_people_44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D5D17A4DE23008F4AA2 /* icone_people_44.png */; };
+		02BE31F417B2D88800D509CD /* icon_search40.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE31F217B2D88800D509CD /* icon_search40.png */; };
+		02BE31F517B2D88800D509CD /* icon_search40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE31F317B2D88800D509CD /* icon_search40@2x.png */; };
 		02BE5EC317A3307300FDC09F /* acessotag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */; };
 		02BE5EC417A3307300FDC09F /* cardápiotags 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */; };
 		02BE5EC517A3307300FDC09F /* moneytag 91x91px.png in Resources */ = {isa = PBXBuildFile; fileRef = 02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */; };
@@ -207,6 +211,8 @@
 		024549D917A8A63A00D4D558 /* STDraggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDraggerViewController.m; sourceTree = "<group>"; };
 		024549DB17A8D44700D4D558 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		026CAE4A17B3E3DB00DDD540 /* plus_yellow_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_yellow_50.png; sourceTree = "<group>"; };
+		026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_yellow_50@2x.png"; sourceTree = "<group>"; };
 		027E13D017A5EA8B00C44DC7 /* icon_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_map.png; sourceTree = "<group>"; };
 		027E13D217A5FEC800C44DC7 /* Button Back-peao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back-peao.png"; sourceTree = "<group>"; };
 		027E13D317A5FEC800C44DC7 /* Intercarlation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intercarlation.png; sourceTree = "<group>"; };
@@ -240,6 +246,8 @@
 		029E2D5B17A4DE23008F4AA2 /* icone_money_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone_money_44.png; sourceTree = "<group>"; };
 		029E2D5C17A4DE23008F4AA2 /* icone_music_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone_music_44.png; sourceTree = "<group>"; };
 		029E2D5D17A4DE23008F4AA2 /* icone_people_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone_people_44.png; sourceTree = "<group>"; };
+		02BE31F217B2D88800D509CD /* icon_search40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search40.png; sourceTree = "<group>"; };
+		02BE31F317B2D88800D509CD /* icon_search40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search40@2x.png"; sourceTree = "<group>"; };
 		02BE5EBD17A3307300FDC09F /* acessotag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "acessotag 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EBE17A3307300FDC09F /* cardápiotags 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardápiotags 91x91px.png"; sourceTree = "<group>"; };
 		02BE5EBF17A3307300FDC09F /* moneytag 91x91px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moneytag 91x91px.png"; sourceTree = "<group>"; };
@@ -336,6 +344,10 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				026CAE4A17B3E3DB00DDD540 /* plus_yellow_50.png */,
+				026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */,
+				02BE31F217B2D88800D509CD /* icon_search40.png */,
+				02BE31F317B2D88800D509CD /* icon_search40@2x.png */,
 				02EEE91E17A979B2009B1C37 /* icon_filter_black@2x.png */,
 				027E13D817A60B9100C44DC7 /* Button Back NOVO.png */,
 				027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */,
@@ -671,6 +683,10 @@
 				027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */,
 				027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */,
 				02EEE91F17A979B2009B1C37 /* icon_filter_black@2x.png in Resources */,
+				02BE31F417B2D88800D509CD /* icon_search40.png in Resources */,
+				02BE31F517B2D88800D509CD /* icon_search40@2x.png in Resources */,
+				026CAE4C17B3E3DB00DDD540 /* plus_yellow_50.png in Resources */,
+				026CAE4D17B3E3DB00DDD540 /* plus_yellow_50@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,6 @@
     if ([NSJSONSerialization isValidJSONObject:json]) {
         NSDictionary *mainDictionary = json;
         STRanking *ranking = [[STRanking alloc] init];
-        ranking.distance = mainDictionary[@"distance"];
         ranking.social = mainDictionary[@"social"];
         ranking.buzz = mainDictionary[@"buzz"];
         ranking.overall = mainDictionary[@"overall"];

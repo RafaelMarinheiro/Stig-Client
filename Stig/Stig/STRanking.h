@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface STRanking : NSObject
-@property (nonatomic, strong) NSNumber *distance;
 @property (nonatomic, strong) NSNumber *social;
 @property (nonatomic, strong) NSNumber *buzz;
 @property (nonatomic, strong) NSNumber *overall;

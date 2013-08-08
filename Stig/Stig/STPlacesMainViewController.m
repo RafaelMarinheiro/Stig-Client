@@ -28,8 +28,6 @@
     [super viewDidLoad];
     _showingMap = YES;
     _showingDropper = NO;
-
-    self.dropperView.delegate = self;
     self.filterButtonDisposer.delegate = self;
     self.optionsButtonDisposer.delegate = self;
     self.optionsButtonDisposer.disposeToTheRight = NO;
@@ -52,7 +50,10 @@
 
     [self.suggestionButton addTarget:self action:@selector(suggestSomething:) forControlEvents:UIControlEventTouchUpInside];
 }
-
+- (void) viewWillAppear:(BOOL)animated {
+//    self.searchBar.backgroundImage = [UIImage imageNamed:@"barra_topo_stig_name.png"];
+//    self.searchBar.backgroundColor = [UIColor clearColor];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -106,6 +107,7 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Dragger Segue"]) {
         self.draggerViewController = segue.destinationViewController;
+        self.draggerViewController.delegate = self;
     }else if ([segue.identifier isEqualToString:@"List Segue"]){
         self.listViewController= segue.destinationViewController;
     }
@@ -222,5 +224,19 @@
             _showingMap = YES;
         }];
     }
+}
+
+#pragma mark - Dragger View Controller Delegate
+- (void) draggerViewControllerWillShowCallout:(STDraggerViewController *)draggerViewController {
+    NSLog(@"will show callout");
+}
+- (void) draggerViewControllerDidShowCallout:(STDraggerViewController *)draggerViewController {
+    NSLog(@"did show callout");
+}
+- (void) draggerViewControllerWillHideCallout:(STDraggerViewController *)draggerViewController {
+    NSLog(@"will hide callout");
+}
+- (void) draggerViewControllerDidHideCallout:(STDraggerViewController *)draggerViewController {
+    NSLog(@"did hide callout");
 }
 @end

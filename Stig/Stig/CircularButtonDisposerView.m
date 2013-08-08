@@ -67,7 +67,7 @@
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
-    [self.mainButton setImage:[UIImage imageNamed:@"filter-main.png"] forState:UIControlStateNormal];
+    [self.mainButton setImage:[UIImage imageNamed:@"plus_yellow_50.png"] forState:UIControlStateNormal];
     [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;

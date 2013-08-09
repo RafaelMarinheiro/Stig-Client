@@ -12,89 +12,151 @@
 #import "STPlace.h"
 #import "STLocation.h"
 
-typedef enum{
-    STOverlordOperationImportanceHigh,      //Should be used for high level operations like requesting information from a place
-    STOverlordOperationImportanceNormal,    //Should be used for normal operations, like loading the comments related to a place
-    STOverlordOperationImportanceLow        //Should be used for low level operations, like caching the previous comments or other informations
-}STOverlordOperationImportance;
 
-typedef void(^STOOErrorBlock)(NSError *error);
-//@protocol STOverlordOperation;
-typedef void(^STOOGetCompletionBlock)(NSArray *array, NSUInteger page);
-typedef void(^STOOResolveCompletionBlock)(id result);
-@interface STOverlord : NSObject
+@protocol STOverlord
+
+@property (nonatomic, strong, readonly) STUser * user;
+@property (nonatomic, strong) STLocation *userLocation;
 
 
-@property (nonatomic, strong,readonly) STLocation *userLocation;
+#pragma mark - Authentication methods
+- (void) signInUserWithId: (NSNumber *) userId
+             withPassword: (NSString *) password
+               completion: (void (^)(STUser * user)) completionBlock
+                    error: (void (^) (NSError* error)) errorBlock;
+
+- (void) authenticateUserWithId: (NSNumber *) userId
+                   withPassword: (NSString *) password
+                     completion: (void (^)(STUser * user)) completionBlock
+                          error: (void (^) (NSError* error)) errorBlock;
+
+- (void) signOutUser: (NSNumber *) userId
+          completion: (void (^)()) completionBlock
+               error: (void (^) (NSError* error)) errorBlock;
+
+#pragma mark - Check-In methods
+
+- (void) checkInPlace: (STPlace *) place
+           completion: (void (^)(STUser * user, STPlace * place)) completionBlock
+                error: (void (^) (NSError* error)) errorBlock;
 
 
-+ (id) sharedInstance;
-//Ideally, all the information return should be cached by the Overlord, so if if you know there is a high probability for you
-//to need something in the future, just ask the Overlord to resolve the information you need and send nil as a completion block,
-//the next time you ask for the same thing, the Overlord should have your information really fast
+#pragma mark - Raw Resolve methods
 
-//Convenience methods, the default importance is STOverlordOperationImportanceNormal and the default requestNew is NO 
+// User
+- (void) resolveUserById:(NSNumber *)userId
+              requestNew:(BOOL) requestNew
+              completion:(void (^)(STUser *place)) completionBlock
+                   error:(void (^)(NSError *error)) errorBlock;
+
+//Place
+- (void) resolvePlaceById:(NSNumber *) placeId
+               requestNew:(BOOL) requestNew
+               completion:(void (^)(STPlace *place)) completionBlock
+                    error:(void (^)(NSError *error)) errorBlock;
+
+//Comment
+- (void) resolveCommentById:(NSNumber *) commentId
+                       fromPlace:(NSNumber *) placeId
+                      requestNew:(BOOL) requestNew
+                      completion:(void (^)(STBoardComment *place)) completionBlock
+                           error:(void (^)(NSError *error)) errorBlock;
+
+
+#pragma mark - Simple Resolve Methods
 - (void) resolveUserById:(NSNumber *)userId
               completion:(void (^)(STUser *user)) completionBlock
-                   error:(STOOErrorBlock) errorBlock;
-- (void) resolveBoardCommentById:(NSNumber *) commentId
-                      completion:(void (^)(STBoardComment *place)) completionBlock
-                           error:(STOOErrorBlock) errorBlock;
+                   error:(void (^)(NSError *error)) errorBlock;
+
+
 - (void) resolvePlaceById:(NSNumber *) placeId
                completion:(void (^)(STPlace *place)) completionBlock
                     error:(void (^)(NSError *error)) errorBlock;
-- (void) getPlacesWithSearchTerm:(NSString *) term
-                      pageNumber:(NSUInteger) pageNumber
-                      completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                           error:(STOOErrorBlock) errorBlock;
-- (void) getCommentsFromPlace:(STPlace *) place
-                 withStickers:(NSArray *) stickers
-                   pageNumber:(NSUInteger) pageNumber
-                   completion:(STOOGetCompletionBlock) completionBlock
-                        error:(STOOErrorBlock) errorBlock;
+
+- (void) resolveCommentById:(NSNumber *) commentId
+                       fromPlace:(NSNumber *) placeId
+                    completion:(void (^)(STBoardComment *place)) completionBlock
+                        error:(void (^)(NSError *error)) errorBlock;
+
+#pragma mark - Insertion methods
+
+- (void) postComment: (STBoardComment*) comment
+       toPlaceWithId: (NSNumber *) placeId
+          completion: (void (^)(STBoardComment * comment)) completionBlock
+               error: (void (^)(NSError *error)) errorBlock;
+
+- (void) postComment: (STBoardComment*) comment
+           inReplyTo: (STBoardComment*) comment
+          completion: (void (^)(STBoardComment * comment)) completionBlock
+               error: (void (^)(NSError *error)) errorBlock;
+
+#pragma mark - Raw Get methods
+
+- (void) getCheckInHistoryFromUser:(STUser*) user
+                        pageNumber: (NSUInteger) pageNumber
+                        requestNew: (BOOL) requestNew
+                        completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCommentsFromPlace: (STPlace *) place
+                 withStickers: (NSArray *) stickers
+                   pageNumber: (NSUInteger) pageNumber
+                   requestNew: (BOOL) requestNew
+                   completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                        error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCommentsInReplyTo: (STBoardComment *) comment
+                 withStickers: (NSArray *) stickers
+                   pageNumber: (NSUInteger) pageNumber
+                   requestNew: (BOOL) requestNew
+                   completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                        error: (void (^) (NSError* error)) errorBlock;
 
 
-- (void) resolveUserById:(NSNumber *)userId
-              importance:(STOverlordOperationImportance) importance
-              requestNew:(BOOL) requestNew
-              completion:(void (^)(STUser *place)) completionBlock
-                   error:(STOOErrorBlock) errorBlock;
+- (void) getPlacesWithSearchTerm: (NSString *) term
+                      pageNumber: (NSUInteger) pageNumber
+                      requestNew: (BOOL) requestNew
+                      completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                           error: (void (^) (NSError* error)) errorBlock;
 
-- (void) resolveBoardCommentById:(NSNumber *) commentId
-                      importance:(STOverlordOperationImportance) importance
-                      requestNew:(BOOL) requestNew
-                      completion:(void (^)(STBoardComment *place)) completionBlock
-                           error:(STOOErrorBlock) errorBlock;
-- (void) resolvePlaceById:(NSNumber *) placeId
-               importance:(STOverlordOperationImportance) importance
-               requestNew:(BOOL) requestNew
-               completion:(void (^)(STPlace *place)) completionBlock
-                    error:(STOOErrorBlock) errorBlock;
-- (void) getPlacesWithSearchTerm:(NSString *) term
-                      pageNumber:(NSUInteger) pageNumber
-                    importance:(STOverlordOperationImportance) importance
-                    requestNew:(BOOL) requestNew
-                    completion:(void (^)(NSArray *places, NSUInteger page)) completionBlock
-                         error:(STOOErrorBlock) errorBlock;
-- (void) getCommentsFromPlace:(STPlace *) place
-                 withStickers:(NSArray *) stickers
-                   pageNumber:(NSUInteger) pageNumber
-                   importance:(STOverlordOperationImportance) importance
-                   requestNew:(BOOL) requestNew
-                   completion:(STOOGetCompletionBlock) completionBlock
-                        error:(STOOErrorBlock) errorBlock;
-- (void)updateLocation:(STLocation *) location;
-- (void) updateCaches; //The Overlord will re-cache everything, he will use STOverlordImportanceLow to do this
-- (void) deleteCaches; //If memory is low, call this. This may occur, because the overlord will try to cache everything it resolves
+#pragma mark - Simple Get methods
+
+- (void) getCheckInHistoryFromUser:(STUser*) user
+                        pageNumber: (NSUInteger) pageNumber
+                        completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCommentsFromPlace: (STPlace *) place
+                 withStickers: (NSArray *) stickers
+                   pageNumber: (NSUInteger) pageNumber
+                   completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                        error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCommentsInReplyTo: (STBoardComment *) comment
+                 withStickers: (NSArray *) stickers
+                   pageNumber: (NSUInteger) pageNumber
+                   completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                        error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getPlacesWithSearchTerm: (NSString *) term
+                      pageNumber: (NSUInteger) pageNumber
+                      completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
+                           error: (void (^) (NSError* error)) errorBlock;
+
+
 @end
 
 
-@protocol STOverlordOperation <NSObject>
-@required
-@property (nonatomic, readonly) STOverlordOperationImportance importance;
-@property (nonatomic, readonly, getter = isCacheable) BOOL cacheable;
-@property (nonatomic, readonly) id output;
-- (BOOL) run; //This method is called when the operation must process the inputs and return if it was successful. By the end of the process, the output must have a valid answer or a NSError 
-- (void) runCompletionBlock;
-- (void) runErrorBlock;
+typedef enum{
+    STOverlordTypeNetworked,
+    STOverlordTypeLocalJson,
+    STOverlordTypeNumbers
+} STOverlordType;
+
+@interface STHiveCluster : NSObject
+
++ (id<STOverlord>) spawnOverlord;
++ (void) setDefaultOverlordType: (STOverlordType) type;
++ (id<STOverlord>) spawnOverlordWithType:(STOverlordType) type;
+
 @end

@@ -20,6 +20,7 @@
         comment.userId = json[@"user_id"];
         comment.commentText = json[@"text"];
         comment.placeId = json[@"place_id"];
+        comment.replyId = nil;
         comment.commentStickers = json[@"stickers"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";

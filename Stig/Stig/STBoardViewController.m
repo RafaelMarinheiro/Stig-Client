@@ -15,7 +15,7 @@
 
 @implementation STBoardViewController{
     NSMutableDictionary *_heightsDictionary;
-    STOverlord *_overlord;
+    id<STOverlord> _overlord;
 }
 
 - (void)viewDidLoad
@@ -26,7 +26,7 @@
     _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
     _loadedPlace = NO;
     _loadedComments = NO;
-    _overlord = [STOverlord sharedInstance];
+    _overlord = [STHiveCluster spawnOverlord];
     [self.topBatTitle setText:self.place.placeName];
     [self requestData];
 
@@ -49,19 +49,20 @@
     // Dispose of any resources that can be recreated.
 }
 - (void) requestDataForIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Request user from overlord %@",indexPath);
     STBoardComment *comment = self.comments[indexPath];
     if (comment) {
         [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
             [_commentsUsers setObject:user forKey:indexPath];
+            NSLog(@"Overlord handed user %@:", user);
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
         }error:^(NSError *error){
-            
+            NSLog(@"%@", error);
         }];
     }
 }
 - (void) requestData{
-    NSLog(@"request data %@", self.place);
+    //NSLog(@"request data %@", self.place);
         self.title = self.place.placeName;
         [_overlord getCommentsFromPlace:self.place withStickers:@[@3,@1,@2] pageNumber:0 completion:^(NSArray *comments, NSUInteger pageNumber){
             _comments = [[NSMutableDictionary alloc] initWithCapacity:[comments count]];
@@ -114,15 +115,18 @@
     STBoardComment *comment = self.comments[indexPath];
     STUser *user = self.commentsUsers[indexPath];
     
+    NSLog(@"Request for Cell :%@ %@", comment, user);
+    
     if (user&&comment) {
         STBoardCommentView *commentView =(STBoardCommentView *) [cell.contentView viewWithTag:100];
         commentView.commentFont = self.commentFont;
         commentView.userNameFont = self.userNameFont;
         [commentView populateCommentWithText:comment.commentText userName:user.userName userImageURL:user.userImageURL andTimestamp:comment.commentTimestamp];
     } else {
+        NSLog(@"Will need to hit cache");
         [self requestDataForIndexPath:indexPath];
         
-        NSLog(@"User: %@, COmment %@", user, comment);
+        
     }
     return cell;
 }

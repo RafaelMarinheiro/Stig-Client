@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSNumber *commentId;
 @property (nonatomic, strong) NSNumber *userId;
 @property (nonatomic, strong) NSNumber *placeId;
+@property (nonatomic, strong) NSNumber *replyId;
 @property (nonatomic, strong) NSString *commentText;
 @property (nonatomic, strong) NSArray *commentStickers;
 @property (nonatomic, strong) NSDate *commentTimestamp;

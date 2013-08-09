@@ -33,7 +33,7 @@
     self.optionsButtonDisposer.disposeToTheRight = NO;
     self.optionsButtonDisposer.shouldRotateMainButton = YES;
     if (!self.places) {
-        STOverlord *overlord = [STOverlord sharedInstance];
+        id<STOverlord> overlord = [STHiveCluster spawnOverlord];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
             self.places = places;
         }error:^(NSError *error) {

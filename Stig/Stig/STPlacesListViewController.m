@@ -65,10 +65,9 @@
     STPlace *place = self.places[indexPath.row];
     [cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:20.0]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setText:place.placeName];
-    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
     [cell.textLabel setTextColor:[UIColor blackColor]];
     //[cell.detailTextLabel setText:place.placeDescription];
     return cell;
@@ -104,9 +103,9 @@
     self.places = sorted;
 }
 #pragma mark - Table View Delegate Methods
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 75.0;
-}
+//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 75.0;
+//}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

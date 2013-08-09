@@ -23,19 +23,8 @@
 
 @property (nonatomic, strong) STDraggerViewController *draggerViewController;
 @property (nonatomic, strong)  STPlacesListViewController *listViewController;
-@property (nonatomic,readonly) BOOL showingMap;
-@property (nonatomic, readonly) BOOL showingDropper;
-
-@property (weak, nonatomic) IBOutlet UIButton *suggestionButton;
-@property (weak, nonatomic) IBOutlet CircularButtonDisposerView *optionsButtonDisposer;
-@property (weak, nonatomic) IBOutlet CircularButtonDisposerView *filterButtonDisposer;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UILabel *dropperLabel;
-@property (weak, nonatomic) IBOutlet STDropperView *dropperView;
-@property (weak, nonatomic) IBOutlet STStickersView *stickersView;
-
-@property (weak, nonatomic) IBOutlet UIButton *listSwitcherButton;
-
-- (IBAction)switcherButtonPressed:(UIButton *)sender;
-- (IBAction)stickerButtonPressed:(UIButton *)sender;
+@property (nonatomic) BOOL showingDrawer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *drawerConstraint;
+@property (nonatomic, strong) UIPanGestureRecognizer *drawerGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *closeDrawerGestureRecognizer;
 @end

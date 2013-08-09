@@ -17,21 +17,18 @@
 
 
 
-@implementation STPlacesMainViewController {
-    STPlace *_selectedPlace;
-}
-
-
-
+@implementation STPlacesMainViewController
 - (void)viewDidLoad
+
 {
+    _showingDrawer = NO;
+    self.drawerGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrawerPan:)];
+    self.drawerGestureRecognizer.enabled = NO;
+    self.closeDrawerGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.closeDrawerGestureRecognizer.enabled = NO;
+    [self.mapViewContainer addGestureRecognizer:self.drawerGestureRecognizer];
+    [self.mapViewContainer addGestureRecognizer:self.closeDrawerGestureRecognizer];
     [super viewDidLoad];
-    _showingMap = YES;
-    _showingDropper = NO;
-    self.filterButtonDisposer.delegate = self;
-    self.optionsButtonDisposer.delegate = self;
-    self.optionsButtonDisposer.disposeToTheRight = NO;
-    self.optionsButtonDisposer.shouldRotateMainButton = YES;
     if (!self.places) {
         STOverlord *overlord = [STOverlord sharedInstance];
         [overlord getPlacesWithSearchTerm:@"" pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
@@ -40,19 +37,9 @@
             NSLog(@"ERROR LOADING PLACES DATA !");
         }];
     }
-    
-    UIButton *filterMainButton = self.filterButtonDisposer.mainButton;
-    NSArray *filterButtons = self.filterButtonDisposer.buttons;
-    [filterMainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
-    [filterButtons[0] setImage:[UIImage imageNamed:@"Intercarlation.png"] forState:UIControlStateNormal];
-    [filterButtons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
-    [filterButtons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
-
-    [self.suggestionButton addTarget:self action:@selector(suggestSomething:) forControlEvents:UIControlEventTouchUpInside];
 }
-- (void) viewWillAppear:(BOOL)animated {
-//    self.searchBar.backgroundImage = [UIImage imageNamed:@"barra_topo_stig_name.png"];
-//    self.searchBar.backgroundColor = [UIColor clearColor];
+- (void) viewDidLayoutSubviews {
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -60,26 +47,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-# pragma mark - Suggestion Button
 
-- (void) suggestSomething: (UIButton *) button{
-    double k = -1;
-    _selectedPlace = nil;
-    
-    for(int i = 0; i < [self.places count]; i++){
-        STPlace * place = [self.places objectAtIndex:i];
-        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
-            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
-            _selectedPlace = place;
-        }
-    }
-
-    [self.draggerViewController.mapViewController selectPlace:_selectedPlace];
-    
-    
-    [self.dropperLabel setText:_selectedPlace.placeName];
-    [self showDropper];
-}
 - (void) setPlaces:(NSArray *)places {
     _places = places;
     if (self.listViewController) {
@@ -89,21 +57,7 @@
         self.draggerViewController.places = _places;
     }
 }
-#pragma mark - DropperView Delegate Methods
-- (void) dragStarted {
-    [self collapseDisposers];
-}
-- (void) dragCancelled {
 
-}
-
-- (void) dragCompleted {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", _selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-    [alert show];
-}
-- (void) dragMoveWithPercentage:(NSNumber *)percentage {
-    
-}
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Dragger Segue"]) {
         self.draggerViewController = segue.destinationViewController;
@@ -112,118 +66,54 @@
         self.listViewController= segue.destinationViewController;
     }
 }
-#pragma mark - Circular Disposer Delegate Methods
-- (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
-    [self collapseDisposers];
-}
-- (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
-    if (disposer == self.filterButtonDisposer) {
-        [self filterPressed:buttonTag];
-    } else {
-        [self optionsPressed:buttonTag];
-    }
-}
-
-- (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {
-    if (disposer == self.filterButtonDisposer) {
-        [self filterDisposed];
-    }else {
-        [self optionsDisposed];
-    }
-}
-#pragma mark - Disposer Buttons Pressed
-- (void) optionsPressed:(NSUInteger) optionNumber {
-    
-}
-- (void) filterPressed:(NSUInteger) filterNumber {
-    STRankingCriteria crit;
-    if(filterNumber == 0){
-        crit = ST_OVERALL;
-    } else if(filterNumber == 1){
-        crit = ST_BUZZ;
-    } else{
-        crit = ST_SOCIAL;
-    }
-    [self.draggerViewController.mapViewController setRankingCriteria:crit];
-    [self collapseDisposers];
-}
-#pragma mark - Disposer States
-- (void) collapseDisposers {
-    [self.suggestionButton setAlpha:1.0];
-    [self.suggestionButton setUserInteractionEnabled:YES];
-    if ([self.filterButtonDisposer isDisposing]) {
-        [self.filterButtonDisposer toggleDispose];
-    }
-    [self.filterButtonDisposer setAlpha:1.0];
-    [self.filterButtonDisposer setUserInteractionEnabled:YES];
-    if ([self.optionsButtonDisposer isDisposing]) {
-        [self.optionsButtonDisposer toggleDispose];
-    }
-    [self.optionsButtonDisposer setAlpha:1.0];
-    [self.optionsButtonDisposer setUserInteractionEnabled:YES];
-}
-- (void) optionsDisposed {
-    [self.suggestionButton setAlpha:0.2];
-    [self.suggestionButton setUserInteractionEnabled:NO];
-    if ([self.filterButtonDisposer isDisposing]) {
-        [self.filterButtonDisposer toggleDispose];
-    }
-    [self.filterButtonDisposer setAlpha:0.2];
-    [self.filterButtonDisposer setUserInteractionEnabled:NO];
-    
-}
-- (void) filterDisposed {
-    [self.suggestionButton setAlpha:0.3];
-    [self.suggestionButton setUserInteractionEnabled:NO];
-    if ([self.optionsButtonDisposer isDisposing]) {
-        [self.optionsButtonDisposer toggleDispose];
-    }
-    [self.optionsButtonDisposer setAlpha:0.3];
-    [self.optionsButtonDisposer setUserInteractionEnabled:NO];
-}
-
-#pragma mark - Dropper Movement
-
-- (void) showDropper {
-    if (!self.showingDropper) {
-        [self.dropperView showBasicInformation:^(BOOL completed){
-            _showingDropper = YES;
-        }];
-    }
-}
--(void) hideDropper {
-    if (self.showingDropper) {
-        [self.dropperView hide: ^(BOOL completed){
-            _showingDropper = NO;
-        }];
-    }
-}
 #pragma mark - Pushing View Controller
 - (void) pushBoardViewControllerWithPlace:(STPlace *)place {
     STBoardViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"STBoardViewControllerID"];
     viewController.place = place;
     [self.navigationController pushViewController:viewController animated:YES];
 }
-- (IBAction)stickerButtonPressed:(UIButton *)sender {
-    [self pushBoardViewControllerWithPlace:_selectedPlace];
+#pragma mark - Drawer Movement
+- (CGFloat) drawerInitialConstant {
+    return self.view.frame.size.width - 60.0;
 }
-- (IBAction)switcherButtonPressed:(UIButton *)sender {
-    if (self.showingMap) {
-        [self hideDropper];
-        [sender setImage:[UIImage imageNamed:@"icon_map.png"] forState:UIControlStateNormal];
-        self.suggestionButton.hidden = YES;
-        self.filterButtonDisposer.hidden = YES;
-        [UIView transitionFromView:self.mapViewContainer toView:self.listViewContainer duration:0.40 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL completed) {
-            _showingMap = NO;
-        }];
-    }else{
-        self.suggestionButton.hidden = NO;
-        self.filterButtonDisposer.hidden = NO;
-        [sender setImage:[UIImage imageNamed:@"icon_list.png"] forState:UIControlStateNormal];
-        [UIView transitionFromView:self.listViewContainer toView:self.mapViewContainer duration:0.40 options:UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL completed) {
-            _showingMap = YES;
-        }];
+- (void) handleTap:(UITapGestureRecognizer *) recognizer {
+    [self hideDrawer];
+}
+
+- (void) handleDrawerPan:(UIPanGestureRecognizer *) recognizer {
+    CGPoint translation = [recognizer translationInView:self.draggerViewController.view];
+    self.drawerConstraint.constant = MAX(0.0, [self drawerInitialConstant] + translation.x);
+    if (recognizer.state ==  UIGestureRecognizerStateCancelled || recognizer.state == UIGestureRecognizerStateEnded) {
+        CGFloat distanceToShow = abs(self.drawerConstraint.constant  - [self drawerInitialConstant]);
+        if (distanceToShow < self.drawerConstraint.constant) {
+            [self showDrawer];
+        }else {
+            [self hideDrawer];
+        }
     }
+}
+- (void) showDrawer {
+    self.drawerGestureRecognizer.enabled = YES;
+    self.closeDrawerGestureRecognizer.enabled = YES;
+    [self.draggerViewController.view setUserInteractionEnabled:NO];
+    
+    CGFloat constant = self.view.frame.size.width - 60.0;
+    self.drawerConstraint.constant = constant;
+    _showingDrawer = YES;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];    
+    }];
+}
+- (void) hideDrawer {
+    self.drawerGestureRecognizer.enabled = NO;
+    self.closeDrawerGestureRecognizer.enabled = NO;
+    [self.draggerViewController.view setUserInteractionEnabled:YES];
+    
+    self.drawerConstraint.constant = 0;
+    _showingDrawer = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - Dragger View Controller Delegate
@@ -238,5 +128,12 @@
 }
 - (void) draggerViewControllerDidHideCallout:(STDraggerViewController *)draggerViewController {
     NSLog(@"did hide callout");
+}
+- (void) draggerViewControllerSliderButtonPressed:(STDraggerViewController *)draggerViewController {
+    if (!self.showingDrawer) {
+        [self showDrawer];
+    } else {
+        [self hideDrawer];
+    }
 }
 @end

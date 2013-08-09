@@ -36,7 +36,21 @@
 {
     [super viewDidLoad];
     _rankingCriteria = ST_OVERALL;
-	// Do any additional setup after loading the view.
+
+
+    [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
+    [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-intercalation"] forState:UIControlStateNormal];
+    [self.filterDisposerView.buttons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
+    [self.filterDisposerView.buttons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
+    self.filterDisposerView.delegate = self;
+
+    [self.optionsDisposerView.mainButton setImage:[UIImage imageNamed:@"plus_yellow_50.png"] forState:UIControlStateNormal];
+    [self.optionsDisposerView.buttons[0] setImage:[UIImage imageNamed:@"plus-config-44.png"] forState:UIControlStateNormal];
+    [self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-historico-44.png"] forState:UIControlStateNormal];
+    [self.optionsDisposerView.buttons[2] setImage:[UIImage imageNamed:@"plus-me-44.png"] forState:UIControlStateNormal];
+    self.optionsDisposerView.delegate = self;
+    self.optionsDisposerView.shouldRotateMainButton = YES;
+    self.optionsDisposerView.disposeToTheRight = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +58,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)suggestionButtonPressed:(id)sender {
+    double k = -1;
+
+    for(int i = 0; i < [self.places count]; i++){
+        STPlace * place = [self.places objectAtIndex:i];
+        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
+            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
+            _selectedPlace = place;
+        }
+    }
+    [self selectPlace:_selectedPlace];
+}
+#pragma mark - Setters
 - (void) selectPlace:(STPlace *) place {
     _selectedPlace = place;
     [self.mapView selectAnnotation:place animated:NO];
@@ -64,6 +91,33 @@
         }
     }
 
+}
+#pragma mark - Circular Disposer Delegate
+- (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {
+    if (self.filterDisposerView == disposer) {
+        self.optionsDisposerView.alpha = 0.2;
+    }else {
+        self.filterDisposerView.alpha = 0.2;
+    }
+    self.suggestionButton.alpha = 0.2;
+}
+- (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
+    self.filterDisposerView.alpha = 1.0;
+    self.optionsDisposerView.alpha = 1.0;
+    self.suggestionButton.alpha = 1.0;
+}
+- (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
+    if (disposer == self.filterDisposerView) {
+        STRankingCriteria crit;
+        if(buttonTag == 0){
+            crit = ST_OVERALL;
+        } else if(buttonTag == 1){
+            crit = ST_BUZZ;
+        } else{
+            crit = ST_SOCIAL;
+        }
+        [self setRankingCriteria:crit];
+    }
 }
 #pragma mark - MapView Delegate
 - (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {

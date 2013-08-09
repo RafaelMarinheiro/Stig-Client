@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.contentInset = UIEdgeInsetsMake(-144.0, 0.0, 0.0, 0.0);
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
     _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
@@ -99,7 +100,7 @@
     if ([indexPath row]==0) {
         static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 244.0f)];
         
         [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -121,8 +122,6 @@
         [commentView populateCommentWithText:comment.commentText userName:user.userName userImageURL:user.userImageURL andTimestamp:comment.commentTimestamp];
     } else {
         [self requestDataForIndexPath:indexPath];
-        
-        NSLog(@"User: %@, COmment %@", user, comment);
     }
     return cell;
 }
@@ -180,7 +179,7 @@
     if (height) {
         return [height floatValue];
     }
-    return 100.0;
+    return 244.0;
 }
 - (IBAction)stickerButtonPressed:(UIButton *)sender {
     self.stickersView.hidden = !self.stickersView.hidden;

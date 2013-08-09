@@ -24,6 +24,7 @@
 @property (nonatomic, readonly, getter = isAnimating) BOOL animating;
 @property (nonatomic) BOOL disposeToTheRight;
 @property (nonatomic) BOOL disposeToTheBottom;
+@property (nonatomic) BOOL collapsesAfterButtonPress;
 
 -(void) toggleDispose;
 
@@ -34,5 +35,7 @@
 @optional
 - (void) circularButtonDisposerView:(CircularButtonDisposerView *) disposer buttonPressed:(NSUInteger) buttonTag;
 - (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *) disposer;
+- (void) circularButtonDisposerViewDidDispose:(CircularButtonDisposerView *) disposer;
 - (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *) disposer;
+- (void) circularButtonDisposerViewDidHide:(CircularButtonDisposerView *) disposer;
 @end

@@ -14,6 +14,7 @@
 {
     // Override point for customization after application launch.
      //[[UISearchBar appearance] setSearchFieldBackgroundImage:[UIImage imageNamed:@"Sticker Icon.png"]forState:UIControlStateNormal];
+    
     return YES;
 }
 							

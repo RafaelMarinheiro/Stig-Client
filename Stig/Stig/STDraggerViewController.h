@@ -31,6 +31,7 @@ typedef enum {
 - (void) toggleShowingDragger;
 - (void) showDraggerWithCompletion:(void (^)(BOOL completed) )completion;
 - (void) hideDraggerWithCompletion:(void (^)(BOOL completed) )completion;
+- (IBAction)drawerButtonPressed:(id)sender;
 
 @property (nonatomic, strong) NSArray *places;
 @property (nonatomic, strong) STCalloutViewController *calloutViewController;
@@ -43,5 +44,5 @@ typedef enum {
 - (void) draggerViewControllerDidShowCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerWillHideCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerDidHideCallout:(STDraggerViewController *) draggerViewController;
-
+- (void) draggerViewControllerSliderButtonPressed:(STDraggerViewController *) draggerViewController;
 @end

@@ -39,7 +39,7 @@ typedef enum {
 @end
 
 @protocol STDraggerViewControllerDelegate <NSObject>
-
+@optional
 - (void) draggerViewControllerWillShowCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerDidShowCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerWillHideCallout:(STDraggerViewController *) draggerViewController;

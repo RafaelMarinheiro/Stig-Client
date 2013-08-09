@@ -15,7 +15,7 @@
 #import "STPlacesMapViewController.h"
 #import "STPlacesListViewController.h"
 
-@interface STPlacesMainViewController : UIViewController <CircularButtonDisposerDelegate, STDraggerViewControllerDelegate>
+@interface STSliderViewController : UIViewController <CircularButtonDisposerDelegate, STDraggerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *listViewContainer;
 
 @property (weak, nonatomic) IBOutlet UIView *mapViewContainer;

@@ -35,7 +35,7 @@
 		0202F46217A05F7D0071D95C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F46117A05F7C0071D95C /* MapKit.framework */; };
 		0202F46417A05F850071D95C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F46317A05F850071D95C /* QuartzCore.framework */; };
 		0202F46917A05FB50071D95C /* STBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46617A05FB50071D95C /* STBoardViewController.m */; };
-		0202F46A17A05FB50071D95C /* STPlacesMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46817A05FB50071D95C /* STPlacesMainViewController.m */; };
+		0202F46A17A05FB50071D95C /* STSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0202F46817A05FB50071D95C /* STSliderViewController.m */; };
 		0202F47B17A060290071D95C /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46D17A060270071D95C /* check.png */; };
 		0202F47C17A060290071D95C /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46E17A060270071D95C /* check@2x.png */; };
 		0202F47D17A060290071D95C /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0202F46F17A060270071D95C /* clock.png */; };
@@ -69,10 +69,6 @@
 		026CAE4D17B3E3DB00DDD540 /* plus_yellow_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */; };
 		026CAE5017B3EB7000DDD540 /* STStor.m in Sources */ = {isa = PBXBuildFile; fileRef = 026CAE4F17B3EB7000DDD540 /* STStor.m */; };
 		026CAE5417B41E0900DDD540 /* STIg_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE5317B41E0900DDD540 /* STIg_icon.png */; };
-		026CAE5817B41EE900DDD540 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE5717B41EE900DDD540 /* Icon.png */; };
-		026CAE5A17B41EF000DDD540 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE5917B41EEF00DDD540 /* Icon@2x.png */; };
-		026CAE5E17B41FC600DDD540 /* Icon_57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE5D17B41FC600DDD540 /* Icon_57@2x.png */; };
-		026CAE6217B41FF300DDD540 /* Icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6117B41FF300DDD540 /* Icon_57.png */; };
 		026CAE6517B422FB00DDD540 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6317B422FB00DDD540 /* Icon.png */; };
 		026CAE6617B422FB00DDD540 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6417B422FB00DDD540 /* Icon@2x.png */; };
 		026CAE6D17B4351100DDD540 /* icone_acesso_44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6717B4351000DDD540 /* icone_acesso_44@2x.png */; };
@@ -176,8 +172,8 @@
 		0202F46317A05F850071D95C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0202F46517A05FB50071D95C /* STBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardViewController.h; sourceTree = "<group>"; };
 		0202F46617A05FB50071D95C /* STBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardViewController.m; sourceTree = "<group>"; };
-		0202F46717A05FB50071D95C /* STPlacesMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesMainViewController.h; sourceTree = "<group>"; };
-		0202F46817A05FB50071D95C /* STPlacesMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesMainViewController.m; sourceTree = "<group>"; };
+		0202F46717A05FB50071D95C /* STSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSliderViewController.h; sourceTree = "<group>"; };
+		0202F46817A05FB50071D95C /* STSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSliderViewController.m; sourceTree = "<group>"; };
 		0202F46D17A060270071D95C /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		0202F46E17A060270071D95C /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		0202F46F17A060270071D95C /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
@@ -230,10 +226,6 @@
 		026CAE4E17B3EB7000DDD540 /* STStor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStor.h; sourceTree = "<group>"; };
 		026CAE4F17B3EB7000DDD540 /* STStor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStor.m; sourceTree = "<group>"; };
 		026CAE5317B41E0900DDD540 /* STIg_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = STIg_icon.png; sourceTree = "<group>"; };
-		026CAE5717B41EE900DDD540 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		026CAE5917B41EEF00DDD540 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		026CAE5D17B41FC600DDD540 /* Icon_57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_57@2x.png"; sourceTree = "<group>"; };
-		026CAE6117B41FF300DDD540 /* Icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_57.png; sourceTree = "<group>"; };
 		026CAE6317B422FB00DDD540 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		026CAE6417B422FB00DDD540 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		026CAE6717B4351000DDD540 /* icone_acesso_44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icone_acesso_44@2x.png"; sourceTree = "<group>"; };
@@ -324,10 +316,6 @@
 		0202F40517A05E920071D95C = {
 			isa = PBXGroup;
 			children = (
-				026CAE6117B41FF300DDD540 /* Icon_57.png */,
-				026CAE5D17B41FC600DDD540 /* Icon_57@2x.png */,
-				026CAE5917B41EEF00DDD540 /* Icon@2x.png */,
-				026CAE5717B41EE900DDD540 /* Icon.png */,
 				026CAE5317B41E0900DDD540 /* STIg_icon.png */,
 				0202F41717A05E920071D95C /* Stig */,
 				0202F41017A05E920071D95C /* Frameworks */,
@@ -456,8 +444,8 @@
 			children = (
 				0202F46517A05FB50071D95C /* STBoardViewController.h */,
 				0202F46617A05FB50071D95C /* STBoardViewController.m */,
-				0202F46717A05FB50071D95C /* STPlacesMainViewController.h */,
-				0202F46817A05FB50071D95C /* STPlacesMainViewController.m */,
+				0202F46717A05FB50071D95C /* STSliderViewController.h */,
+				0202F46817A05FB50071D95C /* STSliderViewController.m */,
 				024549CF17A8420000D4D558 /* STPlacesMapViewController.h */,
 				024549D017A8420000D4D558 /* STPlacesMapViewController.m */,
 				024549D217A8462900D4D558 /* STPlacesListViewController.h */,
@@ -727,10 +715,6 @@
 				026CAE4C17B3E3DB00DDD540 /* plus_yellow_50.png in Resources */,
 				026CAE4D17B3E3DB00DDD540 /* plus_yellow_50@2x.png in Resources */,
 				026CAE5417B41E0900DDD540 /* STIg_icon.png in Resources */,
-				026CAE5817B41EE900DDD540 /* Icon.png in Resources */,
-				026CAE5A17B41EF000DDD540 /* Icon@2x.png in Resources */,
-				026CAE5E17B41FC600DDD540 /* Icon_57@2x.png in Resources */,
-				026CAE6217B41FF300DDD540 /* Icon_57.png in Resources */,
 				026CAE6517B422FB00DDD540 /* Icon.png in Resources */,
 				026CAE6617B422FB00DDD540 /* Icon@2x.png in Resources */,
 				026CAE6D17B4351100DDD540 /* icone_acesso_44@2x.png in Resources */,
@@ -769,7 +753,7 @@
 				0202F45417A05EF90071D95C /* STOOGetCommentsByPlaceFake.m in Sources */,
 				0202F45517A05EF90071D95C /* STOOResolvePlaceByIdFake.m in Sources */,
 				0202F46917A05FB50071D95C /* STBoardViewController.m in Sources */,
-				0202F46A17A05FB50071D95C /* STPlacesMainViewController.m in Sources */,
+				0202F46A17A05FB50071D95C /* STSliderViewController.m in Sources */,
 				0202F49D17A060610071D95C /* AFHTTPClient.m in Sources */,
 				0202F49E17A060610071D95C /* AFHTTPRequestOperation.m in Sources */,
 				0202F49F17A060610071D95C /* AFImageRequestOperation.m in Sources */,

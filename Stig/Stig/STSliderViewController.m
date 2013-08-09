@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 AwesomeInc. All rights reserved.
 //
 
-#import "STPlacesMainViewController.h"
+#import "STSliderViewController.h"
 #import "STBoardViewController.h"
 #import "STMapOverlayView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface STPlacesMainViewController ()
+@interface STSliderViewController ()
     
 @end
 
 
 
-@implementation STPlacesMainViewController
+@implementation STSliderViewController
 - (void)viewDidLoad
 
 {
@@ -115,20 +115,7 @@
         [self.view layoutIfNeeded];
     }];
 }
-
 #pragma mark - Dragger View Controller Delegate
-- (void) draggerViewControllerWillShowCallout:(STDraggerViewController *)draggerViewController {
-    NSLog(@"will show callout");
-}
-- (void) draggerViewControllerDidShowCallout:(STDraggerViewController *)draggerViewController {
-    NSLog(@"did show callout");
-}
-- (void) draggerViewControllerWillHideCallout:(STDraggerViewController *)draggerViewController {
-    NSLog(@"will hide callout");
-}
-- (void) draggerViewControllerDidHideCallout:(STDraggerViewController *)draggerViewController {
-    NSLog(@"did hide callout");
-}
 - (void) draggerViewControllerSliderButtonPressed:(STDraggerViewController *)draggerViewController {
     if (!self.showingDrawer) {
         [self showDrawer];

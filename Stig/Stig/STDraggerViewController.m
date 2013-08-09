@@ -7,7 +7,7 @@
 //
 
 #import "STDraggerViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 
 static CGFloat const STDraggerShowingHeight = 150.0;
@@ -55,6 +55,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 {
     [super viewDidLoad];
     _state = STDraggerStateHidden;
+    [self.view.layer setCornerRadius:5.0];
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];
     [self.draggedView addGestureRecognizer:self.dragGestureRecognizer];

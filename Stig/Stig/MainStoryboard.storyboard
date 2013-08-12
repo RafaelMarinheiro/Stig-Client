@@ -10,8 +10,9 @@
             <objects>
                 <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="wjR-LJ-aVm" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="kF1-hW-frl">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="kF1-hW-frl">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.44705882670000002" green="0.28627452250000002" blue="0.89019608500000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="dK9-Pj-bfG" kind="relationship" relationship="rootViewController" id="ast-XP-0qJ"/>
@@ -55,7 +56,7 @@
                             <constraint firstItem="QJT-ia-h1s" firstAttribute="width" secondItem="vge-6D-VaH" secondAttribute="width" type="user" id="uIx-kV-lG3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Stig" id="KWQ-EH-Aqe"/>
+                    <navigationItem key="navigationItem" title="Stig" id="kPT-hv-zlp"/>
                     <connections>
                         <outlet property="drawerConstraint" destination="cyf-4P-J27" id="6yh-23-71d"/>
                         <outlet property="listViewContainer" destination="vge-6D-VaH" id="z0U-hn-N8G"/>
@@ -346,7 +347,13 @@
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASd-iN-Evb">
                                 <items>
-                                    <navigationItem title="Title" id="xG2-6f-ujx"/>
+                                    <navigationItem title="Title" id="xG2-6f-ujx">
+                                        <barButtonItem key="rightBarButtonItem" title="Post" id="RVD-qV-gMf">
+                                            <connections>
+                                                <segue destination="P4e-NL-upe" kind="modal" id="Xlg-ly-5gW"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -389,7 +396,7 @@
             <objects>
                 <viewController id="P4e-NL-upe" customClass="STComposePostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BbD-cS-44L">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YId-hc-6rS">

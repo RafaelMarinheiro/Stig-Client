@@ -575,11 +575,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fo2-GY-M1b" firstAttribute="right" secondItem="Qcd-70-Orh" secondAttribute="right" constant="-60" type="user" id="3Cx-Ei-c0T"/>
                             <constraint firstItem="fo2-GY-M1b" firstAttribute="bottom" secondItem="qru-UG-JKd" secondAttribute="top" type="default" id="CaD-cX-UVH"/>
                             <constraint firstAttribute="bottom" secondItem="qru-UG-JKd" secondAttribute="bottom" type="user" id="Ocd-pi-kH5"/>
                             <constraint firstItem="qru-UG-JKd" firstAttribute="leading" secondItem="Qcd-70-Orh" secondAttribute="leading" type="default" id="RJ4-NU-aoJ"/>
                             <constraint firstItem="qru-UG-JKd" firstAttribute="trailing" secondItem="Qcd-70-Orh" secondAttribute="trailing" type="default" id="Xuy-qZ-Feu"/>
-                            <constraint firstItem="fo2-GY-M1b" firstAttribute="trailing" secondItem="Qcd-70-Orh" secondAttribute="trailing" type="default" id="Zin-Ne-mKo"/>
                             <constraint firstItem="fo2-GY-M1b" firstAttribute="top" secondItem="Qcd-70-Orh" secondAttribute="top" type="default" id="ckX-Jm-ius"/>
                             <constraint firstItem="fo2-GY-M1b" firstAttribute="leading" secondItem="Qcd-70-Orh" secondAttribute="leading" type="default" id="sjE-Yq-Rao"/>
                         </constraints>

@@ -27,6 +27,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *draggedView;
 @property (nonatomic) STDraggerState state;
 @property (nonatomic, weak) id <STDraggerViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 - (IBAction)toggleDragger:(id)sender;
 - (void) toggleShowingDragger;
 - (void) showDraggerWithCompletion:(void (^)(BOOL completed) )completion;

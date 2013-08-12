@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet CircularButtonDisposerView *optionsDisposerView;
 - (IBAction)suggestionButtonPressed:(id)sender;
 - (void) selectPlace:(STPlace *) place;
+- (STPlace *) selectedPlace;
 @end
 
 @protocol STPlacesMapViewControllerDelegate <NSObject>

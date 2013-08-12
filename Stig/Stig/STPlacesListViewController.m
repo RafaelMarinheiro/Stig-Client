@@ -29,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,23 +61,24 @@
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchresultscell"];
+         NSLog(@"Search");
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
             return cell;
         }
     }
-    
+    NSLog(@"Normal");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
 //    if (!cell) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
 //    }
     STPlace *place = self.places[indexPath.row];
-    [cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
+    //[cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setText:place.placeName];
-    [cell.textLabel setTextColor:[UIColor blackColor]];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     //[cell.detailTextLabel setText:place.placeDescription];
     return cell;
 }

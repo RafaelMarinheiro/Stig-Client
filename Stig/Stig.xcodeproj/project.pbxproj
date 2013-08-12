@@ -67,7 +67,6 @@
 		024549DE17A8D44E00D4D558 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */; };
 		026CAE4C17B3E3DB00DDD540 /* plus_yellow_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE4A17B3E3DB00DDD540 /* plus_yellow_50.png */; };
 		026CAE4D17B3E3DB00DDD540 /* plus_yellow_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */; };
-		026CAE5017B3EB7000DDD540 /* STStor.m in Sources */ = {isa = PBXBuildFile; fileRef = 026CAE4F17B3EB7000DDD540 /* STStor.m */; };
 		026CAE5417B41E0900DDD540 /* STIg_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE5317B41E0900DDD540 /* STIg_icon.png */; };
 		026CAE6517B422FB00DDD540 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6317B422FB00DDD540 /* Icon.png */; };
 		026CAE6617B422FB00DDD540 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 026CAE6417B422FB00DDD540 /* Icon@2x.png */; };
@@ -90,8 +89,10 @@
 		027E13D717A5FEC900C44DC7 /* Sticker Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D417A5FEC900C44DC7 /* Sticker Icon.png */; };
 		027E13DA17A60B9100C44DC7 /* Button Back NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D817A60B9100C44DC7 /* Button Back NOVO.png */; };
 		027E13DB17A60B9100C44DC7 /* Sticker Icon NOVO.png in Resources */ = {isa = PBXBuildFile; fileRef = 027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */; };
+		0293918917B881A000B618A4 /* barra_topo_stig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293918717B881A000B618A4 /* barra_topo_stig@2x.png */; };
+		0293918A17B881A000B618A4 /* barra_topo_stig.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293918817B881A000B618A4 /* barra_topo_stig.png */; };
+		0293918D17B891D400B618A4 /* STComposePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0293918C17B891D400B618A4 /* STComposePostViewController.m */; };
 		0298D66417A71F46000E9557 /* STStickersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298D66317A71F46000E9557 /* STStickersView.m */; };
-		029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D2917A44452008F4AA2 /* barra_topo_stig.png */; };
 		029E2D3917A475EA008F4AA2 /* filter_yellow_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D3317A475EA008F4AA2 /* filter_yellow_50.png */; };
 		029E2D3A17A475EA008F4AA2 /* filter_yellow_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D3417A475EA008F4AA2 /* filter_yellow_50@2x.png */; };
 		029E2D3B17A475EA008F4AA2 /* filter-buzz-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 029E2D3517A475EA008F4AA2 /* filter-buzz-44.png */; };
@@ -223,8 +224,6 @@
 		024549DD17A8D44E00D4D558 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		026CAE4A17B3E3DB00DDD540 /* plus_yellow_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_yellow_50.png; sourceTree = "<group>"; };
 		026CAE4B17B3E3DB00DDD540 /* plus_yellow_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_yellow_50@2x.png"; sourceTree = "<group>"; };
-		026CAE4E17B3EB7000DDD540 /* STStor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStor.h; sourceTree = "<group>"; };
-		026CAE4F17B3EB7000DDD540 /* STStor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStor.m; sourceTree = "<group>"; };
 		026CAE5317B41E0900DDD540 /* STIg_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = STIg_icon.png; sourceTree = "<group>"; };
 		026CAE6317B422FB00DDD540 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		026CAE6417B422FB00DDD540 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -248,9 +247,12 @@
 		027E13D417A5FEC900C44DC7 /* Sticker Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon.png"; sourceTree = "<group>"; };
 		027E13D817A60B9100C44DC7 /* Button Back NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Back NOVO.png"; sourceTree = "<group>"; };
 		027E13D917A60B9100C44DC7 /* Sticker Icon NOVO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sticker Icon NOVO.png"; sourceTree = "<group>"; };
+		0293918717B881A000B618A4 /* barra_topo_stig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barra_topo_stig@2x.png"; sourceTree = "<group>"; };
+		0293918817B881A000B618A4 /* barra_topo_stig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig.png; sourceTree = "<group>"; };
+		0293918B17B891D400B618A4 /* STComposePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STComposePostViewController.h; sourceTree = "<group>"; };
+		0293918C17B891D400B618A4 /* STComposePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STComposePostViewController.m; sourceTree = "<group>"; };
 		0298D66217A71F46000E9557 /* STStickersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickersView.h; sourceTree = "<group>"; };
 		0298D66317A71F46000E9557 /* STStickersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickersView.m; sourceTree = "<group>"; };
-		029E2D2917A44452008F4AA2 /* barra_topo_stig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barra_topo_stig.png; sourceTree = "<group>"; };
 		029E2D3317A475EA008F4AA2 /* filter_yellow_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter_yellow_50.png; sourceTree = "<group>"; };
 		029E2D3417A475EA008F4AA2 /* filter_yellow_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter_yellow_50@2x.png"; sourceTree = "<group>"; };
 		029E2D3517A475EA008F4AA2 /* filter-buzz-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-buzz-44.png"; sourceTree = "<group>"; };
@@ -360,8 +362,6 @@
 				0202F44617A05EE20071D95C /* Model */,
 				0202F46C17A05FF70071D95C /* View */,
 				0202F41817A05E920071D95C /* Supporting Files */,
-				026CAE4E17B3EB7000DDD540 /* STStor.h */,
-				026CAE4F17B3EB7000DDD540 /* STStor.m */,
 			);
 			path = Stig;
 			sourceTree = "<group>";
@@ -387,7 +387,8 @@
 				029E2D3F17A4760D008F4AA2 /* Filter Icons */,
 				029E2D4017A47621008F4AA2 /* Options Icons */,
 				0FEE9E8317A4691E00722EA6 /* callout.png */,
-				029E2D2917A44452008F4AA2 /* barra_topo_stig.png */,
+				0293918717B881A000B618A4 /* barra_topo_stig@2x.png */,
+				0293918817B881A000B618A4 /* barra_topo_stig.png */,
 				029E2D2817A44324008F4AA2 /* Sticker Icons */,
 				0202F4A617A060670071D95C /* AFNetworking */,
 				0202F48917A0602E0071D95C /* Resources */,
@@ -454,6 +455,8 @@
 				024549D617A865D600D4D558 /* STCalloutViewController.m */,
 				024549D817A8A63A00D4D558 /* STDraggerViewController.h */,
 				024549D917A8A63A00D4D558 /* STDraggerViewController.m */,
+				0293918B17B891D400B618A4 /* STComposePostViewController.h */,
+				0293918C17B891D400B618A4 /* STComposePostViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -683,7 +686,6 @@
 				02BE5EC617A3307300FDC09F /* tagfila 91x91px.png in Resources */,
 				02BE5EC717A3307300FDC09F /* tagmusic91x91px.png in Resources */,
 				02BE5EC817A3307300FDC09F /* tagpessoa 91x91px.png in Resources */,
-				029E2D2A17A44452008F4AA2 /* barra_topo_stig.png in Resources */,
 				0FEE9E8417A4691E00722EA6 /* callout.png in Resources */,
 				029E2D3917A475EA008F4AA2 /* filter_yellow_50.png in Resources */,
 				029E2D3A17A475EA008F4AA2 /* filter_yellow_50@2x.png in Resources */,
@@ -729,6 +731,8 @@
 				026CAE7C17B4462D00DDD540 /* plus-historico-44@2x.png in Resources */,
 				026CAE7D17B4462D00DDD540 /* plus-me-44.png in Resources */,
 				026CAE7E17B4462D00DDD540 /* plus-me-44@2x.png in Resources */,
+				0293918917B881A000B618A4 /* barra_topo_stig@2x.png in Resources */,
+				0293918A17B881A000B618A4 /* barra_topo_stig.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,8 +779,8 @@
 				02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */,
 				02EEE91A17A9666A009B1C37 /* STStickerSelectorView.m in Sources */,
 				02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */,
-				026CAE5017B3EB7000DDD540 /* STStor.m in Sources */,
 				026CAE8117B45A3E00DDD540 /* STSticker.m in Sources */,
+				0293918D17B891D400B618A4 /* STComposePostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,8 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     //[[UISearchBar appearance] setSearchFieldBackgroundImage:[UIImage imageNamed:@"Sticker Icon.png"]forState:UIControlStateNormal];
-    
+    UIFont *testFont = [UIFont fontWithName:@"MarketingScript" size:30.0];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont:testFont,UITextAttributeTextColor:[UIColor whiteColor],
+                          UITextAttributeTextShadowColor:[UIColor clearColor]}];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
+    self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+
     return YES;
 }
 							

@@ -21,6 +21,16 @@
 - (void)viewDidLoad
 
 {
+
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
+    [button addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    //[self.customNavigationBar.items[0] setLeftBarButtonItem:barButtonItem];
     _showingDrawer = NO;
     self.drawerGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrawerPan:)];
     self.drawerGestureRecognizer.enabled = NO;
@@ -114,6 +124,13 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+}
+- (void) leftButtonPressed:(id) sender {
+    if (!self.showingDrawer) {
+        [self showDrawer];
+    } else {
+        [self hideDrawer];
+    }
 }
 #pragma mark - Dragger View Controller Delegate
 - (void) draggerViewControllerSliderButtonPressed:(STDraggerViewController *)draggerViewController {

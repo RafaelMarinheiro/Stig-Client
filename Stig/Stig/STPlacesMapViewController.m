@@ -24,6 +24,9 @@
     }
     return self;
 }
+- (STPlace *) selectedPlace {
+    return _selectedPlace;
+}
 - (void) setPlaces:(NSArray *)places {
     _places = places;
 

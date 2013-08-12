@@ -7,6 +7,7 @@
 //
 
 #import "STAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation STAppDelegate
 
@@ -19,6 +20,8 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
 
+    // See if the app has a valid token for the current state.
+    
     return YES;
 }
 							
@@ -47,6 +50,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 @end

@@ -11,6 +11,8 @@
 #import "STMapOverlayView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import <FacebookSDK/FacebookSDK.h>
+
 @interface STSliderViewController ()
     
 @end
@@ -21,6 +23,24 @@
 - (void)viewDidLoad
 
 {
+
+    [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+            completionHandler:^(FBSession *session,
+                                FBSessionState status,
+                                NSError *error) {
+                if ([FBSession.activeSession isOpen]) {
+                    [[FBRequest requestForMe] startWithCompletionHandler:
+                     ^(FBRequestConnection *connection,
+                       NSDictionary<FBGraphUser> *user,
+                       NSError *error) {
+                         if(!error){
+                             NSLog([[FBSession.activeSession accessTokenData] accessToken]);
+                         }
+                     }];
+                }
+            }];
+    
+
 
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

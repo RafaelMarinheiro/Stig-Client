@@ -29,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,8 +44,10 @@
     return 1;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.places) {
-        return [self.places count];
+    if (tableView == self.tableView) {
+        if (self.places) {
+            return [self.places count];
+        }
     }
     return 0;
 }
@@ -58,18 +59,26 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchresultscell"];
+         NSLog(@"Search");
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
+            return cell;
+        }
+    }
+    NSLog(@"Normal");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
 //    if (!cell) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
 //    }
     STPlace *place = self.places[indexPath.row];
-    [cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
+    //[cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:20.0]];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setText:place.placeName];
-    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
-    [cell.textLabel setTextColor:[UIColor blackColor]];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     //[cell.detailTextLabel setText:place.placeDescription];
     return cell;
 }
@@ -105,7 +114,7 @@
 }
 #pragma mark - Table View Delegate Methods
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 75.0;
+    return 50.0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @interface STLocation : NSObject
+
 @property (nonatomic, strong) NSNumber *latitude;
 @property (nonatomic, strong) NSNumber *longitude;
 

@@ -7,10 +7,10 @@
 //
 
 #import "STDraggerViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
-
-static CGFloat const STDraggerShowingHeight = 150.0;
+static CGFloat const STDraggerShowingHeight = 144.0;
 static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
 static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
@@ -23,18 +23,17 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 @implementation STDraggerViewController
 
 - (CGFloat) showingHeight {
-    return 150.0;
+    return 144.0;
 }
 - (CGFloat) animationInitialHeight {
     return [self showingHeight] + 50.0;
 }
 - (CGFloat) animationFinalHeight {
     CGFloat totalFrameHeight = self.view.frame.size.height;
-    return totalFrameHeight * 0.8;
+    return totalFrameHeight * 1.03;
 }
 - (CGFloat) animationPercentage {
     CGFloat constraintConstant = -self.verticalSpaceConstraint.constant;
-    NSLog(@"[%0.2f] [%0.2f] [%0.2f]", [self animationInitialHeight], constraintConstant ,[self animationFinalHeight]);
     if (constraintConstant <= [self animationInitialHeight]) {
         return 0.0;
     }else if (constraintConstant >= [self animationFinalHeight]){
@@ -56,9 +55,21 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 {
     [super viewDidLoad];
     _state = STDraggerStateHidden;
+    [self.view.layer setCornerRadius:5.0];
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];
     [self.draggedView addGestureRecognizer:self.dragGestureRecognizer];
+
+
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
+    [button addTarget:self action:@selector(drawerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+    [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,18 +122,11 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 
         CGFloat percentage = [self animationPercentage];
         [self.calloutViewController changeForPercentage:percentage];
-//        if (-self.verticalSpaceConstraint.constant >= STDraggerPercentageInitial) {
-//            CGFloat percentage = (-self.verticalSpaceConstraint.constant-STDraggerPercentageInitial)/STDraggerPercentageFinal;
-//            [self.calloutViewController changeForPercentage:percentage];
-//        }
-
-    
-        //NSLog(@"dragger view size: %@ %0.2f", NSStringFromCGSize(self.view.frame.size), percentage);
         if(percentage >= 1.0){
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
                 [self.calloutViewController changeForPercentage:0.0];
             }];
-            
+            [self draggerCompletedCheckin];
 
         } else if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
             [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
@@ -176,6 +180,10 @@ static CGFloat const STDraggerBounceDelta = 5.0;
     }
 }
 
+- (IBAction)drawerButtonPressed:(id)sender {
+    [self draggerSliderButtonPressed];
+}
+
 - (void) moveDraggerToShowingPositionWithCompletion:( void (^)(BOOL completed)) completion {
     if (self.state == STDraggerStateDragging) {
         _state = STDraggerStateAnimating;
@@ -198,6 +206,15 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 }
 
 #pragma mark - Delegate Notification
+- (void) draggerCompletedCheckin {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", self.mapViewController.selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+    [alert show];
+}
+- (void) draggerSliderButtonPressed {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerSliderButtonPressed:)]) {
+        [self.delegate draggerViewControllerSliderButtonPressed:self];
+    }
+}
 - (void) draggerWillShowCallout {
     if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerWillShowCallout:)]) {
         [self.delegate draggerViewControllerWillShowCallout:self];

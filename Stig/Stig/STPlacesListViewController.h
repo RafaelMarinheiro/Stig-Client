@@ -10,5 +10,7 @@
 #import "STPlace.h"
 @interface STPlacesListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UISearchDisplayController *searchDisplay;
 @property (nonatomic, strong) NSArray *places;
 @end

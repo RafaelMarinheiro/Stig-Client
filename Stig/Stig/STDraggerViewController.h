@@ -27,10 +27,12 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *draggedView;
 @property (nonatomic) STDraggerState state;
 @property (nonatomic, weak) id <STDraggerViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 - (IBAction)toggleDragger:(id)sender;
 - (void) toggleShowingDragger;
 - (void) showDraggerWithCompletion:(void (^)(BOOL completed) )completion;
 - (void) hideDraggerWithCompletion:(void (^)(BOOL completed) )completion;
+- (IBAction)drawerButtonPressed:(id)sender;
 
 @property (nonatomic, strong) NSArray *places;
 @property (nonatomic, strong) STCalloutViewController *calloutViewController;
@@ -38,10 +40,10 @@ typedef enum {
 @end
 
 @protocol STDraggerViewControllerDelegate <NSObject>
-
+@optional
 - (void) draggerViewControllerWillShowCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerDidShowCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerWillHideCallout:(STDraggerViewController *) draggerViewController;
 - (void) draggerViewControllerDidHideCallout:(STDraggerViewController *) draggerViewController;
-
+- (void) draggerViewControllerSliderButtonPressed:(STDraggerViewController *) draggerViewController;
 @end

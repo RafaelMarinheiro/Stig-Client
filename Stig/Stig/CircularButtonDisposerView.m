@@ -8,7 +8,7 @@
 
 #import "CircularButtonDisposerView.h"
 
-@implementation CircularButtonDisposerView
+@implementation CircularButtonDisposerView;
 
 #pragma mark -
 #pragma mark Initialization
@@ -35,6 +35,7 @@
     _disposeToTheBottom = NO;
     _disposing = NO;
     _animating = NO;
+    _collapsesAfterButtonPress = YES;
     self.disposeRadius = @70.0;
     self.disposeAngle = @(M_PI/2.0);
     self.disposeCenter = CGPointMake(30.0, 30.0);
@@ -58,16 +59,11 @@
     }
     self.buttons = buttons;
 
-    [self.buttons[0] setImage:[UIImage imageNamed:@"filter-config.png"] forState:UIControlStateNormal];
-    [self.buttons[1] setImage:[UIImage imageNamed:@"filter-historico.png"] forState:UIControlStateNormal];
-    [self.buttons[2] setImage:[UIImage imageNamed:@"filter-me.png"] forState:UIControlStateNormal];
-    
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
  
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
-    [self.mainButton setImage:[UIImage imageNamed:@"plus_yellow_50.png"] forState:UIControlStateNormal];
     [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
@@ -94,8 +90,9 @@
     return CGRectContainsPoint(self.bounds, point);
 }
 - (void) disposedButtonPressed:(UIButton *) button {
-    if (self.delegate) {
-        [self.delegate circularButtonDisposerView:self buttonPressed:button.tag];
+    [self circularButtonPressed:button.tag];
+    if (self.collapsesAfterButtonPress) {
+        [self toggleDispose];
     }
 }
 
@@ -138,10 +135,9 @@
 #pragma mark State Changes
 - (void) dispose:(void (^)(BOOL completed)) completion{
     if (!self.disposing && !self.animating) {
+        [self.superview bringSubviewToFront:self];
         _animating = YES;
-        if (self.delegate) {
-            [self.delegate circularButtonDisposerViewWillDispose:self];
-        }
+        [self circularButtonWillDispose];
         if (self.shouldRotateMainButton) {
             CGAffineTransform mainTransform = CGAffineTransformMakeRotation(M_PI/ 4.1);
 
@@ -152,9 +148,6 @@
         for (int i = 0 ; i < self.numberOfButtons; i++) {
             UIView *view = self.buttons[i];
             view.hidden = NO;
-            
-            
-
             CGAffineTransform translation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             CGAffineTransform bounceTranslation = [self transformForPosition:i withDisposeRadius:[self.disposeRadius floatValue] - self.bounceRadiusDelta disposeAngle:[self.disposeAngle floatValue] andAnimationCenter:self.disposeCenter];
             float deltaTiming = (i +0.0)/ 100.0;
@@ -172,6 +165,7 @@
                             _disposing = YES;
                             _animating = NO;
                             completion(completed);
+                            [self circularButtonDidDispose];
                         }
                     }];
                 }];
@@ -182,9 +176,7 @@
 - (void) hideButtons:(void (^)(BOOL completed)) completion{
     if (self.disposing && !self.animating) {
         _animating = YES;
-        if (self.delegate) {
-            [self.delegate circularButtonDisposerViewWillHide:self];
-        }
+        [self circularButtonWillHide];
         if (self.shouldRotateMainButton) {
             [UIView animateWithDuration:0.2 animations:^{
                 self.mainButton.transform = CGAffineTransformIdentity;
@@ -205,12 +197,38 @@
                         _disposing = NO;
                         _animating = NO;
                         completion(completed);
+                        [self circularButtonDidHide];
                     }
                 }];
             }];
         }
-        
     }
-    
+}
+
+#pragma mark - Delegate Callbacks
+- (void) circularButtonWillDispose {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circularButtonDisposerViewWillDispose:)]) {
+        [self.delegate circularButtonDisposerViewWillDispose:self];
+    }
+}
+- (void) circularButtonDidDispose {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circularButtonDisposerViewDidDispose:)]) {
+        [self.delegate circularButtonDisposerViewDidDispose:self];
+    }
+}
+- (void) circularButtonWillHide {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circularButtonDisposerViewWillHide:)]) {
+        [self.delegate circularButtonDisposerViewWillHide:self];
+    }
+}
+- (void) circularButtonDidHide {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circularButtonDisposerViewDidHide:)]) {
+        [self.delegate circularButtonDisposerViewDidHide:self];
+    }
+}
+- (void) circularButtonPressed:(NSUInteger) buttonTag{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circularButtonDisposerView:buttonPressed:)]) {
+        [self.delegate circularButtonDisposerView:self buttonPressed:buttonTag];
+    }
 }
 @end

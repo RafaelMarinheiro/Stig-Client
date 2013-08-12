@@ -20,6 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
     }
     return self;
 }

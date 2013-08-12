@@ -17,7 +17,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont:testFont,UITextAttributeTextColor:[UIColor whiteColor],
                           UITextAttributeTextShadowColor:[UIColor clearColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
-    self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
 
     return YES;
 }

@@ -40,22 +40,7 @@
     _overlord = [STHiveCluster spawnOverlord];
     [self.topBatTitle setText:self.place.placeName];
     [self requestData];
-
-
     // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
-
-
-
-
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     [button addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -65,7 +50,10 @@
 
     [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
 
-    [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    //[self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    [self setDefinesPresentationContext:YES];
+    [self setProvidesPresentationContextTransitionStyle:YES];
+    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
 }
 
@@ -174,48 +162,5 @@
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (BOOL) textFieldShouldReturn:(UITextField *)textField  {
-    [textField resignFirstResponder];
-    return YES;
-}
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {
-    //self.view.transform = CGAffineTransformMakeTranslation(0.0, -300.0);
-    return YES;
-}
-- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
-    //self.view.transform = CGAffineTransformIdentity;
-    return YES;
-}
-
-
-- (void)keyboardWillHide:(NSNotification *)n
-{
-
-    NSDictionary* userInfo = [n userInfo];
-    NSNumber *number = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    double duration = [number doubleValue];
-    [UIView animateWithDuration:duration animations:^{
-        [self.view setTransform:CGAffineTransformIdentity];
-    }];
-}
-
-- (void)keyboardWillShow:(NSNotification *)n
-{
-    
-
-    NSDictionary* userInfo = [n userInfo];
-
-    NSNumber *number = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    double duration = [number doubleValue];
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    [UIView animateWithDuration:duration animations:^{
-        [self.view setTransform:CGAffineTransformMakeTranslation(0.0, -keyboardSize.height)];
-    }];
-    // resize the noteView
-    
 }
 @end

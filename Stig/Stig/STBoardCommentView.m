@@ -9,68 +9,46 @@
 #import "STBoardCommentView.h"
 
 
-@implementation STBoardCommentView{
-    NSAttributedString *_commentString;
-}
-- (void) populateCommentWithText:(NSString *) commentText userName:(NSString *)userName userImageURL:(NSString *) userImageURL andTimestamp:(NSDate *)timestamp {
-    UIColor *nameColor = [UIColor colorWithRed:48.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1.0];
+@implementation STBoardCommentView
 
-    UIColor *commentColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
-    
+- (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
+    self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
+    self.stickersView.stickers = comment.commentStickers;
+    [self.commentLabel sizeToFit];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+}
+- (NSAttributedString *) textWithComment:(STBoardComment *) comment andUser:(STUser *) user {
+    NSMutableAttributedString *nameString = [[self attributedUserNameStringWithUser:user] mutableCopy];
+    [nameString appendAttributedString:[self attributedCommentTextStringWithComment:comment]];
+    [nameString appendAttributedString:[self attributedTimestampStringWithDate:comment.commentTimestamp]];
+    return nameString;
+}
+- (NSAttributedString *) attributedUserNameStringWithUser:(STUser *) user {
+    UIColor *nameColor = [UIColor colorWithRed:48.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1.0];
     NSDictionary *nameAttributes = @{NSFontAttributeName:self.userNameFont,
                                      NSForegroundColorAttributeName:nameColor};
+    NSMutableAttributedString *nameString = [[NSMutableAttributedString alloc] initWithString:user.userName attributes:nameAttributes];
+    return nameString;
+}
+- (NSAttributedString *) attributedTimestampStringWithDate:(NSDate *) date {
+    UIColor *timeColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
+    NSString *time = [self niceTimeInterval:[date timeIntervalSinceNow]];
+    NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
+    [mutParaStyle setAlignment:NSTextAlignmentRight];
+    NSDictionary *timeAttributes = @{NSFontAttributeName:[self.commentFont fontWithSize:13.0],
+                                     NSForegroundColorAttributeName:[timeColor colorWithAlphaComponent:0.8],
+                                     NSParagraphStyleAttributeName:mutParaStyle};
     
+    NSAttributedString *timeString = [[NSAttributedString alloc] initWithString:time attributes:timeAttributes];
+    return timeString;
+}
+- (NSAttributedString *) attributedCommentTextStringWithComment:(STBoardComment *) comment {
+    UIColor *commentColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
     NSDictionary *commentAttributes = @{NSFontAttributeName:self.commentFont,
                                         NSForegroundColorAttributeName:commentColor};
-    NSAttributedString *commentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", commentText] attributes:commentAttributes];
-
-    NSString *time = [self niceTimeInterval:[timestamp timeIntervalSinceNow]];
-
-
-
-    NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
-
-    [mutParaStyle setAlignment:NSTextAlignmentRight];
-
-    
-    
-    NSDictionary *timeAttributes = @{NSFontAttributeName:[self.commentFont fontWithSize:13.0],
-                                     NSForegroundColorAttributeName:[commentColor colorWithAlphaComponent:0.8],NSParagraphStyleAttributeName:mutParaStyle};
-
-
-
-    NSAttributedString *timeString = [[NSAttributedString alloc] initWithString:time attributes:timeAttributes];
-
-    NSMutableAttributedString *nameString = [[NSMutableAttributedString alloc] initWithString:userName attributes:nameAttributes];
-
-    
-    
-    [nameString appendAttributedString:commentString];
-    [nameString appendAttributedString:timeString];
-    _commentString = nameString;
-    self.commentLabel.attributedText = nameString;
-    self.stickersView.stickers = [self randomSticker];
-    [self.commentLabel sizeToFit];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:userImageURL]];
-    
-    
-    
+    NSAttributedString *commentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", comment.commentText] attributes:commentAttributes];
+    return commentString;
 }
-- (CGFloat) cellHeight {
-    CGRect rect = [_commentString boundingRectWithSize:CGSizeMake(230.0, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    return 2.0*10.0 + rect.size.height;
-}
-
-- (NSArray *) randomSticker {
-    NSMutableArray *toReturn = [NSMutableArray arrayWithCapacity:6];
-    int count = rand() % 7;
-    for (int i = 0; i<count; i++) {
-        int n = rand() % 6;
-        [toReturn addObject:@(n)];
-    }
-    return toReturn;
-}
-
 - (NSString *) niceTimeInterval:(NSTimeInterval) time {
     time = - time;
     NSUInteger intTime = time;

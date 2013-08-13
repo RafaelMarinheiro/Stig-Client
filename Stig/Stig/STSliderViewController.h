@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "STOverlord.h"
 #import "CircularButtonDisposerView.h"
-#import "STDropperView.h"
-#import "STStickersView.h"
+#import "STCommentStickerView.h"
 #import "STDraggerViewController.h"
 #import "STPlacesMapViewController.h"
 #import "STPlacesListViewController.h"

@@ -21,16 +21,6 @@
 - (void)viewDidLoad
 
 {
-
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
-    [button addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
-
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    //[self.customNavigationBar.items[0] setLeftBarButtonItem:barButtonItem];
     _showingDrawer = NO;
     self.drawerGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrawerPan:)];
     self.drawerGestureRecognizer.enabled = NO;

@@ -7,7 +7,7 @@
 //
 
 #import "STBoardViewController.h"
-
+#import "STComposePostViewController.h"
 
 @interface STBoardViewController ()
  
@@ -133,7 +133,7 @@
         STBoardCommentView *commentView = (STBoardCommentView *) [cell.contentView viewWithTag:100];
         commentView.commentFont = self.commentFont;
         commentView.userNameFont = self.userNameFont;
-        [commentView populateCommentWithText:comment.commentText userName:user.userName userImageURL:user.userImageURL andTimestamp:comment.commentTimestamp];
+        [commentView populateWithComment:comment andUser:user];
     } else {
         NSLog(@"Will need to hit cache");
         [self requestDataForIndexPath:indexPath];
@@ -162,5 +162,13 @@
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)postButtonPressed:(id)sender {
+    STComposePostViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
+    [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    [vc setModalPresentationStyle:UIModalPresentationCurrentContext];
+    [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 @end

@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "UIImageView+AFNetworking.h"
-#import "STStickersView.h"
+#import "STCommentStickerView.h"
+#import "STBoardComment.h"
+#import "STUser.h"
 @interface STBoardCommentView : UIView
 
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 @property (nonatomic, weak) IBOutlet UITextView *commentLabel;
 @property (nonatomic, strong) UIFont *commentFont;
 @property (nonatomic, strong) UIFont *userNameFont;
-- (void) populateCommentWithText:(NSString *) commentText userName:(NSString *)userName userImageURL:(NSString *) userImageURL andTimestamp:(NSDate *)timestamp;
 @property (nonatomic, readonly) CGFloat cellHeight;
-@property (nonatomic, weak) IBOutlet STStickersView *stickersView;
+@property (nonatomic, weak) IBOutlet STCommentStickerView *stickersView;
+- (void) populateWithComment:(STBoardComment *) comment andUser:(STUser *) user;
 @end

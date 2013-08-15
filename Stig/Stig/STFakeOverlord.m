@@ -9,20 +9,39 @@
 #import "STFakeOverlord.h"
 #import "STSafeMutableDictionary.h"
 
+@interface STBoardCommentQueryContext : NSObject
+
+@property (nonatomic, strong) NSDate * timestamp;
+@property (nonatomic, strong) STPlace * place;
+@property (nonatomic, strong) NSArray * stickers;
+
+@end
+
+@implementation STBoardCommentQueryContext
+
+@end
+
+
 @implementation STFakeOverlord{
+    NSUInteger _counter;
     STSafeMutableDictionary * _users;
     STSafeMutableDictionary * _places;
     STSafeMutableDictionary * _commentsByPlaces;
+    STSafeMutableDictionary * _tokenToBoardQuery;
     STUser * _user;
+    NSLock * _lock;
 }
 
 - (id) init{
     self = [super init];
     if(self){
         _user = nil;
+        _counter = 0;
+        _lock = [[NSLock alloc] init];
         [self loadUsers];
         [self loadPlaces];
         [self loadComments];
+        _tokenToBoardQuery = [[STSafeMutableDictionary alloc] init];
     }
     return self;
 }
@@ -393,4 +412,134 @@
                            error: (void (^) (NSError* error)) errorBlock{
     [self getPlacesWithSearchTerm:term pageNumber:pageNumber requestNew:YES completion:completionBlock error:errorBlock];
 }
+
+- (STOverlordToken) requestTokenForBoard: (STPlace *) place
+                   filteringWithStickers:(NSArray *) stickers{
+    NSUInteger num = 0;
+    [_lock lock];
+        num = _counter;
+        _counter++;
+    [_lock unlock];
+
+    STBoardCommentQueryContext * context = [[STBoardCommentQueryContext alloc] init];
+
+    context.place = place;
+    context.stickers = stickers;
+    context.timestamp = [[NSDate alloc] init];
+
+    [_tokenToBoardQuery setObject:context forKey:@(num)];
+
+    return num;
+}
+
+- (void) getCommentAndUserForToken:(STOverlordToken)token andPosition:(NSUInteger)position completion:(void (^)(STBoardComment *, STUser *))completionBlock error:(void (^)(NSError *))errorBlock{
+
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+
+    if(context == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+    }
+
+    STSafeMutableDictionary * comments = [_commentsByPlaces objectForKey:context.place.placeId];
+
+    if(comments == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Place does not exist" code:43 userInfo:nil]);
+        });
+    }
+
+    NSArray * commentArray = [comments allValues];
+
+    commentArray = [commentArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        return [[((STBoardComment *) obj1) commentTimestamp] compare:[((STBoardComment *) obj2) commentTimestamp]] * (-1);
+    }];
+
+    NSUInteger now = 0;
+    NSUInteger found = -1;
+    for(int i = 0; i < [comments count]; i++){
+        STBoardComment * comment = commentArray[i];
+
+        //Checa se possui comentario
+        for(STSticker * mySticker in comment.commentStickers){
+            for(STSticker * hisSticker in context.stickers){
+                if(mySticker.type == hisSticker.type){
+                    if(now == position){
+                        found = i;
+                    }
+                    now++;
+                    goto GAMBI1;
+                }
+            }
+        }
+    GAMBI1:
+        now = now;
+    }
+
+    if(found == -1){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Comment does not exist" code:43 userInfo:nil]);
+        });
+    }
+
+    STBoardComment * comment = commentArray[found];
+    id user = [_users objectForKey: comment.userId];
+    if(user == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"User does not exist" code:43 userInfo:nil]);
+        });
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        completionBlock(comment, user);
+    });
+}
+
+- (void) getNumberOfCommentsForToken:(STOverlordToken)token completion:(void (^)(NSUInteger))completionBlock error:(void (^)(NSError *))errorBlock{
+
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+
+    if(context == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+    }
+
+    STSafeMutableDictionary * comments = [_commentsByPlaces objectForKey:context.place.placeId];
+
+    if(comments == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Place does not exist" code:43 userInfo:nil]);
+        });
+    }
+
+    NSArray * commentArray = [comments allValues];
+
+    commentArray = [commentArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        return [[((STBoardComment *) obj1) commentTimestamp] compare:[((STBoardComment *) obj2) commentTimestamp]] * (-1);
+    }];
+
+    NSUInteger now = 0;
+    for(int i = 0; i < [comments count]; i++){
+        STBoardComment * comment = commentArray[i];
+
+        //Checa se possui comentario
+        for(STSticker * mySticker in comment.commentStickers){
+            for(STSticker * hisSticker in context.stickers){
+                if(mySticker.type == hisSticker.type){
+                    now++;
+                    goto GAMBI2;
+                }
+            }
+        }
+    GAMBI2:
+        now = now;
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        completionBlock(now);
+    });
+}
+
 @end

@@ -11,7 +11,7 @@
 #import "STUser.h"
 #import "STPlace.h"
 #import "STLocation.h"
-
+#import "STSticker.h"
 
 @protocol STOverlord
 
@@ -143,6 +143,21 @@
                       completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
                            error: (void (^) (NSError* error)) errorBlock;
 
+# pragma mark - Token Stuff
+
+typedef NSUInteger STOverlordToken;
+
+- (STOverlordToken) requestTokenForBoard: (STPlace *) place
+                   filteringWithStickers:(NSArray *) stickers;
+
+- (void) getNumberOfCommentsForToken: (STOverlordToken) token
+                          completion: (void (^) (NSUInteger numberOfComments)) completionBlock
+                               error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCommentAndUserForToken: (STOverlordToken) token
+                       andPosition: (NSUInteger) position
+                        completion: (void (^) (STBoardComment * comment, STUser * user)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock;
 
 @end
 

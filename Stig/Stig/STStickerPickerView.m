@@ -17,7 +17,7 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self config];
+        [self configWithModifier:STSTickerModifierNeutral];
     }
     return self;
 }
@@ -25,17 +25,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self config];
+        [self configWithModifier:STSTickerModifierNeutral];
+    }
+    return self;
+}
+- (id) initWithStickerModifier:(STSTickerModifier) modifier {
+    self = [super init];
+    if (self) {
+        [self configWithModifier:modifier];
     }
     return self;
 }
 
-- (void) config {
+- (void) configWithModifier:(STSTickerModifier) modifier{
+    [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:6];
     _buttonsStickers = [NSMutableDictionary dictionaryWithCapacity:6];
     for (int i = 0; i < 6; i++) {
-        NSNumber *stickerId = @(i*3+1);
+        NSNumber *stickerId = @(i*3+modifier);
         STSticker *sticker = [[STSticker alloc] initWithId:stickerId];
         UIButton *stickerButton = [self buttonForSticker:sticker];
         [stickerButton addTarget:self action:@selector(stickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,7 +84,7 @@
     UIImage *image = [sticker stickerIconWithPlace:@"selector"];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:image forState:UIControlStateNormal];
-    
+    [button setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forState:UIControlStateSelected];
     return button;
 }
 - (UIButton *) buttonWithStickerType:(STStickerType) type {
@@ -86,6 +95,10 @@
 }
 - (STSticker *) stickerForButton:(UIButton *) button {
     return _buttonsStickers[@(button.tag)];
+}
+- (void) selectStickerWithType:(STStickerType) type {
+    UIButton *button = [self buttonWithStickerType:type];
+    button.selected = !button.selected;
 }
 #pragma mark - Setting Stickers
 - (void) setSticker:(STSticker *) sticker {
@@ -103,7 +116,8 @@
 
 #pragma mark - User interaction
 - (void) stickerButtonPressed:(UIButton *) button {
-    STSticker *s = _buttonsStickers[@(button.tag)];
+    STSticker *s = [self stickerForButton:button];
+    [self selectStickerWithType:s.type];
     [self stickerPicked:s];
 }
 #pragma mark - Delegate callbacks

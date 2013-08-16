@@ -8,19 +8,7 @@
 
 #import "STFakeOverlord.h"
 #import "STSafeMutableDictionary.h"
-
-@interface STBoardCommentQueryContext : NSObject
-
-@property (nonatomic, strong) NSDate * timestamp;
-@property (nonatomic, strong) STPlace * place;
-@property (nonatomic, strong) NSArray * stickers;
-
-@end
-
-@implementation STBoardCommentQueryContext
-
-@end
-
+#import "STBoardCommentQueryContext.h"
 
 @implementation STFakeOverlord{
     NSUInteger _counter;

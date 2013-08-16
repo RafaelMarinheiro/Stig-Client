@@ -15,4 +15,5 @@
 @property (nonatomic, strong) STLocation *location;
 @property (nonatomic, strong) NSNumber *userPlaceId;
 +(STUser *) userFromJSONData:(id)json;
++(STUser *) userFromServerJSONData:(id)json;
 @end

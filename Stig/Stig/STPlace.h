@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSDictionary *stickers;
 @property (nonatomic, strong) STRanking *ranking;
 + (STPlace *) placeFromJSONData:(id) json;
++ (STPlace *) placeFromServerJSONData:(id) json;
 - (CLLocationCoordinate2D) coordinate;
 - (MKMapRect) boundingMapRect;
 

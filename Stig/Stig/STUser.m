@@ -22,6 +22,22 @@
     }
     return nil;
 }
+
++(STUser *) userFromServerJSONData:(id)json {
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"HI");
+        NSDictionary *dictionary = json;
+        STUser *user = [[STUser alloc] init];
+        user.userId = dictionary[@"id"];
+        user.userImageURL = dictionary[@"avatar"];
+        user.userName = [[dictionary[@"first_name"] stringByAppendingString:@" "] stringByAppendingString:dictionary[@"last_name"]];
+        user.location = nil;
+        user.userPlaceId = dictionary[@"place"];
+        return user;
+    }
+    return nil;
+}
+
 - (NSString *) description {
     return [NSString stringWithFormat:@"[%@: %@ %@]",self.userId,self.userName,self.userImageURL];
 }

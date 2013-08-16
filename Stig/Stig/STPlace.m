@@ -25,6 +25,24 @@
     }
     return nil;
 }
+
++ (STPlace *) placeFromServerJSONData:(id) json{
+    if ([NSJSONSerialization isValidJSONObject:json]) {
+        NSDictionary *mainDictionary = json;
+        STPlace *place = [[STPlace alloc] init];
+        place.placeId = mainDictionary[@"id"];
+        place.placeName = mainDictionary[@"name"];
+        place.imageURL = mainDictionary[@"image"];
+        place.placeDescription = mainDictionary[@"description"];
+        place.location = [STLocation locationFromJSONData:mainDictionary[@"location"]];
+        place.friends =  mainDictionary[@"friends"];
+        place.stickers = mainDictionary[@"stickers"];
+        place.ranking = [STRanking rankingFromJSONData:mainDictionary[@"ranking"]];
+        return place;
+    }
+    return nil;
+}
+
 - (NSString *) description {
     return [NSString stringWithFormat:@"[%@: %@, %@, %@]",self.placeId, self.placeName, self.placeDescription,self.ranking.overall];
 }

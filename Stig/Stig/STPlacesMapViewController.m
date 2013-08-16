@@ -7,7 +7,7 @@
 //
 
 #import "STPlacesMapViewController.h"
-
+#import "STConfigViewController.h"
 @interface STPlacesMapViewController ()
 
 @end
@@ -29,7 +29,8 @@
 }
 - (void) setPlaces:(NSArray *)places {
     _places = places;
-
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView setDelegate:self];
     [self.mapView addAnnotations:self.places];
     [self.mapView addOverlays:self.places];
@@ -120,6 +121,11 @@
             crit = ST_SOCIAL;
         }
         [self setRankingCriteria:crit];
+    }else {
+        if (buttonTag == 0) {
+            STConfigViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STConfig"];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
     }
 }
 #pragma mark - MapView Delegate

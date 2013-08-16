@@ -38,8 +38,13 @@
         }];
     }
 }
-- (void) viewDidLayoutSubviews {
-    
+- (void) viewDidAppear:(BOOL)animated {
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    [overlord getPlacesWithSearchTerm:nil pageNumber:0 completion:^(NSArray *places, NSUInteger pageNumber){
+        self.places = places;
+    } error:^(NSError *error) {
+        NSLog(@"ERROR LOADING PLACES DATA !");
+    }];
 }
 - (void)didReceiveMemoryWarning
 {

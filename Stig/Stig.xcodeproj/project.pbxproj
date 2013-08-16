@@ -139,6 +139,7 @@
 		02A72BCF17BDD4C500CFF054 /* bordertest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A72BCD17BDD4C500CFF054 /* bordertest@2x.png */; };
 		02A72BD017BDD4C500CFF054 /* bordertest.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A72BCE17BDD4C500CFF054 /* bordertest.png */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
+		02E9A8AC17BEA65700DC499F /* STConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E9A8AB17BEA65700DC499F /* STConfigViewController.m */; };
 		02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */; };
 		02EEE91A17A9666A009B1C37 /* STStickerPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91917A9666A009B1C37 /* STStickerPickerView.m */; };
 		02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA597717AB653500FC9151 /* STCheckInAnimationView.m */; };
@@ -314,6 +315,8 @@
 		02A72BCE17BDD4C500CFF054 /* bordertest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bordertest.png; sourceTree = "<group>"; };
 		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
+		02E9A8AA17BEA65700DC499F /* STConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConfigViewController.h; sourceTree = "<group>"; };
+		02E9A8AB17BEA65700DC499F /* STConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConfigViewController.m; sourceTree = "<group>"; };
 		02EEE91517A953FC009B1C37 /* STLinearLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLinearLayoutView.h; sourceTree = "<group>"; };
 		02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLinearLayoutView.m; sourceTree = "<group>"; };
 		02EEE91817A9666A009B1C37 /* STStickerPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerPickerView.h; sourceTree = "<group>"; };
@@ -450,6 +453,8 @@
 				024549D917A8A63A00D4D558 /* STDraggerViewController.m */,
 				0293918B17B891D400B618A4 /* STComposePostViewController.h */,
 				0293918C17B891D400B618A4 /* STComposePostViewController.m */,
+				02E9A8AA17BEA65700DC499F /* STConfigViewController.h */,
+				02E9A8AB17BEA65700DC499F /* STConfigViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -881,6 +886,7 @@
 				0264D73F17B9529200C5399B /* STNetworkingOverlord.m in Sources */,
 				0264D74217B9537E00C5399B /* STSafeMutableDictionary.m in Sources */,
 				0264D7A717B9E65400C5399B /* STStickerComposerView.m in Sources */,
+				02E9A8AC17BEA65700DC499F /* STConfigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

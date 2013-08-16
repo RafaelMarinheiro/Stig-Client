@@ -7,7 +7,7 @@
 //
 
 #import "STBoardComment.h"
-
+#import "STSticker.h"
 @implementation STBoardComment;
 
 #pragma mark -
@@ -21,7 +21,12 @@
         comment.commentText = json[@"text"];
         comment.placeId = json[@"place_id"];
         comment.replyId = nil;
-        comment.commentStickers = json[@"stickers"];
+        NSArray *stickerIds = json[@"stickers"];
+        NSMutableArray * stickers =  [[NSMutableArray alloc] initWithCapacity:stickerIds.count];
+        for (NSNumber *stickerId in stickerIds) {
+            [stickers addObject: [[STSticker alloc] initWithId:stickerId]];
+        }
+        comment.commentStickers = stickers;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         comment.commentTimestamp = [formatter dateFromString:json[@"timestamp"]];

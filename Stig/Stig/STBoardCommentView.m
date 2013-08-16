@@ -7,15 +7,23 @@
 //
 
 #import "STBoardCommentView.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @implementation STBoardCommentView
 
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
+    [self prepareForReuse];
     self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
     self.stickersView.stickers = comment.commentStickers;
     [self.commentLabel sizeToFit];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+    [self.userImageView.layer setCornerRadius:5.0];
+    self.userImageView.layer.masksToBounds = YES;
+}
+- (void) prepareForReuse {
+    self.commentLabel.attributedText = nil;
+    self.stickersView.stickers = nil;
+    [self.userImageView setImage:[UIImage imageNamed:@""]];
 }
 - (NSAttributedString *) textWithComment:(STBoardComment *) comment andUser:(STUser *) user {
     NSMutableAttributedString *nameString = [[self attributedUserNameStringWithUser:user] mutableCopy];

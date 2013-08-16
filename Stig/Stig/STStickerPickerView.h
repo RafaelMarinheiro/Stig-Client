@@ -13,6 +13,8 @@
 
 @interface STStickerPickerView : UIView
 @property (nonatomic, weak) IBOutlet id <STStickerPickerViewDelegate> delegate;
+@property (nonatomic) BOOL shouldSelectStickers;
+@property (nonatomic, readonly) NSArray *selectedStickers;
 - (void) setStickersWithIds:(NSArray *) stickerIds;
 - (void) setSticker:(STSticker *) sticker;
 - (id) initWithStickerModifier:(STSTickerModifier) modifier;
@@ -21,4 +23,5 @@
 @protocol STStickerPickerViewDelegate <NSObject>
 @optional
 - (void) stickerPicker:(STStickerPickerView *) stickerPicker stickerPicked:(STSticker *) sticker;
+- (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker;
 @end

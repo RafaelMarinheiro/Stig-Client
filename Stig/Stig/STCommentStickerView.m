@@ -40,11 +40,11 @@
     NSUInteger stickersCount = [self.stickers count];
     NSMutableArray *imageViews = [NSMutableArray arrayWithCapacity:stickersCount];
     for (int i = 0; i < stickersCount; i++) {
-        NSNumber *stickerId = self.stickers[i];
-        UIImageView *sticker = [self imageViewForStickerId:stickerId];
-        [imageViews addObject:sticker];
+        STSticker *sticker = self.stickers[i];
+        UIImageView *stickerIcon = [self imageViewForSticker:sticker];
+        [imageViews addObject:stickerIcon];
     }
-    _layoutView = [[STLinearLayoutView alloc] initWithViews:imageViews viewSize:CGSizeMake(30.0, 30.0) viewSeparator:0.0 andEdgeSeparator:0.0];
+    _layoutView = [[STLinearLayoutView alloc] initWithViews:imageViews viewSize:CGSizeMake(17.0, 17.0) viewSeparator:2.0 andEdgeSeparator:0.0];
     [self addSubview:_layoutView];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_layoutView
                                                           attribute:NSLayoutAttributeCenterX
@@ -63,11 +63,14 @@
 
 }
 - (void) setStickers:(NSArray *)stickers {
-    if (!_layoutView) {
-        _stickers = stickers;
-        [self processStickers];
-        [self invalidateIntrinsicContentSize];
+
+
+    if (_layoutView) {
+        [_layoutView removeFromSuperview];
     }
+    _stickers = stickers;
+    [self processStickers];
+    [self invalidateIntrinsicContentSize];
 }
 - (CGSize) intrinsicContentSize {
     if (_layoutView) {
@@ -76,8 +79,8 @@
         return [super intrinsicContentSize];
     }
 }
-- (UIImageView *) imageViewForStickerId:(NSNumber *) stickerId {
-    STSticker *sticker = [[STSticker alloc] initWithId:stickerId];
+- (UIImageView *) imageViewForSticker:(STSticker *) sticker {
+    //[UIImage imageNamed:@"icon_bad_20"];
     UIImage *image = [sticker stickerIconWithPlace:@"selector"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.frame = CGRectMake(0.0, 0.0, STStickerSize.width, STStickerSize.height);

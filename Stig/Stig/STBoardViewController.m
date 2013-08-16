@@ -16,6 +16,9 @@
 @implementation STBoardViewController{
     NSMutableDictionary *_heightsDictionary;
     id<STOverlord> _overlord;
+    NSUInteger _currentToken;
+    NSUInteger _numberOfCommentsForToken;
+    BOOL _loadedMetadata;
 }
 
 - (void)viewDidLoad
@@ -34,13 +37,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(-144.0, 0.0, 0.0, 0.0);
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
-    _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
-    _loadedPlace = NO;
-    _loadedComments = NO;
     _overlord = [STHiveCluster spawnOverlord];
     [self.topBatTitle setText:self.place.placeName];
-    [self requestData];
-    // register for keyboard notifications
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     [button addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,13 +46,25 @@
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
+
+
+
+    UIButton *buttonPost = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonPost setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
+    [buttonPost addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonPost setImage:[UIImage imageNamed:@"icon_post.png"] forState:UIControlStateNormal];
+
+    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonPost];
+    [self.customNavigationItem setRightBarButtonItem:leftButtonItem];
     [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
 
     //[self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    self.title = self.place.placeName;
     [self setDefinesPresentationContext:YES];
     [self setProvidesPresentationContextTransitionStyle:YES];
     [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
+    _loadedMetadata = NO;
+    [self requestDataWithStickers:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,54 +72,40 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void) requestDataForIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Request user from overlord %@",indexPath);
-    STBoardComment *comment = self.comments[@(indexPath.row)];
-    if (comment) {
-        [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
-            [_commentsUsers setObject:user forKey:@(indexPath.row)];
-            NSLog(@"Overlord handed user %@:", user);
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }error:^(NSError *error){
-            NSLog(@"%@ ERRORRORR", error);
-        }];
-    }
-}
-- (void) requestData{
-    //NSLog(@"request data %@", self.place);
-        self.title = self.place.placeName;
-        [_overlord getCommentsFromPlace:self.place withStickers:@[@3,@1,@2] pageNumber:0 completion:^(NSArray *comments, NSUInteger pageNumber){
-            _comments = [[NSMutableDictionary alloc] initWithCapacity:[comments count]];
-            _commentsUsers = [[NSMutableDictionary alloc] initWithCapacity:[comments count]];
-            for (int i =0; i < [comments count]; i++) {
-                STBoardComment *comment = comments[i];
-                [_comments setObject:comment forKey:@(i+1)];
-                [self setHeightForComment:comment atPosition:@(i+1)];
-            }
-            [self.tableView reloadData];
-            _loadedComments = YES;
-        }error:^(NSError *error){
-            NSLog(@"erro 2 %@",error);
-        }];
+- (void) requestDataWithStickers:(NSArray *) stickers {
+    NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:stickers];
+    _currentToken = token;
+    [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
+        _numberOfCommentsForToken = numberOfCommentsForToken;
+        _loadedMetadata = YES;
+        _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
+        [self.tableView reloadData];
+    }error:^(NSError *error) {
+
+    }];
 }
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.comments) {
-        return [self.comments count];
+    if (section == 0) {
+        return 1;
+    } else {
+        if (_loadedMetadata) {
+            return _numberOfCommentsForToken;
+        }
+        return 0;
     }
-    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath row]==0) {
+    if ([indexPath section]==0) {
         static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 244.0f)];
@@ -123,21 +119,20 @@
     }
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    STBoardComment *comment = self.comments[@(indexPath.row)];
-    STUser *user = self.commentsUsers[@(indexPath.row)];
-    
-    NSLog(@"Request for Cell :%@ %@", comment, user);
-    
-    if (user&&comment) {
-        STBoardCommentView *commentView = (STBoardCommentView *) [cell.contentView viewWithTag:100];
+    [_overlord getCommentAndUserForToken:_currentToken andPosition:indexPath.row completion:^(STBoardComment *comment, STUser *user){
+        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+        STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
         commentView.commentFont = self.commentFont;
         commentView.userNameFont = self.userNameFont;
         [commentView populateWithComment:comment andUser:user];
-    } else {
-        NSLog(@"Will need to hit cache");
-        [self requestDataForIndexPath:indexPath];
-    }
+        NSNumber *position = @(indexPath.row);
+        if (!_heightsDictionary[position]) {
+            [self setHeightForComment:comment atPosition:position];
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }error:^(NSError *error){
+
+    }];
     return cell;
 }
 - (void) setHeightForComment:(STBoardComment *) comment atPosition:(NSNumber *) position {
@@ -150,11 +145,15 @@
 
 #pragma mark - Table view delegate
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 244.0;
+    }
+    
     NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
     if (height) {
-        return [height floatValue];
+        return 120.0;//[height floatValue];
     }
-    return 244.0;
+    return 80.0;
 }
 - (IBAction)stickerButtonPressed:(UIButton *)sender {
     self.stickersView.hidden = !self.stickersView.hidden;
@@ -166,9 +165,13 @@
 
 - (IBAction)postButtonPressed:(id)sender {
     STComposePostViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
-    [self setModalPresentationStyle:UIModalPresentationCurrentContext];
-    [vc setModalPresentationStyle:UIModalPresentationCurrentContext];
-    [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//    [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+//    [vc setModalPresentationStyle:UIModalPresentationCurrentContext];
+//    [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
+    [self requestDataWithStickers:stickerPicker.selectedStickers];
 }
 @end

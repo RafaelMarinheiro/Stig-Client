@@ -23,6 +23,6 @@
     return nil;
 }
 - (NSString *) description {
-    return [NSString stringWithFormat:@"[%@: %@]",self.userId,self.userName];
+    return [NSString stringWithFormat:@"[%@: %@ %@]",self.userId,self.userName,self.userImageURL];
 }
 @end

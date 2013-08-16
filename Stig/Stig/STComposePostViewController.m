@@ -19,9 +19,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+//        // Custom initialization
+//        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+
     }
     return self;
 }
@@ -30,8 +31,12 @@
 {
     [super viewDidLoad];
     [self.textView becomeFirstResponder];
-    self.containerView.layer.cornerRadius = 10.0;
-    
+    UIImage *back = [[UIImage imageNamed:@"bordertest.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    //NSLog(@"Image:%@", back);
+//    [self.postButton setBackgroundImage:back forState:UIControlStateNormal];
+//    [self.cancelButton setBackgroundImage:back forState:UIControlStateNormal];
+//    [self.postButton sizeToFit];
+//    [self.cancelButton sizeToFit];
 	// Do any additional setup after loading the view.
 }
 

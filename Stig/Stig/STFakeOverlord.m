@@ -89,7 +89,7 @@
     }
 }
 
-- (void) loadComments{
+- (void) loadComments {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"fakeComments" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSError * error;
@@ -462,19 +462,27 @@
         STBoardComment * comment = commentArray[i];
 
         //Checa se possui comentario
-        for(STSticker * mySticker in comment.commentStickers){
-            for(STSticker * hisSticker in context.stickers){
-                if(mySticker.type == hisSticker.type){
-                    if(now == position){
-                        found = i;
+        if(context.stickers != nil){
+            for(STSticker * mySticker in comment.commentStickers){
+                for(STSticker * hisSticker in context.stickers){
+                    if(mySticker.type == hisSticker.type){
+                        if(now == position){
+                            found = i;
+                        }
+                        now++;
+                        goto GAMBI1;
                     }
-                    now++;
-                    goto GAMBI1;
                 }
             }
+        GAMBI1:
+            now = now;
+        } else{
+            if(now == position){
+                found = i;
+            }
+            now++;
         }
-    GAMBI1:
-        now = now;
+
     }
 
     if(found == -1){
@@ -490,7 +498,6 @@
             errorBlock([[NSError alloc] initWithDomain:@"User does not exist" code:43 userInfo:nil]);
         });
     }
-
     dispatch_async(dispatch_get_main_queue(), ^(){
         completionBlock(comment, user);
     });
@@ -519,22 +526,27 @@
     commentArray = [commentArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
         return [[((STBoardComment *) obj1) commentTimestamp] compare:[((STBoardComment *) obj2) commentTimestamp]] * (-1);
     }];
-
+    NSLog(@"%@", context.stickers);
     NSUInteger now = 0;
     for(int i = 0; i < [comments count]; i++){
         STBoardComment * comment = commentArray[i];
 
         //Checa se possui comentario
-        for(STSticker * mySticker in comment.commentStickers){
-            for(STSticker * hisSticker in context.stickers){
-                if(mySticker.type == hisSticker.type){
-                    now++;
-                    goto GAMBI2;
+        if(context.stickers != nil){
+            for(STSticker * mySticker in comment.commentStickers){
+                for(STSticker * hisSticker in context.stickers){
+                    if(mySticker.type == hisSticker.type){
+                        now++;
+                        goto GAMBI2;
+                    }
                 }
             }
+        GAMBI2:
+            now = now;
+        } else{
+            now++;
         }
-    GAMBI2:
-        now = now;
+
     }
 
     dispatch_async(dispatch_get_main_queue(), ^(){

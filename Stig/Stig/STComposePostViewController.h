@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 - (IBAction)closeButtonPressed:(id)sender;
 - (IBAction)postButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *postButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end

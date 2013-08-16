@@ -38,6 +38,7 @@
 }
 
 - (void) configWithModifier:(STSTickerModifier) modifier{
+    _shouldSelectStickers = YES;
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
     self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -84,7 +85,7 @@
     UIImage *image = [sticker stickerIconWithPlace:@"selector"];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:image forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forState:UIControlStateSelected];
+    [button setBackgroundImage:[UIImage imageNamed:@"sticker-background"] forState:UIControlStateSelected];
     return button;
 }
 - (UIButton *) buttonWithStickerType:(STStickerType) type {
@@ -98,7 +99,17 @@
 }
 - (void) selectStickerWithType:(STStickerType) type {
     UIButton *button = [self buttonWithStickerType:type];
-    button.selected = !button.selected;
+    if (!button.selected) {
+        button.selected = YES;
+    }
+    [self stickerSelected:[self stickerForButton:button]];
+}
+- (void) deselectStickerWithType:(STStickerType) type {
+    UIButton *button = [self buttonWithStickerType:type];
+    if (button.selected) {
+        button.selected = NO;
+    }
+    [self stickerDeselected:[self stickerForButton:button]];
 }
 #pragma mark - Setting Stickers
 - (void) setSticker:(STSticker *) sticker {
@@ -117,8 +128,35 @@
 #pragma mark - User interaction
 - (void) stickerButtonPressed:(UIButton *) button {
     STSticker *s = [self stickerForButton:button];
-    [self selectStickerWithType:s.type];
+    
     [self stickerPicked:s];
+
+    if (self.shouldSelectStickers) {
+        if (button.selected) {
+            [self deselectStickerWithType:s.type];
+        }else{
+            [self selectStickerWithType:s.type];
+        }
+    }
+}
+#pragma mark - Change Selection Array
+- (void) stickerSelected:(STSticker *) sticker {
+    if (!_selectedStickers) {
+        _selectedStickers = @[];
+    }
+    NSMutableArray *selectedStickers = [_selectedStickers mutableCopy];
+    [selectedStickers addObject:sticker];
+    _selectedStickers = selectedStickers;
+    [self stickerSelectionDidChange];
+}
+- (void) stickerDeselected:(STSticker *) sticker {
+    NSMutableArray *selectedStickers = [_selectedStickers mutableCopy];
+    [selectedStickers removeObject:sticker];
+    _selectedStickers = selectedStickers;
+    if ([_selectedStickers count] == 0) {
+        _selectedStickers = nil;
+    }
+    [self stickerSelectionDidChange];
 }
 #pragma mark - Delegate callbacks
 - (void) stickerPicked:(STSticker *) sticker {
@@ -126,4 +164,10 @@
         [self.delegate stickerPicker:self stickerPicked:sticker];
     }
 }
+- (void) stickerSelectionDidChange {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerPickerSelectionDidChange:)]) {
+        [self.delegate stickerPickerSelectionDidChange:self];
+    }
+}
+
 @end

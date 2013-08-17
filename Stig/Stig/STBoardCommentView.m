@@ -19,6 +19,9 @@
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
     [self.userImageView.layer setCornerRadius:5.0];
     self.userImageView.layer.masksToBounds = YES;
+    CGFloat h = self.userImageView.frame.size.height + self.stickersView.frame.size.height + 24;
+    
+    _cellHeight = MAX(h,  self.commentLabel.contentSize.height);
 }
 - (void) prepareForReuse {
     self.commentLabel.attributedText = nil;
@@ -39,10 +42,10 @@
     return nameString;
 }
 - (NSAttributedString *) attributedTimestampStringWithDate:(NSDate *) date {
-    UIColor *timeColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
+    UIColor *timeColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:7.0];
     NSString *time = [self niceTimeInterval:[date timeIntervalSinceNow]];
     NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
-    [mutParaStyle setAlignment:NSTextAlignmentRight];
+    [mutParaStyle setAlignment:NSTextAlignmentLeft];
     NSDictionary *timeAttributes = @{NSFontAttributeName:[self.commentFont fontWithSize:13.0],
                                      NSForegroundColorAttributeName:[timeColor colorWithAlphaComponent:0.8],
                                      NSParagraphStyleAttributeName:mutParaStyle};
@@ -51,7 +54,7 @@
     return timeString;
 }
 - (NSAttributedString *) attributedCommentTextStringWithComment:(STBoardComment *) comment {
-    UIColor *commentColor = [UIColor colorWithRed:91.0/255.0 green:91.0/255.0 blue:91.0/255.0 alpha:1.0];
+    UIColor *commentColor = [UIColor colorWithRed:85.0/255.0 green:85.0/255.0 blue:85.0/255.0 alpha:1.0];
     NSDictionary *commentAttributes = @{NSFontAttributeName:self.commentFont,
                                         NSForegroundColorAttributeName:commentColor};
     NSAttributedString *commentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", comment.commentText] attributes:commentAttributes];

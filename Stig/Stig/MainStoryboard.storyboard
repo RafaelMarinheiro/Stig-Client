@@ -137,15 +137,12 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-wT-Kny">
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="56" type="user" id="GQ2-lq-gJr"/>
-                                                                <constraint firstAttribute="height" constant="56" type="user" id="I6J-z2-Dzl"/>
+                                                                <constraint firstAttribute="width" constant="50" type="user" id="GQ2-lq-gJr"/>
+                                                                <constraint firstAttribute="height" constant="50" type="user" id="I6J-z2-Dzl"/>
                                                             </constraints>
                                                         </imageView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-BR-w7r">
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="233" type="user" id="g20-fm-dsY"/>
-                                                            </constraints>
                                                             <attributedString key="attributedText">
                                                                 <fragment content="Loading...">
                                                                     <attributes>
@@ -166,14 +163,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="top" secondItem="e8V-b9-UwO" secondAttribute="top" constant="20" symbolic="YES" type="user" id="AYN-Gn-xEF"/>
-                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="leading" secondItem="e8V-b9-UwO" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="FdT-ti-QP5"/>
-                                                        <constraint firstAttribute="bottom" secondItem="YHk-BR-w7r" secondAttribute="bottom" constant="5" type="user" id="Uut-oJ-qYh"/>
-                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="leading" secondItem="6kK-W4-izG" secondAttribute="leading" type="user" id="j0o-Wl-bTR"/>
-                                                        <constraint firstAttribute="trailing" secondItem="YHk-BR-w7r" secondAttribute="trailing" constant="3" type="user" id="nFg-4I-6i6"/>
+                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="trailing" secondItem="e8V-b9-UwO" secondAttribute="trailing" type="default" id="5oX-y2-6Do"/>
+                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="top" secondItem="e8V-b9-UwO" secondAttribute="top" constant="12" type="user" id="AYN-Gn-xEF"/>
+                                                        <constraint firstItem="6kK-W4-izG" firstAttribute="centerX" secondItem="Uhj-wT-Kny" secondAttribute="centerX" type="default" id="SMy-cs-s2P"/>
+                                                        <constraint firstAttribute="bottom" secondItem="YHk-BR-w7r" secondAttribute="bottom" priority="724" type="user" id="Uut-oJ-qYh"/>
+                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="leading" secondItem="Uhj-wT-Kny" secondAttribute="trailing" type="user" id="aaR-My-xmQ"/>
+                                                        <constraint firstItem="6kK-W4-izG" firstAttribute="top" secondItem="Uhj-wT-Kny" secondAttribute="bottom" type="user" id="c5P-fz-WyQ"/>
+                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="leading" secondItem="e8V-b9-UwO" secondAttribute="leading" constant="12" type="user" id="oY1-PM-E3d"/>
                                                         <constraint firstItem="YHk-BR-w7r" firstAttribute="top" secondItem="e8V-b9-UwO" secondAttribute="top" type="user" id="pOI-fC-lfJ"/>
-                                                        <constraint firstItem="6kK-W4-izG" firstAttribute="top" secondItem="Uhj-wT-Kny" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="tL3-Jf-zfR"/>
-                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="leading" secondItem="6kK-W4-izG" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="ztF-dv-obv"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="commentLabel" destination="YHk-BR-w7r" id="Blf-Xr-9Pt"/>
@@ -649,13 +646,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tbf-X9-Wae" firstAttribute="bottom" secondItem="fiI-er-aKC" secondAttribute="bottom" type="default" id="0B0-4G-ljS"/>
-                            <constraint firstItem="tbf-X9-Wae" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" type="default" id="9SD-IH-xs4"/>
+                            <constraint firstItem="tbf-X9-Wae" firstAttribute="bottom" secondItem="fiI-er-aKC" secondAttribute="bottom" type="user" id="0B0-4G-ljS"/>
+                            <constraint firstItem="tbf-X9-Wae" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" type="user" id="9SD-IH-xs4"/>
                             <constraint firstAttribute="bottom" secondItem="g7a-ue-Z8T" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VIl-kr-zsY"/>
-                            <constraint firstItem="tbf-X9-Wae" firstAttribute="top" secondItem="fiI-er-aKC" secondAttribute="top" type="default" id="Wuh-ww-Dtc"/>
+                            <constraint firstItem="tbf-X9-Wae" firstAttribute="top" secondItem="fiI-er-aKC" secondAttribute="top" type="user" id="Wuh-ww-Dtc"/>
                             <constraint firstAttribute="trailing" secondItem="3po-1P-0Fj" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YzT-PZ-eJ1"/>
-                            <constraint firstItem="tbf-X9-Wae" firstAttribute="trailing" secondItem="fiI-er-aKC" secondAttribute="trailing" type="default" id="ebB-cX-yLE"/>
-                            <constraint firstItem="g7a-ue-Z8T" firstAttribute="centerX" secondItem="tbf-X9-Wae" secondAttribute="centerX" type="default" id="fCa-XR-BYd"/>
+                            <constraint firstItem="g7a-ue-Z8T" firstAttribute="centerX" secondItem="tbf-X9-Wae" secondAttribute="centerX" type="default" id="e7b-Fo-to1"/>
+                            <constraint firstItem="tbf-X9-Wae" firstAttribute="trailing" secondItem="fiI-er-aKC" secondAttribute="trailing" type="user" id="ebB-cX-yLE"/>
                             <constraint firstAttribute="bottom" secondItem="vOM-3E-7f8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lkl-az-6eQ"/>
                             <constraint firstAttribute="bottom" secondItem="3po-1P-0Fj" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="nq7-uV-3Vw"/>
                             <constraint firstItem="vOM-3E-7f8" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="rTw-CP-uFF"/>

@@ -187,7 +187,6 @@
     return MKCoordinateRegionMake(coordinate, s);
 }
 - (void) mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    NSLog(@"Region Will change animated: %d", animated);
     if (!animated) {
         for (id <MKAnnotation> a in self.mapView.selectedAnnotations) {
             [self.mapView deselectAnnotation:a animated:YES];
@@ -196,9 +195,6 @@
             [self.delegate placesMapViewControllerMapDidMove:self];
         }
     }
-}
-- (void) mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    NSLog(@"Deselected!");
 }
 - (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay{
     if([overlay isKindOfClass: [STPlace class]]){

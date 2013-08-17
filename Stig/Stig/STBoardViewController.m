@@ -28,10 +28,9 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Futura" size:20.0];
-    //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = self.place.placeName;
-    label.textColor = [UIColor whiteColor]; // change this color
+    label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.customNavigationItem.titleView = label;
     self.tableView.contentInset = UIEdgeInsetsMake(-144.0, 0.0, 0.0, 0.0);
@@ -127,7 +126,8 @@
         [commentView populateWithComment:comment andUser:user];
         NSNumber *position = @(indexPath.row);
         if (!_heightsDictionary[position]) {
-            [self setHeightForComment:comment atPosition:position];
+            [self setHeight:commentView.cellHeight forPosition:position];
+            //[self setHeightForComment:comment atPosition:position];
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
     }error:^(NSError *error){
@@ -135,15 +135,25 @@
     }];
     return cell;
 }
-- (void) setHeightForComment:(STBoardComment *) comment atPosition:(NSNumber *) position {
-    NSString *text = [NSString stringWithFormat:@"Rafael Nunes\n%@\n9999 days ago",comment.commentText];
+- (void) setHeight:(CGFloat) height forPosition:(NSNumber *) position {
+    [_heightsDictionary setObject:@(height) forKey:position];
+}
+#pragma mark - Table view delegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    CGSize stringSize = [text sizeWithFont:self.commentFont constrainedToSize:CGSizeMake(230.0, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-    stringSize.height = MAX(stringSize.height, 40.0);
-    [_heightsDictionary setObject:@(stringSize.height+20.0) forKey:position];
+    if (section == 1) {
+        UIImage *myImage = [UIImage imageNamed:@"callout"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:myImage];
+        imageView.frame = CGRectMake(10,10,300,100);
+        imageView.clipsToBounds = YES;
+        return imageView;
+    }
+	return nil;
 }
 
-#pragma mark - Table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 100;
+}
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 244.0;
@@ -151,7 +161,7 @@
     
     NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
     if (height) {
-        return 120.0;//[height floatValue];
+        return [height floatValue];
     }
     return 80.0;
 }

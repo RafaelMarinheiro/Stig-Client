@@ -67,7 +67,6 @@
             return cell;
         }
     }
-    NSLog(@"Normal");
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
 //    if (!cell) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];

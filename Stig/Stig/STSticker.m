@@ -69,4 +69,36 @@
     
 }
 
+- (NSUInteger)getServerCode{
+    if(self.modifier == STSTickerModifierGood){
+        return ((0b10) << (self.type*2));
+    } else{
+        return ((0b01) << (self.type*2));
+    }
+}
+
++ (NSUInteger) stickersServeCodeFromArray: (NSArray *) array{
+    NSUInteger ret = 0;
+    for(int i = 0; i < array.count; i++){
+        ret = (ret | [array[i] getServerCode]);
+    }
+    return ret;
+}
+
++ (NSArray *) stickersWithServerCode: (NSUInteger) code{
+    NSMutableArray *stickers = [NSMutableArray arrayWithCapacity:6];
+
+    for(int i = 0; i < 6; i++){
+        STStickerType type = i;
+        if((code&0b11) == 0b10){
+            [stickers addObject:[[STSticker alloc] initWithType:type andModifier:STSTickerModifierGood]];
+        } else if((code&0b11) == 0b01){
+            [stickers addObject:[[STSticker alloc] initWithType:type andModifier:STStickerModifierBad]];
+        }
+        code = (code >> 2);
+    }
+    
+    return stickers;
+}
+
 @end

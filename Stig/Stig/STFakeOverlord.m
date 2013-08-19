@@ -428,6 +428,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(){
             errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
         });
+        return;
     }
 
     STSafeMutableDictionary * comments = [_commentsByPlaces objectForKey:context.place.placeId];

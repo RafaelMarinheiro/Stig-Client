@@ -35,6 +35,25 @@
 
     return nil;
 }
+
++ (STBoardComment *) boardCommentFromServerJSONData:(id) json {
+    if ([NSJSONSerialization isValidJSONObject:json]) {
+        STBoardComment *comment = [[STBoardComment alloc] init];
+        comment.commentId = json[@"id"];
+        comment.userId = json[@"user"];
+        comment.commentText = json[@"content"];
+        comment.placeId = json[@"place"];
+        comment.replyId = nil;
+        comment.commentStickers = [STSticker stickersWithServerCode:[json[@"stickers"] unsignedIntegerValue]];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+        comment.commentTimestamp = [formatter dateFromString:json[@"created_on"]];
+        return comment;
+    }
+    
+    return nil;
+}
+
 + (STBoardComment *) boardCommentWithId:(NSNumber *)commentId andJSONData:(id)json {
     if([NSJSONSerialization isValidJSONObject:json]){
         

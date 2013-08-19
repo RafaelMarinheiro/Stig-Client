@@ -96,59 +96,68 @@
                         pageNumber: (NSUInteger) pageNumber
                         requestNew: (BOOL) requestNew
                         completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                             error: (void (^) (NSError* error)) errorBlock;
+error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 - (void) getCommentsFromPlace: (STPlace *) place
                  withStickers: (NSArray *) stickers
                    pageNumber: (NSUInteger) pageNumber
                    requestNew: (BOOL) requestNew
                    completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                        error: (void (^) (NSError* error)) errorBlock;
+                        error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 - (void) getCommentsInReplyTo: (STBoardComment *) comment
                  withStickers: (NSArray *) stickers
                    pageNumber: (NSUInteger) pageNumber
                    requestNew: (BOOL) requestNew
                    completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                        error: (void (^) (NSError* error)) errorBlock;
+                        error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 
 - (void) getPlacesWithSearchTerm: (NSString *) term
                       pageNumber: (NSUInteger) pageNumber
                       requestNew: (BOOL) requestNew
                       completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                           error: (void (^) (NSError* error)) errorBlock;
+                           error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 #pragma mark - Simple Get methods
 
 - (void) getCheckInHistoryFromUser:(STUser*) user
                         pageNumber: (NSUInteger) pageNumber
                         completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                             error: (void (^) (NSError* error)) errorBlock;
+                             error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 - (void) getCommentsFromPlace: (STPlace *) place
                  withStickers: (NSArray *) stickers
                    pageNumber: (NSUInteger) pageNumber
                    completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                        error: (void (^) (NSError* error)) errorBlock;
+                        error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 - (void) getCommentsInReplyTo: (STBoardComment *) comment
                  withStickers: (NSArray *) stickers
                    pageNumber: (NSUInteger) pageNumber
                    completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                        error: (void (^) (NSError* error)) errorBlock;
+                        error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 - (void) getPlacesWithSearchTerm: (NSString *) term
                       pageNumber: (NSUInteger) pageNumber
                       completion: (void (^)(NSArray *array, NSUInteger page)) completionBlock
-                           error: (void (^) (NSError* error)) errorBlock;
+                           error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 # pragma mark - Token Stuff
 
+
 typedef NSUInteger STOverlordToken;
+
+# pragma mark - -Token Requests
 
 - (STOverlordToken) requestTokenForBoard: (STPlace *) place
                    filteringWithStickers:(NSArray *) stickers;
+
+- (STOverlordToken) requestTokenForPlacesWithSearchTerm: (NSString *) term;
+
+- (STOverlordToken) requestTokenForCheckInHistoryOfUser: (STUser *) user;
+
+# pragma mark - -Token Queries
 
 - (void) getNumberOfCommentsForToken: (STOverlordToken) token
                           completion: (void (^) (NSUInteger numberOfComments)) completionBlock
@@ -157,6 +166,20 @@ typedef NSUInteger STOverlordToken;
 - (void) getCommentAndUserForToken: (STOverlordToken) token
                        andPosition: (NSUInteger) position
                         completion: (void (^) (STBoardComment * comment, STUser * user)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getPlaceForToken: (STOverlordToken) token
+              andPosition: (NSUInteger) position
+               completion: (void (^) (STPlace * place)) completionBlock
+                    error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getCheckInHistoryPlaceForToken: (STOverlordToken) token
+                            andPosition: (NSUInteger) position
+                             completion: (void (^) (STPlace * place, NSDate * date)) completionBlock
+                                  error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getNumberOfPlacesForToken: (STOverlordToken) token
+                        completion: (void (^) (NSUInteger numberOfComments)) completionBlock
                              error: (void (^) (NSError* error)) errorBlock;
 
 @end

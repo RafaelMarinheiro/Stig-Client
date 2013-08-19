@@ -15,4 +15,9 @@
 @property (nonatomic, strong) STPlace * place;
 @property (nonatomic, strong) NSArray * stickers;
 
+@property (nonatomic, strong, readonly) NSCache * cache;
+
+- (id) initWithPlace: (STPlace*) place andStickers: (NSArray *)stickers andDate: (NSDate *) date;
+- (id) initWithPlace: (STPlace*) place andStickers: (NSArray *)stickers;
+
 @end

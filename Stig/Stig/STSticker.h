@@ -27,6 +27,9 @@ typedef enum {
 @property (nonatomic, readonly) NSNumber *stickerId;
 - (id) initWithType:(STStickerType) type andModifier:(STSTickerModifier) modifier;
 - (id) initWithId:(NSNumber *) stickerId;
-
 - (UIImage *) stickerIconWithPlace:(NSString *) place;
+- (NSUInteger) getServerCode;
+
++ (NSArray *) stickersWithServerCode: (NSUInteger) code;
++ (NSUInteger) stickersServeCodeFromArray: (NSArray *) array;
 @end

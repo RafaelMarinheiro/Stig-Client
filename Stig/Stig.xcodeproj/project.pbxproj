@@ -143,6 +143,8 @@
 		02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */; };
 		02EEE91A17A9666A009B1C37 /* STStickerPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91917A9666A009B1C37 /* STStickerPickerView.m */; };
 		02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA597717AB653500FC9151 /* STCheckInAnimationView.m */; };
+		0F5FF5C517C2A1A1000B3530 /* STCheckInHistoryQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5FF5C417C2A1A0000B3530 /* STCheckInHistoryQueryContext.m */; };
+		0F5FF5C917C2A60F000B3530 /* STPlacesQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5FF5C817C2A60F000B3530 /* STPlacesQueryContext.m */; };
 		0FD1162817BEAEE2009C4081 /* STBoardCommentQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */; };
 		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
 /* End PBXBuildFile section */
@@ -324,6 +326,10 @@
 		02EEE91917A9666A009B1C37 /* STStickerPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerPickerView.m; sourceTree = "<group>"; };
 		02FA597617AB653500FC9151 /* STCheckInAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCheckInAnimationView.h; sourceTree = "<group>"; };
 		02FA597717AB653500FC9151 /* STCheckInAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCheckInAnimationView.m; sourceTree = "<group>"; };
+		0F5FF5C317C2A1A0000B3530 /* STCheckInHistoryQueryContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCheckInHistoryQueryContext.h; sourceTree = "<group>"; };
+		0F5FF5C417C2A1A0000B3530 /* STCheckInHistoryQueryContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCheckInHistoryQueryContext.m; sourceTree = "<group>"; };
+		0F5FF5C717C2A60F000B3530 /* STPlacesQueryContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesQueryContext.h; sourceTree = "<group>"; };
+		0F5FF5C817C2A60F000B3530 /* STPlacesQueryContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesQueryContext.m; sourceTree = "<group>"; };
 		0FD1162617BEAEE2009C4081 /* STBoardCommentQueryContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentQueryContext.h; sourceTree = "<group>"; };
 		0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentQueryContext.m; sourceTree = "<group>"; };
 		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
@@ -588,8 +594,7 @@
 				0264D73D17B9529200C5399B /* STNetworkingOverlord.m */,
 				0202F43417A05EDA0071D95C /* STOverlord.h */,
 				0202F43517A05EDA0071D95C /* STOverlord.m */,
-				0FD1162617BEAEE2009C4081 /* STBoardCommentQueryContext.h */,
-				0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */,
+				0F5FF5C617C2A1A5000B3530 /* Query Context */,
 			);
 			name = Overlord;
 			sourceTree = "<group>";
@@ -684,6 +689,19 @@
 				026CAE7817B4462D00DDD540 /* plus-me-44@2x.png */,
 			);
 			name = "Options Icons";
+			sourceTree = "<group>";
+		};
+		0F5FF5C617C2A1A5000B3530 /* Query Context */ = {
+			isa = PBXGroup;
+			children = (
+				0FD1162617BEAEE2009C4081 /* STBoardCommentQueryContext.h */,
+				0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */,
+				0F5FF5C317C2A1A0000B3530 /* STCheckInHistoryQueryContext.h */,
+				0F5FF5C417C2A1A0000B3530 /* STCheckInHistoryQueryContext.m */,
+				0F5FF5C717C2A60F000B3530 /* STPlacesQueryContext.h */,
+				0F5FF5C817C2A60F000B3530 /* STPlacesQueryContext.m */,
+			);
+			name = "Query Context";
 			sourceTree = "<group>";
 		};
 		0FCDEDEB17A33AB4007E67F8 /* MapOverlay */ = {
@@ -893,6 +911,8 @@
 				0264D7A717B9E65400C5399B /* STStickerComposerView.m in Sources */,
 				02E9A8AC17BEA65700DC499F /* STConfigViewController.m in Sources */,
 				0FD1162817BEAEE2009C4081 /* STBoardCommentQueryContext.m in Sources */,
+				0F5FF5C517C2A1A1000B3530 /* STCheckInHistoryQueryContext.m in Sources */,
+				0F5FF5C917C2A60F000B3530 /* STPlacesQueryContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

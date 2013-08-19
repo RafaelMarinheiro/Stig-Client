@@ -8,7 +8,7 @@
 
 #import "STStickerPickerView.h"
 #import "STLinearLayoutView.h"
-
+#import "STStickerDisposerView.h"
 @implementation STStickerPickerView {
     STLinearLayoutView *_layoutView;
     NSMutableDictionary *_buttonsStickers;
@@ -36,7 +36,6 @@
     }
     return self;
 }
-
 - (void) configWithModifier:(STSTickerModifier) modifier{
     _shouldSelectStickers = YES;
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];

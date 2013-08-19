@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wjR-LJ-aVm">
     <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -98,7 +99,7 @@
                                                                     </connections>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="hkL-NT-9KH" firstAttribute="leading" secondItem="lDz-Sa-o2z" secondAttribute="leading" type="default" id="Tg2-tc-jD3"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hkL-NT-9KH" secondAttribute="bottom" constant="50" type="user" id="dnb-9n-MHi"/>
@@ -151,7 +152,7 @@
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                                                         </textView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kK-W4-izG" customClass="STCommentStickerView">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -230,39 +231,45 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YId-hc-6rS">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YId-hc-6rS" userLabel="ContainerView">
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBs-Js-bh5">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="124" id="J0c-aX-cKq"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
                                     </textView>
                                     <view contentMode="scaleToFill" restorationIdentifier="StickerComposerView" translatesAutoresizingMaskIntoConstraints="NO" id="jPS-sn-ZBX" customClass="STStickerComposerView">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="671" constant="150" type="user" id="FGk-tI-VvU"/>
-                                            <constraint firstAttribute="height" priority="645" constant="33" type="user" id="fhR-l0-Dp1"/>
+                                            <constraint firstAttribute="height" priority="671" constant="33" type="user" id="fhR-l0-Dp1"/>
                                         </constraints>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="placeholder-user.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-tH-LRD">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="Sgp-MN-aIS"/>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="dBB-rz-Opo"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="lBs-Js-bh5" firstAttribute="top" secondItem="YId-hc-6rS" secondAttribute="top" type="user" id="9Fw-pz-HLa"/>
+                                    <constraint firstAttribute="centerX" secondItem="jPS-sn-ZBX" secondAttribute="centerX" type="user" id="Dpr-pL-Ooo"/>
+                                    <constraint firstAttribute="trailing" secondItem="lBs-Js-bh5" secondAttribute="trailing" type="user" id="F2W-M5-Hge"/>
                                     <constraint firstAttribute="bottom" secondItem="jPS-sn-ZBX" secondAttribute="bottom" type="user" id="HPj-sd-mTF"/>
                                     <constraint firstAttribute="height" constant="200" type="user" id="OmL-ZU-UGe"/>
-                                    <constraint firstAttribute="trailing" secondItem="lBs-Js-bh5" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="hP3-hp-uDN"/>
+                                    <constraint firstItem="lBs-Js-bh5" firstAttribute="leading" secondItem="fa9-tH-LRD" secondAttribute="trailing" type="user" id="WjL-k9-Ks2"/>
+                                    <constraint firstItem="fa9-tH-LRD" firstAttribute="leading" secondItem="YId-hc-6rS" secondAttribute="leading" constant="12" type="user" id="lwO-tA-OiR"/>
                                     <constraint firstItem="jPS-sn-ZBX" firstAttribute="top" secondItem="lBs-Js-bh5" secondAttribute="bottom" type="user" id="qQD-Lp-b2n"/>
-                                    <constraint firstItem="lBs-Js-bh5" firstAttribute="leading" secondItem="YId-hc-6rS" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="vnw-Nt-WH1"/>
-                                    <constraint firstItem="jPS-sn-ZBX" firstAttribute="centerX" secondItem="lBs-Js-bh5" secondAttribute="centerX" type="user" id="xYH-9V-zPx"/>
+                                    <constraint firstItem="fa9-tH-LRD" firstAttribute="top" secondItem="YId-hc-6rS" secondAttribute="top" constant="12" type="user" id="vOa-y3-F1W"/>
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oV-pL-VeV">
                                 <color key="tintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Post Comment" id="WlW-JI-Exl">
+                                    <navigationItem id="WlW-JI-Exl">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="tUa-Qi-Tys">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmv-ZV-dY2">
                                                 <rect key="frame" x="5" y="7" width="67" height="29"/>
@@ -302,7 +309,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="4oV-pL-VeV" secondAttribute="bottom" type="user" id="Bg1-lf-Gbw"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="leading" secondItem="BbD-cS-44L" secondAttribute="leading" type="default" id="kdk-c3-LGQ"/>
@@ -315,8 +322,11 @@
                     <connections>
                         <outlet property="cancelButton" destination="mmv-ZV-dY2" id="Nyx-zZ-JuN"/>
                         <outlet property="containerView" destination="YId-hc-6rS" id="vZs-u3-77n"/>
+                        <outlet property="customNavigationItem" destination="WlW-JI-Exl" id="oNG-aV-qEQ"/>
                         <outlet property="postButton" destination="FXx-sQ-gmD" id="5Sn-A3-FQL"/>
+                        <outlet property="stickerComposerView" destination="jPS-sn-ZBX" id="QGN-Vv-BdC"/>
                         <outlet property="textView" destination="lBs-Js-bh5" id="VBn-VR-gmm"/>
+                        <outlet property="userImageView" destination="fa9-tH-LRD" id="KxB-Ng-Sja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bCP-1p-Iv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,7 +357,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raE-L9-Ztp">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="DONE!">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -403,15 +413,14 @@
                         <constraints>
                             <constraint firstItem="1qo-JE-YUV" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="CUu-kN-04B"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="F5b-6P-hJO"/>
-                            <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="1qo-JE-YUV" secondAttribute="bottom" type="user" id="HgK-mz-Evx" userLabel="Dragger Constraint"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="default" id="RNu-Cx-Gbg"/>
+                            <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="1qo-JE-YUV" secondAttribute="bottom" type="user" id="I4m-l7-OFk" userLabel="Dragger Constraint"/>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="default" id="Kjx-vc-Dn9"/>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="default" id="PaE-iM-K3j"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="user" id="U6c-68-vb4"/>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="default" id="VAp-hc-wqg"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="user" id="Ww4-CI-9Ne"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="amK-3P-ahP"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="default" id="crz-hK-cd8"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="default" id="hQS-5c-3ir"/>
-                            <constraint firstItem="G5K-6f-TBQ" firstAttribute="bottom" secondItem="aCX-dV-7VB" secondAttribute="bottom" type="user" id="lR3-Ve-o0H"/>
-                            <constraint firstItem="G5K-6f-TBQ" firstAttribute="bottom" secondItem="aCX-dV-7VB" secondAttribute="bottom" type="user" id="mIV-XB-1YW"/>
+                            <constraint firstItem="G5K-6f-TBQ" firstAttribute="bottom" secondItem="aCX-dV-7VB" secondAttribute="bottom" type="user" id="eNv-cg-E4T"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="qKk-hr-WVr"/>
                             <constraint firstItem="1qo-JE-YUV" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="sFI-Ww-9SZ"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="sIK-Lz-9d3"/>
@@ -423,7 +432,7 @@
                         <outlet property="customNavigationItem" destination="m05-SO-fna" id="ebl-eA-6Jx"/>
                         <outlet property="draggedView" destination="1qo-JE-YUV" id="TIh-Gt-O8S"/>
                         <outlet property="mainView" destination="G5K-6f-TBQ" id="ZlA-J2-s2C"/>
-                        <outlet property="verticalSpaceConstraint" destination="HgK-mz-Evx" id="8Et-hX-wMv"/>
+                        <outlet property="verticalSpaceConstraint" destination="I4m-l7-OFk" id="iK6-an-UJ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0J-dZ-sCI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,6 +682,7 @@
     </scenes>
     <resources>
         <image name="callout.png" width="640" height="1150"/>
+        <image name="placeholder-user.jpg" width="180" height="180"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
     <classes>
@@ -724,8 +734,11 @@
                 <relationship kind="action" name="postButtonPressed:"/>
                 <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="postButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="stickerComposerView" candidateClass="STStickerComposerView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="STConfigViewController" superclassName="UIViewController">

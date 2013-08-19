@@ -7,12 +7,11 @@
 //
 
 #import "STStickerComposerView.h"
-#import "STStickerPickerView.h"
+#import "STLinearLayoutView.h"
+
 @implementation STStickerComposerView {
-    UIScrollView *_scrollView;
-    STStickerPickerView *_stickerPickerViewBad;
-    STStickerPickerView *_stickerPickerViewNeutral;
-    STStickerPickerView *_stickerPickerViewGood;
+    STLinearLayoutView *_linearLayoutView;
+    NSArray *_disposers;
 }
 
 #pragma mark - Initialization
@@ -35,71 +34,74 @@
     self.backgroundColor = [UIColor clearColor];
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
-
-    _scrollView = [[UIScrollView alloc] init];
-    [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSMutableArray *stickers = [NSMutableArray arrayWithCapacity:6];
+    for (int i = 0; i < 6; i++) {
+        STStickerDisposerView *sticker = [[STStickerDisposerView alloc] initWithStickerType:i];
+        sticker.delegate = self;
+        [stickers addObject:sticker];
+    }
+    _disposers = stickers;
+    _linearLayoutView = [[STLinearLayoutView alloc] initWithViews:stickers viewSize:CGSizeMake(44.0, 44.0) viewSeparator:0.0 andEdgeSeparator:0.0];
     
-
-    [self addSubview:_scrollView];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_scrollView]-0-|"
+    [_linearLayoutView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self addSubview:_linearLayoutView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_linearLayoutView]-0-|"
                                                                  options:0
                                                                  metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_scrollView)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_scrollView]-0-|"
+                                                                   views:NSDictionaryOfVariableBindings(_linearLayoutView)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_linearLayoutView]-0-|"
                                                                  options:0
                                                                  metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_scrollView)]];
-
-    _stickerPickerViewBad = [[STStickerPickerView alloc] initWithStickerModifier:STStickerModifierBad];
-    _stickerPickerViewNeutral = [[STStickerPickerView alloc] initWithStickerModifier:STSTickerModifierNeutral];
-    _stickerPickerViewGood = [[STStickerPickerView alloc] initWithStickerModifier:STSTickerModifierGood];
-
-    _stickerPickerViewBad.delegate = self;
-    _stickerPickerViewNeutral.delegate = self;
-    _stickerPickerViewGood.delegate = self;
-    
-    [_scrollView addSubview:_stickerPickerViewBad];
-    [_scrollView addSubview:_stickerPickerViewNeutral];
-    [_scrollView addSubview:_stickerPickerViewGood];
-
-//    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_stickerPickerViewNeutral]|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(_stickerPickerViewNeutral)]];
-    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_stickerPickerViewBad][_stickerPickerViewNeutral][_stickerPickerViewGood]|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(_stickerPickerViewBad,_stickerPickerViewNeutral,_stickerPickerViewGood)]];
-    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_stickerPickerViewBad]|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(_stickerPickerViewBad)]];
-    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_stickerPickerViewNeutral]|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(_stickerPickerViewNeutral)]];
-    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_stickerPickerViewGood]|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(_stickerPickerViewGood)]];
-
-    CGSize contentSize = _stickerPickerViewNeutral.intrinsicContentSize;
-    [_scrollView setAlwaysBounceHorizontal:YES];
-    //[_scrollView setContentOffset:CGPointMake(contentSize.width, 0.0) animated:NO];
-    [_scrollView setPagingEnabled:YES];
-    [_scrollView setShowsHorizontalScrollIndicator:NO];
-    [_scrollView setBackgroundColor:[UIColor clearColor]];
+                                                                   views:NSDictionaryOfVariableBindings(_linearLayoutView)]];
 }
 - (CGSize) intrinsicContentSize {
-    if (_stickerPickerViewNeutral) {
-        return [_stickerPickerViewNeutral intrinsicContentSize];
+    if (_linearLayoutView) {
+        return [_linearLayoutView intrinsicContentSize];
     }
     return CGSizeZero;
 }
-#pragma mark - Sticker Picker Delegate Methods
-- (void) stickerPicker:(STStickerPickerView *)stickerPicker stickerPicked:(STSticker *)sticker {
-    CGSize mySize = _scrollView.frame.size;
-    CGSize stickerSize = stickerPicker.frame.size;
-    NSLog(@"My size: %@ PickerSize: %@ ContentSize: %@",NSStringFromCGSize(mySize), NSStringFromCGSize(stickerSize), NSStringFromCGSize(_scrollView.contentSize));
+
+- (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL normalResult = [super pointInside:point withEvent:event];
+    if (!normalResult) {
+        CGPoint the_point = [_linearLayoutView convertPoint:point fromView:self];
+        if([_linearLayoutView pointInside:the_point withEvent:event]){
+            return YES;
+        }
+    }
+    return normalResult;
+}
+
+- (void) collapseStickers {
+    for (STStickerDisposerView *disposer in _disposers) {
+        if (disposer.disposing) {
+            [disposer collapse];
+        }
+    }
+}
+- (void) stickerDisposerViewWillDispose:(STStickerDisposerView *)stickerDisposerView {
+    [_linearLayoutView bringSubviewToFront:stickerDisposerView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerWillDisposeStickers:)]) {
+        [self.delegate stickerComposerWillDisposeStickers:self];
+    }
+}
+- (void) stickerDisposerViewDidDispose:(STStickerDisposerView *)stickerDisposerView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerDidDisposeStickers:)]) {
+        [self.delegate stickerComposerDidDisposeStickers:self];
+    }
+}
+- (void) stickerDisposerViewWillHide:(STStickerDisposerView *)stickerDisposerView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerWillHideStickers:)]) {
+        [self.delegate stickerComposerWillHideStickers:self];
+    }
+}
+- (void) stickerDisposerViewDidHide:(STStickerDisposerView *)stickerDisposerView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerDidHideStickers:)]) {
+        [self.delegate stickerComposerDidHideStickers:self];
+    }
+}
+- (void) stickerDisposerView:(STStickerDisposerView *)stickerDisposerView selectedSticker:(STSticker *)sticker {
+    
 }
 @end

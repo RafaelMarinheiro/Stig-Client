@@ -13,14 +13,14 @@
 
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
     [self prepareForReuse];
+    [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
     self.stickersView.stickers = comment.commentStickers;
     [self.commentLabel sizeToFit];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
     [self.userImageView.layer setCornerRadius:5.0];
     self.userImageView.layer.masksToBounds = YES;
-    CGFloat h = self.userImageView.frame.size.height + self.stickersView.frame.size.height + 24;
-    
+    CGFloat h = self.userImageView.frame.size.height + self.stickersView.frame.size.height + 14;
     _cellHeight = MAX(h,  self.commentLabel.contentSize.height);
 }
 - (void) prepareForReuse {

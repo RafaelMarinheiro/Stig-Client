@@ -43,22 +43,15 @@
     CGFloat _bounceRadius;
 }
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (id) initWithStickerType:(STStickerType)type {
+    self = [super init];
     if (self) {
-        [self config];
+        [self configWithStickerType:type];
     }
     return self;
 }
-- (id) initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self config];
-    }
-    return self;
-}
-- (void) config {
+- (void) configWithStickerType:(STStickerType) type{
+    _stickerType = type;
     [self loadDefaults];
     [self setupSpots];
     [self setupButtons];
@@ -91,9 +84,9 @@
     bad.tag = 1;
     good.tag = 2;
 
-    bad.hidden = YES;
-    good.hidden = YES;
-    neutral.alpha = 0.7;
+    bad.alpha = 0.0;
+    good.alpha = 0.0;
+    neutral.alpha = 0.5;
     
 
     [self addSubview:good];
@@ -108,6 +101,7 @@
     STSticker *sticker = [[STSticker alloc] initWithType:self.stickerType andModifier:modifier];
     [button setBackgroundImage:[sticker stickerIconWithPlace:@"selector"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
+    
     return button;
 }
 - (CGSize) intrinsicContentSize {
@@ -137,8 +131,8 @@
 }
 #pragma mark - Button Movement
 - (void) disposeButtons{
+    [self willDispose];
     for (UIButton *button in _buttons) {
-        button.hidden = NO;
         STStickerDisposerViewSpot *spot = _spots[button.tag];
         float deltaTiming = (button.tag +0.0)/ 100.0;
         deltaTiming *=2*M_PI;
@@ -148,6 +142,11 @@
         
 
         [UIView animateWithDuration:0.1+deltaTiming animations:^{
+            if (button.tag != 0) {
+                button.alpha = 1.0;
+            }else{
+                button.alpha = 0.5;
+            }
             button.transform = mainTransform;
         }completion:^(BOOL completed) {
             [UIView animateWithDuration:0.05 animations:^{
@@ -155,6 +154,10 @@
             } completion:^(BOOL completed) {
                 [UIView animateWithDuration:0.05 animations:^{
                     button.transform = mainTransform;
+                } completion:^(BOOL completed)  {
+                    if ([button isEqual:[_buttons lastObject]]) {
+                        [self didDispose];
+                    }
                 }];
             }];
         }];
@@ -162,19 +165,60 @@
     _disposing = YES;
 }
 - (void) hideButtonsWithSelectedButtonTag:(NSUInteger) tag {
+    [self willHide];
     for (UIButton *button in _buttons) {
         float deltaTiming = (button.tag +0.0)/ 100.0;
         deltaTiming *=2*M_PI;
         [UIView animateWithDuration:0.1+deltaTiming animations:^{
             button.transform = CGAffineTransformIdentity;
-        } completion:^(BOOL completed){
             if (button.tag != tag) {
-                button.hidden = YES;
+                button.alpha = 0.0;
+            }
+        } completion:^(BOOL completed){
+            if ([button isEqual:[_buttons lastObject]]) {
+                [self didHide];
+                [self selectedSticker:[[STSticker alloc] initWithType:self.stickerType andModifier:[self stickerForTag:tag]]];
             }
         }];
     }
     _selectedButonTag = tag;
     _disposing = NO;
+}
+
+- (STSTickerModifier) stickerForTag:(NSUInteger) tag {
+    if (tag == 0) {
+        return STSTickerModifierNeutral;
+    }else if(tag == 1) {
+        return STStickerModifierBad;
+    }
+    return STSTickerModifierGood;
+}
+#pragma mark - Delegate callbacks
+- (void) willDispose {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewWillDispose:)]) {
+        [self.delegate stickerDisposerViewWillDispose:self];
+    }
+}
+- (void) didDispose {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewDidDispose:)]) {
+        [self.delegate stickerDisposerViewDidDispose:self];
+    }
+}
+- (void) willHide {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewWillHide:)]) {
+        [self.delegate stickerDisposerViewWillHide:self];
+    }
+}
+- (void) didHide {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewDidHide:)]) {
+        [self.delegate stickerDisposerViewDidHide:self];
+    }
+}
+- (void) selectedSticker:(STSticker *) sticker {
+    _selectedSticker = sticker;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerView:selectedSticker:)]) {
+        [self.delegate stickerDisposerView:self selectedSticker:sticker];
+    }
 }
 @end
 

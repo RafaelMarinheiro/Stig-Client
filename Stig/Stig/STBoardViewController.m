@@ -24,7 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Futura" size:20.0];
@@ -33,7 +32,6 @@
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.customNavigationItem.titleView = label;
-    self.tableView.contentInset = UIEdgeInsetsMake(-144.0, 0.0, 0.0, 0.0);
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
     _overlord = [STHiveCluster spawnOverlord];
@@ -45,9 +43,6 @@
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
-
-
-
     UIButton *buttonPost = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonPost setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     [buttonPost addTarget:self action:@selector(postButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,12 +51,8 @@
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonPost];
     [self.customNavigationItem setRightBarButtonItem:leftButtonItem];
     [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
-
-    //[self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    
     self.title = self.place.placeName;
-    [self setDefinesPresentationContext:YES];
-    [self setProvidesPresentationContextTransitionStyle:YES];
-    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     _loadedMetadata = NO;
     [self requestDataWithStickers:nil];
 }
@@ -101,13 +92,12 @@
         return 0;
     }
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section]==0) {
         static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 244.0f)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
         
         [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -139,24 +129,9 @@
     [_heightsDictionary setObject:@(height) forKey:position];
 }
 #pragma mark - Table view delegate
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-
-    if (section == 1) {
-        UIImage *myImage = [UIImage imageNamed:@"callout"];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:myImage];
-        imageView.frame = CGRectMake(10,10,300,100);
-        imageView.clipsToBounds = YES;
-        return imageView;
-    }
-	return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return 100;
-}
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 244.0;
+        return 100.0;
     }
     
     NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
@@ -175,9 +150,6 @@
 
 - (IBAction)postButtonPressed:(id)sender {
     STComposePostViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
-//    [self setModalPresentationStyle:UIModalPresentationCurrentContext];
-//    [vc setModalPresentationStyle:UIModalPresentationCurrentContext];
-//    [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     [self presentViewController:vc animated:YES completion:nil];
 }
 

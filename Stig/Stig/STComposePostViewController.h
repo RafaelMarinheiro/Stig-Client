@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STStickerComposerView.h"
 
-@interface STComposePostViewController : UIViewController
+@interface STComposePostViewController : UIViewController <STStickerComposerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-- (IBAction)closeButtonPressed:(id)sender;
-- (IBAction)postButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet STStickerComposerView *stickerComposerView;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-
+@property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
+- (IBAction)closeButtonPressed:(id)sender;
+- (IBAction)postButtonPressed:(id)sender;
 @end

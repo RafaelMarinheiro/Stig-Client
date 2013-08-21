@@ -87,6 +87,7 @@
     }
 }
 - (void) stickerDisposerViewDidDispose:(STStickerDisposerView *)stickerDisposerView {
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerDidDisposeStickers:)]) {
         [self.delegate stickerComposerDidDisposeStickers:self];
     }

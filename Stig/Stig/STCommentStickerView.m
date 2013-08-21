@@ -63,8 +63,6 @@
 
 }
 - (void) setStickers:(NSArray *)stickers {
-
-
     if (_layoutView) {
         [_layoutView removeFromSuperview];
     }

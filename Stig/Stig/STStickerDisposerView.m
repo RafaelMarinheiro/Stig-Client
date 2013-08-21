@@ -60,6 +60,7 @@
     _numberOfStickers = 3;
     _disposedViewSize = CGSizeMake(44.0, 44.0);
     _disposing = NO;
+    _animating = NO;
     _selectedButonTag = 0;
     _bounceRadius = 3.0;
     self.backgroundColor = [UIColor clearColor];
@@ -131,58 +132,67 @@
 }
 #pragma mark - Button Movement
 - (void) disposeButtons{
-    [self willDispose];
-    for (UIButton *button in _buttons) {
-        STStickerDisposerViewSpot *spot = _spots[button.tag];
-        float deltaTiming = (button.tag +0.0)/ 100.0;
-        deltaTiming *=2*M_PI;
+    if (!self.animating) {
+        [self willDispose];
+        _animating = YES;
+        for (UIButton *button in _buttons) {
+            STStickerDisposerViewSpot *spot = _spots[button.tag];
+            float deltaTiming = (button.tag +0.0)/ 100.0;
+            deltaTiming *=2*M_PI;
 
-        CGAffineTransform mainTransform = spot.transform;
-        CGAffineTransform bounceTransform = CGAffineTransformMakeTranslation(mainTransform.tx, mainTransform.ty + _bounceRadius);
-        
+            CGAffineTransform mainTransform = spot.transform;
+            CGAffineTransform bounceTransform = CGAffineTransformMakeTranslation(mainTransform.tx, mainTransform.ty + _bounceRadius);
 
-        [UIView animateWithDuration:0.1+deltaTiming animations:^{
-            if (button.tag != 0) {
-                button.alpha = 1.0;
-            }else{
-                button.alpha = 0.5;
-            }
-            button.transform = mainTransform;
-        }completion:^(BOOL completed) {
-            [UIView animateWithDuration:0.05 animations:^{
-                button.transform = bounceTransform;
-            } completion:^(BOOL completed) {
+
+            [UIView animateWithDuration:0.1+deltaTiming animations:^{
+                if (button.tag != 0) {
+                    button.alpha = 1.0;
+                }else{
+                    button.alpha = 0.5;
+                }
+                button.transform = mainTransform;
+            }completion:^(BOOL completed) {
                 [UIView animateWithDuration:0.05 animations:^{
-                    button.transform = mainTransform;
-                } completion:^(BOOL completed)  {
-                    if ([button isEqual:[_buttons lastObject]]) {
-                        [self didDispose];
-                    }
+                    button.transform = bounceTransform;
+                } completion:^(BOOL completed) {
+                    [UIView animateWithDuration:0.05 animations:^{
+                        button.transform = mainTransform;
+                    } completion:^(BOOL completed)  {
+                        if ([button isEqual:[_buttons lastObject]]) {
+                            _animating = NO;
+                            [self didDispose];
+                        }
+                    }];
                 }];
             }];
-        }];
+        }
+        _disposing = YES;
     }
-    _disposing = YES;
 }
 - (void) hideButtonsWithSelectedButtonTag:(NSUInteger) tag {
-    [self willHide];
-    for (UIButton *button in _buttons) {
-        float deltaTiming = (button.tag +0.0)/ 100.0;
-        deltaTiming *=2*M_PI;
-        [UIView animateWithDuration:0.1+deltaTiming animations:^{
-            button.transform = CGAffineTransformIdentity;
-            if (button.tag != tag) {
-                button.alpha = 0.0;
-            }
-        } completion:^(BOOL completed){
-            if ([button isEqual:[_buttons lastObject]]) {
-                [self didHide];
-                [self selectedSticker:[[STSticker alloc] initWithType:self.stickerType andModifier:[self stickerForTag:tag]]];
-            }
-        }];
+    if (!self.animating) {
+        [self willHide];
+        _animating = YES;
+        for (UIButton *button in _buttons) {
+            float deltaTiming = (button.tag +0.0)/ 100.0;
+            deltaTiming *=2*M_PI;
+            [UIView animateWithDuration:0.1+deltaTiming animations:^{
+                button.transform = CGAffineTransformIdentity;
+                if (button.tag != tag) {
+                    button.alpha = 0.0;
+                }
+            } completion:^(BOOL completed){
+                if ([button isEqual:[_buttons lastObject]]) {
+                    _animating = NO;
+                    [self didHide];
+                    [self selectedSticker:[[STSticker alloc] initWithType:self.stickerType andModifier:[self stickerForTag:tag]]];
+                }
+            }];
+        }
+        _selectedButonTag = tag;
+        _disposing = NO;
     }
-    _selectedButonTag = tag;
-    _disposing = NO;
+    
 }
 
 - (STSTickerModifier) stickerForTag:(NSUInteger) tag {

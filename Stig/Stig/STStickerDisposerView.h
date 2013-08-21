@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet id <STStickerDisposerViewDelegate> delegate;
 @property (nonatomic ,readonly) STStickerType stickerType;
 @property (nonatomic, readonly) BOOL disposing;
+@property (nonatomic, readonly) BOOL animating;
 @property (nonatomic, readonly) STSticker *selectedSticker;
 - (id) initWithStickerType:(STStickerType) type;
 - (void) dispose;

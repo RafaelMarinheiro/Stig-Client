@@ -176,8 +176,11 @@
 		02A72BD017BDD4C500CFF054 /* bordertest.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A72BCE17BDD4C500CFF054 /* bordertest.png */; };
 		02B4A6CC17C2B1000013977F /* placeholder-user.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 02B4A6CB17C2B1000013977F /* placeholder-user.jpg */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
+		02DF814E17C3086F00DB29BE /* new-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DF814C17C3086F00DB29BE /* new-bar@2x.png */; };
+		02DF814F17C3086F00DB29BE /* new-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DF814D17C3086F00DB29BE /* new-bar.png */; };
 		02E9A8AC17BEA65700DC499F /* STConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E9A8AB17BEA65700DC499F /* STConfigViewController.m */; };
 		02E9A8FB17BF2B9D00DC499F /* STStickerDisposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E9A8FA17BF2B9D00DC499F /* STStickerDisposerView.m */; };
+		02EE46C017C53D34007BBEA1 /* STProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EE46BF17C53D34007BBEA1 /* STProfileViewController.m */; };
 		02EEE91717A953FC009B1C37 /* STLinearLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */; };
 		02EEE91A17A9666A009B1C37 /* STStickerPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EEE91917A9666A009B1C37 /* STStickerPickerView.m */; };
 		02FA597817AB653500FC9151 /* STCheckInAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA597717AB653500FC9151 /* STCheckInAnimationView.m */; };
@@ -390,10 +393,14 @@
 		02B4A6CB17C2B1000013977F /* placeholder-user.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-user.jpg"; sourceTree = "<group>"; };
 		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
+		02DF814C17C3086F00DB29BE /* new-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-bar@2x.png"; sourceTree = "<group>"; };
+		02DF814D17C3086F00DB29BE /* new-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-bar.png"; sourceTree = "<group>"; };
 		02E9A8AA17BEA65700DC499F /* STConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConfigViewController.h; sourceTree = "<group>"; };
 		02E9A8AB17BEA65700DC499F /* STConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConfigViewController.m; sourceTree = "<group>"; };
 		02E9A8F917BF2B9C00DC499F /* STStickerDisposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerDisposerView.h; sourceTree = "<group>"; };
 		02E9A8FA17BF2B9D00DC499F /* STStickerDisposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStickerDisposerView.m; sourceTree = "<group>"; };
+		02EE46BE17C53D34007BBEA1 /* STProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STProfileViewController.h; sourceTree = "<group>"; };
+		02EE46BF17C53D34007BBEA1 /* STProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STProfileViewController.m; sourceTree = "<group>"; };
 		02EEE91517A953FC009B1C37 /* STLinearLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLinearLayoutView.h; sourceTree = "<group>"; };
 		02EEE91617A953FC009B1C37 /* STLinearLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLinearLayoutView.m; sourceTree = "<group>"; };
 		02EEE91817A9666A009B1C37 /* STStickerPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStickerPickerView.h; sourceTree = "<group>"; };
@@ -477,6 +484,8 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02DF814C17C3086F00DB29BE /* new-bar@2x.png */,
+				02DF814D17C3086F00DB29BE /* new-bar.png */,
 				02B4A6CB17C2B1000013977F /* placeholder-user.jpg */,
 				029F965A17BDA9C2001DB8FA /* sticker-background.png */,
 				029F965B17BDA9C2001DB8FA /* sticker-background@2x.png */,
@@ -533,6 +542,8 @@
 				0293918C17B891D400B618A4 /* STComposePostViewController.m */,
 				02E9A8AA17BEA65700DC499F /* STConfigViewController.h */,
 				02E9A8AB17BEA65700DC499F /* STConfigViewController.m */,
+				02EE46BE17C53D34007BBEA1 /* STProfileViewController.h */,
+				02EE46BF17C53D34007BBEA1 /* STProfileViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1028,6 +1039,8 @@
 				02305C6417C0790D00E9ADBD /* icon_sticker_queue_neutral_comment.png in Resources */,
 				02305C6517C0790D00E9ADBD /* icon_sticker_queue_neutral_comment@2x.png in Resources */,
 				02B4A6CC17C2B1000013977F /* placeholder-user.jpg in Resources */,
+				02DF814E17C3086F00DB29BE /* new-bar@2x.png in Resources */,
+				02DF814F17C3086F00DB29BE /* new-bar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,6 +1089,7 @@
 				0264D7A717B9E65400C5399B /* STStickerComposerView.m in Sources */,
 				02E9A8AC17BEA65700DC499F /* STConfigViewController.m in Sources */,
 				02E9A8FB17BF2B9D00DC499F /* STStickerDisposerView.m in Sources */,
+				02EE46C017C53D34007BBEA1 /* STProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,16 +1124,19 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_FAST_MATH = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_UNROLL_LOOPS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LLVM_LTO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1142,10 +1159,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adriano de Souza (3CN87KE3C3)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_FAST_MATH = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LLVM_LTO = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1158,6 +1179,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stig/Stig-Prefix.pch";
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = "Stig/Stig-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1171,6 +1193,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stig/Stig-Prefix.pch";
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = "Stig/Stig-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

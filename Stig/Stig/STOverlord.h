@@ -159,10 +159,6 @@ typedef NSUInteger STOverlordToken;
 
 # pragma mark - -Token Queries
 
-- (void) getNumberOfCommentsForToken: (STOverlordToken) token
-                          completion: (void (^) (NSUInteger numberOfComments)) completionBlock
-                               error: (void (^) (NSError* error)) errorBlock;
-
 - (void) getCommentAndUserForToken: (STOverlordToken) token
                        andPosition: (NSUInteger) position
                         completion: (void (^) (STBoardComment * comment, STUser * user)) completionBlock
@@ -175,12 +171,22 @@ typedef NSUInteger STOverlordToken;
 
 - (void) getCheckInHistoryPlaceForToken: (STOverlordToken) token
                             andPosition: (NSUInteger) position
-                             completion: (void (^) (STPlace * place, NSDate * date)) completionBlock
+                             completion: (void (^) (STPlace * place)) completionBlock
                                   error: (void (^) (NSError* error)) errorBlock;
 
+# pragma mark - -Token counting
+
+- (void) getNumberOfCommentsForToken: (STOverlordToken) token
+                          completion: (void (^) (NSUInteger numberOfComments)) completionBlock
+                               error: (void (^) (NSError* error)) errorBlock;
+
 - (void) getNumberOfPlacesForToken: (STOverlordToken) token
-                        completion: (void (^) (NSUInteger numberOfComments)) completionBlock
+                        completion: (void (^) (NSUInteger numberOfPlaces)) completionBlock
                              error: (void (^) (NSError* error)) errorBlock;
+
+- (void) getNumberOfCheckinsForToken: (STOverlordToken) token
+                          completion: (void (^) (NSUInteger numberOfCheckins)) completionBlock
+                               error: (void (^) (NSError* error)) errorBlock;
 
 @end
 

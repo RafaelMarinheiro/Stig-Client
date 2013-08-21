@@ -266,7 +266,7 @@
                      board = [[NSCache alloc]init];
                      [_commentsByPlaces setObject:board forKey:placeId];
                  }
-                 [board setObject:comment forKey:placeId];
+                 [board setObject:comment forKey:commentId];
                  dispatch_async(dispatch_get_main_queue(), ^(){
                      completionBlock((STBoardComment *) comment);
                  });
@@ -463,7 +463,7 @@
 
 - (void) getCheckInPlaceForToken: (STOverlordToken) token
                      andPosition: (NSUInteger) position
-                      completion: (void (^) (STPlace * place, NSDate * date)) completionBlock
+                      completion: (void (^) (STPlace * place)) completionBlock
                            error: (void (^) (NSError* error)) errorBlock{
     STCheckInHistoryQueryContext * context = [_tokenToCheckInQuery objectForKey:@(token)];
     if(context == nil){
@@ -476,13 +476,8 @@
     NSNumber * placeId = [[context cache] objectForKey:@(position)];
     
     if(placeId){
-        STPlace * place = [_places objectForKey:placeId];
-        if(place){
-            dispatch_async(dispatch_get_main_queue(), ^(){
-                completionBlock(place);
-            });
-            return;
-        }
+        [self resolvePlaceById:placeId completion:completionBlock error:errorBlock];
+        return;
     }
     
     NSNumber * page = @(1);
@@ -499,7 +494,7 @@
      ^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-         STPlace * resultPlace = nil;
+         NSNumber * resultPlaceId = nil;
          
          if(json){
              NSDictionary * dic = json;
@@ -508,24 +503,131 @@
              NSLog(@"%@ objects found", count);
              NSArray * result = dic[@"results"];
              for(int i = 0; i < result.count; i++){
-                 STPlace * place = [STPlace placeFromServerJSONData:result[i]];
-                 if(place){
-                     [_places setObject:place forKey:place.placeId];
+                 NSNumber * placeId = result[i][@"place"];
+                 if(placeId){
                      NSUInteger currentPosition = i+[baseNumber unsignedIntegerValue];
-                     [context.cache setObject:place.placeId forKey:(@(currentPosition))];
-                     NSLog(@"Cached %@ in position %d for token %d", place, currentPosition, token);
+                     [context.cache setObject:placeId forKey:(@(currentPosition))];
+                     NSLog(@"Cached place ID %@ in position %d for token %d", placeId, currentPosition, token);
                      if(position == currentPosition){
-                         resultPlace = place;
+                         resultPlaceId = placeId;
                      }
                  }
              }
              
-             if (resultPlace) {
-                 dispatch_async(dispatch_get_main_queue(), ^(){
-                     completionBlock(resultPlace);
-                 });
+             if (resultPlaceId) {
+                 [self resolvePlaceById:resultPlaceId completion:completionBlock error:errorBlock];
              } else{
                  error = [[NSError alloc] initWithDomain:@"Place not found" code:404 userInfo:nil];
+                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                     errorBlock(error);
+                 });
+             }
+             return;
+         }
+         
+         error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+             errorBlock(error);
+         });
+     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+         NSError * nerror;
+         if([[operation response] statusCode]){
+             nerror = [[NSError alloc] initWithDomain:@"Page does not exist" code:404 userInfo:nil];
+         } else{
+             nerror = [[NSError alloc] initWithDomain:@"Unknown error" code:500 userInfo:
+                       nil];
+         }
+         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+             errorBlock(nerror);
+         });
+         return;
+     }];
+    
+    [_client enqueueHTTPRequestOperation:operation];
+}
+
+- (void) getCommentAndUserForToken: (STOverlordToken) token
+                       andPosition: (NSUInteger) position
+                        completion: (void (^) (STBoardComment * comment, STUser * user)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock{
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+    if(context == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+        return;
+    }
+    
+    NSNumber * commentId = [[context cache] objectForKey:@(position)];
+    
+    if(commentId){
+        NSCache * comments = [_commentsByPlaces objectForKey:context.place.placeId];
+        if(comments){
+            STBoardComment * comment = [comments objectForKey:commentId];
+            if(comment){
+                [self resolveUserById:comment.userId completion:^(STUser *user) {
+                    completionBlock(comment, user);
+                } error:errorBlock];
+                return;
+            }
+        }
+    }
+    
+    NSNumber * page = @(1);
+    NSNumber * baseNumber = @(0);
+    
+    NSString * path = nil;
+    if(context.stickers){
+        path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
+    } else{
+        path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
+    }
+    
+    
+    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
+    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:
+     ^(AFHTTPRequestOperation *operation, id data){
+         NSError * error;
+         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+         STBoardComment * resultComment = nil;
+         
+         if(json){
+             NSDictionary * dic = json;
+             NSNumber * count = dic[@"count"];
+             [context.cache setObject:count forKey:@(-1)];
+             NSLog(@"%@ objects found", count);
+             NSArray * result = dic[@"results"];
+             
+             NSCache * board = [_commentsByPlaces objectForKey:context.place.placeId];
+             if(!board){
+                 board = [[NSCache alloc]init];
+                 [_commentsByPlaces setObject:board forKey:context.place.placeId];
+             }
+             
+             for(int i = 0; i < result.count; i++){
+                 STBoardComment * comment = [STBoardComment boardCommentFromServerJSONData:result[i]];
+                 if(comment){
+                     
+                     [board setObject:comment forKey:comment.commentId];
+                     
+                     NSUInteger currentPosition = i+[baseNumber unsignedIntegerValue];
+                     [context.cache setObject:comment.commentId forKey:(@(currentPosition))];
+                     
+                     NSLog(@"Cached %@ in position %d for token %d", comment, currentPosition, token);
+                     if(position == currentPosition){
+                         resultComment = comment;
+                     }
+                 }
+             }
+             
+             if (resultComment) {
+                 [self resolveUserById:[resultComment userId] completion:^(STUser *user) {
+                     completionBlock(resultComment, user);
+                 } error:errorBlock];
+             } else{
+                 error = [[NSError alloc] initWithDomain:@"Comment not found" code:404 userInfo:nil];
                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
                      errorBlock(error);
                  });
@@ -557,6 +659,55 @@
 
 
 #pragma mark - Token counting
+
+- (void) getNumberOfCommentsForToken: (STOverlordToken) token
+                          completion: (void (^) (NSUInteger numberOfComments)) completionBlock
+                               error: (void (^) (NSError* error)) errorBlock{
+    
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+    if(context){
+        [self getCommentAndUserForToken:token andPosition:0 completion:^(STBoardComment *comment, STUser *user) {
+            completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
+        } error:errorBlock];
+    } else{
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+    }
+}
+
+- (void) getNumberOfPlacesForToken: (STOverlordToken) token
+                        completion: (void (^) (NSUInteger numberOfPlaces)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock{
+    
+    STPlacesQueryContext * context = [_tokenToPlacesQuery objectForKey:@(token)];
+    if(context){
+        [self getPlaceForToken:token andPosition:0 completion:^(STPlace * place) {
+            completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
+        } error:errorBlock];
+    } else{
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+    }
+}
+
+- (void) getNumberOfCheckinsForToken: (STOverlordToken) token
+                          completion: (void (^) (NSUInteger numberOfCheckins)) completionBlock
+                               error: (void (^) (NSError* error)) errorBlock{
+    STCheckInHistoryQueryContext * context = [_tokenToCheckInQuery objectForKey:@(token)];
+    if(context){
+        [self getCheckInHistoryPlaceForToken:token andPosition:0 completion:^(STPlace *place) {
+            completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
+        } error:errorBlock];
+    } else{
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
+        });
+    }
+}
+
+
 
 
 @end

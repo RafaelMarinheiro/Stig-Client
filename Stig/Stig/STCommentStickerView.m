@@ -33,7 +33,7 @@
 }
 - (void) config {
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
+    [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical]; 
 }
 - (void) processStickers {
     
@@ -44,7 +44,7 @@
         UIImageView *stickerIcon = [self imageViewForSticker:sticker];
         [imageViews addObject:stickerIcon];
     }
-    _layoutView = [[STLinearLayoutView alloc] initWithViews:imageViews viewSize:CGSizeMake(17.0, 17.0) viewSeparator:2.0 andEdgeSeparator:0.0];
+    _layoutView = [[STLinearLayoutView alloc] initWithViews:imageViews viewSize:CGSizeMake(17.0, 17.0) viewSeparator:2.0 andEdgeSeparator:2.0];
     [self addSubview:_layoutView];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_layoutView
                                                           attribute:NSLayoutAttributeCenterX
@@ -63,8 +63,6 @@
 
 }
 - (void) setStickers:(NSArray *)stickers {
-
-
     if (_layoutView) {
         [_layoutView removeFromSuperview];
     }
@@ -81,7 +79,7 @@
 }
 - (UIImageView *) imageViewForSticker:(STSticker *) sticker {
     //[UIImage imageNamed:@"icon_bad_20"];
-    UIImage *image = [sticker stickerIconWithPlace:@"selector"];
+    UIImage *image = [sticker stickerIconWithPlace:@"comment"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.frame = CGRectMake(0.0, 0.0, STStickerSize.width, STStickerSize.height);
     return imageView;

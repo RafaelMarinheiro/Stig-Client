@@ -8,6 +8,7 @@
 
 #import "STPlacesMapViewController.h"
 #import "STConfigViewController.h"
+#import "STProfileViewController.h"
 @interface STPlacesMapViewController ()
 
 @end
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     _rankingCriteria = ST_OVERALL;
 
+    self.mapView.showsUserLocation = YES;
 
     [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-intercalation"] forState:UIControlStateNormal];
@@ -125,33 +127,41 @@
         if (buttonTag == 0) {
             STConfigViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STConfig"];
             [self presentViewController:vc animated:YES completion:nil];
+        }else if (buttonTag == 2) {
+            STProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STProfileViewController"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
 #pragma mark - MapView Delegate
 - (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    [self.mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
-    view.selected = NO;
-    STPlace *place = (STPlace *)view.annotation;
-    _selectedPlace = place;
-    [self.calloutViewController showCalloutForPlace:place];
-    if (self.delegate && [[self.delegate class] instancesRespondToSelector:@selector(placesMapViewController:placeSelected:)]) {
-        [self.delegate placesMapViewController:self placeSelected:place];
+    if ([view.annotation isKindOfClass:[STPlace class]]) {
+        [self.mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
+        view.selected = NO;
+        STPlace *place = (STPlace *)view.annotation;
+        _selectedPlace = place;
+        [self.calloutViewController showCalloutForPlace:place];
+        if (self.delegate && [[self.delegate class] instancesRespondToSelector:@selector(placesMapViewController:placeSelected:)]) {
+            [self.delegate placesMapViewController:self placeSelected:place];
+        }
     }
 }
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    NSString * identifier = @"StigPin";
+    if ([annotation isKindOfClass:[STPlace class]]) {
+        NSString * identifier = @"StigPin";
 
-    MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
 
-    if(!pin){
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        //pin.image = [UIImage imageNamed:@"pin_intercalation"];
-        [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
-        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        if(!pin){
+            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            //pin.image = [UIImage imageNamed:@"pin_intercalation"];
+            [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
+            pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        }
+        return pin;
     }
-    return pin;
+    return nil;
 }
 - (MKCoordinateRegion) regionFromAnnotations:(NSArray *) annotations{
     id <MKAnnotation> first = annotations[0];
@@ -187,7 +197,6 @@
     return MKCoordinateRegionMake(coordinate, s);
 }
 - (void) mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    NSLog(@"Region Will change animated: %d", animated);
     if (!animated) {
         for (id <MKAnnotation> a in self.mapView.selectedAnnotations) {
             [self.mapView deselectAnnotation:a animated:YES];
@@ -196,9 +205,6 @@
             [self.delegate placesMapViewControllerMapDidMove:self];
         }
     }
-}
-- (void) mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    NSLog(@"Deselected!");
 }
 - (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay{
     if([overlay isKindOfClass: [STPlace class]]){

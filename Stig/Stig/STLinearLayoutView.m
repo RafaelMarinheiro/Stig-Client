@@ -65,5 +65,16 @@
     CGFloat height = 2*self.edgeSeparatorDistance + MIN(viewCount, 1) * self.viewSize.height;
     return CGSizeMake(width, height);
 }
-
+- (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL normalResult = [super pointInside:point withEvent:event];
+    if (!normalResult) {
+        for(int i = 0; i < [self.views count]; i++){
+            CGPoint the_point = [self.views[i] convertPoint:point fromView:self];
+            if([self.views[i] pointInside:the_point withEvent:event]){
+                return YES;
+            }
+        }
+    }
+    return normalResult;
+}
 @end

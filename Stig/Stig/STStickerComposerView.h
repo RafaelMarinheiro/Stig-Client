@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "STStickerPickerView.h"
-@interface STStickerComposerView : UIView <STStickerPickerViewDelegate>
+#import "STStickerDisposerView.h"
+@protocol STStickerComposerDelegate;
+@interface STStickerComposerView : UIView <STStickerDisposerViewDelegate>
+@property (nonatomic, weak) id <STStickerComposerDelegate> delegate;
+- (void) collapseStickers;
+@end
+
+@protocol STStickerComposerDelegate <NSObject>
+@optional
+- (void) stickerComposerWillDisposeStickers:(STStickerComposerView *) composer;
+- (void) stickerComposerDidDisposeStickers:(STStickerComposerView *) composer;
+- (void) stickerComposerWillHideStickers:(STStickerComposerView *) composer;
+- (void) stickerComposerDidHideStickers:(STStickerComposerView *) composer;
 
 @end

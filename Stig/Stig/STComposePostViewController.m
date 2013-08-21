@@ -31,13 +31,19 @@
 {
     [super viewDidLoad];
     [self.textView becomeFirstResponder];
-    UIImage *back = [[UIImage imageNamed:@"bordertest.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    //NSLog(@"Image:%@", back);
-//    [self.postButton setBackgroundImage:back forState:UIControlStateNormal];
-//    [self.cancelButton setBackgroundImage:back forState:UIControlStateNormal];
-//    [self.postButton sizeToFit];
-//    [self.cancelButton sizeToFit];
-	// Do any additional setup after loading the view.
+    [self.userImageView.layer setCornerRadius:5.0];
+    [self.userImageView.layer setMasksToBounds:YES];
+
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Futura" size:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"New Comment";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.customNavigationItem.titleView = label;
+    self.stickerComposerView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,5 +58,15 @@
 
 - (IBAction)postButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void) stickerComposerWillDisposeStickers:(STStickerComposerView *)composer {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.textView.alpha = 0.3;
+    }];
+}
+- (void) stickerComposerWillHideStickers:(STStickerComposerView *)composer {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.textView.alpha = 1.0;
+    }];
 }
 @end

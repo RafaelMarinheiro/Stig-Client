@@ -33,7 +33,7 @@
     if(self){
         _client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.stigapp.co/"]];
         _user = nil;
-        _counter = 0;
+        _counter = 1;
         _lock = [[NSLock alloc] init];
         _users = [[NSCache alloc] init];
         _places = [[NSCache alloc] init];
@@ -47,6 +47,10 @@
 
 - (STUser *) user{
     return _user;
+}
+
+- (void) setUser:(STUser *)user{
+    _user = user;
 }
 
 - (STLocation *) userLocation{
@@ -707,7 +711,38 @@
     }
 }
 
+#pragma mark - Insertion methods
 
+- (void) postCommentWithText: (NSString*) text
+                 andStickers: (NSArray*) stickers
+               toPlaceWithId: (NSNumber *) placeId
+                  usingToken: (STOverlordToken) token
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock{
+    if(_user == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"User is not logged in" code:41 userInfo:nil]);
+        });
+        return;
+    }
+    
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+    if(!context){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:41 userInfo:nil]);
+        });
+        return;
+    }
+    
+    NSString * path = [[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/comments/"];
+    
+    [_client postPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"content", @([STSticker stickersServeCodeFromArray:stickers]), @"stickers", nil]
+             success:^(AFHTTPRequestOperation *operation, id data) {
+                 NSLog(@"%@", data);
+             } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                 NSLog(@"%@", error);
+             }];
+}
 
 
 @end

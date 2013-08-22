@@ -80,15 +80,17 @@
 
 #pragma mark - Insertion methods
 
-- (void) postComment: (STBoardComment*) comment
-       toPlaceWithId: (NSNumber *) placeId
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock;
+- (void) postCommentWithText: (NSString*) text
+                 andStickers: (NSArray*) stickers
+               toPlaceWithId: (NSNumber *) placeId
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock;
 
-- (void) postComment: (STBoardComment*) comment
-           inReplyTo: (STBoardComment*) comment
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock;
+- (void) postCommentWithText: (NSString *) text
+                 andStickers: (NSArray *) stickers
+                   inReplyTo: (STBoardComment*) comment
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock;
 
 #pragma mark - Raw Get methods
 

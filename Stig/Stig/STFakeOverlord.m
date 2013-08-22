@@ -266,10 +266,11 @@
 
 #pragma mark - Insertion methods
 
-- (void) postComment: (STBoardComment*) comment
-       toPlaceWithId: (NSNumber *) placeId
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock{
+- (void) postCommentWithText: (NSString*) text
+                 andStickers: (NSArray*) stickers
+               toPlaceWithId: (NSNumber *) placeId
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock{
     
     if(_user == nil){
         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -288,9 +289,13 @@
             }
         } while(commentId == nil);
         
+        STBoardComment * comment = [[STBoardComment alloc] init];
+        comment.commentText = text;
+        comment.commentStickers = stickers;
         comment.userId = _user.userId;
         comment.placeId = placeId;
         comment.commentId = commentId;
+        comment.replyId = nil;
         comment.commentTimestamp = [[NSDate alloc] init];
         [comments setObject:comment forKey:commentId];
         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -304,12 +309,46 @@
     }
 }
 
-- (void) postComment: (STBoardComment*) comment
-           inReplyTo: (STBoardComment*) originalComment
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock{
-    comment.replyId = originalComment.commentId;
-    [self postComment:comment toPlaceWithId:originalComment.placeId completion:completionBlock error:errorBlock];
+- (void) postCommentWithText: (NSString *) text
+                 andStickers: (NSArray *) stickers
+                   inReplyTo: (STBoardComment*) originalComment
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock{
+    if(_user == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"User is not logged in" code:41 userInfo:nil]);
+        });
+    }
+    
+    id comments = [_commentsByPlaces objectForKey:originalComment.placeId];
+    
+    if(comments != nil){
+        NSNumber * commentId = nil;
+        do{
+            commentId = @(rand());
+            if([comments objectForKey:commentId] != nil){
+                commentId = nil;
+            }
+        } while(commentId == nil);
+        
+        STBoardComment * comment = [[STBoardComment alloc] init];
+        comment.commentText = text;
+        comment.commentStickers = stickers;
+        comment.userId = _user.userId;
+        comment.placeId = originalComment.placeId;
+        comment.commentId = commentId;
+        comment.replyId = originalComment.placeId;
+        comment.commentTimestamp = [[NSDate alloc] init];
+        [comments setObject:comment forKey:commentId];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            completionBlock(comment);
+        });
+        
+    } else{
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Place does not exist" code:43 userInfo:nil]);
+        });
+    }
 }
 
 #pragma mark - Raw Get methods

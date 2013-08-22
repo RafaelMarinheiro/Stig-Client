@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     [self.textView becomeFirstResponder];
+    self.textView.delegate = self;
     [self.userImageView.layer setCornerRadius:5.0];
     [self.userImageView.layer setMasksToBounds:YES];
 
@@ -59,6 +60,7 @@
 - (IBAction)postButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark Sticker Composer Methods
 - (void) stickerComposerWillDisposeStickers:(STStickerComposerView *)composer {
     [UIView animateWithDuration:0.2 animations:^{
         self.textView.alpha = 0.3;
@@ -68,5 +70,9 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.textView.alpha = 1.0;
     }];
+}
+#pragma mark Text View Methods
+- (void) textViewDidChange:(UITextView *)textView {
+    [self.stickerComposerView collapseStickers];
 }
 @end

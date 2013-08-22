@@ -24,6 +24,7 @@
 
 @protocol STStickerDisposerViewDelegate <NSObject>
 @optional
+- (BOOL) stickerDisposerViewShouldDispose:(STStickerDisposerView *) stickerDisposerView;
 - (void) stickerDisposerViewWillDispose:(STStickerDisposerView *) stickerDisposerView;
 - (void) stickerDisposerViewDidDispose:(STStickerDisposerView *) stickerDisposerView;
 - (void) stickerDisposerViewWillHide:(STStickerDisposerView *) stickerDisposerView;

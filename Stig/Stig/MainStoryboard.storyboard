@@ -320,7 +320,7 @@
                                 <color key="tintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="WlW-JI-Exl">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="tUa-Qi-Tys">
+                                        <barButtonItem key="leftBarButtonItem" id="tUa-Qi-Tys">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmv-ZV-dY2">
                                                 <rect key="frame" x="5" y="7" width="67" height="29"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
@@ -336,7 +336,7 @@
                                                 </connections>
                                             </button>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="3dl-x2-QXt">
+                                        <barButtonItem key="rightBarButtonItem" id="3dl-x2-QXt">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FXx-sQ-gmD">
                                                 <rect key="frame" x="231" y="7" width="84" height="29"/>
                                                 <constraints>
@@ -453,17 +453,25 @@
                                     <segue destination="dzk-eV-isj" kind="embed" identifier="Callout Segue" id="6Ug-Lp-QvL"/>
                                 </connections>
                             </containerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mei-Zn-5Pg">
+                                <items>
+                                    <navigationItem title="Stig" id="m05-SO-fna"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="default" id="1zQ-Tq-mT9"/>
                             <constraint firstItem="1qo-JE-YUV" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="CUu-kN-04B"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="F5b-6P-hJO"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="1qo-JE-YUV" secondAttribute="bottom" type="user" id="I4m-l7-OFk" userLabel="Dragger Constraint"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="user" id="U6c-68-vb4"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="user" id="Ww4-CI-9Ne"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="amK-3P-ahP"/>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="top" secondItem="aCX-dV-7VB" secondAttribute="top" type="default" id="do0-Lo-XlH"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="bottom" secondItem="aCX-dV-7VB" secondAttribute="bottom" type="user" id="eNv-cg-E4T"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="qKk-hr-WVr"/>
+                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="default" id="sCG-8T-NEk"/>
                             <constraint firstItem="1qo-JE-YUV" firstAttribute="trailing" secondItem="aCX-dV-7VB" secondAttribute="trailing" type="user" id="sFI-Ww-9SZ"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="leading" secondItem="aCX-dV-7VB" secondAttribute="leading" type="user" id="sIK-Lz-9d3"/>
                             <constraint firstItem="G5K-6f-TBQ" firstAttribute="height" secondItem="1qo-JE-YUV" secondAttribute="height" type="user" id="wYI-Ug-qDl"/>
@@ -694,27 +702,19 @@
                                     <constraint firstAttribute="width" constant="50" type="user" id="O4p-6H-dsq"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mei-Zn-5Pg">
-                                <items>
-                                    <navigationItem title="Stig" id="m05-SO-fna"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="bottom" secondItem="fiI-er-aKC" secondAttribute="bottom" type="user" id="0B0-4G-ljS"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" type="user" id="9SD-IH-xs4"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="trailing" secondItem="fiI-er-aKC" secondAttribute="trailing" type="default" id="AFC-Eu-tWZ"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="top" secondItem="fiI-er-aKC" secondAttribute="top" type="default" id="C9M-zN-AZ2"/>
+                            <constraint firstItem="g7a-ue-Z8T" firstAttribute="centerX" secondItem="tbf-X9-Wae" secondAttribute="centerX" type="default" id="N93-Ks-kKg"/>
                             <constraint firstAttribute="bottom" secondItem="g7a-ue-Z8T" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VIl-kr-zsY"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="top" secondItem="fiI-er-aKC" secondAttribute="top" type="user" id="Wuh-ww-Dtc"/>
                             <constraint firstAttribute="trailing" secondItem="3po-1P-0Fj" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YzT-PZ-eJ1"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" type="default" id="aKH-fb-GBL"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="trailing" secondItem="fiI-er-aKC" secondAttribute="trailing" type="user" id="ebB-cX-yLE"/>
                             <constraint firstAttribute="bottom" secondItem="vOM-3E-7f8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lkl-az-6eQ"/>
                             <constraint firstAttribute="bottom" secondItem="3po-1P-0Fj" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="nq7-uV-3Vw"/>
                             <constraint firstItem="vOM-3E-7f8" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="rTw-CP-uFF"/>
-                            <constraint firstItem="mei-Zn-5Pg" firstAttribute="centerX" secondItem="g7a-ue-Z8T" secondAttribute="centerX" type="default" id="ya7-DU-zYm"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

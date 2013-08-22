@@ -12,7 +12,9 @@
 @protocol STStickerComposerDelegate;
 @interface STStickerComposerView : UIView <STStickerDisposerViewDelegate>
 @property (nonatomic, weak) id <STStickerComposerDelegate> delegate;
+@property (nonatomic, strong, readonly) NSArray *selectedStickers;
 - (void) collapseStickers;
+
 @end
 
 @protocol STStickerComposerDelegate <NSObject>

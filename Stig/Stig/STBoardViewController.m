@@ -34,7 +34,7 @@
     self.customNavigationItem.titleView = label;
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
-    _overlord = [STHiveCluster spawnOverlord];
+    _overlord = [STHiveCluster spawnOverlordWithType:STOverlordTypeNetworked];
     [self.topBatTitle setText:self.place.placeName];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
@@ -63,6 +63,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void) requestDataWithStickers:(NSArray *) stickers {
+    NSLog(@"REquesting data!");
     NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:stickers];
     _currentToken = token;
     [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
@@ -71,7 +72,7 @@
         _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
         [self.tableView reloadData];
     }error:^(NSError *error) {
-
+        NSLog(@"REquesting data! AND BIG ERROR %@ %@", error, self.place);
     }];
 }
 #pragma mark - Table view data source
@@ -117,7 +118,6 @@
         NSNumber *position = @(indexPath.row);
         if (!_heightsDictionary[position]) {
             [self setHeight:commentView.cellHeight forPosition:position];
-            //[self setHeightForComment:comment atPosition:position];
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
     }error:^(NSError *error){

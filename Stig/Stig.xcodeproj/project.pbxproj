@@ -66,6 +66,11 @@
 		0204ED3317BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2D17BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png */; };
 		0204ED3417BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2E17BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png */; };
 		0204ED3517BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2F17BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png */; };
+		020BC79817C673220076752A /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79017C673220076752A /* MMDrawerController.m */; };
+		020BC79917C673220076752A /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79317C673220076752A /* UIViewController+MMDrawerController.m */; };
+		020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79517C673220076752A /* MMDrawerBarButtonItem.m */; };
+		020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79717C673220076752A /* MMDrawerVisualState.m */; };
+		020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC7A117C68E650076752A /* STDrawerViewController.m */; };
 		02305C4217C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1C17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png */; };
 		02305C4317C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1D17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png */; };
 		02305C4417C0790D00E9ADBD /* icon_sticker_food_bad_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1E17C0790D00E9ADBD /* icon_sticker_food_bad_comment.png */; };
@@ -274,6 +279,17 @@
 		0204ED2D17BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_people_neutral_selector@2x.png"; sourceTree = "<group>"; };
 		0204ED2E17BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_queue_neutral_selector.png; sourceTree = "<group>"; };
 		0204ED2F17BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_queue_neutral_selector@2x.png"; sourceTree = "<group>"; };
+		020BC78F17C673220076752A /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		020BC79017C673220076752A /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		020BC79117C673220076752A /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		020BC79217C673220076752A /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		020BC79317C673220076752A /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		020BC79417C673220076752A /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		020BC79517C673220076752A /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		020BC79617C673220076752A /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		020BC79717C673220076752A /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		020BC7A017C68E650076752A /* STDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDrawerViewController.h; sourceTree = "<group>"; };
+		020BC7A117C68E650076752A /* STDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDrawerViewController.m; sourceTree = "<group>"; };
 		02305C1C17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_accessibility_bad_comment.png; sourceTree = "<group>"; };
 		02305C1D17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_accessibility_bad_comment@2x.png"; sourceTree = "<group>"; };
 		02305C1E17C0790D00E9ADBD /* icon_sticker_food_bad_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_food_bad_comment.png; sourceTree = "<group>"; };
@@ -493,6 +509,7 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				020BC79C17C673270076752A /* MMDrawer */,
 				02DF814C17C3086F00DB29BE /* new-bar@2x.png */,
 				02DF814D17C3086F00DB29BE /* new-bar.png */,
 				02B4A6CB17C2B1000013977F /* placeholder-user.jpg */,
@@ -553,6 +570,8 @@
 				02E9A8AB17BEA65700DC499F /* STConfigViewController.m */,
 				02EE46BE17C53D34007BBEA1 /* STProfileViewController.h */,
 				02EE46BF17C53D34007BBEA1 /* STProfileViewController.m */,
+				020BC7A017C68E650076752A /* STDrawerViewController.h */,
+				020BC7A117C68E650076752A /* STDrawerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -615,6 +634,22 @@
 				0202F49C17A060610071D95C /* UIImageView+AFNetworking.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		020BC79C17C673270076752A /* MMDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				020BC78F17C673220076752A /* MMDrawerController.h */,
+				020BC79017C673220076752A /* MMDrawerController.m */,
+				020BC79117C673220076752A /* MMDrawerController+Subclass.h */,
+				020BC79217C673220076752A /* UIViewController+MMDrawerController.h */,
+				020BC79317C673220076752A /* UIViewController+MMDrawerController.m */,
+				020BC79417C673220076752A /* MMDrawerBarButtonItem.h */,
+				020BC79517C673220076752A /* MMDrawerBarButtonItem.m */,
+				020BC79617C673220076752A /* MMDrawerVisualState.h */,
+				020BC79717C673220076752A /* MMDrawerVisualState.m */,
+			);
+			name = MMDrawer;
 			sourceTree = "<group>";
 		};
 		02305C1B17C0790D00E9ADBD /* bad */ = {
@@ -1116,6 +1151,11 @@
 				0FD1162817BEAEE2009C4081 /* STBoardCommentQueryContext.m in Sources */,
 				0F5FF5C517C2A1A1000B3530 /* STCheckInHistoryQueryContext.m in Sources */,
 				0F5FF5C917C2A60F000B3530 /* STPlacesQueryContext.m in Sources */,
+				020BC79817C673220076752A /* MMDrawerController.m in Sources */,
+				020BC79917C673220076752A /* UIViewController+MMDrawerController.m in Sources */,
+				020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */,
+				020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */,
+				020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

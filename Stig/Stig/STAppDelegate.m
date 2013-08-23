@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UIFont *testFont = [UIFont fontWithName:@"MarketingScript" size:24.0];
+    UIFont *testFont = [UIFont fontWithName:@"Futura" size:20.0];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont:testFont,UITextAttributeTextColor:[UIColor whiteColor],
                           UITextAttributeTextShadowColor:[UIColor clearColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];

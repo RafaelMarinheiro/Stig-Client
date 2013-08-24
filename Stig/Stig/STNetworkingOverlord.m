@@ -24,6 +24,8 @@
     STSafeMutableDictionary * _tokenToCheckInQuery;
     STSafeMutableDictionary * _tokenToPlacesQuery;
     STUser * _user;
+    NSString * _fb_id;
+    NSString * _fb_accesstoken;
     NSLock * _lock;
 }
 
@@ -33,7 +35,7 @@
     if(self){
         _client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.stigapp.co/"]];
         _user = nil;
-        _counter = 0;
+        _counter = 1;
         _lock = [[NSLock alloc] init];
         _users = [[NSCache alloc] init];
         _places = [[NSCache alloc] init];
@@ -45,8 +47,13 @@
     return self;
 }
 
+
 - (STUser *) user{
     return _user;
+}
+
+- (void) setUser:(STUser *)user{
+    _user = user;
 }
 
 - (STLocation *) userLocation{
@@ -70,6 +77,8 @@
 }
 
 #pragma mark - Authentication methods
+
+
 - (void) signInUserWithId: (NSNumber *) userId
              withPassword: (NSString *) password
                completion: (void (^)(STUser * user)) completionBlock
@@ -84,17 +93,56 @@
                    withPassword: (NSString *) password
                      completion: (void (^)(STUser * user)) completionBlock
                           error: (void (^) (NSError* error)) errorBlock{
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        errorBlock([[NSError alloc] initWithDomain:@"Not implemented" code:43 userInfo:nil]);
-    });
+    _user = nil;
+    _fb_id = [userId stringValue];
+    _fb_accesstoken = password;
+    
+    [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+    
+    NSString * path = @"/users/me/";
+    
+    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
+    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
+        NSError * error;
+        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        _user = nil;
+        
+        if(json){
+            NSDictionary * dic = json;
+            _user = [STUser userFromServerJSONData:dic];
+            if(_user){
+                [_users setObject:_user forKey:_user.userId];
+                [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                    completionBlock(_user);
+                });
+                return;
+            }
+        }
+        
+        if(!_user){
+            [_client clearAuthorizationHeader];
+            error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+            if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                errorBlock(error);
+            });
+            return;
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [_client clearAuthorizationHeader];
+        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock(error);
+        });
+    }];
+    
+    [_client enqueueHTTPRequestOperation:operation];
 }
-
-- (void) signOutUser: (NSNumber *) userId
-          completion: (void (^)()) completionBlock
-               error: (void (^) (NSError* error)) errorBlock{
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        errorBlock([[NSError alloc] initWithDomain:@"Not implemented" code:43 userInfo:nil]);
-    });
+     
+- (void) signOutWithCompletion: (void (^)()) completionBlock
+                         error: (void (^) (NSError* error)) errorBlock{
+    _user = nil;
 }
 
 #pragma mark - Raw Resolve methods
@@ -707,7 +755,40 @@
     }
 }
 
+#pragma mark - Insertion methods
 
+- (void) postCommentWithText: (NSString*) text
+                 andStickers: (NSArray*) stickers
+               toPlaceWithId: (NSNumber *) placeId
+                  usingToken: (STOverlordToken) token
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock{
+    if(_user == nil){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"User is not logged in" code:41 userInfo:nil]);
+        });
+        return;
+    }
+    
+    STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+    if(!context){
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:41 userInfo:nil]);
+        });
+        return;
+    }
+    
+    NSString * path = [[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/comments/"];
+    
+    [_client postPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"content", @([STSticker stickersServeCodeFromArray:stickers]), @"stickers", nil]
+             success:^(AFHTTPRequestOperation *operation, id data) {
+                 NSLog(@"%@", data);
+             } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                     errorBlock(error);
+                 });
+             }];
+}
 
 
 @end

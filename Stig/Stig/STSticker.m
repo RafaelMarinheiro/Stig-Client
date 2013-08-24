@@ -78,6 +78,9 @@
 }
 
 + (NSUInteger) stickersServeCodeFromArray: (NSArray *) array{
+    if(!array){
+        return nil;
+    }
     NSUInteger ret = 0;
     for(int i = 0; i < array.count; i++){
         ret = (ret | [array[i] getServerCode]);

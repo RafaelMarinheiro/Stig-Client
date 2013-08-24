@@ -13,9 +13,11 @@
 #import "STLocation.h"
 #import "STSticker.h"
 
+typedef NSUInteger STOverlordToken;
+
 @protocol STOverlord
 
-@property (nonatomic, strong, readonly) STUser * user;
+@property (nonatomic, strong) STUser * user;
 @property (nonatomic, strong) STLocation *userLocation;
 
 
@@ -30,8 +32,7 @@
                      completion: (void (^)(STUser * user)) completionBlock
                           error: (void (^) (NSError* error)) errorBlock;
 
-- (void) signOutUser: (NSNumber *) userId
-          completion: (void (^)()) completionBlock
+- (void) signOutWithCompletion: (void (^)()) completionBlock
                error: (void (^) (NSError* error)) errorBlock;
 
 #pragma mark - Check-In methods
@@ -80,15 +81,19 @@
 
 #pragma mark - Insertion methods
 
-- (void) postComment: (STBoardComment*) comment
-       toPlaceWithId: (NSNumber *) placeId
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock;
+- (void) postCommentWithText: (NSString*) text
+                 andStickers: (NSArray*) stickers
+               toPlaceWithId: (NSNumber *) placeId
+                  usingToken: (STOverlordToken) token
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock;
 
-- (void) postComment: (STBoardComment*) comment
-           inReplyTo: (STBoardComment*) comment
-          completion: (void (^)(STBoardComment * comment)) completionBlock
-               error: (void (^)(NSError *error)) errorBlock;
+- (void) postCommentWithText: (NSString *) text
+                 andStickers: (NSArray *) stickers
+                   inReplyTo: (STBoardComment*) comment
+                  usingToken: (STOverlordToken) token
+                  completion: (void (^)(STBoardComment * comment)) completionBlock
+                       error: (void (^)(NSError *error)) errorBlock;
 
 #pragma mark - Raw Get methods
 
@@ -145,8 +150,6 @@ error: (void (^) (NSError* error)) errorBlock DEPRECATED_ATTRIBUTE;
 
 # pragma mark - Token Stuff
 
-
-typedef NSUInteger STOverlordToken;
 
 # pragma mark - -Token Requests
 

@@ -233,7 +233,7 @@
                             <constraint firstItem="OZc-ex-36v" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="20" symbolic="YES" type="default" id="sIU-iW-Qbw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="unU-y7-Oiw"/>
+                    <navigationItem key="navigationItem" title="Profile" id="unU-y7-Oiw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rRB-VG-9k3" userLabel="First Responder" sceneMemberID="firstResponder"/>

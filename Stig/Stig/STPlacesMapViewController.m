@@ -19,6 +19,7 @@
 @implementation STPlacesMapViewController {
     STPlace *_selectedPlace;
     STOverlordToken _overlordToken;
+    CLLocationManager *_locationManager;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -62,6 +63,14 @@
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
     [self loadPlaces];
+}
+
+- (void) startLocationServices {
+    if (![CLLocationManager locationServicesEnabled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+    [alert show];
+    }
+    
 }
 - (void) loadPlaces {
     id <STOverlord> overlord = [STHiveCluster spawnOverlord];

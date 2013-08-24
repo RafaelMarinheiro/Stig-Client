@@ -10,23 +10,26 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation STBoardCommentView
-
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
-    [self prepareForReuse];
-    [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
+    //[self prepareForReuse];
+    
     self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
     self.stickersView.stickers = comment.commentStickers;
+    [self.stickersView setNeedsLayout];
+    [self.stickersView layoutIfNeeded];
     [self.commentLabel sizeToFit];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+    [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.userImageView.layer setCornerRadius:5.0];
     self.userImageView.layer.masksToBounds = YES;
-    CGFloat h = self.userImageView.frame.size.height + self.stickersView.frame.size.height + 14;
+    CGFloat h = self.userImageView.frame.size.height  + 14 + self.stickersView.frame.size.height;
     _cellHeight = MAX(h,  self.commentLabel.contentSize.height);
 }
 - (void) prepareForReuse {
-    self.commentLabel.attributedText = nil;
+    self.commentLabel.text = @"Loading...";
     self.stickersView.stickers = nil;
-    [self.userImageView setImage:[UIImage imageNamed:@""]];
+    [self.userImageView setImage:[UIImage imageNamed:@"placeholder_user"]];
+    _cellHeight = 80.0;
 }
 - (NSAttributedString *) textWithComment:(STBoardComment *) comment andUser:(STUser *) user {
     NSMutableAttributedString *nameString = [[self attributedUserNameStringWithUser:user] mutableCopy];

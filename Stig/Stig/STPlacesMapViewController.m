@@ -64,20 +64,19 @@
     [self loadPlaces];
 }
 - (void) loadPlaces {
-    id <STOverlord> overlord = [STHiveCluster spawnOverlordWithType:STOverlordTypeNetworked];
+    id <STOverlord> overlord = [STHiveCluster spawnOverlord];
     _overlordToken = [overlord requestTokenForPlacesWithSearchTerm:nil];
-    NSLog(@"MAp token %d", _overlordToken);
     [overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
         for (int i =0; i < numberOfPlaces; i++) {
             [overlord getPlaceForToken:_overlordToken andPosition:i completion:^(STPlace *place) {
                 [self.mapView addAnnotation:place];
                 [self.mapView addOverlay:place];
             } error:^(NSError *error) {
-                
+                NSLog(@"Error loading place %@", error);
             }];
         }
     } error:^(NSError *error) {
-        
+        NSLog(@"Error loading places %@", error);
     }];
     STPlacesListViewController *vc = (STPlacesListViewController *)self.mm_drawerController.leftDrawerViewController;
     vc.overlordToken = _overlordToken;

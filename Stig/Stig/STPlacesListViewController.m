@@ -54,8 +54,7 @@
 }
 - (void) reloadPlaces {
     _loadedPlaces = NO;
-    _overlord = [STHiveCluster spawnOverlordWithType:STOverlordTypeNetworked];
-    NSLog(@"LIST TOKEN !%d", _overlordToken);
+    _overlord = [STHiveCluster spawnOverlord];
     [_overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
         _numberOfPlaces = numberOfPlaces;
         _loadedPlaces = YES;

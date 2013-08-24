@@ -34,7 +34,7 @@
     self.customNavigationItem.titleView = label;
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
-    _overlord = [STHiveCluster spawnOverlordWithType:STOverlordTypeNetworked];
+    _overlord = [STHiveCluster spawnOverlord];
     [self.topBatTitle setText:self.place.placeName];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
@@ -109,6 +109,8 @@
     }
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
+    [reuse prepareForReuse];
     [_overlord getCommentAndUserForToken:_currentToken andPosition:indexPath.row completion:^(STBoardComment *comment, STUser *user){
         UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
         STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
@@ -133,7 +135,6 @@
     if (indexPath.section == 0) {
         return 100.0;
     }
-    
     NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
     if (height) {
         return [height floatValue];

@@ -67,6 +67,6 @@
     return nil;
 }
 - (NSString *) description {
-    return [NSString stringWithFormat:@"[%@: %@, %@, %@]",self.commentId,self.userId,self.commentText,self.commentTimestamp];
+    return [NSString stringWithFormat:@"[%@: %@, %@, %@, [%@]]",self.commentId,self.userId,self.commentText,self.commentTimestamp, self.commentStickers];
 }
 @end

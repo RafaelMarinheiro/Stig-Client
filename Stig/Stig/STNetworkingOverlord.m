@@ -12,6 +12,7 @@
 #import "STBoardCommentQueryContext.h"
 #import "STCheckInHistoryQueryContext.h"
 #import "STPlacesQueryContext.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 
 @implementation STNetworkingOverlord{
@@ -89,55 +90,75 @@
     
 }
 
-- (void) authenticateUserWithId: (NSNumber *) userId
-                   withPassword: (NSString *) password
-                     completion: (void (^)(STUser * user)) completionBlock
-                          error: (void (^) (NSError* error)) errorBlock{
-    _user = nil;
-    _fb_id = [userId stringValue];
-    _fb_accesstoken = password;
-    
-    [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-    
-    NSString * path = @"/users/me/";
-    
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
-        NSError * error;
-        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        _user = nil;
-        
-        if(json){
-            NSDictionary * dic = json;
-            _user = [STUser userFromServerJSONData:dic];
-            if(_user){
-                [_users setObject:_user forKey:_user.userId];
-                [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-                if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                    completionBlock(_user);
-                });
-                return;
-            }
-        }
-        
-        if(!_user){
-            [_client clearAuthorizationHeader];
-            error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
-            if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                errorBlock(error);
-            });
-            return;
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_client clearAuthorizationHeader];
-        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-            errorBlock(error);
+- (void) authenticateUserWithCompletion: (void (^)(STUser * user)) completionBlock
+                                  error: (void (^) (NSError* error)) errorBlock{
+    if(_user){
+        if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(_user);
         });
-    }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
+        return;
+    }
+
+    [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+                            completionHandler:^(FBSession *session,
+                                                FBSessionState status,
+                                                NSError *error) {
+                                if ([FBSession.activeSession isOpen]) {
+                                    [[FBRequest requestForMe] startWithCompletionHandler:
+                                     ^(FBRequestConnection *connection,
+                                       NSDictionary<FBGraphUser> *user,
+                                       NSError *error) {
+                                         if(!error){
+                                             _user = nil;
+                                             _fb_id = [user id];
+                                             _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
+
+                                             [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+
+                                             NSString * path = @"/users/me/";
+
+                                             NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
+                                             AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+                                             [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
+                                                 NSError * error;
+                                                 id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                                                 _user = nil;
+
+                                                 if(json){
+                                                     NSDictionary * dic = json;
+                                                     _user = [STUser userFromServerJSONData:dic];
+                                                     if(_user){
+                                                         [_users setObject:_user forKey:_user.userId];
+                                                         [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                                                         if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                             completionBlock(_user);
+                                                         });
+                                                         return;
+                                                     }
+                                                 }
+                                                 
+                                                 if(!_user){
+                                                     [_client clearAuthorizationHeader];
+                                                     error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+                                                     if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                         errorBlock(error);
+                                                     });
+                                                     return;
+                                                 }
+                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                 [_client clearAuthorizationHeader];
+                                                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                     errorBlock(error);
+                                                 });
+                                             }];
+                                             
+                                             [_client enqueueHTTPRequestOperation:operation];
+                                             
+                                         }
+                                     }];
+                                }
+                            }];
 }
      
 - (void) signOutWithCompletion: (void (^)()) completionBlock
@@ -434,9 +455,9 @@
             return;
         }
     }
-    
-    NSNumber * page = @(1);
-    NSNumber * baseNumber = @(0);
+
+    NSNumber * page = @((position/10) + 1);
+    NSNumber * baseNumber = @(([page unsignedIntegerValue]-1)*10);
     
     NSString * path = nil;
     if(context.queryString){
@@ -528,8 +549,8 @@
         return;
     }
     
-    NSNumber * page = @(1);
-    NSNumber * baseNumber = @(0);
+    NSNumber * page = @((position/10) + 1);
+    NSNumber * baseNumber = @(([page unsignedIntegerValue]-1)*10);
     
     NSString * path = nil;
     path = [[[[@"users/" stringByAppendingString:[context.user userName]] stringByAppendingString:@"/checkins/"] stringByAppendingString:@"?page="] stringByAppendingString:[page stringValue]];
@@ -621,8 +642,8 @@
         }
     }
     
-    NSNumber * page = @(1);
-    NSNumber * baseNumber = @(0);
+    NSNumber * page = @((position/10) + 1);
+    NSNumber * baseNumber = @(([page unsignedIntegerValue]-1)*10);
     
     NSString * path = nil;
     if(context.stickers){

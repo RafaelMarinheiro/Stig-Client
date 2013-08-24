@@ -200,37 +200,31 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jEk-Ax-5Xx">
-                                <color key="progressTintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.69019607843137254" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="progressTintColor" red="0.33333333333333331" green="0.69019607843137254" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ex-36v">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Rmc-9l-WPZ"/>
-                                    <constraint firstAttribute="width" constant="100" id="Vrj-zc-9my"/>
+                                    <constraint firstAttribute="width" constant="100" type="user" id="Vrj-zc-9my"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ype-X7-Q8g">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rafael Marinheiro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vz-wc-ad2">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0vz-wc-ad2" firstAttribute="leading" secondItem="OZc-ex-36v" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="2fI-1x-S1J"/>
-                            <constraint firstItem="jEk-Ax-5Xx" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="102" id="66q-r8-DdV"/>
-                            <constraint firstItem="ype-X7-Q8g" firstAttribute="centerX" secondItem="jEk-Ax-5Xx" secondAttribute="centerX" type="default" id="7uT-vb-7Zp"/>
                             <constraint firstAttribute="trailing" secondItem="jEk-Ax-5Xx" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G8j-68-PsI"/>
+                            <constraint firstItem="OZc-ex-36v" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="11" id="GGf-xU-jVl"/>
                             <constraint firstItem="0vz-wc-ad2" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Q9s-Iq-JKQ"/>
-                            <constraint firstItem="ype-X7-Q8g" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="78" id="WBC-We-dlE"/>
-                            <constraint firstItem="OZc-ex-36v" firstAttribute="leading" secondItem="IsL-Jg-fxy" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="bsJ-DZ-ftb"/>
+                            <constraint firstItem="OZc-ex-36v" firstAttribute="leading" secondItem="IsL-Jg-fxy" secondAttribute="leading" constant="20" type="user" id="bsJ-DZ-ftb"/>
+                            <constraint firstItem="OZc-ex-36v" firstAttribute="bottom" secondItem="jEk-Ax-5Xx" secondAttribute="bottom" type="default" id="kLm-sj-3hj"/>
                             <constraint firstItem="jEk-Ax-5Xx" firstAttribute="leading" secondItem="OZc-ex-36v" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="lr2-ei-X2R"/>
-                            <constraint firstItem="OZc-ex-36v" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="20" symbolic="YES" type="default" id="sIU-iW-Qbw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="unU-y7-Oiw"/>
@@ -421,10 +415,22 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Stig" id="GmC-dm-4eS">
-                        <barButtonItem key="leftBarButtonItem" title="List" id="eff-EM-c5J">
-                            <connections>
-                                <action selector="drawerButtonPressed:" destination="jsV-1v-Hdp" id="AbB-Ay-52r"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="eR2-BB-2sn">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G0v-sv-moT">
+                                <rect key="frame" x="5" y="0.0" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" type="user" id="zDy-0h-yZC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="icon_list_white.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -445,7 +451,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qru-UG-JKd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qru-UG-JKd">
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -728,6 +734,7 @@
     </scenes>
     <resources>
         <image name="callout.png" width="640" height="1150"/>
+        <image name="icon_list_white.png" width="44" height="44"/>
         <image name="placeholder-user.jpg" width="180" height="180"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>

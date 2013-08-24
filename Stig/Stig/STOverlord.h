@@ -27,13 +27,11 @@ typedef NSUInteger STOverlordToken;
                completion: (void (^)(STUser * user)) completionBlock
                     error: (void (^) (NSError* error)) errorBlock;
 
-- (void) authenticateUserWithId: (NSNumber *) userId
-                   withPassword: (NSString *) password
-                     completion: (void (^)(STUser * user)) completionBlock
+- (void) authenticateUserWithCompletion: (void (^)(STUser * user)) completionBlock
                           error: (void (^) (NSError* error)) errorBlock;
 
 - (void) signOutWithCompletion: (void (^)()) completionBlock
-               error: (void (^) (NSError* error)) errorBlock;
+                         error: (void (^) (NSError* error)) errorBlock;
 
 #pragma mark - Check-In methods
 

@@ -93,6 +93,7 @@
         }
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
+    cell.textLabel.text = @"Loading ...";
     [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
        
         UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];

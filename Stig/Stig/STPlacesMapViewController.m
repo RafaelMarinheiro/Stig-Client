@@ -20,6 +20,8 @@
     STPlace *_selectedPlace;
     STOverlordToken _overlordToken;
     CLLocationManager *_locationManager;
+    CLLocation *_currentLocation;
+    BOOL _locationLoaded;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,6 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _locationLoaded = NO;
     _rankingCriteria = ST_OVERALL;
 
     self.mapView.showsUserLocation = YES;
@@ -63,14 +66,25 @@
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
     [self loadPlaces];
+    [self startLocationServices];
 }
 
 - (void) startLocationServices {
-    if (![CLLocationManager locationServicesEnabled]) {
+    if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-    [alert show];
+        [alert show];
     }
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
     
+}
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    _currentLocation = locations[0];
+    if (!_locationLoaded) {
+        _locationLoaded = YES;
+        [self centerMapOnLocation:_currentLocation.coordinate];
+    }
 }
 - (void) loadPlaces {
     id <STOverlord> overlord = [STHiveCluster spawnOverlord];
@@ -110,14 +124,18 @@
     }
     [self selectPlace:_selectedPlace];
 }
-#pragma mark - Setters
-- (void) selectPlace:(STPlace *) place {
-    _selectedPlace = place;
-    [self.mapView selectAnnotation:place animated:NO];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_selectedPlace.coordinate, 1000, 1000);
+- (void) centerMapOnLocation:(CLLocationCoordinate2D) location {
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location, 1000, 1000);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
     [self.mapView setRegion:adjustedRegion animated:YES];
 }
+- (void) selectPlace:(STPlace *) place {
+    _selectedPlace = place;
+    [self.mapView selectAnnotation:place animated:NO];
+    [self centerMapOnLocation:_selectedPlace.coordinate];
+}
+#pragma mark - Setters
+
 - (void) setRankingCriteria:(STRankingCriteria)rankingCriteria {
     _rankingCriteria = rankingCriteria;
     
@@ -157,13 +175,17 @@
         }
         [self setRankingCriteria:crit];
     }else {
-        if (buttonTag == 0) {
-            STConfigViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STConfig"];
-            [self presentViewController:vc animated:YES completion:nil];
-        }else if (buttonTag == 2) {
-            STProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STProfileViewController"];
-            [self.navigationController pushViewController:vc animated:YES];
+        id <STOverlord> overlord = [STHiveCluster spawnOverlord];
+        if (overlord.user) {
+            if (buttonTag == 0) {
+                [self performSegueWithIdentifier:@"settingsSegue" sender:nil];
+            }else if (buttonTag == 2) {
+                [self performSegueWithIdentifier:@"profileSegue" sender:nil];
+            }
+        } else {
+            [self performSegueWithIdentifier:@"logInMapSegue" sender:nil];
         }
+        
     }
 }
 #pragma mark - MapView Delegate

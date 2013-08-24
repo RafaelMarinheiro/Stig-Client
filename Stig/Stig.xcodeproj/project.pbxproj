@@ -178,6 +178,7 @@
 		02A72BCF17BDD4C500CFF054 /* bordertest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A72BCD17BDD4C500CFF054 /* bordertest@2x.png */; };
 		02A72BD017BDD4C500CFF054 /* bordertest.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A72BCE17BDD4C500CFF054 /* bordertest.png */; };
 		02B4A6CC17C2B1000013977F /* placeholder-user.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 02B4A6CB17C2B1000013977F /* placeholder-user.jpg */; };
+		02CF70D217C8ECD30043218F /* STLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CF70D117C8ECD30043218F /* STLogInViewController.m */; };
 		02DF29A217A34C6F003316C1 /* STMapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DF29A117A34C6F003316C1 /* STMapOverlayView.m */; };
 		02DF814E17C3086F00DB29BE /* new-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DF814C17C3086F00DB29BE /* new-bar@2x.png */; };
 		02DF814F17C3086F00DB29BE /* new-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DF814D17C3086F00DB29BE /* new-bar.png */; };
@@ -410,6 +411,8 @@
 		02A72BCD17BDD4C500CFF054 /* bordertest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bordertest@2x.png"; sourceTree = "<group>"; };
 		02A72BCE17BDD4C500CFF054 /* bordertest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bordertest.png; sourceTree = "<group>"; };
 		02B4A6CB17C2B1000013977F /* placeholder-user.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-user.jpg"; sourceTree = "<group>"; };
+		02CF70D017C8ECD30043218F /* STLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLogInViewController.h; sourceTree = "<group>"; };
+		02CF70D117C8ECD30043218F /* STLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLogInViewController.m; sourceTree = "<group>"; };
 		02DF29A017A34C6F003316C1 /* STMapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMapOverlayView.h; sourceTree = "<group>"; };
 		02DF29A117A34C6F003316C1 /* STMapOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMapOverlayView.m; sourceTree = "<group>"; };
 		02DF814C17C3086F00DB29BE /* new-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-bar@2x.png"; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 				02EE46BF17C53D34007BBEA1 /* STProfileViewController.m */,
 				020BC7A017C68E650076752A /* STDrawerViewController.h */,
 				020BC7A117C68E650076752A /* STDrawerViewController.m */,
+				02CF70D017C8ECD30043218F /* STLogInViewController.h */,
+				02CF70D117C8ECD30043218F /* STLogInViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1164,6 +1169,7 @@
 				020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */,
 				020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */,
 				020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */,
+				02CF70D217C8ECD30043218F /* STLogInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@
 #import "CircularButtonDisposerView.h"
 
 @protocol STPlacesMapViewControllerDelegate;
-@interface STPlacesMapViewController : UIViewController <MKMapViewDelegate, CircularButtonDisposerDelegate>
+@interface STPlacesMapViewController : UIViewController <MKMapViewDelegate, CircularButtonDisposerDelegate,CLLocationManagerDelegate>
 @property (nonatomic, weak) id <STPlacesMapViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *places;

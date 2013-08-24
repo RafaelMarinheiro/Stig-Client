@@ -669,7 +669,7 @@
         [self getCommentAndUserForToken:token andPosition:0 completion:^(STBoardComment *comment, STUser *user) {
             completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
         } error:errorBlock];
-    } else{
+    }else {
         dispatch_async(dispatch_get_main_queue(), ^(){
             errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
         });

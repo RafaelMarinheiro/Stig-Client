@@ -25,7 +25,7 @@
 
 +(STUser *) userFromServerJSONData:(id)json {
     if ([json isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"HI");
+        NSLog(@"USER CREATION FROM SERVER!");
         NSDictionary *dictionary = json;
         STUser *user = [[STUser alloc] init];
         user.userId = dictionary[@"id"];

@@ -175,7 +175,7 @@
                     <navigationItem key="navigationItem" id="joV-NK-j5a">
                         <barButtonItem key="rightBarButtonItem" title="Post" id="psM-s4-NFU">
                             <connections>
-                                <segue destination="P4e-NL-upe" kind="modal" id="EmG-hI-N1f"/>
+                                <action selector="postButtonPressed:" destination="x2V-Yo-eIf" id="fyc-SU-wan"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -183,33 +183,69 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="mTr-Jz-y3M" id="44B-g5-5Lg"/>
+                        <segue destination="ZGL-TH-VUU" kind="modal" identifier="logInSegue" id="FaR-sn-Tgm"/>
+                        <segue destination="P4e-NL-upe" kind="push" identifier="postCommentSegue" id="P68-ZX-7Qn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRW-eb-FSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-52" y="-1244"/>
+            <point key="canvasLocation" x="-84" y="-1244"/>
         </scene>
         <!--Profile View Controller - Profile-->
         <scene sceneID="6f4-ac-Pdy">
             <objects>
                 <viewController storyboardIdentifier="STProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GFf-F0-9ke" customClass="STProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IsL-Jg-fxy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jEk-Ax-5Xx">
+                                <color key="progressTintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ex-36v">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Rmc-9l-WPZ"/>
+                                    <constraint firstAttribute="width" constant="100" id="Vrj-zc-9my"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ype-X7-Q8g">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rafael Marinheiro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vz-wc-ad2">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0vz-wc-ad2" firstAttribute="leading" secondItem="OZc-ex-36v" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="2fI-1x-S1J"/>
+                            <constraint firstItem="jEk-Ax-5Xx" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="102" id="66q-r8-DdV"/>
+                            <constraint firstItem="ype-X7-Q8g" firstAttribute="centerX" secondItem="jEk-Ax-5Xx" secondAttribute="centerX" type="default" id="7uT-vb-7Zp"/>
+                            <constraint firstAttribute="trailing" secondItem="jEk-Ax-5Xx" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G8j-68-PsI"/>
+                            <constraint firstItem="0vz-wc-ad2" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Q9s-Iq-JKQ"/>
+                            <constraint firstItem="ype-X7-Q8g" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="78" id="WBC-We-dlE"/>
+                            <constraint firstItem="OZc-ex-36v" firstAttribute="leading" secondItem="IsL-Jg-fxy" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="bsJ-DZ-ftb"/>
+                            <constraint firstItem="jEk-Ax-5Xx" firstAttribute="leading" secondItem="OZc-ex-36v" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="lr2-ei-X2R"/>
+                            <constraint firstItem="OZc-ex-36v" firstAttribute="top" secondItem="IsL-Jg-fxy" secondAttribute="top" constant="20" symbolic="YES" type="default" id="sIU-iW-Qbw"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="unU-y7-Oiw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rRB-VG-9k3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="-2079"/>
+            <point key="canvasLocation" x="467" y="171"/>
         </scene>
         <!--Compose Post View Controller-->
         <scene sceneID="YAI-xs-eA5">
             <objects>
                 <viewController storyboardIdentifier="STComposePostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P4e-NL-upe" customClass="STComposePostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BbD-cS-44L">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="440"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YId-hc-6rS" userLabel="ContainerView">
@@ -300,6 +336,7 @@
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="trailing" secondItem="BbD-cS-44L" secondAttribute="trailing" type="default" id="rT7-ct-34s"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="yy4-vH-kCP"/>
                     <connections>
                         <outlet property="cancelButton" destination="mmv-ZV-dY2" id="Nyx-zZ-JuN"/>
                         <outlet property="containerView" destination="YId-hc-6rS" id="vZs-u3-77n"/>
@@ -312,14 +349,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bCP-1p-Iv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="-1408"/>
+            <point key="canvasLocation" x="449" y="-1589"/>
         </scene>
         <!--Config View Controller-->
         <scene sceneID="eNM-l6-59S">
             <objects>
                 <viewController storyboardIdentifier="STConfig" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HMg-eT-agC" customClass="STConfigViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lMP-3y-0DS">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVy-hN-DzY">
@@ -344,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEV-vu-CtP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="-1408"/>
+            <point key="canvasLocation" x="-109" y="160"/>
         </scene>
         <!--Dragger View Controller - Stig-->
         <scene sceneID="VIA-CQ-Wvg">
@@ -631,11 +668,62 @@
                         <outlet property="mapView" destination="tbf-X9-Wae" id="xJT-YP-BWS"/>
                         <outlet property="optionsDisposerView" destination="3po-1P-0Fj" id="G0K-dX-G6m"/>
                         <outlet property="suggestionButton" destination="g7a-ue-Z8T" id="Ygr-Ol-L7I"/>
+                        <segue destination="HMg-eT-agC" kind="modal" identifier="settingsSegue" id="EVA-9o-N15"/>
+                        <segue destination="GFf-F0-9ke" kind="push" identifier="profileSegue" id="qSb-8M-f7u"/>
+                        <segue destination="ZGL-TH-VUU" kind="modal" identifier="logInMapSegue" id="JcO-f9-ND9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJa-fc-CaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-661" y="-583"/>
+            <point key="canvasLocation" x="-661" y="-540"/>
+        </scene>
+        <!--Log In View Controller-->
+        <scene sceneID="ezh-0V-TT9">
+            <objects>
+                <viewController storyboardIdentifier="STLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZGL-TH-VUU" customClass="STLogInViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Twg-t3-JPM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8se-Si-Bsf">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="LOG WITH FACEBOOK">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logInButtonPressed:" destination="ZGL-TH-VUU" eventType="touchUpInside" id="6Hn-DD-ASF"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="I7o-G4-JSL">
+                                <items>
+                                    <navigationItem title="Log In" id="eab-uW-Rnr">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Ig4-LQ-Xiu">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="ZGL-TH-VUU" id="1x2-52-edl"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="8se-Si-Bsf" secondAttribute="bottom" constant="134" type="user" id="0U5-n3-9NM"/>
+                            <constraint firstItem="I7o-G4-JSL" firstAttribute="centerX" secondItem="8se-Si-Bsf" secondAttribute="centerX" type="default" id="NtB-s5-WgG"/>
+                            <constraint firstItem="I7o-G4-JSL" firstAttribute="leading" secondItem="Twg-t3-JPM" secondAttribute="leading" type="default" id="PuO-Up-beo"/>
+                            <constraint firstItem="I7o-G4-JSL" firstAttribute="trailing" secondItem="Twg-t3-JPM" secondAttribute="trailing" type="default" id="cF0-Rc-7Qe"/>
+                            <constraint firstItem="I7o-G4-JSL" firstAttribute="top" secondItem="Twg-t3-JPM" secondAttribute="top" type="default" id="mwD-ad-jn2"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXE-CW-Mqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="457" y="-652"/>
         </scene>
     </scenes>
     <resources>
@@ -664,9 +752,7 @@
         <class className="STBoardViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
                 <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="action" name="stickerButtonPressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="stickersView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -723,6 +809,13 @@
         <class className="STDrawerViewController" superclassName="MMDrawerController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STDrawerViewController.h"/>
         </class>
+        <class className="STLogInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STLogInViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="logInButtonPressed:"/>
+            </relationships>
+        </class>
         <class className="STPlacesListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesListViewController.h"/>
             <relationships>
@@ -763,4 +856,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="JcO-f9-ND9"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -141,20 +141,15 @@
     }
     return 80.0;
 }
-- (IBAction)stickerButtonPressed:(UIButton *)sender {
-    self.stickersView.hidden = !self.stickersView.hidden;
-}
-
-- (IBAction)backButtonPressed:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)postButtonPressed:(id)sender {
-    STComposePostViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
-    [self presentViewController:vc animated:YES completion:nil];
-}
 
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
     [self requestDataWithStickers:stickerPicker.selectedStickers];
+}
+- (IBAction)postButtonPressed:(id)sender {
+    if (_overlord.user) {
+        [self performSegueWithIdentifier:@"postCommentSegue" sender:sender];
+    }else {
+        [self performSegueWithIdentifier:@"logInSegue" sender:sender];
+    }
 }
 @end

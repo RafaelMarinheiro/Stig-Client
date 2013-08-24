@@ -81,6 +81,7 @@
 }
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     _currentLocation = locations[0];
+    [[STHiveCluster spawnOverlord] setUserLocation:[STLocation locationFromCLLocationCoordinate2D:_currentLocation.coordinate]];
     if (!_locationLoaded) {
         _locationLoaded = YES;
         [self centerMapOnLocation:_currentLocation.coordinate];
@@ -208,10 +209,10 @@
         MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
 
         if(!pin){
-            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            //pin.image = [UIImage imageNamed:@"pin_intercalation"];
-            [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
+            //pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pin.image = [UIImage imageNamed:@"icon_pin"];
+            //[((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
             pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
         return pin;

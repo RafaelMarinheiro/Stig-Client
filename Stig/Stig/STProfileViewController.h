@@ -11,5 +11,7 @@
 @interface STProfileViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 - (IBAction)backButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
 
 @end

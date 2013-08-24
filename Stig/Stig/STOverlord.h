@@ -27,8 +27,9 @@ typedef NSUInteger STOverlordToken;
                completion: (void (^)(STUser * user)) completionBlock
                     error: (void (^) (NSError* error)) errorBlock;
 
-- (void) authenticateUserWithCompletion: (void (^)(STUser * user)) completionBlock
-                          error: (void (^) (NSError* error)) errorBlock;
+- (void) authenticateUserOpeningUI: (BOOL) openUI
+                    completion: (void (^)(STUser * user)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock;
 
 - (void) signOutWithCompletion: (void (^)()) completionBlock
                          error: (void (^) (NSError* error)) errorBlock;

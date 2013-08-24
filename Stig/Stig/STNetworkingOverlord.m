@@ -90,8 +90,9 @@
     
 }
 
-- (void) authenticateUserWithCompletion: (void (^)(STUser * user)) completionBlock
-                                  error: (void (^) (NSError* error)) errorBlock{
+- (void) authenticateUserOpeningUI: (BOOL) openUI
+                        completion: (void (^)(STUser * user)) completionBlock
+                             error: (void (^) (NSError* error)) errorBlock{
     if(_user){
         if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(_user);
@@ -99,7 +100,11 @@
         return;
     }
 
-    [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+
+
+    if(openUI){
+
+        [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
                             completionHandler:^(FBSession *session,
                                                 FBSessionState status,
                                                 NSError *error) {
@@ -159,8 +164,66 @@
                                      }];
                                 }
                             }];
+    } else{
+        [FBSession openActiveSessionWithAllowLoginUI:NO];
+        if ([FBSession.activeSession isOpen]) {
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             ^(FBRequestConnection *connection,
+               NSDictionary<FBGraphUser> *user,
+               NSError *error) {
+                 if(!error){
+                     _user = nil;
+                     _fb_id = [user id];
+                     _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
+
+                     [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+
+                     NSString * path = @"/users/me/";
+
+                     NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
+                     AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+                     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
+                         NSError * error;
+                         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                         _user = nil;
+
+                         if(json){
+                             NSDictionary * dic = json;
+                             _user = [STUser userFromServerJSONData:dic];
+                             if(_user){
+                                 [_users setObject:_user forKey:_user.userId];
+                                 [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                                 if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                     completionBlock(_user);
+                                 });
+                                 return;
+                             }
+                         }
+
+                         if(!_user){
+                             [_client clearAuthorizationHeader];
+                             error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+                             if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                 errorBlock(error);
+                             });
+                             return;
+                         }
+                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         [_client clearAuthorizationHeader];
+                         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                             errorBlock(error);
+                         });
+                     }];
+
+                     [_client enqueueHTTPRequestOperation:operation];
+
+                 }
+             }];
+        }
+    }
 }
-     
+
 - (void) signOutWithCompletion: (void (^)()) completionBlock
                          error: (void (^) (NSError* error)) errorBlock{
     _user = nil;
@@ -184,9 +247,9 @@
             return;
         }
     }
-    
+
     NSString * path = [[@"users/" stringByAppendingString:[userId stringValue]] stringByAppendingString:@"/"];
-    
+
     NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
     AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 

@@ -38,12 +38,32 @@
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+- (void) changeToInteraction {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.loginButton.alpha = 1.0;
+        self.activityIndicator.alpha = 0.0;
+        self.connectWithLabel.alpha = 1.0;
+        self.barsImageView.alpha = 1.0;
+    }];
+}
+-(void) changeToLoading {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.loginButton.alpha = 0.0;
+        self.activityIndicator.alpha = 1.0;
+        self.connectWithLabel.alpha = 0.0;
+        self.barsImageView.alpha = 0.0;
+    }];
+}
 - (IBAction)logInButtonPressed:(id)sender {
-    [[STHiveCluster spawnOverlord] authenticateUserWithCompletion:^(STUser *user) {
-        NSLog(@"%@",  user);
+    [self.activityIndicator startAnimating];
+    [self changeToLoading];
+    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI: YES completion:^(STUser *user) {
+        [self.activityIndicator stopAnimating];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } error:^(NSError *error) {
-        NSLog(@"%@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:@"" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        [alert show];
+        [self changeToInteraction];
     }];
 }
 @end

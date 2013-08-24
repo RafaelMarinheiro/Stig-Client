@@ -7,6 +7,8 @@
 //
 
 #import "STProfileViewController.h"
+#import "STOverlord.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface STProfileViewController ()
 
@@ -34,7 +36,11 @@
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.customNavigationItem.titleView = label;
-	// Do any additional setup after loading the view.
+    STUser *user = [STHiveCluster spawnOverlord].user;
+    self.userLabel.text = user.userName;
+    [self.userImage setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+    
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

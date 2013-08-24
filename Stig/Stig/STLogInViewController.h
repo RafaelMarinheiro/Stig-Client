@@ -11,5 +11,9 @@
 @interface STLogInViewController : UIViewController
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)logInButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *barsImageView;
+@property (weak, nonatomic) IBOutlet UILabel *connectWithLabel;
 
 @end

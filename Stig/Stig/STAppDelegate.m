@@ -10,7 +10,8 @@
 #import "STSticker.h"
 #import <QuartzCore/QuartzCore.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "AFNetworking.h" 
+#import "AFNetworking.h"
+#import "STOverlord.h"
 
 @implementation STAppDelegate
 
@@ -23,6 +24,11 @@
                           UITextAttributeTextShadowColor:[UIColor clearColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
+//
+//    } error:^(NSError *error) {
+//        
+//    }];
     return YES;
 }
 							

@@ -7,7 +7,8 @@
 //
 
 #import "STLogInViewController.h"
-
+#import <FacebookSDK/FacebookSDK.h>
+#import "STOverlord.h"
 @interface STLogInViewController ()
 
 @end
@@ -40,6 +41,28 @@
 }
 
 - (IBAction)logInButtonPressed:(id)sender {
-    NSLog(@"LOGARRRRRRRRR");
+    [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+                            completionHandler:^(FBSession *session,
+                                                FBSessionState status,
+                                                NSError *error) {
+                                if ([FBSession.activeSession isOpen]) {
+                                    [[FBRequest requestForMe] startWithCompletionHandler:
+                                     ^(FBRequestConnection *connection,
+                                       NSDictionary<FBGraphUser> *user,
+                                       NSError *error) {
+                                         if(!error){
+                                             NSNumberFormatter * f = [[NSNumberFormatter alloc]init];
+                                             NSNumber * uid = [f numberFromString:[user id]];
+
+                                             id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+                                             [overlord authenticateUserWithId: uid withPassword:[[FBSession.activeSession accessTokenData] accessToken] completion:^(STUser *user) {
+                                                 
+                                             } error:^(NSError *error) {
+                                                 <#code#>
+                                             }]
+                                             }
+                                     }];
+                                }
+                            }];
 }
 @end

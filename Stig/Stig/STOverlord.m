@@ -41,7 +41,7 @@
 #import "STFakeOverlord.h"
 #import "STNetworkingOverlord.h"
 
-static STOverlordType _defaultType = STOverlordTypeLocalJson;
+static STOverlordType _defaultType = STOverlordTypeNetworked;
 static id<STOverlord> _overlords[STOverlordTypeNumbers];
 static dispatch_once_t onceToken[STOverlordTypeNumbers];
 

@@ -8,9 +8,10 @@
 
 #import "STDraggerViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MMDrawerController.h"
+#import "UIViewController+MMDrawerController.h"
 
-
-static CGFloat const STDraggerShowingHeight = 144.0;
+static CGFloat const STDraggerShowingHeight = 100.0;
 static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
 static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
@@ -23,7 +24,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 @implementation STDraggerViewController
 
 - (CGFloat) showingHeight {
-    return 144.0;
+    return 100.0;
 }
 - (CGFloat) animationInitialHeight {
     return [self showingHeight] + 50.0;
@@ -50,26 +51,19 @@ static CGFloat const STDraggerBounceDelta = 5.0;
     }
     return self;
 }
-
+- (void) viewWillAppear:(BOOL)animated {
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+}
+- (void) viewWillDisappear:(BOOL)animated {
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _state = STDraggerStateHidden;
-    [self.view.layer setCornerRadius:5.0];
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];
     [self.draggedView addGestureRecognizer:self.dragGestureRecognizer];
-
-
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
-    [button addTarget:self action:@selector(drawerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
-
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-
-    [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,16 +100,17 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 - (IBAction)toggleDragger:(id)sender {
     [self toggleShowingDragger];
 }
-
-
-
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer{
     CGPoint translation = [recognizer translationInView:self.view];
     if([recognizer state] == UIGestureRecognizerStateBegan){
         _state = STDraggerStateDragging;
     }
     if(_state == STDraggerStateDragging){
-        if(translation.y < 0) return;
+        if(translation.y < 0) {
+            [self moveDraggerToShowingPositionWithCompletion:^(BOOL completed){
+                [self.calloutViewController changeForPercentage:0.0];
+            }];
+        };
 
         self.verticalSpaceConstraint.constant = -(translation.y + STDraggerShowingHeight);
         [self.view layoutIfNeeded];
@@ -182,6 +177,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 
 - (IBAction)drawerButtonPressed:(id)sender {
     [self draggerSliderButtonPressed];
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 - (void) moveDraggerToShowingPositionWithCompletion:( void (^)(BOOL completed)) completion {

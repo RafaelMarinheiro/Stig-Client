@@ -69,10 +69,6 @@
     double wt = (1-percentage)*(initialSize.width/2) + percentage*(finalWidth/2);
     double ht = (initialSize.height/2)*(initialSize.width/2)/wt;
 
-
-    CGFloat widthDelta = (finalSize.width - initialSize.width) * percentage;
-    CGFloat heightDelta = (finalSize.height - initialSize.height) * percentage;
-
     return [self centeredRectWithSize:CGSizeMake(2*wt, 2*ht)];
 }
 - (void)drawRect:(CGRect)rect

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STOverlord.h"
 
 @interface STAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic) STOverlordToken currentSearchToken;
 @end

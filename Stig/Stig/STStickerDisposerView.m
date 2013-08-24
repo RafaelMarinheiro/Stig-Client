@@ -41,6 +41,7 @@
     NSArray *_buttons;
 
     CGFloat _bounceRadius;
+    BOOL _shouldReverseOnCompletion;
 }
 #pragma mark - Initialization
 - (id) initWithStickerType:(STStickerType)type {
@@ -63,6 +64,7 @@
     _animating = NO;
     _selectedButonTag = 0;
     _bounceRadius = 3.0;
+    _shouldReverseOnCompletion = NO;
     self.backgroundColor = [UIColor clearColor];
     self.clipsToBounds = NO;
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -126,13 +128,33 @@
                 return YES;
             }
         }
-        [self hideButtonsWithSelectedButtonTag:_selectedButonTag];
+        [self collapse];
         return NO;
+    }
+}
+#pragma mark - Disposer Controls
+- (void) collapse {
+    if (self.disposing) {
+        if (!_animating) {
+            [self hideButtonsWithSelectedButtonTag:_selectedButonTag];
+        } else {
+            _shouldReverseOnCompletion = YES;
+        }
+    }
+}
+- (void) dispose {
+    if (!self.disposing) {
+        if (!self.animating) {
+            [self disposeButtons];
+        } else {
+            _shouldReverseOnCompletion = YES;
+        }
     }
 }
 #pragma mark - Button Movement
 - (void) disposeButtons{
-    if (!self.animating) {
+
+    if ([self shouldDispose]) {
         [self willDispose];
         _animating = YES;
         for (UIButton *button in _buttons) {
@@ -143,8 +165,8 @@
             CGAffineTransform mainTransform = spot.transform;
             CGAffineTransform bounceTransform = CGAffineTransformMakeTranslation(mainTransform.tx, mainTransform.ty + _bounceRadius);
 
-
-            [UIView animateWithDuration:0.1+deltaTiming animations:^{
+            
+            [UIView animateWithDuration:0.1+deltaTiming delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
                 if (button.tag != 0) {
                     button.alpha = 1.0;
                 }else{
@@ -152,49 +174,79 @@
                 }
                 button.transform = mainTransform;
             }completion:^(BOOL completed) {
-                [UIView animateWithDuration:0.05 animations:^{
+                [UIView animateWithDuration:0.05 delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
                     button.transform = bounceTransform;
                 } completion:^(BOOL completed) {
-                    [UIView animateWithDuration:0.05 animations:^{
+                    [UIView animateWithDuration:0.05 delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
                         button.transform = mainTransform;
                     } completion:^(BOOL completed)  {
                         if ([button isEqual:[_buttons lastObject]]) {
                             _animating = NO;
                             [self didDispose];
+                            if (_shouldReverseOnCompletion) {
+                                [self hideButtonsWithSelectedButtonTag:_selectedButonTag];
+                                _shouldReverseOnCompletion = NO;
+                            }
                         }
                     }];
                 }];
             }];
         }
         _disposing = YES;
+    } else {
+        [self animateCancelation];
     }
 }
 - (void) hideButtonsWithSelectedButtonTag:(NSUInteger) tag {
-    if (!self.animating) {
+    
         [self willHide];
         _animating = YES;
         for (UIButton *button in _buttons) {
             float deltaTiming = (button.tag +0.0)/ 100.0;
-            deltaTiming *=2*M_PI;
-            [UIView animateWithDuration:0.1+deltaTiming animations:^{
+            deltaTiming *= 2*M_PI;
+            
+            [UIView animateWithDuration:0.1+deltaTiming  delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
+                NSLog(@"HIDER :Animate  %d", self.stickerType);
                 button.transform = CGAffineTransformIdentity;
                 if (button.tag != tag) {
                     button.alpha = 0.0;
                 }
-            } completion:^(BOOL completed){
+            }  completion:^(BOOL completed){
+                NSLog(@"HIDER :Completed  %d", self.stickerType);
                 if ([button isEqual:[_buttons lastObject]]) {
                     _animating = NO;
                     [self didHide];
                     [self selectedSticker:[[STSticker alloc] initWithType:self.stickerType andModifier:[self stickerForTag:tag]]];
+                    if (_shouldReverseOnCompletion) {
+                        [self disposeButtons];
+                        _shouldReverseOnCompletion = NO;
+                    }
                 }
             }];
         }
         _selectedButonTag = tag;
         _disposing = NO;
-    }
     
 }
+- (void) animateCancelation {
 
+    CGAffineTransform mainTransform = CGAffineTransformTranslate(self.transform, 2*_bounceRadius, 0.0);
+    CGAffineTransform bounceTransform = CGAffineTransformTranslate(self.transform, -2*_bounceRadius, 0.0);
+    
+    [UIView animateWithDuration:0.1 delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
+        self.transform = mainTransform;
+    }completion:^(BOOL completed) {
+        [UIView animateWithDuration:0.1 delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
+            self.transform = bounceTransform;
+        } completion:^(BOOL completed) {
+            [UIView animateWithDuration:0.1 delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
+                self.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL completed)  {
+                _animating = NO;
+            }];
+        }];
+    }];
+}
 - (STSTickerModifier) stickerForTag:(NSUInteger) tag {
     if (tag == 0) {
         return STSTickerModifierNeutral;
@@ -204,6 +256,12 @@
     return STSTickerModifierGood;
 }
 #pragma mark - Delegate callbacks
+- (BOOL) shouldDispose {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewShouldDispose:)]) {
+        return [self.delegate stickerDisposerViewShouldDispose:self];
+    }
+    return YES;
+}
 - (void) willDispose {
     if (self.delegate && [self.delegate respondsToSelector:@selector(stickerDisposerViewWillDispose:)]) {
         [self.delegate stickerDisposerViewWillDispose:self];

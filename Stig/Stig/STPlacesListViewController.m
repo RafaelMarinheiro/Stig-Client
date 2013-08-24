@@ -8,11 +8,14 @@
 
 #import "STPlacesListViewController.h"
 #import "STBoardViewController.h"
-@interface STPlacesListViewController ()
+#import "UIViewController+MMDrawerController.h"
+#import "STDraggerViewController.h"
 
-@end
-
-@implementation STPlacesListViewController
+@implementation STPlacesListViewController {
+    id <STOverlord> _overlord;
+    NSUInteger _numberOfPlaces;
+    BOOL _loadedPlaces;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _loadedPlaces = NO;
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app addObserver:self forKeyPath:@"currentSearchToken" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +44,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void) setOverlordToken:(STOverlordToken)overlordToken {
+    _overlordToken = overlordToken;
+    [self reloadPlaces];
+}
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSNumber *test = change[NSKeyValueChangeNewKey];
+    self.overlordToken = [test integerValue];
+}
+- (void) reloadPlaces {
+    _loadedPlaces = NO;
+    _overlord = [STHiveCluster spawnOverlord];
+    [_overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
+        _numberOfPlaces = numberOfPlaces;
+        _loadedPlaces = YES;
+        //_loadedIndexPath = [NSMutableDictionary dictionaryWithCapacity:numberOfPlaces];
+        [self.tableView reloadData];
+    } error:^(NSError *error) {
+        
+    }];
+}
 #pragma mark - Table View Data Source Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -45,8 +71,8 @@
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        if (self.places) {
-            return [self.places count];
+        if (_loadedPlaces) {
+            return _numberOfPlaces;
         }
     }
     return 0;
@@ -61,62 +87,54 @@
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchresultscell"];
-         NSLog(@"Search");
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
             return cell;
         }
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-//    }
-    STPlace *place = self.places[indexPath.row];
-    //[cell.contentView setBackgroundColor:[self colorForRanking:place.ranking]];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    [cell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
-    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
-    [cell.textLabel setText:place.placeName];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
-    //[cell.detailTextLabel setText:place.placeDescription];
-    return cell;
-}
-- (UIColor *) colorForRanking:(STRanking *) ranking {
-    float max = [((STPlace *) self.places[0]).ranking.overall floatValue];
-
-    // UIColor *baseColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:1.0];
-    UIColor *baseColor = [UIColor colorWithRed:242.0/255.0 green:242.0/255.0 blue:242.0/255.0 alpha:1.0];
-    CGFloat alpha = [ranking.overall floatValue]/max + 0.05;
-    return [baseColor colorWithAlphaComponent:alpha];
-}
-- (void) sortPlaces {
-    NSArray *sorted  = [self.places sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
-        if ([a isKindOfClass:[STPlace class]] && [b isKindOfClass:[STPlace class]]){
-
-            STPlace *first = a;
-            STPlace *second = b;
-            float left = [first.ranking.overall floatValue];
-            float right = [second.ranking.overall floatValue];
-            if (left < right) {
-                return NSOrderedDescending;
-            }else if (left == right){
-                return NSOrderedSame;
-            } else {
-                return NSOrderedAscending;
-            }
-        } else {
-
-        }
-        return NSOrderedSame;
+    [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
+       
+        UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        currentCell.selectionStyle = UITableViewCellSelectionStyleGray;
+        [currentCell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
+        [currentCell.textLabel setBackgroundColor:[UIColor clearColor]];
+        [currentCell.textLabel setText:place.placeName];
+        [currentCell.textLabel setTextColor:[UIColor whiteColor]];
+        [currentCell setNeedsLayout];
+    } error:^(NSError *error) {
+        
     }];
-    self.places = sorted;
+    return cell;
 }
 #pragma mark - Table View Delegate Methods
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.0;
+    return 44.0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
+    STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
+    [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
+        [dragger.mapViewController selectPlace:place];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
+
+    } error:^(NSError *error) {
+        
+    }];
+}
+
+
+
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    [self.mm_drawerController setMaximumLeftDrawerWidth:320.0 animated:YES completion:nil];
+}
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    [self.mm_drawerController setMaximumLeftDrawerWidth:240.0 animated:YES completion:nil];
+}
+- (void) dealloc {
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app removeObserver:self forKeyPath:@"currentSearchToken"];
 }
 @end

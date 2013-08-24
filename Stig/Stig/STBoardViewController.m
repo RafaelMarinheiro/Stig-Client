@@ -63,6 +63,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void) requestDataWithStickers:(NSArray *) stickers {
+    NSLog(@"REquesting data!");
     NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:stickers];
     _currentToken = token;
     [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
@@ -71,7 +72,7 @@
         _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
         [self.tableView reloadData];
     }error:^(NSError *error) {
-
+        NSLog(@"REquesting data! AND BIG ERROR %@ %@", error, self.place);
     }];
 }
 #pragma mark - Table view data source
@@ -108,6 +109,8 @@
     }
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
+    [reuse prepareForReuse];
     [_overlord getCommentAndUserForToken:_currentToken andPosition:indexPath.row completion:^(STBoardComment *comment, STUser *user){
         UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
         STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
@@ -117,7 +120,6 @@
         NSNumber *position = @(indexPath.row);
         if (!_heightsDictionary[position]) {
             [self setHeight:commentView.cellHeight forPosition:position];
-            //[self setHeightForComment:comment atPosition:position];
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
     }error:^(NSError *error){
@@ -133,7 +135,6 @@
     if (indexPath.section == 0) {
         return 100.0;
     }
-    
     NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
     if (height) {
         return [height floatValue];

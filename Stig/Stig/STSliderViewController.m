@@ -19,7 +19,6 @@
 
 @implementation STSliderViewController
 - (void)viewDidLoad
-
 {
     _showingDrawer = NO;
     self.drawerGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrawerPan:)];

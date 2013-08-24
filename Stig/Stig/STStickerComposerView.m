@@ -12,6 +12,8 @@
 @implementation STStickerComposerView {
     STLinearLayoutView *_linearLayoutView;
     NSArray *_disposers;
+
+    NSMutableDictionary *_selectedStickersDictionary;
 }
 
 #pragma mark - Initialization
@@ -31,6 +33,7 @@
     return self;
 }
 - (void) config {
+    _selectedStickersDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
     self.backgroundColor = [UIColor clearColor];
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
@@ -80,6 +83,20 @@
         }
     }
 }
+- (NSArray *) selectedStickers {
+    return [_selectedStickersDictionary allValues];
+}
+#pragma mark - Sticker Disposer Delegate Methods
+- (BOOL) stickerDisposerViewShouldDispose:(STStickerDisposerView *)stickerDisposerView {
+    
+    if ([_selectedStickersDictionary count] <=2) {
+        return YES;
+    }
+    if (_selectedStickersDictionary[@(stickerDisposerView.stickerType)]) {
+        return YES;
+    }
+    return NO;
+}
 - (void) stickerDisposerViewWillDispose:(STStickerDisposerView *)stickerDisposerView {
     [_linearLayoutView bringSubviewToFront:stickerDisposerView];
     if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerWillDisposeStickers:)]) {
@@ -87,7 +104,6 @@
     }
 }
 - (void) stickerDisposerViewDidDispose:(STStickerDisposerView *)stickerDisposerView {
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(stickerComposerDidDisposeStickers:)]) {
         [self.delegate stickerComposerDidDisposeStickers:self];
     }
@@ -103,6 +119,10 @@
     }
 }
 - (void) stickerDisposerView:(STStickerDisposerView *)stickerDisposerView selectedSticker:(STSticker *)sticker {
-    
+    if (sticker.modifier != STSTickerModifierNeutral) {
+        [_selectedStickersDictionary setObject:sticker forKey:@(sticker.type)];
+    }else {
+        [_selectedStickersDictionary removeObjectForKey:@(sticker.type)];
+    }
 }
 @end

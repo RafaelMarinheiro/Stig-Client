@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "STStickerComposerView.h"
 
-@interface STComposePostViewController : UIViewController <STStickerComposerDelegate>
+@interface STComposePostViewController : UIViewController <STStickerComposerDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;

@@ -20,4 +20,5 @@
 @property (nonatomic, readonly) CGFloat cellHeight;
 @property (nonatomic, weak) IBOutlet STCommentStickerView *stickersView;
 - (void) populateWithComment:(STBoardComment *) comment andUser:(STUser *) user;
+- (void) prepareForReuse;
 @end

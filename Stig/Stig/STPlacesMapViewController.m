@@ -9,12 +9,17 @@
 #import "STPlacesMapViewController.h"
 #import "STConfigViewController.h"
 #import "STProfileViewController.h"
+#import "STOverlord.h"
+#import "STPlacesListViewController.h"
+#import "UIViewController+MMDrawerController.h"
 @interface STPlacesMapViewController ()
 
 @end
 
 @implementation STPlacesMapViewController {
     STPlace *_selectedPlace;
+    STOverlordToken _overlordToken;
+    CLLocationManager *_locationManager;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,7 +48,7 @@
     _rankingCriteria = ST_OVERALL;
 
     self.mapView.showsUserLocation = YES;
-
+    self.mapView.delegate = self;
     [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-intercalation"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
@@ -57,8 +62,37 @@
     self.optionsDisposerView.delegate = self;
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
+    [self loadPlaces];
 }
 
+- (void) startLocationServices {
+    if (![CLLocationManager locationServicesEnabled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+    [alert show];
+    }
+    
+}
+- (void) loadPlaces {
+    id <STOverlord> overlord = [STHiveCluster spawnOverlord];
+    _overlordToken = [overlord requestTokenForPlacesWithSearchTerm:nil];
+    [overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
+        for (int i =0; i < numberOfPlaces; i++) {
+            [overlord getPlaceForToken:_overlordToken andPosition:i completion:^(STPlace *place) {
+                [self.mapView addAnnotation:place];
+                [self.mapView addOverlay:place];
+            } error:^(NSError *error) {
+                NSLog(@"Error loading place %@", error);
+            }];
+        }
+    } error:^(NSError *error) {
+        NSLog(@"Error loading places %@", error);
+    }];
+    STPlacesListViewController *vc = (STPlacesListViewController *)self.mm_drawerController.leftDrawerViewController;
+    vc.overlordToken = _overlordToken;
+    NSLog(@"%@ %@",self.mm_drawerController,vc);
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.currentSearchToken = _overlordToken;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -96,7 +130,6 @@
             }
         }
     }
-
 }
 #pragma mark - Circular Disposer Delegate
 - (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {

@@ -13,4 +13,6 @@
     #import <Foundation/Foundation.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
+    #import "STOverlord.h"
+    #import "STAppDelegate.h"
 #endif

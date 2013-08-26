@@ -24,14 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Futura" size:20.0];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = self.place.placeName;
-    label.textColor = [UIColor whiteColor];
-    [label sizeToFit];
-    self.customNavigationItem.titleView = label;
     self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
     self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
     _overlord = [STHiveCluster spawnOverlord];
@@ -39,7 +31,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     [button addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"Button Back NOVO.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"button_back.png"] forState:UIControlStateNormal];
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
@@ -49,8 +41,8 @@
     [buttonPost setImage:[UIImage imageNamed:@"icon_post.png"] forState:UIControlStateNormal];
 
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonPost];
-    [self.customNavigationItem setRightBarButtonItem:leftButtonItem];
-    [self.customNavigationItem setLeftBarButtonItem:barButtonItem];
+    [self.navigationItem setRightBarButtonItem:leftButtonItem];
+    [self.navigationItem setLeftBarButtonItem:barButtonItem];
     
     self.title = self.place.placeName;
     _loadedMetadata = NO;
@@ -144,6 +136,9 @@
 
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
     [self requestDataWithStickers:stickerPicker.selectedStickers];
+}
+- (void) backButtonPressed:(id) sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)postButtonPressed:(id)sender {
     if (_overlord.user) {

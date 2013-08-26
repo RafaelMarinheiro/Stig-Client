@@ -71,6 +71,11 @@
 		020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79517C673220076752A /* MMDrawerBarButtonItem.m */; };
 		020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79717C673220076752A /* MMDrawerVisualState.m */; };
 		020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC7A117C68E650076752A /* STDrawerViewController.m */; };
+		022FF29B17CAF8DC009A7B7B /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29917CAF8DC009A7B7B /* button_back.png */; };
+		022FF29C17CAF8DC009A7B7B /* button_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29A17CAF8DC009A7B7B /* button_back@2x.png */; };
+		022FF29E17CAF913009A7B7B /* stig_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29D17CAF913009A7B7B /* stig_logo.png */; };
+		022FF2A117CB0756009A7B7B /* icon_neutro_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29F17CB0756009A7B7B /* icon_neutro_empty.png */; };
+		022FF2A217CB0756009A7B7B /* icon_neutro_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF2A017CB0756009A7B7B /* icon_neutro_empty@2x.png */; };
 		02305C4217C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1C17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png */; };
 		02305C4317C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1D17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png */; };
 		02305C4417C0790D00E9ADBD /* icon_sticker_food_bad_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C1E17C0790D00E9ADBD /* icon_sticker_food_bad_comment.png */; };
@@ -304,6 +309,11 @@
 		020BC79717C673220076752A /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		020BC7A017C68E650076752A /* STDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDrawerViewController.h; sourceTree = "<group>"; };
 		020BC7A117C68E650076752A /* STDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDrawerViewController.m; sourceTree = "<group>"; };
+		022FF29917CAF8DC009A7B7B /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
+		022FF29A17CAF8DC009A7B7B /* button_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_back@2x.png"; sourceTree = "<group>"; };
+		022FF29D17CAF913009A7B7B /* stig_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stig_logo.png; sourceTree = "<group>"; };
+		022FF29F17CB0756009A7B7B /* icon_neutro_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_neutro_empty.png; sourceTree = "<group>"; };
+		022FF2A017CB0756009A7B7B /* icon_neutro_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_neutro_empty@2x.png"; sourceTree = "<group>"; };
 		02305C1C17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_accessibility_bad_comment.png; sourceTree = "<group>"; };
 		02305C1D17C0790D00E9ADBD /* icon_sticker_accessibility_bad_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_accessibility_bad_comment@2x.png"; sourceTree = "<group>"; };
 		02305C1E17C0790D00E9ADBD /* icon_sticker_food_bad_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_food_bad_comment.png; sourceTree = "<group>"; };
@@ -540,6 +550,8 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				022FF29F17CB0756009A7B7B /* icon_neutro_empty.png */,
+				022FF2A017CB0756009A7B7B /* icon_neutro_empty@2x.png */,
 				0269F76817C95B5600C0CB99 /* icon_pin.png */,
 				0269F76917C95B5600C0CB99 /* icon_pin@2x.png */,
 				0269F76217C953FF00C0CB99 /* barras_connect_with.png */,
@@ -846,6 +858,9 @@
 		0264D7A317B9E3B000C5399B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				022FF29D17CAF913009A7B7B /* stig_logo.png */,
+				022FF29917CAF8DC009A7B7B /* button_back.png */,
+				022FF29A17CAF8DC009A7B7B /* button_back@2x.png */,
 				0269F75617C93A0C00C0CB99 /* icon_list_white.png */,
 				0269F75717C93A0C00C0CB99 /* icon_list_white@2x.png */,
 				02EDB81E17C8516900DD3451 /* placeholder_user.png */,
@@ -1156,6 +1171,11 @@
 				0269F76517C953FF00C0CB99 /* barras_connect_with@2x.png in Resources */,
 				0269F76A17C95B5600C0CB99 /* icon_pin.png in Resources */,
 				0269F76B17C95B5600C0CB99 /* icon_pin@2x.png in Resources */,
+				022FF29B17CAF8DC009A7B7B /* button_back.png in Resources */,
+				022FF29C17CAF8DC009A7B7B /* button_back@2x.png in Resources */,
+				022FF29E17CAF913009A7B7B /* stig_logo.png in Resources */,
+				022FF2A117CB0756009A7B7B /* icon_neutro_empty.png in Resources */,
+				022FF2A217CB0756009A7B7B /* icon_neutro_empty@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

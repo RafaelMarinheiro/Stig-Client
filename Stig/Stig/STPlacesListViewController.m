@@ -98,6 +98,18 @@
        
         UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];
         currentCell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+        if (YES) { //Devo mostrar icones na lista ? 
+            NSString *imageName = @"";
+            if (indexPath.row %3 ==0) {
+                imageName = @"icon_sticker_money_bad_selector";
+            }else if(indexPath.row %3 == 1) {
+                imageName = @"icon_sticker_food_good_selector";
+            }else {
+                imageName = @"icon_neutro_empty";
+            }
+            [currentCell.imageView setImage:[UIImage imageNamed:imageName]];
+        }
         [currentCell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
         [currentCell.textLabel setBackgroundColor:[UIColor clearColor]];
         [currentCell.textLabel setText:place.placeName];
@@ -132,7 +144,7 @@
     [self.mm_drawerController setMaximumLeftDrawerWidth:320.0 animated:YES completion:nil];
 }
 - (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    [self.mm_drawerController setMaximumLeftDrawerWidth:240.0 animated:YES completion:nil];
+    [self.mm_drawerController setMaximumLeftDrawerWidth:270.0 animated:YES completion:nil];
 }
 - (void) dealloc {
     STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];

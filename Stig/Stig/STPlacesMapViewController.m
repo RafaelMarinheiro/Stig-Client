@@ -209,11 +209,11 @@
         MKAnnotationView *pin = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
 
         if(!pin){
-            //pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            pin.image = [UIImage imageNamed:@"icon_pin"];
-            //[((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
-            pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
+            //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            //pin.image = [UIImage imageNamed:@"icon_pin"];
+            
         }
         return pin;
     }

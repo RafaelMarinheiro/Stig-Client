@@ -44,7 +44,7 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat:@"[%@: %@, %@, %@]",self.placeId, self.placeName, self.placeDescription,self.ranking.overall];
+    return [NSString stringWithFormat:@"[%@: %@, %@, %@]",self.placeId, self.placeName, self.stickers,self.ranking.overall];
 }
 - (CLLocationCoordinate2D) coordinate{
     return [self.location locationCoordinate];

@@ -7,6 +7,7 @@
 //
 
 #import "STComposePostViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 #import <QuartzCore/QuartzCore.h>
 @interface STComposePostViewController ()
@@ -32,6 +33,10 @@
     [super viewDidLoad];
     [self.textView becomeFirstResponder];
     self.textView.delegate = self;
+    
+    STUser *user = [STHiveCluster spawnOverlord].user;
+    [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+    [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.userImageView.layer setCornerRadius:5.0];
     [self.userImageView.layer setMasksToBounds:YES];
 

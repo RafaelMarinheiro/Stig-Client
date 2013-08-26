@@ -288,40 +288,17 @@
                                 <color key="tintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="WlW-JI-Exl">
-                                        <barButtonItem key="leftBarButtonItem" id="tUa-Qi-Tys">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmv-ZV-dY2">
-                                                <rect key="frame" x="5" y="7" width="67" height="29"/>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                                <state key="normal" title="cancel">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="closeButtonPressed:" destination="P4e-NL-upe" eventType="touchUpInside" id="lyd-Vc-OJ6"/>
-                                                </connections>
-                                            </button>
+                                        <barButtonItem key="leftBarButtonItem" title="cancel" id="Td9-ij-grz">
+                                            <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="closeButtonPressed:" destination="P4e-NL-upe" id="KgH-ph-RMs"/>
+                                            </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="3dl-x2-QXt">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FXx-sQ-gmD">
-                                                <rect key="frame" x="231" y="7" width="84" height="29"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="29" type="user" id="ahP-mh-Ash"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                                <state key="normal" title="post">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="postButtonPressed:" destination="P4e-NL-upe" eventType="touchUpInside" id="But-o6-0MW"/>
-                                                </connections>
-                                            </button>
+                                        <barButtonItem key="rightBarButtonItem" title="post" id="Tlb-KO-dKh">
+                                            <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="postButtonPressed:" destination="P4e-NL-upe" id="DC0-n2-3YQ"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -339,10 +316,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="yy4-vH-kCP"/>
                     <connections>
-                        <outlet property="cancelButton" destination="mmv-ZV-dY2" id="Nyx-zZ-JuN"/>
                         <outlet property="containerView" destination="YId-hc-6rS" id="vZs-u3-77n"/>
                         <outlet property="customNavigationItem" destination="WlW-JI-Exl" id="oNG-aV-qEQ"/>
-                        <outlet property="postButton" destination="FXx-sQ-gmD" id="5Sn-A3-FQL"/>
                         <outlet property="stickerComposerView" destination="jPS-sn-ZBX" id="QGN-Vv-BdC"/>
                         <outlet property="textView" destination="lBs-Js-bh5" id="VBn-VR-gmm"/>
                         <outlet property="userImageView" destination="fa9-tH-LRD" id="KxB-Ng-Sja"/>
@@ -437,6 +412,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="drawerButtonPressed:" destination="jsV-1v-Hdp" eventType="touchUpInside" id="2GP-j1-CdR"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -695,7 +673,7 @@
             <objects>
                 <viewController storyboardIdentifier="STLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZGL-TH-VUU" customClass="STLogInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Twg-t3-JPM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8se-Si-Bsf">
@@ -715,24 +693,11 @@
                                     <action selector="logInButtonPressed:" destination="ZGL-TH-VUU" eventType="touchUpInside" id="6Hn-DD-ASF"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VTp-EE-gGb"/>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUJ-BT-6l2">
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VTp-EE-gGb">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" type="user" id="FXz-Ye-ZqI"/>
-                                    <constraint firstAttribute="height" constant="44" type="user" id="M6d-Nj-XWl"/>
+                                    <constraint firstAttribute="height" constant="37" type="user" id="E7e-RR-gUM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="icon_back.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonPressed:" destination="ZGL-TH-VUU" eventType="touchUpInside" id="nwQ-RU-Lhk"/>
-                                </connections>
-                            </button>
+                            </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="barras_connect_with.png" translatesAutoresizingMaskIntoConstraints="NO" id="zcp-km-ELz">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" type="user" id="xBQ-8A-chX"/>
@@ -747,20 +712,55 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.63" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stig_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vI3-Qf-Bg7">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="154" id="R5u-U0-5ih"/>
+                                    <constraint firstAttribute="width" constant="263" id="WDV-Vg-uyD"/>
+                                </constraints>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wO-JG-DsV">
+                                <items>
+                                    <navigationItem title="Login" id="o30-WP-wmP">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="5be-SU-WO2">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HUJ-BT-6l2">
+                                                <rect key="frame" x="5" y="0.0" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" type="user" id="FXz-Ye-ZqI"/>
+                                                    <constraint firstAttribute="height" constant="44" type="user" id="M6d-Nj-XWl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" image="button_back.png">
+                                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelButtonPressed:" destination="ZGL-TH-VUU" eventType="touchUpInside" id="nwQ-RU-Lhk"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="8se-Si-Bsf" secondAttribute="bottom" constant="134" type="user" id="0U5-n3-9NM"/>
-                            <constraint firstItem="HUJ-BT-6l2" firstAttribute="leading" secondItem="Twg-t3-JPM" secondAttribute="leading" type="user" id="1pK-rx-L98"/>
-                            <constraint firstItem="zcp-km-ELz" firstAttribute="centerX" secondItem="8se-Si-Bsf" secondAttribute="centerX" type="default" id="E5b-8y-yhA"/>
+                            <constraint firstAttribute="bottom" secondItem="8se-Si-Bsf" secondAttribute="bottom" constant="80" type="user" id="0U5-n3-9NM"/>
+                            <constraint firstItem="3wO-JG-DsV" firstAttribute="trailing" secondItem="Twg-t3-JPM" secondAttribute="trailing" type="default" id="BKR-G6-VXr"/>
                             <constraint firstItem="NCE-0f-Dv5" firstAttribute="centerY" secondItem="zcp-km-ELz" secondAttribute="centerY" type="default" id="HFC-XE-6YL"/>
                             <constraint firstItem="8se-Si-Bsf" firstAttribute="top" secondItem="zcp-km-ELz" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JV8-ii-r8G"/>
-                            <constraint firstItem="HUJ-BT-6l2" firstAttribute="top" secondItem="Twg-t3-JPM" secondAttribute="top" type="default" id="UEe-Mk-w8U"/>
+                            <constraint firstItem="vI3-Qf-Bg7" firstAttribute="centerX" secondItem="3wO-JG-DsV" secondAttribute="centerX" type="default" id="L0c-TX-zbD"/>
+                            <constraint firstItem="NCE-0f-Dv5" firstAttribute="centerX" secondItem="VTp-EE-gGb" secondAttribute="centerX" type="default" id="TUg-Pb-FDR"/>
+                            <constraint firstItem="3wO-JG-DsV" firstAttribute="leading" secondItem="Twg-t3-JPM" secondAttribute="leading" type="default" id="WQI-Bc-Rom"/>
                             <constraint firstItem="8se-Si-Bsf" firstAttribute="top" secondItem="VTp-EE-gGb" secondAttribute="bottom" constant="60" type="user" id="e6m-k0-84n"/>
                             <constraint firstItem="zcp-km-ELz" firstAttribute="trailing" secondItem="Twg-t3-JPM" secondAttribute="trailing" type="default" id="enP-N3-CLy"/>
-                            <constraint firstItem="NCE-0f-Dv5" firstAttribute="leading" secondItem="Twg-t3-JPM" secondAttribute="leading" constant="107" id="gFC-pU-uRp"/>
+                            <constraint firstItem="NCE-0f-Dv5" firstAttribute="centerX" secondItem="zcp-km-ELz" secondAttribute="centerX" type="default" id="lxK-gl-a0r"/>
+                            <constraint firstItem="vI3-Qf-Bg7" firstAttribute="top" secondItem="Twg-t3-JPM" secondAttribute="top" constant="90" id="psV-39-PHR"/>
+                            <constraint firstItem="3wO-JG-DsV" firstAttribute="top" secondItem="Twg-t3-JPM" secondAttribute="top" type="default" id="qFT-bE-dYs"/>
+                            <constraint firstItem="NCE-0f-Dv5" firstAttribute="centerX" secondItem="8se-Si-Bsf" secondAttribute="centerX" type="default" id="rEo-Hu-FjZ"/>
                             <constraint firstItem="zcp-km-ELz" firstAttribute="leading" secondItem="Twg-t3-JPM" secondAttribute="leading" type="default" id="v7G-26-QT1"/>
-                            <constraint firstItem="VTp-EE-gGb" firstAttribute="centerX" secondItem="zcp-km-ELz" secondAttribute="centerX" type="default" id="vWP-yu-pPl"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -778,11 +778,12 @@
     </scenes>
     <resources>
         <image name="barras_connect_with.png" width="640" height="70"/>
+        <image name="button_back.png" width="44" height="44"/>
         <image name="button_login_fb.png" width="424" height="80"/>
         <image name="callout.png" width="640" height="1150"/>
-        <image name="icon_back.png" width="44" height="44"/>
         <image name="icon_list_white.png" width="44" height="44"/>
         <image name="placeholder_user.png" width="40" height="40"/>
+        <image name="stig_logo.png" width="644" height="376"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
     <classes>
@@ -917,6 +918,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JcO-f9-ND9"/>
+        <segue reference="FaR-sn-Tgm"/>
     </inferredMetricsTieBreakers>
 </document>

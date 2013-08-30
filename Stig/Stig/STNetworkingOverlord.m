@@ -710,12 +710,17 @@
     
     NSString * path = nil;
     if(context.stickers){
-        path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
+        if([context.stickers count] == 0){
+            path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
+        } else{
+            path = [[[[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]] stringByAppendingString:@"&filter="] stringByAppendingString:[@([STSticker stickersServerQueryCodeFromArray:context.stickers]) stringValue]];
+        }
     } else{
         path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
     }
-    
-    
+
+    NSLog(path);
+
     NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
     AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -797,10 +802,19 @@
                                error: (void (^) (NSError* error)) errorBlock{
     
     STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
+    NSNumber *test = @(92);
+    
     if(context){
         [self getCommentAndUserForToken:token andPosition:0 completion:^(STBoardComment *comment, STUser *user) {
             completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
-        } error:errorBlock];
+        } error:^(NSError* error){
+            NSNumber *size = [context.cache objectForKey:@(-1)];
+            if(size){
+                completionBlock([size unsignedIntegerValue]);
+            } else{
+                errorBlock(error);
+            }
+        }];
     }else {
         dispatch_async(dispatch_get_main_queue(), ^(){
             errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
@@ -816,7 +830,14 @@
     if(context){
         [self getPlaceForToken:token andPosition:0 completion:^(STPlace * place) {
             completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
-        } error:errorBlock];
+        } error:^(NSError* error){
+            NSNumber * size = [context.cache objectForKey:@(-1)];
+            if(size){
+                completionBlock([size unsignedIntegerValue]);
+            } else{
+                errorBlock(error);
+            }
+        }];
     } else{
         dispatch_async(dispatch_get_main_queue(), ^(){
             errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
@@ -831,7 +852,14 @@
     if(context){
         [self getCheckInHistoryPlaceForToken:token andPosition:0 completion:^(STPlace *place) {
             completionBlock([[context.cache objectForKey:@(-1)] unsignedIntegerValue]);
-        } error:errorBlock];
+        } error:^(NSError* error){
+            NSNumber * size = [context.cache objectForKey:@(-1)];
+            if(size){
+                completionBlock([size unsignedIntegerValue]);
+            } else{
+                errorBlock(error);
+            }
+        }];
     } else{
         dispatch_async(dispatch_get_main_queue(), ^(){
             errorBlock([[NSError alloc] initWithDomain:@"Token not found" code:43 userInfo:nil]);
@@ -863,10 +891,51 @@
     }
     
     NSString * path = [[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/comments/"];
-    
+
+    NSLog(path);
+
     [_client postPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"content", @([STSticker stickersServeCodeFromArray:stickers]), @"stickers", nil]
              success:^(AFHTTPRequestOperation *operation, id data) {
-                 NSLog(@"%@", data);
+                 NSError * error;
+                 id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                 STBoardComment * resultComment = nil;
+
+                 if(json){
+                     resultComment = [STBoardComment boardCommentFromServerJSONData:json];
+
+                     NSCache * board = [_commentsByPlaces objectForKey:context.place.placeId];
+                     if(!board){
+                         board = [[NSCache alloc]init];
+                         [_commentsByPlaces setObject:board forKey:context.place.placeId];
+                     }
+
+                     resultComment = [STBoardComment boardCommentFromServerJSONData:json];
+
+                     if(resultComment){
+                         [board setObject:resultComment forKey:resultComment.commentId];
+
+                         NSNumber * size = [context.cache objectForKey:@(-1)];
+
+                         NSUInteger currentPosition = 1+[size unsignedIntegerValue];
+
+                         [context.cache setObject:resultComment.commentId forKey:@(currentPosition)];
+
+                         [context.cache setObject:@(-1) forKey:@(currentPosition)];
+                         NSLog(@"Cached %@ in position %d for token %d", resultComment, currentPosition, token);
+                     }
+                 }
+
+                 if (resultComment) {
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         completionBlock(resultComment);
+                     });
+                 } else{
+                     error = [[NSError alloc] initWithDomain:@"Comment not found" code:404 userInfo:nil];
+                     if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                         errorBlock(error);
+                     });
+                 }
+                 return;
              } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
                      errorBlock(error);

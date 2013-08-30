@@ -63,6 +63,14 @@
 }
 
 - (IBAction)postButtonPressed:(id)sender {
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    [overlord postCommentWithText:self.textView.text andStickers:self.stickerComposerView.selectedStickers toPlaceWithId: self.place.placeId usingToken:self.overlordToken completion:^(STBoardComment *comment) {
+        if (self.completionHandler) {
+            self.completionHandler(YES);
+        }
+    } error:^(NSError *error) {
+        self.completionHandler(NO);
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark Sticker Composer Methods

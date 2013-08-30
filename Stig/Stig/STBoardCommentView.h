@@ -11,14 +11,15 @@
 #import "STCommentStickerView.h"
 #import "STBoardComment.h"
 #import "STUser.h"
-@interface STBoardCommentView : UIView
+#import "STSwipeView.h"
+@interface STBoardCommentView : STSwipeView
 
-@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
-@property (nonatomic, weak) IBOutlet UITextView *commentLabel;
+@property (nonatomic, strong)  UIImageView *userImageView;
+@property (nonatomic, strong)  UITextView *commentLabel;
 @property (nonatomic, strong) UIFont *commentFont;
 @property (nonatomic, strong) UIFont *userNameFont;
 @property (nonatomic, readonly) CGFloat cellHeight;
-@property (nonatomic, weak) IBOutlet STCommentStickerView *stickersView;
+@property (nonatomic, strong)  STCommentStickerView *stickersView;
 - (void) populateWithComment:(STBoardComment *) comment andUser:(STUser *) user;
 - (void) prepareForReuse;
 @end

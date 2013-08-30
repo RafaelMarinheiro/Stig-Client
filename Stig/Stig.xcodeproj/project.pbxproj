@@ -71,6 +71,8 @@
 		020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79517C673220076752A /* MMDrawerBarButtonItem.m */; };
 		020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79717C673220076752A /* MMDrawerVisualState.m */; };
 		020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC7A117C68E650076752A /* STDrawerViewController.m */; };
+		0228647417CEF0C8001E5F36 /* YIInnerShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0228647117CEF0C8001E5F36 /* YIInnerShadowView.m */; };
+		0228647517CEF0C8001E5F36 /* YIInnerShadowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0228647317CEF0C8001E5F36 /* YIInnerShadowLayer.m */; };
 		022FF29B17CAF8DC009A7B7B /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29917CAF8DC009A7B7B /* button_back.png */; };
 		022FF29C17CAF8DC009A7B7B /* button_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29A17CAF8DC009A7B7B /* button_back@2x.png */; };
 		022FF29E17CAF913009A7B7B /* stig_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 022FF29D17CAF913009A7B7B /* stig_logo.png */; };
@@ -110,6 +112,7 @@
 		02305C6317C0790D00E9ADBD /* icon_sticker_people_neutral_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C3F17C0790D00E9ADBD /* icon_sticker_people_neutral_comment@2x.png */; };
 		02305C6417C0790D00E9ADBD /* icon_sticker_queue_neutral_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C4017C0790D00E9ADBD /* icon_sticker_queue_neutral_comment.png */; };
 		02305C6517C0790D00E9ADBD /* icon_sticker_queue_neutral_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02305C4117C0790D00E9ADBD /* icon_sticker_queue_neutral_comment@2x.png */; };
+		023E798017CE761D00162673 /* STSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 023E797F17CE761D00162673 /* STSwipeView.m */; };
 		024549D117A8420000D4D558 /* STPlacesMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D017A8420000D4D558 /* STPlacesMapViewController.m */; };
 		024549D417A8462900D4D558 /* STPlacesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D317A8462900D4D558 /* STPlacesListViewController.m */; };
 		024549D717A865D600D4D558 /* STCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024549D617A865D600D4D558 /* STCalloutViewController.m */; };
@@ -309,6 +312,10 @@
 		020BC79717C673220076752A /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		020BC7A017C68E650076752A /* STDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDrawerViewController.h; sourceTree = "<group>"; };
 		020BC7A117C68E650076752A /* STDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDrawerViewController.m; sourceTree = "<group>"; };
+		0228647017CEF0C8001E5F36 /* YIInnerShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YIInnerShadowView.h; sourceTree = "<group>"; };
+		0228647117CEF0C8001E5F36 /* YIInnerShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YIInnerShadowView.m; sourceTree = "<group>"; };
+		0228647217CEF0C8001E5F36 /* YIInnerShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YIInnerShadowLayer.h; sourceTree = "<group>"; };
+		0228647317CEF0C8001E5F36 /* YIInnerShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YIInnerShadowLayer.m; sourceTree = "<group>"; };
 		022FF29917CAF8DC009A7B7B /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
 		022FF29A17CAF8DC009A7B7B /* button_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_back@2x.png"; sourceTree = "<group>"; };
 		022FF29D17CAF913009A7B7B /* stig_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stig_logo.png; sourceTree = "<group>"; };
@@ -348,6 +355,8 @@
 		02305C3F17C0790D00E9ADBD /* icon_sticker_people_neutral_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_people_neutral_comment@2x.png"; sourceTree = "<group>"; };
 		02305C4017C0790D00E9ADBD /* icon_sticker_queue_neutral_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_queue_neutral_comment.png; sourceTree = "<group>"; };
 		02305C4117C0790D00E9ADBD /* icon_sticker_queue_neutral_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_queue_neutral_comment@2x.png"; sourceTree = "<group>"; };
+		023E797E17CE761D00162673 /* STSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSwipeView.h; sourceTree = "<group>"; };
+		023E797F17CE761D00162673 /* STSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSwipeView.m; sourceTree = "<group>"; };
 		024549CF17A8420000D4D558 /* STPlacesMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesMapViewController.h; sourceTree = "<group>"; };
 		024549D017A8420000D4D558 /* STPlacesMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlacesMapViewController.m; sourceTree = "<group>"; };
 		024549D217A8462900D4D558 /* STPlacesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlacesListViewController.h; sourceTree = "<group>"; };
@@ -632,6 +641,10 @@
 		0202F46C17A05FF70071D95C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0228647017CEF0C8001E5F36 /* YIInnerShadowView.h */,
+				0228647117CEF0C8001E5F36 /* YIInnerShadowView.m */,
+				0228647217CEF0C8001E5F36 /* YIInnerShadowLayer.h */,
+				0228647317CEF0C8001E5F36 /* YIInnerShadowLayer.m */,
 				0202F45717A05F330071D95C /* MainStoryboard.storyboard */,
 				0FCDEDEB17A33AB4007E67F8 /* MapOverlay */,
 				0FEE9E8117A44C0000722EA6 /* CircularButtonDisposer */,
@@ -649,6 +662,8 @@
 				0264D7A617B9E65300C5399B /* STStickerComposerView.m */,
 				02E9A8F917BF2B9C00DC499F /* STStickerDisposerView.h */,
 				02E9A8FA17BF2B9D00DC499F /* STStickerDisposerView.m */,
+				023E797E17CE761D00162673 /* STSwipeView.h */,
+				023E797F17CE761D00162673 /* STSwipeView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1234,6 +1249,9 @@
 				020BC79B17C673220076752A /* MMDrawerVisualState.m in Sources */,
 				020BC7A217C68E650076752A /* STDrawerViewController.m in Sources */,
 				02CF70D217C8ECD30043218F /* STLogInViewController.m in Sources */,
+				023E798017CE761D00162673 /* STSwipeView.m in Sources */,
+				0228647417CEF0C8001E5F36 /* YIInnerShadowView.m in Sources */,
+				0228647517CEF0C8001E5F36 /* YIInnerShadowLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,4 +32,7 @@ typedef enum {
 
 + (NSArray *) stickersWithServerCode: (NSUInteger) code;
 + (NSUInteger) stickersServeCodeFromArray: (NSArray *) array;
++ (NSUInteger) stickersServerQueryCodeFromArray: (NSArray*) array;
+
+
 @end

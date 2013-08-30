@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *stickersView;
 @property (weak, nonatomic) IBOutlet UILabel *topBatTitle;
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
+@property (nonatomic, strong) NSArray *selectedStickers;
 - (IBAction)postButtonPressed:(id)sender;
 
 

@@ -102,49 +102,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8V-b9-UwO" customClass="STBoardCommentView">
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-wT-Kny">
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="50" type="user" id="GQ2-lq-gJr"/>
-                                                                <constraint firstAttribute="height" constant="50" type="user" id="I6J-z2-Dzl"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-BR-w7r">
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Loading...">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
-                                                        </textView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kK-W4-izG" customClass="STCommentStickerView">
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" priority="695" constant="58" type="user" id="ZRw-CW-k5A"/>
-                                                                <constraint firstAttribute="height" priority="740" constant="20" type="user" id="vhZ-84-Zhh"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="trailing" secondItem="e8V-b9-UwO" secondAttribute="trailing" type="default" id="5oX-y2-6Do"/>
-                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="top" secondItem="e8V-b9-UwO" secondAttribute="top" constant="12" type="user" id="AYN-Gn-xEF"/>
-                                                        <constraint firstItem="6kK-W4-izG" firstAttribute="centerX" secondItem="Uhj-wT-Kny" secondAttribute="centerX" type="default" id="SMy-cs-s2P"/>
-                                                        <constraint firstAttribute="bottom" secondItem="YHk-BR-w7r" secondAttribute="bottom" priority="724" type="user" id="Uut-oJ-qYh"/>
-                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="leading" secondItem="Uhj-wT-Kny" secondAttribute="trailing" type="user" id="aaR-My-xmQ"/>
-                                                        <constraint firstItem="6kK-W4-izG" firstAttribute="top" secondItem="Uhj-wT-Kny" secondAttribute="bottom" type="user" id="c5P-fz-WyQ"/>
-                                                        <constraint firstItem="Uhj-wT-Kny" firstAttribute="leading" secondItem="e8V-b9-UwO" secondAttribute="leading" constant="12" type="user" id="oY1-PM-E3d"/>
-                                                        <constraint firstItem="YHk-BR-w7r" firstAttribute="top" secondItem="e8V-b9-UwO" secondAttribute="top" type="user" id="pOI-fC-lfJ"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <outlet property="commentLabel" destination="YHk-BR-w7r" id="Blf-Xr-9Pt"/>
-                                                        <outlet property="stickersView" destination="6kK-W4-izG" id="T5S-x2-tRP"/>
-                                                        <outlet property="userImageView" destination="Uhj-wT-Kny" id="pFo-VB-B9n"/>
-                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -289,13 +247,13 @@
                                 <items>
                                     <navigationItem id="WlW-JI-Exl">
                                         <barButtonItem key="leftBarButtonItem" title="cancel" id="Td9-ij-grz">
-                                            <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="closeButtonPressed:" destination="P4e-NL-upe" id="KgH-ph-RMs"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="post" id="Tlb-KO-dKh">
-                                            <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="postButtonPressed:" destination="P4e-NL-upe" id="DC0-n2-3YQ"/>
                                             </connections>
@@ -643,11 +601,11 @@
                         <constraints>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="bottom" secondItem="fiI-er-aKC" secondAttribute="bottom" type="user" id="0B0-4G-ljS"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" type="user" id="9SD-IH-xs4"/>
-                            <constraint firstItem="g7a-ue-Z8T" firstAttribute="centerX" secondItem="tbf-X9-Wae" secondAttribute="centerX" type="default" id="N93-Ks-kKg"/>
                             <constraint firstAttribute="bottom" secondItem="g7a-ue-Z8T" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VIl-kr-zsY"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="top" secondItem="fiI-er-aKC" secondAttribute="top" type="user" id="Wuh-ww-Dtc"/>
                             <constraint firstAttribute="trailing" secondItem="3po-1P-0Fj" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YzT-PZ-eJ1"/>
                             <constraint firstItem="tbf-X9-Wae" firstAttribute="trailing" secondItem="fiI-er-aKC" secondAttribute="trailing" type="user" id="ebB-cX-yLE"/>
+                            <constraint firstItem="g7a-ue-Z8T" firstAttribute="centerX" secondItem="tbf-X9-Wae" secondAttribute="centerX" type="default" id="hUV-EK-xRj"/>
                             <constraint firstAttribute="bottom" secondItem="vOM-3E-7f8" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lkl-az-6eQ"/>
                             <constraint firstAttribute="bottom" secondItem="3po-1P-0Fj" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="nq7-uV-3Vw"/>
                             <constraint firstItem="vOM-3E-7f8" firstAttribute="leading" secondItem="fiI-er-aKC" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="rTw-CP-uFF"/>
@@ -673,7 +631,7 @@
             <objects>
                 <viewController storyboardIdentifier="STLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZGL-TH-VUU" customClass="STLogInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Twg-t3-JPM">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8se-Si-Bsf">
@@ -796,13 +754,8 @@
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
-        <class className="STBoardCommentView" superclassName="UIView">
+        <class className="STBoardCommentView" superclassName="STSwipeView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commentLabel" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="stickersView" candidateClass="STCommentStickerView"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
         </class>
         <class className="STBoardViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
@@ -825,9 +778,6 @@
         </class>
         <class className="STCheckInAnimationView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STCheckInAnimationView.h"/>
-        </class>
-        <class className="STCommentStickerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCommentStickerView.h"/>
         </class>
         <class className="STComposePostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/STComposePostViewController.h"/>
@@ -911,6 +861,9 @@
                 <relationship kind="outlet" name="delegate"/>
             </relationships>
         </class>
+        <class className="STSwipeView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/STSwipeView.h"/>
+        </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -918,6 +871,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FaR-sn-Tgm"/>
+        <segue reference="JcO-f9-ND9"/>
     </inferredMetricsTieBreakers>
 </document>

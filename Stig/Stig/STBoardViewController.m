@@ -135,14 +135,28 @@
 }
 
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
-    [self requestDataWithStickers:stickerPicker.selectedStickers];
+    self.selectedStickers = stickerPicker.selectedStickers;
+    [self requestDataWithStickers:self.selectedStickers];
 }
 - (void) backButtonPressed:(id) sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)postButtonPressed:(id)sender {
     if (_overlord.user) {
-        [self performSegueWithIdentifier:@"postCommentSegue" sender:sender];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]];
+        STComposePostViewController * vc = [sb instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
+        vc.completionHandler = ^(BOOL completed) {
+            if (completed) {
+                [self requestDataWithStickers:self.selectedStickers];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error on comment post"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alert show];
+            }
+
+        };
+        vc.overlordToken = _currentToken;
+        vc.place = self.place;
+        [self presentViewController:vc animated:YES completion:nil];
     }else {
         [self performSegueWithIdentifier:@"logInSegue" sender:sender];
     }

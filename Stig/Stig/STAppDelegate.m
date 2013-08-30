@@ -27,11 +27,12 @@
     NSDictionary *barButtonAppearanceDict = @{UITextAttributeFont : [UIFont fontWithName:@"Futura" size:14.0]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
-//
-//    } error:^(NSError *error) {
-//        
-//    }];
+    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
+
+    } error:^(NSError *error) {
+        
+    }];
+
     return YES;
 }
 							

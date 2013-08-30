@@ -10,6 +10,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation STBoardCommentView
+- (id) initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self config];
+    }
+    return self;
+}
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
     //[self prepareForReuse];
     
@@ -83,5 +90,51 @@
             }
         }
     }
+}
+- (void) config {
+    [self setupViews];
+    [self setupConstraints];
+}
+- (void) setupViews {
+    _userImageView = [[UIImageView alloc] init];
+    [_userImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.mainSwipeView addSubview:_userImageView];
+
+    _commentLabel = [[UITextView alloc] init];
+    [_commentLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.mainSwipeView addSubview:_commentLabel];
+    [_commentLabel setEditable:NO];
+    [_commentLabel setUserInteractionEnabled:NO];
+
+    _stickersView = [[STCommentStickerView alloc] init];
+    [_stickersView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.mainSwipeView addSubview:_stickersView];
+}
+
+- (void) setupConstraints {
+    
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(12)-[_userImageView(50)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_userImageView)]];
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(12)-[_userImageView(50)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_userImageView)]];
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_userImageView]-0-[_stickersView]"
+                                                                               options:NSLayoutFormatAlignAllCenterX
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_userImageView,_stickersView)]];
+
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(6)-[_commentLabel]-(0)-|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_commentLabel)]];
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_userImageView]-(0)-[_commentLabel]-(0)-|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_userImageView,_commentLabel)]];
+
+    
 }
 @end

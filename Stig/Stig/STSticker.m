@@ -77,13 +77,28 @@
     }
 }
 
+- (NSUInteger)getQueryServerCode{
+    return (0b1 << self.type);
+}
+
 + (NSUInteger) stickersServeCodeFromArray: (NSArray *) array{
     if(!array){
-        return nil;
+        return 0;
     }
     NSUInteger ret = 0;
     for(int i = 0; i < array.count; i++){
         ret = (ret | [array[i] getServerCode]);
+    }
+    return ret;
+}
+
++ (NSUInteger) stickersServerQueryCodeFromArray:(NSArray *)array{
+    if(!array){
+        return 0;
+    }
+    NSUInteger ret = 0;
+    for(int i = 0; i < array.count; i++){
+        ret = (ret | [array[i] getQueryServerCode]);
     }
     return ret;
 }

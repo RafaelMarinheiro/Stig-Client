@@ -46,25 +46,55 @@
     
     self.title = self.place.placeName;
     _loadedMetadata = NO;
-    [self requestDataWithStickers:nil];
-}
+    //[self requestDataWithStickers:nil];
 
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.tintColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Loading"];
+    [refresh addTarget:self
+                action:@selector(refreshView:)
+      forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+    [self.refreshControl beginRefreshing];
+    [self refreshData:^(BOOL completed) {
+        if (completed) {
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+            [self.refreshControl endRefreshing];
+        }else {
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Failed to load data"];
+        }
+    }];
+}
+- (void) refreshView:(UIRefreshControl *) refresh {
+    [self refreshData:^(BOOL completed) {
+        if (completed) {
+            [refresh endRefreshing];
+        }else{
+            [refresh endRefreshing];
+        }
+    }];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void) requestDataWithStickers:(NSArray *) stickers {
-    NSLog(@"REquesting data!");
-    NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:stickers];
+- (void) refreshData:(void(^)(BOOL completed))completion {
+    NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:self.selectedStickers];
     _currentToken = token;
     [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
         _numberOfCommentsForToken = numberOfCommentsForToken;
         _loadedMetadata = YES;
         _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
         [self.tableView reloadData];
+        if (completion) {
+            completion(YES);
+        }
     }error:^(NSError *error) {
         NSLog(@"REquesting data! AND BIG ERROR %@ %@", error, self.place);
+        if (completion) {
+            completion(NO);
+        }
     }];
 }
 #pragma mark - Table view data source
@@ -103,7 +133,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
     [reuse prepareForReuse];
-    [_overlord getCommentAndUserForToken:_currentToken andPosition:indexPath.row completion:^(STBoardComment *comment, STUser *user){
+    [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
         UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
         STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
         commentView.commentFont = self.commentFont;
@@ -136,7 +166,7 @@
 
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
     self.selectedStickers = stickerPicker.selectedStickers;
-    [self requestDataWithStickers:self.selectedStickers];
+    [self refreshData:nil];
 }
 - (void) backButtonPressed:(id) sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -147,7 +177,7 @@
         STComposePostViewController * vc = [sb instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
         vc.completionHandler = ^(BOOL completed) {
             if (completed) {
-                [self requestDataWithStickers:self.selectedStickers];
+                [self refreshData:nil];
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error on comment post"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [alert show];

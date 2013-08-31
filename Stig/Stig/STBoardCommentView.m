@@ -30,6 +30,7 @@
     [self.userImageView.layer setCornerRadius:5.0];
     self.userImageView.layer.masksToBounds = YES;
     CGFloat h = self.userImageView.frame.size.height  + 14 + self.stickersView.frame.size.height;
+    NSLog(@"Content Size: %@", NSStringFromCGSize(self.commentLabel.contentSize));
     _cellHeight = MAX(h,  self.commentLabel.contentSize.height);
 }
 - (void) prepareForReuse {
@@ -105,6 +106,8 @@
     [self.mainSwipeView addSubview:_commentLabel];
     [_commentLabel setEditable:NO];
     [_commentLabel setUserInteractionEnabled:NO];
+    
+    _commentLabel.contentInset = UIEdgeInsetsMake(8, 0, -8, 0);
 
     _stickersView = [[STCommentStickerView alloc] init];
     [_stickersView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -126,14 +129,14 @@
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_userImageView,_stickersView)]];
 
-    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(6)-[_commentLabel]-(0)-|"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:NSDictionaryOfVariableBindings(_commentLabel)]];
     [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_userImageView]-(0)-[_commentLabel]-(0)-|"
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_userImageView,_commentLabel)]];
+    [self.mainSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_commentLabel]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_commentLabel)]];
 
     
 }

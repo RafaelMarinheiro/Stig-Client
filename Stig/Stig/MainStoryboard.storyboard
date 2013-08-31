@@ -39,97 +39,83 @@
         <scene sceneID="onb-is-lVB">
             <objects>
                 <viewController restorationIdentifier="STBoardViewControllerID" storyboardIdentifier="STBoardViewControllerID" id="x2V-Yo-eIf" customClass="STBoardViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="h9Q-5u-yck">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="G00-T8-tQh">
                         <rect key="frame" x="0.0" y="64" width="320" height="440"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mTr-Jz-y3M">
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="STBoardHeaderIdentifier" rowHeight="120" id="5dA-29-tZF">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="STBoardHeaderIdentifier" rowHeight="120" id="f02-88-AIq">
+                                <rect key="frame" x="0.0" y="22" width="320" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37n-Uq-n5K">
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CK3-iF-o5n">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AS-hl-8Bs" userLabel="Stickers View">
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDz-Sa-o2z" userLabel="Stickers View">
-                                                            <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkL-NT-9KH" customClass="STStickerPickerView">
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="50" type="user" id="KlE-gu-1X2"/>
-                                                                    </constraints>
-                                                                    <connections>
-                                                                        <outlet property="delegate" destination="x2V-Yo-eIf" id="ooo-cq-k5L"/>
-                                                                    </connections>
-                                                                </view>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLs-DX-yDu" customClass="STStickerPickerView">
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="hkL-NT-9KH" firstAttribute="leading" secondItem="lDz-Sa-o2z" secondAttribute="leading" type="default" id="Tg2-tc-jD3"/>
-                                                                <constraint firstAttribute="bottom" secondItem="hkL-NT-9KH" secondAttribute="bottom" constant="50" type="user" id="dnb-9n-MHi"/>
-                                                                <constraint firstItem="hkL-NT-9KH" firstAttribute="trailing" secondItem="lDz-Sa-o2z" secondAttribute="trailing" type="default" id="lXg-qE-GZy"/>
+                                                                <constraint firstAttribute="height" constant="50" type="user" id="9Mv-Qs-qxy"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="x2V-Yo-eIf" id="1g2-Ds-sjW"/>
+                                                            </connections>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="lDz-Sa-o2z" secondAttribute="width" type="user" id="6iz-0k-GQz"/>
-                                                        <constraint firstItem="lDz-Sa-o2z" firstAttribute="leading" secondItem="CK3-iF-o5n" secondAttribute="leading" type="default" id="USX-6k-xzi"/>
-                                                        <constraint firstAttribute="height" secondItem="lDz-Sa-o2z" secondAttribute="height" type="user" id="du4-sV-eLE"/>
-                                                        <constraint firstItem="lDz-Sa-o2z" firstAttribute="top" secondItem="CK3-iF-o5n" secondAttribute="top" type="default" id="o7q-ak-TKY"/>
+                                                        <constraint firstItem="uLs-DX-yDu" firstAttribute="leading" secondItem="5AS-hl-8Bs" secondAttribute="leading" type="default" id="eya-eP-YF7"/>
+                                                        <constraint firstItem="uLs-DX-yDu" firstAttribute="trailing" secondItem="5AS-hl-8Bs" secondAttribute="trailing" type="default" id="ltr-Nl-BKB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uLs-DX-yDu" secondAttribute="bottom" constant="50" type="user" id="reW-q8-URh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="5AS-hl-8Bs" firstAttribute="top" secondItem="37n-Uq-n5K" secondAttribute="top" type="default" id="UTP-oT-Agc"/>
+                                                <constraint firstAttribute="width" secondItem="5AS-hl-8Bs" secondAttribute="width" type="user" id="slE-To-RwM"/>
+                                                <constraint firstItem="5AS-hl-8Bs" firstAttribute="leading" secondItem="37n-Uq-n5K" secondAttribute="leading" type="default" id="tdx-Ul-FlV"/>
+                                                <constraint firstAttribute="height" secondItem="5AS-hl-8Bs" secondAttribute="height" type="user" id="uw9-lO-GXS"/>
+                                            </constraints>
                                         </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="top" secondItem="5dA-29-tZF" secondAttribute="top" type="user" id="1eI-8p-9ky"/>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="leading" secondItem="5dA-29-tZF" secondAttribute="leading" type="default" id="Ikr-Y7-m61"/>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="trailing" secondItem="5dA-29-tZF" secondAttribute="trailing" type="default" id="Zrg-6k-GEJ"/>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="bottom" secondItem="5dA-29-tZF" secondAttribute="bottom" type="user" id="fOI-tS-cWY"/>
-                                            <constraint firstItem="CK3-iF-o5n" firstAttribute="bottom" secondItem="5dA-29-tZF" secondAttribute="bottom" type="user" id="nKQ-qK-sgl"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="STBoardCommentIdentifier" rowHeight="139" id="ydQ-I6-FU4">
-                                        <rect key="frame" x="0.0" y="142" width="320" height="139"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view clipsSubviews="YES" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8V-b9-UwO" customClass="STBoardCommentView">
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="37n-Uq-n5K" firstAttribute="leading" secondItem="f02-88-AIq" secondAttribute="leading" type="default" id="2nE-Et-5ae"/>
+                                    <constraint firstItem="37n-Uq-n5K" firstAttribute="trailing" secondItem="f02-88-AIq" secondAttribute="trailing" type="default" id="52m-m3-eGv"/>
+                                    <constraint firstItem="37n-Uq-n5K" firstAttribute="bottom" secondItem="f02-88-AIq" secondAttribute="bottom" type="user" id="TXA-h6-bkl"/>
+                                    <constraint firstItem="37n-Uq-n5K" firstAttribute="bottom" secondItem="f02-88-AIq" secondAttribute="bottom" type="user" id="anG-69-VJD"/>
+                                    <constraint firstItem="37n-Uq-n5K" firstAttribute="top" secondItem="f02-88-AIq" secondAttribute="top" type="user" id="h1v-aE-r6O"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="STBoardCommentIdentifier" rowHeight="139" id="wvD-Xo-g9W">
+                                <rect key="frame" x="0.0" y="142" width="320" height="139"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view clipsSubviews="YES" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgc-VT-OpD" customClass="STBoardCommentView">
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="e8V-b9-UwO" secondAttribute="bottom" type="user" id="DFP-9R-H7g"/>
-                                            <constraint firstItem="e8V-b9-UwO" firstAttribute="top" secondItem="ydQ-I6-FU4" secondAttribute="top" type="user" id="GGy-3m-zEu"/>
-                                            <constraint firstItem="e8V-b9-UwO" firstAttribute="leading" secondItem="ydQ-I6-FU4" secondAttribute="leading" type="user" id="h56-Od-8Js"/>
-                                            <constraint firstItem="e8V-b9-UwO" firstAttribute="trailing" secondItem="ydQ-I6-FU4" secondAttribute="trailing" type="user" id="vqd-1I-Rjm"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="x2V-Yo-eIf" id="Alg-9T-cDS"/>
-                                    <outlet property="delegate" destination="x2V-Yo-eIf" id="Lh7-Us-6Gf"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="trailing" secondItem="h9Q-5u-yck" secondAttribute="trailing" type="user" id="SsB-zf-xdB"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="leading" secondItem="h9Q-5u-yck" secondAttribute="leading" type="user" id="U51-JP-PAY"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="top" secondItem="h9Q-5u-yck" secondAttribute="top" type="default" id="Yuu-21-A9m"/>
-                            <constraint firstItem="mTr-Jz-y3M" firstAttribute="bottom" secondItem="h9Q-5u-yck" secondAttribute="bottom" type="default" id="hJy-id-vQc"/>
-                        </constraints>
-                    </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="bgc-VT-OpD" secondAttribute="bottom" type="user" id="5v2-km-6Xe"/>
+                                    <constraint firstItem="bgc-VT-OpD" firstAttribute="leading" secondItem="wvD-Xo-g9W" secondAttribute="leading" type="user" id="TVv-LA-Ihb"/>
+                                    <constraint firstItem="bgc-VT-OpD" firstAttribute="top" secondItem="wvD-Xo-g9W" secondAttribute="top" type="user" id="aRZ-Nj-PmL"/>
+                                    <constraint firstItem="bgc-VT-OpD" firstAttribute="trailing" secondItem="wvD-Xo-g9W" secondAttribute="trailing" type="user" id="fEo-pC-CMQ"/>
+                                </constraints>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <navigationItem key="navigationItem" id="joV-NK-j5a">
                         <barButtonItem key="rightBarButtonItem" title="Post" id="psM-s4-NFU">
                             <connections>
@@ -140,7 +126,6 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
-                        <outlet property="tableView" destination="mTr-Jz-y3M" id="44B-g5-5Lg"/>
                         <segue destination="ZGL-TH-VUU" kind="modal" identifier="logInSegue" id="FaR-sn-Tgm"/>
                         <segue destination="P4e-NL-upe" kind="modal" identifier="postCommentSegue" id="P68-ZX-7Qn"/>
                     </connections>
@@ -631,7 +616,7 @@
             <objects>
                 <viewController storyboardIdentifier="STLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZGL-TH-VUU" customClass="STLogInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Twg-t3-JPM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8se-Si-Bsf">
@@ -744,133 +729,12 @@
         <image name="stig_logo.png" width="644" height="376"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="MMDrawerController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMDrawerController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="STSwipeView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-        </class>
-        <class className="STBoardViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="stickersView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topBatTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STCalloutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCalloutViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="animationView" candidateClass="STCheckInAnimationView"/>
-                <relationship kind="outlet" name="checkinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stickerSelector" candidateClass="STStickerPickerView"/>
-            </relationships>
-        </class>
-        <class className="STCheckInAnimationView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCheckInAnimationView.h"/>
-        </class>
-        <class className="STComposePostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STComposePostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeButtonPressed:"/>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="postButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="stickerComposerView" candidateClass="STStickerComposerView"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STConfigViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STConfigViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="networkSwitchChanged:" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="STDraggerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDraggerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="drawerButtonPressed:"/>
-                <relationship kind="action" name="toggleDragger:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="draggedView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mainView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="verticalSpaceConstraint" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="STDrawerViewController" superclassName="MMDrawerController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDrawerViewController.h"/>
-        </class>
-        <class className="STLogInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STLogInViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="logInButtonPressed:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="barsImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="connectWithLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STPlacesListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchDisplay" candidateClass="UISearchDisplayController"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="STPlacesMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="suggestionButtonPressed:"/>
-                <relationship kind="outlet" name="filterDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="optionsDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="suggestionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="userImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STStickerComposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerComposerView.h"/>
-        </class>
-        <class className="STStickerPickerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerPickerView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="delegate"/>
-            </relationships>
-        </class>
-        <class className="STSwipeView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STSwipeView.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JcO-f9-ND9"/>
+        <segue reference="FaR-sn-Tgm"/>
     </inferredMetricsTieBreakers>
 </document>

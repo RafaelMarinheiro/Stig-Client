@@ -18,6 +18,7 @@
         user.userName = dictionary[@"name"];
         user.location = [STLocation locationFromJSONData:dictionary[@"location"]];
         user.userPlaceId = dictionary[@"place"];
+        user.points = dictionary[@"points"];
         return user;
     }
     return nil;

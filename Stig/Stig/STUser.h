@@ -11,6 +11,7 @@
 @interface STUser : NSObject
 @property (nonatomic, strong) NSNumber *userId;
 @property (nonatomic, strong) NSString *userImageURL;
+@property (nonatomic, strong) NSNumber *points;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) STLocation *location;
 @property (nonatomic, strong) NSNumber *userPlaceId;

@@ -19,8 +19,14 @@
     NSUInteger _currentToken;
     NSUInteger _numberOfCommentsForToken;
     BOOL _loadedMetadata;
+    BOOL _viewAppearing;
 }
-
+- (void) viewWillAppear:(BOOL)animated {
+    _viewAppearing = YES;
+}
+- (void) viewWillDisappear:(BOOL)animated {
+    _viewAppearing = NO;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,21 +80,26 @@
         }
     }];
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void) refreshData:(void(^)(BOOL completed))completion {
     NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:self.selectedStickers];
     _currentToken = token;
     [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
-        _numberOfCommentsForToken = numberOfCommentsForToken;
-        _loadedMetadata = YES;
-        _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
-        [self.tableView reloadData];
-        if (completion) {
-            completion(YES);
+        if (_viewAppearing) {
+            _numberOfCommentsForToken = numberOfCommentsForToken;
+            _loadedMetadata = YES;
+            _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
+            [self.tableView reloadData];
+            if (completion) {
+                completion(YES);
+            }
         }
     }error:^(NSError *error) {
         NSLog(@"REquesting data! AND BIG ERROR %@ %@", error, self.place);
@@ -134,15 +145,17 @@
     STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
     [reuse prepareForReuse];
     [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
-        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-        STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
-        commentView.commentFont = self.commentFont;
-        commentView.userNameFont = self.userNameFont;
-        [commentView populateWithComment:comment andUser:user];
-        NSNumber *position = @(indexPath.row);
-        if (!_heightsDictionary[position]) {
-            [self setHeight:commentView.cellHeight forPosition:position];
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        if (_viewAppearing) {
+            UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+            STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
+            commentView.commentFont = self.commentFont;
+            commentView.userNameFont = self.userNameFont;
+            [commentView populateWithComment:comment andUser:user];
+            NSNumber *position = @(indexPath.row);
+            if (!_heightsDictionary[position]) {
+                [self setHeight:commentView.cellHeight forPosition:position];
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
     }error:^(NSError *error){
 

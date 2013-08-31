@@ -118,5 +118,7 @@
     
     return stickers;
 }
-
++ (NSArray *) stickersWithStatusDictionary:(NSDictionary *) dictionary {
+    
+}
 @end

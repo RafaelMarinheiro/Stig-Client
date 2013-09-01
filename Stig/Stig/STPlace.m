@@ -19,7 +19,7 @@
         place.placeDescription = mainDictionary[@"description"];
         place.location = [STLocation locationFromJSONData:mainDictionary[@"location"]];
         place.friends =  mainDictionary[@"friends"];
-        place.stickers = mainDictionary[@"stickers"];
+        place.stickers = [STSticker stickersWithStatusDictionary: mainDictionary[@"stickers"]];
         place.ranking = [STRanking rankingFromJSONData:mainDictionary[@"ranking"]];
         return place;
     }
@@ -36,8 +36,9 @@
         place.placeDescription = mainDictionary[@"description"];
         place.location = [STLocation locationFromJSONData:mainDictionary[@"location"]];
         place.friends =  mainDictionary[@"friends"];
-        place.stickers = mainDictionary[@"stickers"];
+        place.stickers = [STSticker stickersWithStatusDictionary: mainDictionary[@"stickers"]];
         place.ranking = [STRanking rankingFromJSONData:mainDictionary[@"ranking"]];
+        place.mostRelevantSticker = [STSticker relevantStickerFromStatusDictionary:mainDictionary[@"stickers"]];
         return place;
     }
     return nil;

@@ -15,19 +15,6 @@
 @end
 
 @implementation STComposePostViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-//        // Custom initialization
-//        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-//        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
-
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -69,7 +56,9 @@
             self.completionHandler(YES);
         }
     } error:^(NSError *error) {
-        self.completionHandler(NO);
+        if (self.completionHandler) {
+            self.completionHandler(NO);
+        }
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

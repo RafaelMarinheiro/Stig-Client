@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) NSArray *selectedStickers;
 - (void) setStickersWithIds:(NSArray *) stickerIds;
 - (void) setSticker:(STSticker *) sticker;
+- (void) setStickers:(NSArray *) stickers;
 - (id) initWithStickerModifier:(STSTickerModifier) modifier;
 @end
 

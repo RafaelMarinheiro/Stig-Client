@@ -49,6 +49,7 @@
 - (void) showCalloutForPlace:(STPlace *) place {
     _selectedPlace = place;
     [self.placeNameLabel setText:place.placeName];
+    [self.stickerSelector setStickers:place.stickers];
 }
 - (UIColor *) colorInterpolatingColor:(UIColor *) initialColor toColor:(UIColor *) finalColor withPercentage:(CGFloat) percentage {
     CGFloat initialRed, initialGreen, initialBlue, initialAlpha;

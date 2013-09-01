@@ -15,8 +15,6 @@
 @interface STBoardViewController : UITableViewController <UITextFieldDelegate,STStickerPickerViewDelegate>
 
 @property (nonatomic, strong) STPlace *place;
-@property (nonatomic, strong) UIFont *commentFont;
-@property (nonatomic, strong) UIFont *userNameFont;
 @property (weak, nonatomic) IBOutlet UIView *stickersView;
 @property (weak, nonatomic) IBOutlet UILabel *topBatTitle;
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;

@@ -34,5 +34,6 @@ typedef enum {
 + (NSUInteger) stickersServeCodeFromArray: (NSArray *) array;
 + (NSUInteger) stickersServerQueryCodeFromArray: (NSArray*) array;
 + (NSArray *) stickersWithStatusDictionary:(NSDictionary *) dictionary;
++ (STSticker *) relevantStickerFromStatusDictionary:(NSDictionary *) dictionary;
 
 @end

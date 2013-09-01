@@ -30,10 +30,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.userNameFont = [UIFont fontWithName:@"Futura" size:16.0];
-    self.commentFont =  [UIFont fontWithName:@"Helvetica" size:14.0];
     _overlord = [STHiveCluster spawnOverlord];
-    [self.topBatTitle setText:self.place.placeName];
+    
+    [self setupViews];
+    self.title = self.place.placeName;
+    _loadedMetadata = NO;
+    
+    [self refreshData:^(BOOL completed) {
+        if (completed) {
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+            [self.refreshControl endRefreshing];
+        }else {
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Failed to load data"];
+        }
+    }];
+}
+- (void) setupViews {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     [button addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -49,10 +61,7 @@
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonPost];
     [self.navigationItem setRightBarButtonItem:leftButtonItem];
     [self.navigationItem setLeftBarButtonItem:barButtonItem];
-    
-    self.title = self.place.placeName;
-    _loadedMetadata = NO;
-    //[self requestDataWithStickers:nil];
+
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     refresh.tintColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
@@ -62,31 +71,15 @@
       forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
     [self.refreshControl beginRefreshing];
-    [self refreshData:^(BOOL completed) {
-        if (completed) {
-            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-            [self.refreshControl endRefreshing];
-        }else {
-            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Failed to load data"];
-        }
-    }];
 }
-- (void) refreshView:(UIRefreshControl *) refresh {
-    [self refreshData:^(BOOL completed) {
-        if (completed) {
-            [refresh endRefreshing];
-        }else{
-            [refresh endRefreshing];
-        }
-    }];
-}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Overlord Communication
 
 - (void) refreshData:(void(^)(BOOL completed))completion {
     NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:self.selectedStickers];
@@ -107,6 +100,41 @@
             completion(NO);
         }
     }];
+}
+- (UITableViewCell *) getHeaderCellFromTableView:(UITableView *) tableView{
+    static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
+    STStickerPickerView *picker = (STStickerPickerView *)[cell.contentView viewWithTag:12];
+    [picker setStickers:self.place.stickers];
+
+    [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [imageView setClipsToBounds:YES];
+    [cell.contentView addSubview:imageView];
+    [cell.contentView sendSubviewToBack:imageView];
+    return cell;
+}
+- (UITableViewCell *) getCommentCellFromTableView:(UITableView *) tableView andIndexPath:(NSIndexPath *) indexPath{
+    static NSString *CellIdentifier = @"STBoardCommentIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
+    [reuse prepareForReuse];
+    [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
+        if (_viewAppearing) {
+            UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+            STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
+            [commentView populateWithComment:comment andUser:user];
+            NSNumber *position = @(indexPath.row);
+            if (!_heightsDictionary[position]) {
+                [self setHeight:commentView.cellHeight forPosition:position];
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    }error:^(NSError *error){
+
+    }];
+    return cell;
 }
 #pragma mark - Table view data source
 
@@ -129,38 +157,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section]==0) {
-        static NSString *CellIdentifier = @"STBoardHeaderIdentifier";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
-        
-        [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
-        [imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [imageView setClipsToBounds:YES];
-        [cell.contentView addSubview:imageView];
-        [cell.contentView sendSubviewToBack:imageView];
-        return cell;
+        return [self getHeaderCellFromTableView:tableView];
+    }else {
+        return [self getCommentCellFromTableView:tableView andIndexPath:indexPath];
     }
-    static NSString *CellIdentifier = @"STBoardCommentIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
-    [reuse prepareForReuse];
-    [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
-        if (_viewAppearing) {
-            UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-            STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
-            commentView.commentFont = self.commentFont;
-            commentView.userNameFont = self.userNameFont;
-            [commentView populateWithComment:comment andUser:user];
-            NSNumber *position = @(indexPath.row);
-            if (!_heightsDictionary[position]) {
-                [self setHeight:commentView.cellHeight forPosition:position];
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }
-    }error:^(NSError *error){
-
-    }];
-    return cell;
 }
 - (void) setHeight:(CGFloat) height forPosition:(NSNumber *) position {
     [_heightsDictionary setObject:@(height) forKey:position];
@@ -176,7 +176,7 @@
     }
     return 80.0;
 }
-
+#pragma mark - Callbacks
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
     self.selectedStickers = stickerPicker.selectedStickers;
     [self refreshData:nil];
@@ -193,15 +193,24 @@
                 [self refreshData:nil];
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error on comment post"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    [alert show];
+                [alert show];
             }
 
         };
         vc.overlordToken = _currentToken;
         vc.place = self.place;
         [self presentViewController:vc animated:YES completion:nil];
-    }else {
+    } else {
         [self performSegueWithIdentifier:@"logInSegue" sender:sender];
     }
+}
+- (void) refreshView:(UIRefreshControl *) refresh {
+    [self refreshData:^(BOOL completed) {
+        if (completed) {
+            [refresh endRefreshing];
+        }else{
+            [refresh endRefreshing];
+        }
+    }];
 }
 @end

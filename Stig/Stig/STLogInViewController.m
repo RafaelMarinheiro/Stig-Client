@@ -61,7 +61,7 @@
         [self.activityIndicator stopAnimating];
         [self dismissViewControllerAnimated:YES completion:nil];
     } error:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:@"" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to login" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
         [alert show];
         [self changeToInteraction];
     }];

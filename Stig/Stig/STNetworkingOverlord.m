@@ -105,65 +105,74 @@
     if(openUI){
 
         [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
-                            completionHandler:^(FBSession *session,
-                                                FBSessionState status,
-                                                NSError *error) {
-                                if ([FBSession.activeSession isOpen]) {
-                                    [[FBRequest requestForMe] startWithCompletionHandler:
-                                     ^(FBRequestConnection *connection,
-                                       NSDictionary<FBGraphUser> *user,
-                                       NSError *error) {
-                                         if(!error){
-                                             _user = nil;
-                                             _fb_id = [user id];
-                                             _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
-
-                                             [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-
-                                             NSString * path = @"/users/me/";
-
-                                             NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-                                             AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-
-                                             [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
-                                                 NSError * error;
-                                                 id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                                completionHandler:^(FBSession *session,
+                                                    FBSessionState status,
+                                                    NSError *error) {
+                                    if ([FBSession.activeSession isOpen]) {
+                                        [[FBRequest requestForMe] startWithCompletionHandler:
+                                         ^(FBRequestConnection *connection,
+                                           NSDictionary<FBGraphUser> *user,
+                                           NSError *error) {
+                                             if(!error){
                                                  _user = nil;
+                                                 _fb_id = [user id];
+                                                 _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
 
-                                                 if(json){
-                                                     NSDictionary * dic = json;
-                                                     _user = [STUser userFromServerJSONData:dic];
-                                                     if(_user){
-                                                         [_users setObject:_user forKey:_user.userId];
-                                                         [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-                                                         if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                                             completionBlock(_user);
+                                                 [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+
+                                                 NSString * path = @"/users/me/";
+
+                                                 NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
+                                                 AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+                                                 [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
+                                                     NSError * error;
+                                                     id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                                                     _user = nil;
+
+                                                     if(json){
+                                                         NSDictionary * dic = json;
+                                                         _user = [STUser userFromServerJSONData:dic];
+                                                         if(_user){
+                                                             [_users setObject:_user forKey:_user.userId];
+                                                             [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                                                             if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                                 completionBlock(_user);
+                                                             });
+                                                             return;
+                                                         }
+                                                     }
+
+                                                     if(!_user){
+                                                         [_client clearAuthorizationHeader];
+                                                         error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+                                                         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                             errorBlock(error);
                                                          });
                                                          return;
                                                      }
-                                                 }
-                                                 
-                                                 if(!_user){
+                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                      [_client clearAuthorizationHeader];
-                                                     error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
                                                      if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
                                                          errorBlock(error);
                                                      });
-                                                     return;
-                                                 }
-                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 [_client clearAuthorizationHeader];
-                                                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                                                 }];
+
+                                                 [_client enqueueHTTPRequestOperation:operation];
+
+                                             }
+                                             else{
+                                                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
                                                      errorBlock(error);
                                                  });
-                                             }];
-                                             
-                                             [_client enqueueHTTPRequestOperation:operation];
-                                             
-                                         }
-                                     }];
-                                }
-                            }];
+                                             }
+                                         }];
+                                    }else{
+                                        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                                            errorBlock(error);
+                                        });
+                                    }
+                                }];
     } else{
         [FBSession openActiveSessionWithAllowLoginUI:NO];
         if ([FBSession.activeSession isOpen]) {
@@ -215,9 +224,9 @@
                              errorBlock(error);
                          });
                      }];
-
+                     
                      [_client enqueueHTTPRequestOperation:operation];
-
+                     
                  }
              }];
         }
@@ -719,8 +728,6 @@
         path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
     }
 
-    NSLog(path);
-
     NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
     AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -802,7 +809,6 @@
                                error: (void (^) (NSError* error)) errorBlock{
     
     STBoardCommentQueryContext * context = [_tokenToBoardQuery objectForKey:@(token)];
-    NSNumber *test = @(92);
     
     if(context){
         [self getCommentAndUserForToken:token andPosition:0 completion:^(STBoardComment *comment, STUser *user) {
@@ -892,7 +898,6 @@
     
     NSString * path = [[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/comments/"];
 
-    NSLog(path);
 
     [_client postPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"content", @([STSticker stickersServeCodeFromArray:stickers]), @"stickers", nil]
              success:^(AFHTTPRequestOperation *operation, id data) {

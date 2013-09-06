@@ -47,6 +47,12 @@
     _stickersView = [[STCommentStickerView alloc] init];
     [_stickersView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.mainSwipeView addSubview:_stickersView];
+    UIColor * mainColor = [UIColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0];
+    _commentLabel.backgroundColor = mainColor;
+    self.backgroundColor = mainColor;
+    self.mainSwipeView.backgroundColor = mainColor;
+
+
 }
 
 - (void) setupConstraints {
@@ -84,12 +90,14 @@
 
 #pragma mark - Reuse 
 - (void) prepareForReuse {
+    self.currentComment = nil;
     self.commentLabel.text = @"Loading...";
     self.stickersView.stickers = nil;
     [self.userImageView setImage:[UIImage imageNamed:@"placeholder_user"]];
     _cellHeight = 80.0;
 }
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
+    self.currentComment = comment;
     self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
     self.stickersView.stickers = comment.commentStickers;
     [self.stickersView setNeedsLayout];

@@ -17,6 +17,7 @@
 @property (nonatomic, strong)  UIImageView *userImageView;
 @property (nonatomic, strong)  UITextView *commentLabel;
 @property (nonatomic, readonly) CGFloat cellHeight;
+@property (nonatomic, strong) STBoardComment *currentComment;
 @property (nonatomic, strong)  STCommentStickerView *stickersView;
 - (void) populateWithComment:(STBoardComment *) comment andUser:(STUser *) user;
 - (void) prepareForReuse;

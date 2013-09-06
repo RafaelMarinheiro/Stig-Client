@@ -12,6 +12,7 @@
 #import "STBoardCommentQueryContext.h"
 #import "STCheckInHistoryQueryContext.h"
 #import "STPlacesQueryContext.h"
+#import "STNetworkManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 
@@ -21,10 +22,12 @@
     NSCache * _users;
     NSCache * _places;
     NSCache * _commentsByPlaces;
+    STNetworkManager * _manager;
     STSafeMutableDictionary * _tokenToBoardQuery;
     STSafeMutableDictionary * _tokenToCheckInQuery;
     STSafeMutableDictionary * _tokenToPlacesQuery;
     STUser * _user;
+    STLocation *_userLocation;
     NSString * _fb_id;
     NSString * _fb_accesstoken;
     NSLock * _lock;
@@ -35,6 +38,8 @@
     self = [super init];
     if(self){
         _client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.stigapp.co/"]];
+        _manager = [[STNetworkManager alloc] init];
+        _manager.client = _client;
         _user = nil;
         _counter = 1;
         _lock = [[NSLock alloc] init];
@@ -58,11 +63,11 @@
 }
 
 - (STLocation *) userLocation{
-    return nil;
+    return _userLocation;
 }
 
 - (void) setUserLocation:(STLocation *)userLocation{
-    return;
+    _userLocation = userLocation;
 }
 
 #pragma mark - Check-In methods
@@ -70,11 +75,74 @@
 - (void) checkInPlace: (STPlace *) place
            completion: (void (^)(STUser * user, STPlace * place)) completionBlock
                 error: (void (^) (NSError* error)) errorBlock{
-    
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        errorBlock([[NSError alloc] initWithDomain:@"Not implemented" code:43 userInfo:nil]);
-    });
-    
+
+    if(!self.user){
+        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+            errorBlock([NSError errorWithDomain:@"User is not logged in" code:42 userInfo:nil]);
+        });
+        return;
+    }
+
+    NSString * path = [[@"places/" stringByAppendingString:[[place placeId] stringValue]] stringByAppendingString:@"/checkin/"];
+
+    [_client postPath:path parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id data) {
+                  if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      completionBlock(self.user, place);
+                  });
+              } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      errorBlock(error);
+                  });
+              }];
+}
+
+#pragma mark - Like/Dislike
+
+- (void) likeComment:(STBoardComment *)comment completion:(void (^)(STBoardComment *))completionBlock error:(void (^)(NSError *))errorBlock{
+
+    if(!self.user){
+        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+            errorBlock([NSError errorWithDomain:@"User is not logged in" code:42 userInfo:nil]);
+        });
+        return;
+    }
+
+    NSString * path = [[[[@"places/" stringByAppendingString:[[comment placeId] stringValue]] stringByAppendingString:@"/comments/"] stringByAppendingString:[[comment commentId] stringValue]]stringByAppendingString:@"/like/"];
+
+    [_client postPath:path parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id data) {
+                  if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      completionBlock(comment);
+                  });
+              } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      errorBlock(error);
+                  });
+              }];
+}
+
+- (void) dislikeComment:(STBoardComment *)comment completion:(void (^)(STBoardComment *))completionBlock error:(void (^)(NSError *))errorBlock{
+
+    if(!self.user){
+        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+            errorBlock([NSError errorWithDomain:@"User is not logged in" code:42 userInfo:nil]);
+        });
+        return;
+    }
+
+    NSString * path = [[[[@"places/" stringByAppendingString:[[comment placeId] stringValue]] stringByAppendingString:@"/comments/"] stringByAppendingString:[[comment commentId] stringValue]]stringByAppendingString:@"/dislike/"];
+
+    [_client postPath:path parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id data) {
+                  if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      completionBlock(comment);
+                  });
+              } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      errorBlock(error);
+                  });
+              }];
 }
 
 #pragma mark - Authentication methods
@@ -100,135 +168,88 @@
         return;
     }
 
+    typedef void(^STFacebookBlock)(FBRequestConnection *connection,
+                                   NSDictionary<FBGraphUser> *user,
+                                   NSError *error);
 
+    STFacebookBlock umnomebom = ^(FBRequestConnection *connection,
+                                          NSDictionary<FBGraphUser> *user,
+                                          NSError *error) {
+        if(!error){
+            _user = nil;
+            _fb_id = [user id];
+            _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
+
+            [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+
+            NSString * path = @"/users/me/";
+            [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, NSData * data) {
+                NSError * error;
+                id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                _user = nil;
+
+                if(json){
+                    NSDictionary * dic = json;
+                    _user = [STUser userFromServerJSONData:dic];
+                    if(_user){
+                        [_users setObject:_user forKey:_user.userId];
+                        [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                        if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                            completionBlock(_user);
+                        });
+                        return;
+                    }
+                }
+
+                if(!_user){
+                    [_client clearAuthorizationHeader];
+                    error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
+                    if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                        errorBlock(error);
+                    });
+                    return;
+                }
+            } error:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [_client clearAuthorizationHeader];
+                if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                    errorBlock(error);
+                });
+            }];
+        }
+        else{
+            if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                errorBlock(error);
+            });
+        }
+    };
 
     if(openUI){
 
-        [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
-                                completionHandler:^(FBSession *session,
-                                                    FBSessionState status,
-                                                    NSError *error) {
-                                    if ([FBSession.activeSession isOpen]) {
-                                        [[FBRequest requestForMe] startWithCompletionHandler:
-                                         ^(FBRequestConnection *connection,
-                                           NSDictionary<FBGraphUser> *user,
-                                           NSError *error) {
-                                             if(!error){
-                                                 _user = nil;
-                                                 _fb_id = [user id];
-                                                 _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
-
-                                                 [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-
-                                                 NSString * path = @"/users/me/";
-
-                                                 NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-                                                 AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-
-                                                 [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
-                                                     NSError * error;
-                                                     id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                                                     _user = nil;
-
-                                                     if(json){
-                                                         NSDictionary * dic = json;
-                                                         _user = [STUser userFromServerJSONData:dic];
-                                                         if(_user){
-                                                             [_users setObject:_user forKey:_user.userId];
-                                                             [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-                                                             if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                                                 completionBlock(_user);
-                                                             });
-                                                             return;
-                                                         }
-                                                     }
-
-                                                     if(!_user){
-                                                         [_client clearAuthorizationHeader];
-                                                         error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
-                                                         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                                             errorBlock(error);
-                                                         });
-                                                         return;
-                                                     }
-                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                     [_client clearAuthorizationHeader];
-                                                     if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                                         errorBlock(error);
-                                                     });
-                                                 }];
-
-                                                 [_client enqueueHTTPRequestOperation:operation];
-
-                                             }
-                                             else{
-                                                 if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
-                                                     errorBlock(error);
-                                                 });
-                                             }
-                                         }];
-                                    }else{
-                                        if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
-                                            errorBlock(error);
-                                        });
-                                    }
-                                }];
+        if(![FBSession.activeSession isOpen]){
+            [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+                                    completionHandler:^(FBSession *session,
+                                                        FBSessionState status,
+                                                        NSError *error) {
+                                        if ([FBSession.activeSession isOpen]) {
+                                            [[FBRequest requestForMe] startWithCompletionHandler:
+                                             umnomebom];
+                                        }else{
+                                            if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                                                errorBlock(error);
+                                            });
+                                        }
+                                    }];
+        } else{
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             umnomebom];
+        }
     } else{
-        [FBSession openActiveSessionWithAllowLoginUI:NO];
+        if(![FBSession.activeSession isOpen]){
+            [FBSession openActiveSessionWithAllowLoginUI:NO];
+        }
         if ([FBSession.activeSession isOpen]) {
             [[FBRequest requestForMe] startWithCompletionHandler:
-             ^(FBRequestConnection *connection,
-               NSDictionary<FBGraphUser> *user,
-               NSError *error) {
-                 if(!error){
-                     _user = nil;
-                     _fb_id = [user id];
-                     _fb_accesstoken = [[FBSession.activeSession accessTokenData] accessToken];
-
-                     [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-
-                     NSString * path = @"/users/me/";
-
-                     NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-                     AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-
-                     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSData * data) {
-                         NSError * error;
-                         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                         _user = nil;
-
-                         if(json){
-                             NSDictionary * dic = json;
-                             _user = [STUser userFromServerJSONData:dic];
-                             if(_user){
-                                 [_users setObject:_user forKey:_user.userId];
-                                 [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
-                                 if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                     completionBlock(_user);
-                                 });
-                                 return;
-                             }
-                         }
-
-                         if(!_user){
-                             [_client clearAuthorizationHeader];
-                             error = [[NSError alloc] initWithDomain:@"Invalid JSON" code:404 userInfo:nil];
-                             if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                                 errorBlock(error);
-                             });
-                             return;
-                         }
-                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                         [_client clearAuthorizationHeader];
-                         if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
-                             errorBlock(error);
-                         });
-                     }];
-                     
-                     [_client enqueueHTTPRequestOperation:operation];
-                     
-                 }
-             }];
+             umnomebom];
         }
     }
 }
@@ -236,6 +257,9 @@
 - (void) signOutWithCompletion: (void (^)()) completionBlock
                          error: (void (^) (NSError* error)) errorBlock{
     _user = nil;
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        completionBlock();
+    });
 }
 
 #pragma mark - Raw Resolve methods
@@ -259,11 +283,7 @@
 
     NSString * path = [[@"users/" stringByAppendingString:[userId stringValue]] stringByAppendingString:@"/"];
 
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-
-    [operation setCompletionBlockWithSuccess:
-    ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
         NSError * error;
         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         STUser * user = nil;
@@ -287,7 +307,7 @@
             });
             return;
         }
-    }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+    }error: ^(AFHTTPRequestOperation * operation, NSError *error){
         NSError * nerror;
         if([[operation response] statusCode]){
             nerror = [[NSError alloc] initWithDomain:@"User not found" code:404 userInfo:nil];
@@ -300,8 +320,6 @@
         });
         return;
     }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
 }
 
 //Place
@@ -321,12 +339,7 @@
     }
     
     NSString * path = [[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/"];
-    
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:
-     ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
          STPlace * place = nil;
@@ -350,7 +363,7 @@
              });
              return;
          }
-     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+     }error: ^(AFHTTPRequestOperation * operation, NSError *error){
          NSError * nerror;
          if([[operation response] statusCode]){
              nerror = [[NSError alloc] initWithDomain:@"Place not found" code:404 userInfo:nil];
@@ -363,8 +376,6 @@
          });
          return;
      }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
 }
 
 //Comment
@@ -389,11 +400,7 @@
     
     NSString * path = [[[[@"places/" stringByAppendingString:[placeId stringValue]] stringByAppendingString:@"/comments/"] stringByAppendingString:[commentId stringValue]] stringByAppendingString:@"/"];
     
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path:path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:
-     ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
          STBoardComment * comment = nil;
@@ -422,7 +429,7 @@
              });
              return;
          }
-     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+     }error: ^(AFHTTPRequestOperation * operation, NSError *error){
          NSError * nerror;
          if([[operation response] statusCode]){
              nerror = [[NSError alloc] initWithDomain:@"Comment not found" code:404 userInfo:nil];
@@ -435,8 +442,6 @@
          });
          return;
      }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
 }
 
 #pragma mark - Simple Resolve Methods
@@ -483,7 +488,7 @@
         _counter++;
     [_lock unlock];
     
-    STPlacesQueryContext * context = [[STPlacesQueryContext alloc] initWithQueryString:term];
+    STPlacesQueryContext * context = [[STPlacesQueryContext alloc] initWithQueryString:[term stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [_tokenToPlacesQuery setObject:context forKey:@(num)];
     
     return num;
@@ -538,12 +543,7 @@
         path = [@"places/?page=" stringByAppendingString:[page stringValue]];
     }
     
-    
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:
-     ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
          STPlace * resultPlace = nil;
@@ -552,7 +552,7 @@
              NSDictionary * dic = json;
              NSNumber * count = dic[@"count"];
              [context.cache setObject:count forKey:@(-1)];
-             NSLog(@"%@ objects found", count);
+//             NSLog(@"%@ objects found", count);
              NSArray * result = dic[@"results"];
              for(int i = 0; i < result.count; i++){
                  STPlace * place = [STPlace placeFromServerJSONData:result[i]];
@@ -560,7 +560,7 @@
                      [_places setObject:place forKey:place.placeId];
                      NSUInteger currentPosition = i+[baseNumber unsignedIntegerValue];
                      [context.cache setObject:place.placeId forKey:(@(currentPosition))];
-                     NSLog(@"Cached %@ in position %d for token %d", place, currentPosition, token);
+//                     NSLog(@"Cached %@ in position %d for token %d", place, currentPosition, token);
                      if(position == currentPosition){
                          resultPlace = place;
                      }
@@ -584,7 +584,7 @@
          if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
              errorBlock(error);
          });
-     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+     }error: ^(AFHTTPRequestOperation * operation, NSError *error){
          NSError * nerror;
          if([[operation response] statusCode]){
              nerror = [[NSError alloc] initWithDomain:@"Page does not exist" code:404 userInfo:nil];
@@ -597,15 +597,12 @@
          });
          return;
      }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
-  
 }
 
-- (void) getCheckInPlaceForToken: (STOverlordToken) token
-                     andPosition: (NSUInteger) position
-                      completion: (void (^) (STPlace * place)) completionBlock
-                           error: (void (^) (NSError* error)) errorBlock{
+- (void) getCheckInHistoryPlaceForToken: (STOverlordToken) token
+                            andPosition: (NSUInteger) position
+                             completion: (void (^) (STPlace * place)) completionBlock
+                                  error: (void (^) (NSError* error)) errorBlock{
     STCheckInHistoryQueryContext * context = [_tokenToCheckInQuery objectForKey:@(token)];
     if(context == nil){
         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -625,14 +622,9 @@
     NSNumber * baseNumber = @(([page unsignedIntegerValue]-1)*10);
     
     NSString * path = nil;
-    path = [[[[@"users/" stringByAppendingString:[context.user userName]] stringByAppendingString:@"/checkins/"] stringByAppendingString:@"?page="] stringByAppendingString:[page stringValue]];
+    path = [[[[@"users/" stringByAppendingString:[[context.user userId] stringValue]] stringByAppendingString:@"/checkins/"] stringByAppendingString:@"?page="] stringByAppendingString:[page stringValue]];
     
-    
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:
-     ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
          NSNumber * resultPlaceId = nil;
@@ -670,7 +662,7 @@
          if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
              errorBlock(error);
          });
-     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+     } error: ^(AFHTTPRequestOperation * operation, NSError *error){
          NSError * nerror;
          if([[operation response] statusCode]){
              nerror = [[NSError alloc] initWithDomain:@"Page does not exist" code:404 userInfo:nil];
@@ -683,8 +675,6 @@
          });
          return;
      }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
 }
 
 - (void) getCommentAndUserForToken: (STOverlordToken) token
@@ -728,11 +718,7 @@
         path = [[[@"places/" stringByAppendingString:[context.place.placeId stringValue]] stringByAppendingString:@"/comments/?page="] stringByAppendingString:[page stringValue]];
     }
 
-    NSMutableURLRequest * request = [_client requestWithMethod:@"GET" path: path parameters:nil];
-    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:
-     ^(AFHTTPRequestOperation *operation, id data){
+    [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
          NSError * error;
          id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
          STBoardComment * resultComment = nil;
@@ -741,7 +727,7 @@
              NSDictionary * dic = json;
              NSNumber * count = dic[@"count"];
              [context.cache setObject:count forKey:@(-1)];
-             NSLog(@"%@ objects found", count);
+//             NSLog(@"%@ objects found", count);
              NSArray * result = dic[@"results"];
              
              NSCache * board = [_commentsByPlaces objectForKey:context.place.placeId];
@@ -759,7 +745,7 @@
                      NSUInteger currentPosition = i+[baseNumber unsignedIntegerValue];
                      [context.cache setObject:comment.commentId forKey:(@(currentPosition))];
                      
-                     NSLog(@"Cached %@ in position %d for token %d", comment, currentPosition, token);
+//                     NSLog(@"Cached %@ in position %d for token %d", comment, currentPosition, token);
                      if(position == currentPosition){
                          resultComment = comment;
                      }
@@ -783,7 +769,7 @@
          if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
              errorBlock(error);
          });
-     }failure: ^(AFHTTPRequestOperation * operation, NSError *error){
+     }error: ^(AFHTTPRequestOperation * operation, NSError *error){
          NSError * nerror;
          if([[operation response] statusCode]){
              nerror = [[NSError alloc] initWithDomain:@"Page does not exist" code:404 userInfo:nil];
@@ -796,9 +782,6 @@
          });
          return;
      }];
-    
-    [_client enqueueHTTPRequestOperation:operation];
-    
 }
 
 
@@ -926,7 +909,7 @@
                          [context.cache setObject:resultComment.commentId forKey:@(currentPosition)];
 
                          [context.cache setObject:@(-1) forKey:@(currentPosition)];
-                         NSLog(@"Cached %@ in position %d for token %d", resultComment, currentPosition, token);
+//                         NSLog(@"Cached %@ in position %d for token %d", resultComment, currentPosition, token);
                      }
                  }
 
@@ -947,6 +930,4 @@
                  });
              }];
 }
-
-
 @end

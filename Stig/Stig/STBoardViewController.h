@@ -12,7 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "STBoardCommentView.h"
 #import "STStickerPickerView.h"
-@interface STBoardViewController : UITableViewController <UITextFieldDelegate,STStickerPickerViewDelegate>
+@interface STBoardViewController : UITableViewController <UITextFieldDelegate,STStickerPickerViewDelegate, STSwipeDelegate>
 
 @property (nonatomic, strong) STPlace *place;
 @property (weak, nonatomic) IBOutlet UIView *stickersView;

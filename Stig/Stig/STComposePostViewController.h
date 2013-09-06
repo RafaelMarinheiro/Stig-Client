@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 @property (nonatomic, strong) void (^completionHandler)(BOOL completed);
 

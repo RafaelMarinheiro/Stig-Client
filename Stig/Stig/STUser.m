@@ -34,6 +34,7 @@
         user.userName = [[dictionary[@"first_name"] stringByAppendingString:@" "] stringByAppendingString:dictionary[@"last_name"]];
         user.location = nil;
         user.userPlaceId = dictionary[@"place"];
+        user.points = dictionary[@"points"];
         return user;
     }
     return nil;

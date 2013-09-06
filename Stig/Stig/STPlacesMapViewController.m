@@ -82,6 +82,7 @@
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     _currentLocation = locations[0];
     [[STHiveCluster spawnOverlord] setUserLocation:[STLocation locationFromCLLocationCoordinate2D:_currentLocation.coordinate]];
+    NSLog(@"Location update : %@", _currentLocation);
     if (!_locationLoaded) {
         _locationLoaded = YES;
         [self centerMapOnLocation:_currentLocation.coordinate];
@@ -116,14 +117,19 @@
 - (IBAction)suggestionButtonPressed:(id)sender {
     double k = -1;
 
-    for(int i = 0; i < [self.places count]; i++){
-        STPlace * place = [self.places objectAtIndex:i];
-        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
-            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
-            _selectedPlace = place;
+    for(int i = 0; i < [self.mapView.annotations count]; i++){
+        STPlace * place = [self.mapView.annotations objectAtIndex: i];
+        if([place isKindOfClass: [STPlace class]]){
+            if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
+                k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
+                _selectedPlace = place;
+            }
         }
     }
-    [self selectPlace:_selectedPlace];
+
+    if (k != -1){
+        [self selectPlace:_selectedPlace];
+    }
 }
 - (void) centerMapOnLocation:(CLLocationCoordinate2D) location {
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location, 1000, 1000);

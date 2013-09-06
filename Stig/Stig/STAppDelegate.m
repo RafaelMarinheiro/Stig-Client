@@ -28,11 +28,13 @@
     [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
-
+        
     } error:^(NSError *error) {
         
     }];
 
+    
+    //[[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"button_test.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     return YES;
 }
 							

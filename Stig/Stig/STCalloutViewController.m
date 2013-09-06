@@ -46,6 +46,26 @@
         [self.placeNameLabel  setAlpha:1.0-percentage];
     }
 }
+
+- (IBAction)driveButtonPressed:(id)sender {
+
+    NSString* urlStr;
+    NSString* saddr = @"Current+Location";
+    NSString *daddr = [NSString stringWithFormat:@"%f,%f", _selectedPlace.location.locationCoordinate.latitude,_selectedPlace.location.locationCoordinate.longitude];
+    CLLocationCoordinate2D currentLocation = [STHiveCluster spawnOverlord].userLocation.locationCoordinate;
+    if ((currentLocation.latitude != kCLLocationCoordinate2DInvalid.latitude) && (currentLocation.longitude != kCLLocationCoordinate2DInvalid.longitude)) {
+        //Valid location.
+        saddr = [NSString stringWithFormat:@"%f,%f", currentLocation.latitude,currentLocation.longitude];
+        
+        urlStr = [NSString stringWithFormat:@"http://maps.apple.com/maps?saddr=%@&daddr=%@", saddr, daddr];
+        //urlStr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%@", daddr];
+    } else {
+        //Invalid location. Location Service disabled.
+        urlStr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%@", daddr];
+    }
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+}
 - (void) showCalloutForPlace:(STPlace *) place {
     _selectedPlace = place;
     [self.placeNameLabel setText:place.placeName];

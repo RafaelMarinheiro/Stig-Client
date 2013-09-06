@@ -15,6 +15,12 @@
     id <STOverlord> _overlord;
     NSUInteger _numberOfPlaces;
     BOOL _loadedPlaces;
+
+
+
+    NSOperationQueue *_searchQueue;
+    STOverlordToken _searchToken;
+    NSUInteger _numberOfResults;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,7 +41,8 @@
     _loadedPlaces = NO;
     STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app addObserver:self forKeyPath:@"currentSearchToken" options:NSKeyValueObservingOptionNew context:nil];
-    
+    _searchQueue = [NSOperationQueue new];
+    [_searchQueue setMaxConcurrentOperationCount:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,31 +82,30 @@
             return _numberOfPlaces;
         }
     }
+    if (_searchToken != 0) {
+        return _numberOfResults;
+    }
     return 0;
 }
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    STPlace *place = self.places[path.row];
-    STBoardViewController *vc = segue.destinationViewController;
-    vc.place = place;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchresultscell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
-            return cell;
-        }
+- (UITableViewCell *) searchCellforIndexPath:(NSIndexPath *) indexPath tableView:(UITableView *) tableView{
+    UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchresultscell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
     }
+    [_overlord getPlaceForToken:_searchToken andPosition:indexPath.row completion:^(STPlace *place) {
+        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+        [currentCell.textLabel setText:place.placeName];
+        [currentCell setNeedsLayout];
+        [currentCell layoutIfNeeded];
+    } error:^(NSError *error){NSLog(@"Error loading searchResult:%@", error);}];
+    return cell;
+}
+- (UITableViewCell *) placeCellForIndexPath:(NSIndexPath *) indexPath tableView:(UITableView *) tableView{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
     cell.textLabel.text = @"Loading ...";
     [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
-       
         UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];
         currentCell.selectionStyle = UITableViewCellSelectionStyleGray;
-
-
         UIImage *placeIcon;
         if (place.mostRelevantSticker) {
             placeIcon = [place.mostRelevantSticker stickerIconWithPlace:@"selector"];
@@ -113,30 +119,82 @@
         [currentCell.textLabel setTextColor:[UIColor whiteColor]];
         [currentCell setNeedsLayout];
     } error:^(NSError *error) {
-        
+
     }];
     return cell;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    STPlace *place = self.places[path.row];
+    STBoardViewController *vc = segue.destinationViewController;
+    vc.place = place;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self searchCellforIndexPath:indexPath tableView:tableView];
+    }else{
+        return [self placeCellForIndexPath:indexPath tableView:tableView];
+    }
 }
 #pragma mark - Table View Delegate Methods
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44.0;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
-    STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
-    [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
-        [dragger.mapViewController selectPlace:place];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.tableView) {
+        UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
+        STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
+        [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
+            [dragger.mapViewController selectPlace:place];
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
 
-    } error:^(NSError *error) {
-        
-    }];
+        } error:^(NSError *error) {
+            
+        }];
+    } else {
+        UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
+        STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
+        [_overlord getPlaceForToken:_searchToken andPosition:indexPath.row completion:^(STPlace *place) {
+            [self.searchDisplayController.searchBar resignFirstResponder];
+            [dragger.mapViewController selectPlace:place];
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
+        } error:^(NSError *error) {
+
+        }];
+    }
 }
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
 
-
-
+    if (![searchString isEqualToString:@""]) {
+        [_searchQueue cancelAllOperations];
+        [_searchQueue addOperationWithBlock:^{
+            STOverlordToken newToken = [_overlord requestTokenForPlacesWithSearchTerm:searchString];
+            [_overlord getNumberOfPlacesForToken:newToken completion:^(NSUInteger numberOfPlaces) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    _numberOfResults = numberOfPlaces;
+                    _searchToken = newToken;
+                    [self.searchDisplayController.searchResultsTableView reloadData];
+                }];
+            } error: ^ (NSError *error) {
+                NSLog(@"Error requesting token: %@", error);
+            }];
+        }];
+        return NO;
+    } else {
+        _searchToken = 0;
+        return YES;
+    }
+}
+- (void) searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView{
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+}
+- (void) searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+}
 - (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
     [self.mm_drawerController setMaximumLeftDrawerWidth:320.0 animated:YES completion:nil];
 }

@@ -163,7 +163,6 @@
         return nil;
     }
     STSticker *result = [[STSticker alloc] initWithType:type andModifier:modifier];
-    NSLog(@"Processed dic:%@, resulted:%@",dictionary, result);
     return result;
 }
 + (NSArray *) stickersWithStatusDictionary:(NSDictionary *) dictionary {

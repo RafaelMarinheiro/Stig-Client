@@ -120,20 +120,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
     [reuse prepareForReuse];
-    [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
-        if (_viewAppearing) {
-            UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-            STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
-            [commentView populateWithComment:comment andUser:user];
-            NSNumber *position = @(indexPath.row);
-            if (!_heightsDictionary[position]) {
-                [self setHeight:commentView.cellHeight forPosition:position];
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
+            if (_viewAppearing) {
+                UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+                STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
+                commentView.delegate = self;
+                [commentView populateWithComment:comment andUser:user];
+                NSNumber *position = @(indexPath.row);
+                if (!_heightsDictionary[position]) {
+                    [self setHeight:commentView.cellHeight forPosition:position];
+                    //[tableView reloadData];
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
             }
-        }
-    }error:^(NSError *error){
-
-    }];
+        }error:^(NSError *error){
+            
+        }];
     return cell;
 }
 #pragma mark - Table view data source
@@ -195,7 +197,6 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error on comment post"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [alert show];
             }
-
         };
         vc.overlordToken = _currentToken;
         vc.place = self.place;
@@ -211,6 +212,24 @@
         }else{
             [refresh endRefreshing];
         }
+    }];
+}
+- (void) swipeViewDidSwipeRight:(STSwipeView *)swipeView {
+    STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
+    STBoardComment *comment = commentView.currentComment;
+    [_overlord likeComment:comment completion:^(STBoardComment *comment) {
+        NSLog(@"Like SAPORRA");
+    } error:^(NSError *error) {
+        NSLog(@"Errou o like %@", error);
+    }];
+}
+- (void) swipeViewDidSwipeLeft:(STSwipeView *)swipeView{
+    STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
+    STBoardComment *comment = commentView.currentComment;
+    [_overlord dislikeComment:comment completion:^(STBoardComment *comment) {
+        NSLog(@"Dilike SAPORRA");
+    } error:^(NSError *error) {
+        NSLog(@"Errou o dislike %@", error);
     }];
 }
 @end

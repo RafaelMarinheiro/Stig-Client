@@ -203,8 +203,19 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 
 #pragma mark - Delegate Notification
 - (void) draggerCompletedCheckin {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", self.mapViewController.selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-    [alert show];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Are you sure ?" delegate:nil cancelButtonTitle:@"No" destructiveButtonTitle:nil otherButtonTitles: @"Yes",nil];
+    [sheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+
+    [sheet showInView:self.view];
+    
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    [overlord checkInPlace:self.mapViewController.selectedPlace completion:^(STUser *user, STPlace *place) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", place] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        [alert show];
+        NSLog(@"User: %@ Place: %@", user, place);
+    } error:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 - (void) draggerSliderButtonPressed {
     if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerSliderButtonPressed:)]) {

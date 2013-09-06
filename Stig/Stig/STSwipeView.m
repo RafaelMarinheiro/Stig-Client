@@ -105,22 +105,22 @@
 
 
 
-//    YIInnerShadowView *shadow = [[YIInnerShadowView alloc] init];
-//    [shadow setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    shadow.shadowMask = YIInnerShadowMaskVertical;
-//    shadow.shadowOffset = CGSizeMake(0.0f, 0.0f);
-//    shadow.shadowColor = [UIColor blackColor];
-//    shadow.shadowOpacity = 1.0;
-//    shadow.shadowRadius = 10.0;
-//    [_leftSwipeView addSubview:shadow];
-//    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
-//    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
+    YIInnerShadowView *shadow = [[YIInnerShadowView alloc] init];
+    [shadow setTranslatesAutoresizingMaskIntoConstraints:NO];
+    shadow.shadowMask = YIInnerShadowMaskVertical;
+    shadow.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    shadow.shadowColor = [UIColor blackColor];
+    shadow.shadowOpacity = 1.0;
+    shadow.shadowRadius = 10.0;
+    [_leftSwipeView addSubview:shadow];
+    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
+    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
 }
 - (void) _setupRightView {
     UILabel *label = [[UILabel alloc] init];
     [label setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    [label setText:@"Like"];
+    [label setText:@"Dislike"];
     [label setFont:[UIFont fontWithName:@"Futura" size:20.0]];
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor yellowColor]];
@@ -140,9 +140,9 @@
     [self _setupViews];
     [self _setupConstraints];
     [self _setupDefaults];
-//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-//    [_mainSwipeView addGestureRecognizer:pan];
-//    [pan setDelegate:self];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [_mainSwipeView addGestureRecognizer:pan];
+    [pan setDelegate:self];
     [self _setupLeftView];
     [self _setupRightView];
 }
@@ -161,12 +161,13 @@
         [self sendSubviewToBack:_leftSwipeView];
     }
     _swipeConstraint.constant = translation.x;
-
-    
-    
-
     if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled || pan.state == UIGestureRecognizerStateFailed) {
         [self animateToNormal];
+        if (translation.x>0) {
+            [self swipedRight];
+        }else {
+            [self swipedLeft];
+        }
     }
 }
 - (void) animateToNormal {
@@ -185,5 +186,17 @@
         }
     }
     return NO;
+}
+
+
+- (void) swipedLeft {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeViewDidSwipeLeft:)]) {
+        [self.delegate swipeViewDidSwipeLeft:self];
+    }
+}
+- (void) swipedRight {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeViewDidSwipeRight:)]) {
+        [self.delegate swipeViewDidSwipeRight:self];
+    }
 }
 @end

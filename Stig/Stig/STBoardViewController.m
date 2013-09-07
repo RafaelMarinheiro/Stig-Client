@@ -107,7 +107,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 100.0f)];
     STStickerPickerView *picker = (STStickerPickerView *)[cell.contentView viewWithTag:12];
     [picker setStickers:self.place.stickers];
-
+ 
     [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
     [imageView setClipsToBounds:YES];
@@ -206,7 +206,7 @@
     }
 }
 - (void) refreshView:(UIRefreshControl *) refresh {
-    [self refreshData:^(BOOL completed) {
+    [self refreshData:^(BOOL completed) { 
         if (completed) {
             [refresh endRefreshing];
         }else{
@@ -227,9 +227,9 @@
     STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
     STBoardComment *comment = commentView.currentComment;
     [_overlord dislikeComment:comment completion:^(STBoardComment *comment) {
-        NSLog(@"Dilike SAPORRA");
+
     } error:^(NSError *error) {
-        NSLog(@"Errou o dislike %@", error);
+
     }];
 }
 @end

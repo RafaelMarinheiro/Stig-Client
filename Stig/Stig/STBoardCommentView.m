@@ -52,7 +52,6 @@
     self.backgroundColor = mainColor;
     self.mainSwipeView.backgroundColor = mainColor;
 
-
 }
 
 - (void) setupConstraints {
@@ -102,7 +101,6 @@
     self.stickersView.stickers = comment.commentStickers;
     [self.stickersView setNeedsLayout];
     [self.stickersView layoutIfNeeded];
-    [self.commentLabel sizeToFit];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
     [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.userImageView.layer setCornerRadius:5.0];

@@ -8,6 +8,7 @@
 
 #import "STProfileViewController.h"
 #import "STOverlord.h"
+#import "STBoardViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -61,6 +62,10 @@
     }];
     // Do any additional setup after loading the view.
 }
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    STBoardViewController *vc =  (STBoardViewController *)segue.destinationViewController;
+    vc.place = sender;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -89,7 +94,15 @@
     return cell;
 }
 
-
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[STHiveCluster spawnOverlord] getCheckInHistoryPlaceForToken:_currentToken andPosition:_numberOfChekins - indexPath.row - 1  completion:^(STPlace *place) {
+        [self performSegueWithIdentifier:@"HistoryToBoardSegue" sender:place];
+    } error:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

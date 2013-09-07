@@ -17,12 +17,14 @@
 @property (nonatomic, strong, readonly) UIView *mainSwipeView;
 @property (nonatomic, strong, readonly) UIView *leftSwipeView;
 @property (nonatomic, strong, readonly) UIView *rightSwipeView;
+@property (nonatomic) BOOL swipeEnabled;
 
 @end
 
 
 @protocol STSwipeDelegate <NSObject>
-
+@optional
+- (BOOL) swipeViewShouldSwipe:(STSwipeView *) swipeView;
 - (void) swipeViewDidSwipeLeft:(STSwipeView *) swipeView;
 - (void) swipeViewDidSwipeRight:(STSwipeView *) swipeView;
 

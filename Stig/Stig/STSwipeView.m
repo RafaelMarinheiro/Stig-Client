@@ -9,6 +9,7 @@
 #import "STSwipeView.h"
 #import "YIInnerShadowView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIColor+Stig.h"
 
 @implementation STSwipeView {
     NSLayoutConstraint *_swipeConstraint;
@@ -73,11 +74,10 @@
                                                                    views:NSDictionaryOfVariableBindings(_rightSwipeView)]];
 }
 - (void) _setupDefaults {
-    UIColor *sameGray = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
     _mainSwipeView.backgroundColor = [UIColor whiteColor];
-    _leftSwipeView.backgroundColor = sameGray;
-    _rightSwipeView.backgroundColor = sameGray;
-
+    _leftSwipeView.backgroundColor = [UIColor stigGreen];
+    _rightSwipeView.backgroundColor = [UIColor stigRed];
+    _swipeEnabled = YES;
 //    [_mainSwipeView.layer setShadowRadius:20.0];
 //    [_mainSwipeView.layer setShadowOpacity:1.0];
 //    [_mainSwipeView.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
@@ -90,7 +90,7 @@
     [label setText:@"Like"];
     [label setFont:[UIFont fontWithName:@"Futura" size:20.0]];
     [label setBackgroundColor:[UIColor clearColor]];
-    [label setTextColor:[UIColor yellowColor]];
+    [label setTextColor:[UIColor stigWhite]];
 
     [_leftSwipeView addSubview:label];
     [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[label]"
@@ -101,20 +101,6 @@
                                                                            options:NSLayoutFormatAlignAllCenterY
                                                                            metrics:nil
                                                                              views:NSDictionaryOfVariableBindings(label)]];
-
-
-
-
-    YIInnerShadowView *shadow = [[YIInnerShadowView alloc] init];
-    [shadow setTranslatesAutoresizingMaskIntoConstraints:NO];
-    shadow.shadowMask = YIInnerShadowMaskVertical;
-    shadow.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    shadow.shadowColor = [UIColor blackColor];
-    shadow.shadowOpacity = 1.0;
-    shadow.shadowRadius = 10.0;
-    [_leftSwipeView addSubview:shadow];
-    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
-    [_leftSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[shadow]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(shadow)]];
 }
 - (void) _setupRightView {
     UILabel *label = [[UILabel alloc] init];
@@ -123,7 +109,7 @@
     [label setText:@"Dislike"];
     [label setFont:[UIFont fontWithName:@"Futura" size:20.0]];
     [label setBackgroundColor:[UIColor clearColor]];
-    [label setTextColor:[UIColor yellowColor]];
+    [label setTextColor:[UIColor stigWhite]];
 
     [_rightSwipeView addSubview:label];
     [_rightSwipeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[label]-|"
@@ -178,17 +164,27 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if ([gestureRecognizer class] == [UIPanGestureRecognizer class]) {
-        UIPanGestureRecognizer *g = (UIPanGestureRecognizer *)gestureRecognizer;
-        CGPoint point = [g velocityInView:self];
-        if (fabsf(point.x) > fabsf(point.y) ) {
-            return YES;
+    if ([self shouldSwipe]) {
+        if ([gestureRecognizer class] == [UIPanGestureRecognizer class]) {
+            UIPanGestureRecognizer *g = (UIPanGestureRecognizer *)gestureRecognizer;
+            CGPoint point = [g velocityInView:self];
+            if (fabsf(point.x) > fabsf(point.y) ) {
+                return YES;
+            }
         }
     }
     return NO;
 }
 
-
+- (BOOL) shouldSwipe {
+    if (![self swipeEnabled]) {
+        return NO;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeViewShouldSwipe:)]) {
+        return [self.delegate swipeViewShouldSwipe:self];
+    }
+    return YES;
+}
 - (void) swipedLeft {
     if (self.delegate && [self.delegate respondsToSelector:@selector(swipeViewDidSwipeLeft:)]) {
         [self.delegate swipeViewDidSwipeLeft:self];

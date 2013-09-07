@@ -65,6 +65,7 @@
 		0204ED3317BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2D17BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png */; };
 		0204ED3417BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2E17BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png */; };
 		0204ED3517BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0204ED2F17BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png */; };
+		020BA33A17DACC3600388ED2 /* UIColor+Stig.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BA33917DACC3600388ED2 /* UIColor+Stig.m */; };
 		020BC79817C673220076752A /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79017C673220076752A /* MMDrawerController.m */; };
 		020BC79917C673220076752A /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79317C673220076752A /* UIViewController+MMDrawerController.m */; };
 		020BC79A17C673220076752A /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 020BC79517C673220076752A /* MMDrawerBarButtonItem.m */; };
@@ -301,6 +302,8 @@
 		0204ED2D17BD374C007AC4FE /* icon_sticker_people_neutral_selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_people_neutral_selector@2x.png"; sourceTree = "<group>"; };
 		0204ED2E17BD374C007AC4FE /* icon_sticker_queue_neutral_selector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sticker_queue_neutral_selector.png; sourceTree = "<group>"; };
 		0204ED2F17BD374C007AC4FE /* icon_sticker_queue_neutral_selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sticker_queue_neutral_selector@2x.png"; sourceTree = "<group>"; };
+		020BA33817DACC3600388ED2 /* UIColor+Stig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Stig.h"; sourceTree = "<group>"; };
+		020BA33917DACC3600388ED2 /* UIColor+Stig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Stig.m"; sourceTree = "<group>"; };
 		020BC78F17C673220076752A /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
 		020BC79017C673220076752A /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
 		020BC79117C673220076752A /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -668,6 +671,8 @@
 				02E9A8FA17BF2B9D00DC499F /* STStickerDisposerView.m */,
 				023E797E17CE761D00162673 /* STSwipeView.h */,
 				023E797F17CE761D00162673 /* STSwipeView.m */,
+				020BA33817DACC3600388ED2 /* UIColor+Stig.h */,
+				020BA33917DACC3600388ED2 /* UIColor+Stig.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1270,6 +1275,7 @@
 				0228647517CEF0C8001E5F36 /* YIInnerShadowLayer.m in Sources */,
 				0254407417D7A687006ABC28 /* STNetworkManager.m in Sources */,
 				0254407817D7A6AA006ABC28 /* STNetworkOperation.m in Sources */,
+				020BA33A17DACC3600388ED2 /* UIColor+Stig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

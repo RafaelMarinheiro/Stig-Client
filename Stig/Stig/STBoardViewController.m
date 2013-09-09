@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _overlord = [STHiveCluster spawnOverlord];
     
     [self setupViews];
@@ -205,6 +206,72 @@
         [self performSegueWithIdentifier:@"logInSegue" sender:sender];
     }
 }
+- (void) navigateUsingGoogleMapsFromLocation:(STLocation *) source toLocation:(STLocation *) destination {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        if (source) {
+            NSString  *url = [NSString stringWithFormat:@"comgooglemaps://?saddr=%f,%f&daddr=%f,%f&directionsmode=transit",source.locationCoordinate.latitude,source.locationCoordinate.longitude,destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }else{
+            NSString  *url = [NSString stringWithFormat:@"comgooglemaps://?daddr=%f,%f&directionsmode=driving",destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
+        
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/id585027354"]];
+    }
+}
+- (void) navigateUsingAppleMapsFromLocation:(STLocation *) source toLocation:(STLocation *) destination {
+    NSString* urlStr;
+    NSString* saddr = @"Current+Location";
+    NSString *daddr = [NSString stringWithFormat:@"%f,%f", destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
+    CLLocationCoordinate2D currentLocation = source.locationCoordinate;
+    
+    if (source) {
+        //Valid location.
+        saddr = [NSString stringWithFormat:@"%f,%f", currentLocation.latitude,currentLocation.longitude];
+
+        urlStr = [NSString stringWithFormat:@"http://maps.apple.com/maps?saddr=%@&daddr=%@", saddr, daddr];
+    } else {
+        //Invalid location. Location Service disabled.
+        urlStr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%@", daddr];
+    }
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+}
+- (void) navigateUsingWazeToLocation:(STLocation *) location {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"waze://"]]) {
+        NSString *urlStr = [NSString stringWithFormat:@"waze://?ll=%f,%f&navigate=yes", location.locationCoordinate.latitude, location.locationCoordinate.longitude];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/id323229106"]];
+    }
+}
+- (IBAction)directionsButtonPressed:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Which app do you want to use ?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Waze",@"Google Maps",@"Apple Maps", nil];
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [sheet showInView:self.view];
+}
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    STLocation *source = [STHiveCluster spawnOverlord].userLocation;
+    STLocation *destination = self.place.location;
+    switch (buttonIndex) {
+        case 0:
+            [self navigateUsingWazeToLocation:self.place.location];
+            break;
+        case 1:
+            [self navigateUsingGoogleMapsFromLocation:source toLocation:destination];
+            break;
+        case 2:
+            [self navigateUsingAppleMapsFromLocation:source toLocation:destination];
+            break;
+        default:
+            break;
+    }
+}
 - (void) refreshView:(UIRefreshControl *) refresh {
     [self refreshData:^(BOOL completed) { 
         if (completed) {
@@ -214,13 +281,20 @@
         }
     }];
 }
+- (BOOL) swipeViewShouldSwipe:(STSwipeView *)swipeView {
+    if (_overlord.user) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 - (void) swipeViewDidSwipeRight:(STSwipeView *)swipeView {
     STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
     STBoardComment *comment = commentView.currentComment;
     [_overlord likeComment:comment completion:^(STBoardComment *comment) {
-        NSLog(@"Like SAPORRA");
+        
     } error:^(NSError *error) {
-        NSLog(@"Errou o like %@", error);
+        
     }];
 }
 - (void) swipeViewDidSwipeLeft:(STSwipeView *)swipeView{

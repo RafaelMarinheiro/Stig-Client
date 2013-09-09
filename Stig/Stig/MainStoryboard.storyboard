@@ -64,12 +64,31 @@
                                                                 <outlet property="delegate" destination="x2V-Yo-eIf" id="1g2-Ds-sjW"/>
                                                             </connections>
                                                         </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHw-Gm-WGb">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="44" id="Nps-kP-YQF"/>
+                                                                <constraint firstAttribute="width" constant="80" id="ebm-HH-WEE"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                                            <state key="normal" title="Directions">
+                                                                <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <state key="highlighted">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="directionsButtonPressed:" destination="x2V-Yo-eIf" eventType="touchUpInside" id="9tU-mW-nBc"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="uLs-DX-yDu" firstAttribute="leading" secondItem="5AS-hl-8Bs" secondAttribute="leading" type="default" id="eya-eP-YF7"/>
+                                                        <constraint firstItem="KHw-Gm-WGb" firstAttribute="trailing" secondItem="5AS-hl-8Bs" secondAttribute="trailing" type="default" id="g5R-a3-tY6"/>
                                                         <constraint firstItem="uLs-DX-yDu" firstAttribute="trailing" secondItem="5AS-hl-8Bs" secondAttribute="trailing" type="default" id="ltr-Nl-BKB"/>
                                                         <constraint firstAttribute="bottom" secondItem="uLs-DX-yDu" secondAttribute="bottom" constant="50" type="user" id="reW-q8-URh"/>
+                                                        <constraint firstItem="KHw-Gm-WGb" firstAttribute="bottom" secondItem="5AS-hl-8Bs" secondAttribute="bottom" type="default" id="twR-bL-gfq"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -781,130 +800,6 @@
         <image name="stig_logo.png" width="644" height="376"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="MMDrawerController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMDrawerController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="STSwipeView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-        </class>
-        <class className="STBoardViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="stickersView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="topBatTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STCalloutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCalloutViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="driveButtonPressed:"/>
-                <relationship kind="outlet" name="animationView" candidateClass="STCheckInAnimationView"/>
-                <relationship kind="outlet" name="checkinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stickerSelector" candidateClass="STStickerPickerView"/>
-            </relationships>
-        </class>
-        <class className="STCheckInAnimationView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCheckInAnimationView.h"/>
-        </class>
-        <class className="STComposePostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STComposePostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeButtonPressed:"/>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="bottomConstraint" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="postButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="stickerComposerView" candidateClass="STStickerComposerView"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STConfigViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STConfigViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="networkSwitchChanged:" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="STDraggerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDraggerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="drawerButtonPressed:"/>
-                <relationship kind="action" name="toggleDragger:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="draggedView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mainView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="verticalSpaceConstraint" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="STDrawerViewController" superclassName="MMDrawerController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDrawerViewController.h"/>
-        </class>
-        <class className="STLogInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STLogInViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="logInButtonPressed:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="barsImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="connectWithLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STPlacesListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchDisplay" candidateClass="UISearchDisplayController"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="STPlacesMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="suggestionButtonPressed:"/>
-                <relationship kind="outlet" name="filterDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="optionsDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="suggestionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="userImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STStickerComposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerComposerView.h"/>
-        </class>
-        <class className="STStickerPickerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerPickerView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="delegate"/>
-            </relationships>
-        </class>
-        <class className="STSwipeView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STSwipeView.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

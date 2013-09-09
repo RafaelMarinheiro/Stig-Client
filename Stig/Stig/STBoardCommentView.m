@@ -52,6 +52,10 @@
     self.backgroundColor = mainColor;
     self.mainSwipeView.backgroundColor = mainColor;
 
+    [self.mainSwipeView bringSubviewToFront:self.leftIndicatorView];
+    [self.mainSwipeView bringSubviewToFront:self.rightIndicatorView];
+    
+
 }
 
 - (void) setupConstraints {
@@ -89,6 +93,7 @@
 
 #pragma mark - Reuse 
 - (void) prepareForReuse {
+    [super prepareForReuse];
     self.currentComment = nil;
     self.commentLabel.text = @"Loading...";
     self.stickersView.stickers = nil;
@@ -107,6 +112,7 @@
     self.userImageView.layer.masksToBounds = YES;
     CGFloat h = self.userImageView.frame.size.height  + 14 + self.stickersView.frame.size.height;
     _cellHeight = MAX(h,  self.commentLabel.contentSize.height);
+    self.swipeEnabled = YES;
 }
 
 #pragma mark - Text appearance

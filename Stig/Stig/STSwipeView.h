@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
+typedef enum {
+    STSwipeViewSelectionStatusNone,
+    STSwipeViewSelectionStatusLeft,
+    STSwipeViewSelectionStatusRight
+} STSwipeViewSelectionStatus;
+
 @protocol STSwipeDelegate;
 
 @interface STSwipeView : UIView<UIGestureRecognizerDelegate>
@@ -17,8 +23,11 @@
 @property (nonatomic, strong, readonly) UIView *mainSwipeView;
 @property (nonatomic, strong, readonly) UIView *leftSwipeView;
 @property (nonatomic, strong, readonly) UIView *rightSwipeView;
+@property (nonatomic, strong) UIView *leftIndicatorView;
+@property (nonatomic, strong) UIView *rightIndicatorView;
 @property (nonatomic) BOOL swipeEnabled;
-
+@property (nonatomic) STSwipeViewSelectionStatus selectionStatus;
+- (void) prepareForReuse;
 @end
 
 

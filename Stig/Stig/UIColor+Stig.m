@@ -25,6 +25,13 @@
     return [UIColor colorWithRed:236/255.0 green:110/255.0 blue:111/255.0 alpha:1.0];
 }
 + (UIColor *) colorInterpolatingColor:(UIColor *) initialColor toColor:(UIColor *) finalColor withPercentage:(CGFloat) percentage {
+
+    if (percentage <0.0) {
+        percentage = 0.0;
+    }
+    if (percentage > 1.0) {
+        percentage = 1.0;
+    }
     CGFloat initialRed, initialGreen, initialBlue, initialAlpha;
     [initialColor getRed:&initialRed green:&initialGreen blue:&initialBlue alpha:&initialAlpha];
     CGFloat finalRed, finalGreen, finalBlue, finalAlpha;

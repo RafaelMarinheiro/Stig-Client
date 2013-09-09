@@ -20,5 +20,4 @@
 @property (nonatomic, strong) STBoardComment *currentComment;
 @property (nonatomic, strong)  STCommentStickerView *stickersView;
 - (void) populateWithComment:(STBoardComment *) comment andUser:(STUser *) user;
-- (void) prepareForReuse;
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *commentText;
 @property (nonatomic, strong) NSArray *commentStickers;
 @property (nonatomic, strong) NSDate *commentTimestamp;
+@property (nonatomic, strong) NSNumber *userLike;
 + (STBoardComment *) boardCommentFromJSONData:(id) json;
 + (STBoardComment *) boardCommentFromServerJSONData:(id) json;
 + (STBoardComment *) boardCommentWithId:(NSNumber *)commentId andJSONData:(id)json;

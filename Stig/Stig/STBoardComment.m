@@ -48,6 +48,8 @@
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
         comment.commentTimestamp = [formatter dateFromString:json[@"created_on"]];
+        comment.userLike = json[@"thumbs_by_me"];
+        NSLog(@"Comment json [%@]", json);
         return comment;
     }
     

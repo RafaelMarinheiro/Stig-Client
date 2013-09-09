@@ -21,7 +21,4 @@
 @property (nonatomic, strong) NSArray *selectedStickers;
 - (IBAction)postButtonPressed:(id)sender;
 - (IBAction)directionsButtonPressed:(id)sender;
-
-
-
 @end

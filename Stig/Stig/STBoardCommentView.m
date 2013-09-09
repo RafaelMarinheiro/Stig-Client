@@ -103,6 +103,14 @@
 - (void) populateWithComment:(STBoardComment *)comment andUser:(STUser *)user {
     self.currentComment = comment;
     self.commentLabel.attributedText = [self textWithComment:comment andUser:user];
+
+    if([comment.userLike integerValue] == -1) {
+        self.selectionStatus = STSwipeViewSelectionStatusRight;
+    }else if ([comment.userLike integerValue] == 1){
+        self.selectionStatus = STSwipeViewSelectionStatusLeft;
+    }else{
+        self.selectionStatus = STSwipeViewSelectionStatusNone;
+    }
     self.stickersView.stickers = comment.commentStickers;
     [self.stickersView setNeedsLayout];
     [self.stickersView layoutIfNeeded];

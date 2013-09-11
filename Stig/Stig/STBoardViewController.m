@@ -209,7 +209,7 @@
 - (void) navigateUsingGoogleMapsFromLocation:(STLocation *) source toLocation:(STLocation *) destination {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
         if (source) {
-            NSString  *url = [NSString stringWithFormat:@"comgooglemaps://?saddr=%f,%f&daddr=%f,%f&directionsmode=transit",source.locationCoordinate.latitude,source.locationCoordinate.longitude,destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
+            NSString  *url = [NSString stringWithFormat:@"comgooglemaps://?saddr=%f,%f&daddr=%f,%f&directionsmode=driving",source.locationCoordinate.latitude,source.locationCoordinate.longitude,destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         }else{
             NSString  *url = [NSString stringWithFormat:@"comgooglemaps://?daddr=%f,%f&directionsmode=driving",destination.locationCoordinate.latitude,destination.locationCoordinate.longitude];
@@ -247,7 +247,7 @@
     }
 }
 - (IBAction)directionsButtonPressed:(id)sender {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Which app do you want to use ?"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Which app do you want to use?"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil

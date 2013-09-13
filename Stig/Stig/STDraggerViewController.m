@@ -53,13 +53,16 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 }
 - (void) viewWillAppear:(BOOL)animated {
     self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"barra_logostig"] forBarMetrics:UIBarMetricsDefault];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"";
     _state = STDraggerStateHidden;
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];

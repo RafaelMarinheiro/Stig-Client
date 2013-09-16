@@ -10,32 +10,34 @@
 #import "UIImageView+AFNetworking.h"
 
 #import <QuartzCore/QuartzCore.h>
-@interface STComposePostViewController ()
 
-@end
+static NSUInteger _MAX_CHAR_COUNT = 200;
 
-@implementation STComposePostViewController
+@implementation STComposePostViewController {
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.textView becomeFirstResponder];
     self.textView.delegate = self;
-    
+    self.postButton.enabled = NO;
+    NSLog(@"TEste : %@ %@", self.postButton, self.cancelButton);
     STUser *user = [STHiveCluster spawnOverlord].user;
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.userImageURL]];
     [self.userImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.userImageView.layer setCornerRadius:5.0];
     [self.userImageView.layer setMasksToBounds:YES];
+    [self.charsLabel setText:[NSString stringWithFormat:@"%d", _MAX_CHAR_COUNT]];
 
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Futura" size:20.0];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"New Comment";
-    label.textColor = [UIColor whiteColor];
-    [label sizeToFit];
-    self.customNavigationItem.titleView = label;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.font = [UIFont fontWithName:@"Futura" size:20.0];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.text = @"New Comment";
+//    label.textColor = [UIColor whiteColor];
+//    [label sizeToFit];
+//    self.customNavigationItem.titleView = label;
     self.stickerComposerView.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,7 +101,20 @@
     }];
 }
 #pragma mark Text View Methods
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([[textView text] length] - range.length + text.length > _MAX_CHAR_COUNT) {
+        return NO;
+    }
+    return YES;
+}
 - (void) textViewDidChange:(UITextView *)textView {
+    NSInteger count = _MAX_CHAR_COUNT - [textView.text length];
+    if (count > 0 && count <=200) {
+        self.postButton.enabled = YES;
+    }else {
+        self.postButton.enabled = NO;
+    }
+    [self.charsLabel setText:[NSString stringWithFormat:@"%d",count]];
     [self.stickerComposerView collapseStickers];
 }
 @end

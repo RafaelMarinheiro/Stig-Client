@@ -26,7 +26,6 @@
     }
     return self;
 }
-
 - (void) config {
     [self setupViews];
     [self setupConstraints];

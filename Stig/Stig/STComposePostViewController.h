@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *charsLabel;
 
 @property (nonatomic, strong) void (^completionHandler)(BOOL completed);
 

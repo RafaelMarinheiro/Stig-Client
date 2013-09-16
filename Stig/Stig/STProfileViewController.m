@@ -32,6 +32,9 @@
 
 - (void)viewDidLoad
 {
+    if (!self.user) {
+        self.user = [STHiveCluster spawnOverlord].user;
+    }
     [super viewDidLoad];
     [self.userImage.layer setCornerRadius:5.0];
     [self.userImage.layer setMasksToBounds:YES];
@@ -45,14 +48,13 @@
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.customNavigationItem.titleView = label;
-    STUser *user = [STHiveCluster spawnOverlord].user;
-    self.userLabel.text = user.userName;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%@ points", user.points];
+    self.userLabel.text = self.user.userName;
+    self.pointsLabel.text = [NSString stringWithFormat:@"%@ points", self.user.points];
     [self.pointsLabel sizeToFit];
-    [self.userImage setImageWithURL:[NSURL URLWithString:user.userImageURL]];
+    [self.userImage setImageWithURL:[NSURL URLWithString:self.user.userImageURL]];
 
     id <STOverlord> overlord = [STHiveCluster spawnOverlord];
-    STOverlordToken token = [overlord requestTokenForCheckInHistoryOfUser:user];
+    STOverlordToken token = [overlord requestTokenForCheckInHistoryOfUser:self.user];
     [overlord getNumberOfCheckinsForToken:token completion:^(NSUInteger numberOfCheckins) {
         _currentToken = token;
         _numberOfChekins = numberOfCheckins;

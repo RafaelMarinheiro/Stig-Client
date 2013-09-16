@@ -159,16 +159,24 @@
 #pragma mark - Circular Disposer Delegate
 - (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {
     if (self.filterDisposerView == disposer) {
-        self.optionsDisposerView.alpha = 0.2;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.optionsDisposerView.alpha = 0.2;
+        }];
     }else {
-        self.filterDisposerView.alpha = 0.2;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.filterDisposerView.alpha = 0.2;
+        }];
     }
-    self.suggestionButton.alpha = 0.2;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.suggestionButton.alpha = 0.2;
+    }];
 }
 - (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
-    self.filterDisposerView.alpha = 1.0;
-    self.optionsDisposerView.alpha = 1.0;
-    self.suggestionButton.alpha = 1.0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.filterDisposerView.alpha = 1.0;
+        self.optionsDisposerView.alpha = 1.0;
+        self.suggestionButton.alpha = 1.0;
+    }];
 }
 - (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
     if (disposer == self.filterDisposerView) {

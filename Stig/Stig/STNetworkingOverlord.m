@@ -68,6 +68,11 @@
 
 - (void) setUserLocation:(STLocation *)userLocation{
     _userLocation = userLocation;
+    if(_userLocation){
+        NSString * content = [NSString stringWithFormat:@"geo:%f,%f", [_userLocation.longitude floatValue], [_userLocation.latitude floatValue]];
+        [_client setDefaultHeader:@"Geolocation" value:content];
+    }
+    NSLog(@"%@", userLocation);
 }
 
 #pragma mark - Check-In methods

@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AFNetworking.h"
 #import "STOverlord.h"
+#import "UIColor+Stig.h"
 
 @implementation STAppDelegate
 
@@ -27,6 +28,13 @@
     NSDictionary *barButtonAppearanceDict = @{UITextAttributeFont : [UIFont fontWithName:@"Futura" size:14.0]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+
+//    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+//                                                         diskCapacity:20 * 1024 * 1024
+//                                                             diskPath:nil];
+//    [NSURLCache setSharedURLCache:URLCache];
+
+
     [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
         
     } error:^(NSError *error) {
@@ -34,7 +42,10 @@
     }];
 
     
-    //[[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"button_test.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"border-button.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //[attributes setValue:[UIColor whiteColor] forKey:UITextAttributeTextShadowColor];
+    NSDictionary * attributes = @{UITextAttributeTextColor:[UIColor stigWhite],UITextAttributeTextShadowColor:[UIColor clearColor]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
     return YES;
 }
 							

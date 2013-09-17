@@ -75,7 +75,12 @@ static NSUInteger _MAX_CHAR_COUNT = 200;
 - (IBAction)closeButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void) enablePost {
+    
+}
+- (void) disablePost {
 
+}
 - (IBAction)postButtonPressed:(id)sender {
     id<STOverlord> overlord = [STHiveCluster spawnOverlord];
     [overlord postCommentWithText:self.textView.text andStickers:self.stickerComposerView.selectedStickers toPlaceWithId: self.place.placeId usingToken:self.overlordToken completion:^(STBoardComment *comment) {

@@ -292,18 +292,18 @@
     STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
     STBoardComment *comment = commentView.currentComment;
     [_overlord likeComment:comment completion:^(STBoardComment *comment) {
-        
+        NSLog(@"Liked a comment");
     } error:^(NSError *error) {
-        
+        NSLog(@"Error on like: %@", error);
     }];
 }
 - (void) swipeViewDidSwipeLeft:(STSwipeView *)swipeView{
     STBoardCommentView *commentView = (STBoardCommentView *)swipeView;
     STBoardComment *comment = commentView.currentComment;
     [_overlord dislikeComment:comment completion:^(STBoardComment *comment) {
-
+        NSLog(@"Disliked a comment");
     } error:^(NSError *error) {
-
+        NSLog(@"Error on dislike: %@", error);
     }];
 }
 @end

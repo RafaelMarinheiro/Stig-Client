@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02002DC817E7B3480009AD3A /* border-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02002DC617E7B3480009AD3A /* border-button@2x.png */; };
+		02002DC917E7B3480009AD3A /* border-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 02002DC717E7B3480009AD3A /* border-button.png */; };
 		0202F41217A05E920071D95C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F41117A05E920071D95C /* UIKit.framework */; };
 		0202F41417A05E920071D95C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F41317A05E920071D95C /* Foundation.framework */; };
 		0202F41617A05E920071D95C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0202F41517A05E920071D95C /* CoreGraphics.framework */; };
@@ -223,6 +225,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02002DC617E7B3480009AD3A /* border-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border-button@2x.png"; sourceTree = "<group>"; };
+		02002DC717E7B3480009AD3A /* border-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border-button.png"; sourceTree = "<group>"; };
 		0202F40E17A05E920071D95C /* Stig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0202F41117A05E920071D95C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0202F41317A05E920071D95C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -571,6 +575,8 @@
 		0202F41817A05E920071D95C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02002DC617E7B3480009AD3A /* border-button@2x.png */,
+				02002DC717E7B3480009AD3A /* border-button.png */,
 				0254407917D7D05C006ABC28 /* button_test.png */,
 				022FF29F17CB0756009A7B7B /* icon_neutro_empty.png */,
 				022FF2A017CB0756009A7B7B /* icon_neutro_empty@2x.png */,
@@ -1221,6 +1227,8 @@
 				0254407A17D7D05C006ABC28 /* button_test.png in Resources */,
 				029EE36C17E2A4C200A75338 /* barra_logostig.png in Resources */,
 				029EE36D17E2A4C200A75338 /* barra_logostig@2x.png in Resources */,
+				02002DC817E7B3480009AD3A /* border-button@2x.png in Resources */,
+				02002DC917E7B3480009AD3A /* border-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

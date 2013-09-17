@@ -49,7 +49,7 @@
     [super viewDidLoad];
     _locationLoaded = NO;
     _rankingCriteria = ST_OVERALL;
-
+    [self startLocationServices];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
@@ -65,14 +65,15 @@
     self.optionsDisposerView.delegate = self;
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
-    [self loadPlaces];
-    [self startLocationServices];
 }
 
 - (void) startLocationServices {
     if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        [self loadPlaces];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
         [alert show];
+    } else if(![CLLocationManager significantLocationChangeMonitoringAvailable]){
+        [self loadPlaces];
     }
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -86,6 +87,7 @@
     if (!_locationLoaded) {
         _locationLoaded = YES;
         [self centerMapOnLocation:_currentLocation.coordinate];
+        [self loadPlaces];
     }
 }
 - (void) loadPlaces {

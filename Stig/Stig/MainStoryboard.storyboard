@@ -285,49 +285,20 @@
                                 <color key="tintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="WlW-JI-Exl">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="0hQ-oT-UvP">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="clF-yx-4iR">
-                                                <rect key="frame" x="5" y="0.0" width="60" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                                <state key="normal" title="cancel">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="closeButtonPressed:" destination="P4e-NL-upe" eventType="touchUpInside" id="afm-CW-iRE"/>
-                                                </connections>
-                                            </button>
+                                        <barButtonItem key="leftBarButtonItem" title="cancel" id="V4D-Lk-7lt">
+                                            <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="pD5-62-Vev">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I0F-qH-7sp">
-                                                <rect key="frame" x="257" y="0.0" width="58" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                                <state key="normal" title="post">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="postButtonPressed:" destination="P4e-NL-upe" eventType="touchUpInside" id="cG1-og-Afb"/>
-                                                </connections>
-                                            </button>
+                                        <barButtonItem key="rightBarButtonItem" title="post" id="Qyv-QB-8mn">
+                                            <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtE-Tq-crk">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="OPM-nZ-m1n"/>
                                     <constraint firstAttribute="width" constant="34" id="ObV-Pz-Hwa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -335,24 +306,23 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="4oV-pL-VeV" secondAttribute="bottom" type="user" id="Bg1-lf-Gbw"/>
-                            <constraint firstAttribute="trailing" secondItem="ZtE-Tq-crk" secondAttribute="trailing" constant="55" id="dua-1f-hfq"/>
+                            <constraint firstItem="4oV-pL-VeV" firstAttribute="centerY" secondItem="ZtE-Tq-crk" secondAttribute="centerY" type="default" id="GOI-NE-K1B"/>
+                            <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="ZtE-Tq-crk" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="HmS-xt-iKM"/>
                             <constraint firstAttribute="bottom" secondItem="YId-hc-6rS" secondAttribute="bottom" type="user" id="f3t-XY-fVh" userLabel="Bottom constraint"/>
-                            <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="ZtE-Tq-crk" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="gSJ-ZR-tYV"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="leading" secondItem="BbD-cS-44L" secondAttribute="leading" type="default" id="kdk-c3-LGQ"/>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="leading" secondItem="BbD-cS-44L" secondAttribute="leading" type="user" id="lNP-oi-Gl0"/>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="centerX" secondItem="BbD-cS-44L" secondAttribute="centerX" type="user" id="mGN-Uo-qME"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="top" secondItem="BbD-cS-44L" secondAttribute="top" type="user" id="oOd-gG-as3"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="trailing" secondItem="BbD-cS-44L" secondAttribute="trailing" type="default" id="rT7-ct-34s"/>
+                            <constraint firstAttribute="trailing" secondItem="ZtE-Tq-crk" secondAttribute="trailing" constant="55" id="vlt-Ns-00i"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yy4-vH-kCP"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="f3t-XY-fVh" id="bfk-We-mor"/>
-                        <outlet property="cancelButton" destination="clF-yx-4iR" id="GqK-oi-ifd"/>
                         <outlet property="charsLabel" destination="ZtE-Tq-crk" id="YAB-DM-B3X"/>
                         <outlet property="containerView" destination="YId-hc-6rS" id="vZs-u3-77n"/>
                         <outlet property="customNavigationItem" destination="WlW-JI-Exl" id="oNG-aV-qEQ"/>
-                        <outlet property="postButton" destination="I0F-qH-7sp" id="gYd-9h-ux9"/>
                         <outlet property="stickerComposerView" destination="jPS-sn-ZBX" id="QGN-Vv-BdC"/>
                         <outlet property="textView" destination="lBs-Js-bh5" id="VBn-VR-gmm"/>
                         <outlet property="userImageView" destination="fa9-tH-LRD" id="KxB-Ng-Sja"/>

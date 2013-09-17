@@ -109,7 +109,7 @@
     STStickerPickerView *picker = (STStickerPickerView *)[cell.contentView viewWithTag:12];
     [picker setStickers:self.place.stickers];
  
-    [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"uk-board.jpg"]];
+    [imageView setImageWithURL:[NSURL URLWithString:self.place.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder_place"]];
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
     [imageView setClipsToBounds:YES];
     [cell.contentView addSubview:imageView];

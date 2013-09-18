@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MMDrawerController.h"
 #import "UIViewController+MMDrawerController.h"
+#import <MapKit/MapKit.h>
+
 
 //static CGFloat const STDraggerShowingHeight = 100.0;
 //static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
@@ -203,17 +205,34 @@ static CGFloat const STDraggerBounceDelta = 5.0;
         }];
     }
 }
+
+- (double) distanceInMetersToPlace: (STPlace *) place{
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    STLocation * location = [overlord userLocation];
+    CLLocationCoordinate2D coord = [location locationCoordinate];
+    CLLocation * userLocation = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+    CLLocationCoordinate2D pcoord = [[place location] locationCoordinate];
+    CLLocation * placeLocation = [[CLLocation alloc]initWithLatitude:pcoord.latitude longitude:pcoord.longitude];
+    double dist = [userLocation distanceFromLocation:placeLocation];
+    return dist;
+}
+
 #pragma mark - Action Sheet Delegate
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        id<STOverlord> overlord = [STHiveCluster spawnOverlord];
-        [overlord checkInPlace:self.mapViewController.selectedPlace completion:^(STUser *user, STPlace *place) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!" message:[NSString stringWithFormat:@"Check in at: %@", place.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        if([self distanceInMetersToPlace:self.mapViewController.selectedPlace] < 300){
+            id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+            [overlord checkInPlace:self.mapViewController.selectedPlace completion:^(STUser *user, STPlace *place) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!" message:[NSString stringWithFormat:@"Check in at: %@", place.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+                [alert show];
+            } error:^(NSError *error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Checkin failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+            }];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You're too far away from this place!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
-        } error:^(NSError *error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Checkin failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alert show];
-        }];
+        }
     }
 }
 

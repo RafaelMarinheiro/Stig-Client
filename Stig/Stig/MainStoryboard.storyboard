@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eiL-Nw-UmD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eiL-Nw-UmD">
     <dependencies>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
@@ -287,9 +287,15 @@
                                     <navigationItem id="WlW-JI-Exl">
                                         <barButtonItem key="leftBarButtonItem" title="cancel" id="V4D-Lk-7lt">
                                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="closeButtonPressed:" destination="P4e-NL-upe" id="8Gl-or-6S5"/>
+                                            </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="post" id="Qyv-QB-8mn">
+                                        <barButtonItem key="rightBarButtonItem" title="post" id="dta-lv-QeQ">
                                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="postButtonPressed:" destination="P4e-NL-upe" id="Sxo-Qw-BdS"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -320,9 +326,11 @@
                     <navigationItem key="navigationItem" id="yy4-vH-kCP"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="f3t-XY-fVh" id="bfk-We-mor"/>
+                        <outlet property="cancelButton" destination="V4D-Lk-7lt" id="wZy-0E-St0"/>
                         <outlet property="charsLabel" destination="ZtE-Tq-crk" id="YAB-DM-B3X"/>
                         <outlet property="containerView" destination="YId-hc-6rS" id="vZs-u3-77n"/>
                         <outlet property="customNavigationItem" destination="WlW-JI-Exl" id="oNG-aV-qEQ"/>
+                        <outlet property="postButton" destination="dta-lv-QeQ" id="cZq-wJ-dpI"/>
                         <outlet property="stickerComposerView" destination="jPS-sn-ZBX" id="QGN-Vv-BdC"/>
                         <outlet property="textView" destination="lBs-Js-bh5" id="VBn-VR-gmm"/>
                         <outlet property="userImageView" destination="fa9-tH-LRD" id="KxB-Ng-Sja"/>

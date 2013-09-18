@@ -57,14 +57,20 @@
 - (IBAction)logInButtonPressed:(id)sender {
     [self.activityIndicator startAnimating];
     [self changeToLoading];
-    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI: YES completion:^(STUser *user) {
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    [overlord authenticateUserOpeningUI: YES completion:^(STUser *user) {
         [self.activityIndicator stopAnimating];
         [self dismissViewControllerAnimated:YES completion:nil];
     } error:^(NSError *error) {
-        NSLog(@"ERROR LOGIN : %@", error);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to login" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-        [alert show];
-        [self changeToInteraction];
+        [overlord signInUserWithId:nil withPassword:nil completion:^(STUser *user) {
+            [self.activityIndicator stopAnimating];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } error:^(NSError *error) {
+            NSLog(@"ERROR LOGIN : %@", error);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to login" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+            [alert show];
+            [self changeToInteraction];
+        }];
     }];
 }
 @end

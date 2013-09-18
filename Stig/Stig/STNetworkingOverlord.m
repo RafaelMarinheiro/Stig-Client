@@ -157,10 +157,47 @@
              withPassword: (NSString *) password
                completion: (void (^)(STUser * user)) completionBlock
                     error: (void (^) (NSError* error)) errorBlock{
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        errorBlock([[NSError alloc] initWithDomain:@"Not implemented" code:43 userInfo:nil]);
-    });
+//    POST https://api.stigapp.co/users
+//    
+//    {
+//        "fb-id": <USER-ID-USUARIO>,
+//        "fb-access-token": <USER-ACCESS-TOKEN>
+//    }
     
+    NSString * path = @"users/";
+    [_client clearAuthorizationHeader];
+    [_client postPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:_fb_id, @"fb_id", _fb_accesstoken, @"access_token", nil]
+              success:^(AFHTTPRequestOperation *operation, id data) {
+                  NSError * error;
+                  id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                  STUser * resultUser = nil;
+                  
+                  if(json){
+                      resultUser = [STUser userFromServerJSONData:json];
+                      
+                      if(resultUser){
+                          [_users setObject:resultUser forKey:resultUser.userId];
+                          _user = resultUser;
+                          [_client setAuthorizationHeaderWithUsername:_fb_id password:_fb_accesstoken];
+                      }
+                  }
+                  
+                  if (resultUser) {
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          completionBlock(resultUser);
+                      });
+                  } else{
+                      error = [[NSError alloc] initWithDomain:@"User format is not accepted" code:404 userInfo:nil];
+                      if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^(){
+                          errorBlock(error);
+                      });
+                  }
+                  return;
+              } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+                  if(errorBlock) dispatch_async(dispatch_get_main_queue(), ^{
+                      errorBlock(error);
+                  });
+              }];
 }
 
 - (void) authenticateUserOpeningUI: (BOOL) openUI

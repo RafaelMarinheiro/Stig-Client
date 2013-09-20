@@ -223,14 +223,14 @@ static CGFloat const STDraggerBounceDelta = 5.0;
         if([self distanceInMetersToPlace:self.mapViewController.selectedPlace] < 300){
             id<STOverlord> overlord = [STHiveCluster spawnOverlord];
             [overlord checkInPlace:self.mapViewController.selectedPlace completion:^(STUser *user, STPlace *place) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!" message:[NSString stringWithFormat:@"Check in at: %@", place.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!" message:[NSString stringWithFormat:@"Check in feito em: %@", place.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
                 [alert show];
             } error:^(NSError *error) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Checkin failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Falha ao fazer check-in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [alert show];
             }];
         } else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You're too far away from this place!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Você está muito longe desse lugar!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
         }
     }
@@ -239,7 +239,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 
 #pragma mark - Delegate Notification
 - (void) draggerCompletedCheckin {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Confirm check in ?" delegate:self cancelButtonTitle:@"No" destructiveButtonTitle:nil otherButtonTitles: @"Yes",nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Confirmar check-in?" delegate:self cancelButtonTitle:@"Não" destructiveButtonTitle:nil otherButtonTitles: @"Sim",nil];
     [sheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
 
     [sheet showInView:self.view];

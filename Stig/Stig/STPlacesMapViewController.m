@@ -52,16 +52,19 @@
     [self startLocationServices];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
+    [self.filterDisposerView configWithNumberOfButtons:3];
     [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
-    [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-intercalation"] forState:UIControlStateNormal];
+    [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-trophy-44"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
     self.filterDisposerView.delegate = self;
 
+    [self.optionsDisposerView configWithNumberOfButtons:2];
+    
     [self.optionsDisposerView.mainButton setImage:[UIImage imageNamed:@"plus_yellow_50.png"] forState:UIControlStateNormal];
     [self.optionsDisposerView.buttons[0] setImage:[UIImage imageNamed:@"plus-config-44.png"] forState:UIControlStateNormal];
-    [self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-historico-44.png"] forState:UIControlStateNormal];
-    [self.optionsDisposerView.buttons[2] setImage:[UIImage imageNamed:@"plus-me-44.png"] forState:UIControlStateNormal];
+    //[self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-historico-44.png"] forState:UIControlStateNormal];
+    [self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-me-44.png"] forState:UIControlStateNormal];
     self.optionsDisposerView.delegate = self;
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
@@ -70,7 +73,7 @@
 - (void) startLocationServices {
     if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         [self loadPlaces];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Localização" message:@"Você deve ativar os serviços de localização para que nós possamos encontrar os melhores lugares para você!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
         [alert show];
     } else if(![CLLocationManager significantLocationChangeMonitoringAvailable]){
         [self loadPlaces];
@@ -122,8 +125,8 @@
     for(int i = 0; i < [self.mapView.annotations count]; i++){
         STPlace * place = [self.mapView.annotations objectAtIndex: i];
         if([place isKindOfClass: [STPlace class]]){
-            if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
-                k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
+            if([place.ranking.overall floatValue] > k){
+                k = [place.ranking.overall floatValue];
                 _selectedPlace = place;
             }
         }
@@ -196,7 +199,7 @@
         if (overlord.user) {
             if (buttonTag == 0) {
                 [self performSegueWithIdentifier:@"settingsSegue" sender:nil];
-            }else if (buttonTag == 2) {
+            }else if (buttonTag == 1) {
                 [self performSegueWithIdentifier:@"profileSegue" sender:nil];
             }
         } else {

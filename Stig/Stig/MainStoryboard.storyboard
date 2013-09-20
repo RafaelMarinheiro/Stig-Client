@@ -67,10 +67,10 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHw-Gm-WGb">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="Nps-kP-YQF"/>
-                                                                <constraint firstAttribute="width" constant="80" id="ebm-HH-WEE"/>
+                                                                <constraint firstAttribute="width" constant="100" id="VoE-QL-dQR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                                            <state key="normal" title="Directions">
+                                                            <state key="normal" title="Como chegar">
                                                                 <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -136,7 +136,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="joV-NK-j5a">
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="psM-s4-NFU">
+                        <barButtonItem key="rightBarButtonItem" title="Comentar" id="psM-s4-NFU">
                             <connections>
                                 <action selector="postButtonPressed:" destination="x2V-Yo-eIf" id="fyc-SU-wan"/>
                             </connections>
@@ -176,7 +176,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXG-Qr-P5N" userLabel="Points label">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="pontos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXG-Qr-P5N" userLabel="Points label">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="173" id="71T-zH-c0c"/>
                                     <constraint firstAttribute="height" constant="21" id="bQG-tD-sqq"/>
@@ -207,7 +207,7 @@
                             <constraint firstItem="HBd-Nz-vzN" firstAttribute="trailing" secondItem="IsL-Jg-fxy" secondAttribute="trailing" type="default" id="vWK-W4-DYs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="unU-y7-Oiw">
+                    <navigationItem key="navigationItem" title="Perfil" id="unU-y7-Oiw">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="suF-4l-04d">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vHd-xI-hms">
                                 <rect key="frame" x="5" y="0.0" width="44" height="44"/>
@@ -285,13 +285,13 @@
                                 <color key="tintColor" red="1" green="0.8862745098" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="WlW-JI-Exl">
-                                        <barButtonItem key="leftBarButtonItem" title="cancel" id="V4D-Lk-7lt">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancelar" id="V4D-Lk-7lt">
                                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="closeButtonPressed:" destination="P4e-NL-upe" id="8Gl-or-6S5"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="post" id="dta-lv-QeQ">
+                                        <barButtonItem key="rightBarButtonItem" title="Postar" id="dta-lv-QeQ">
                                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="postButtonPressed:" destination="P4e-NL-upe" id="Sxo-Qw-BdS"/>
@@ -314,13 +314,13 @@
                             <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="4oV-pL-VeV" secondAttribute="bottom" type="user" id="Bg1-lf-Gbw"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="centerY" secondItem="ZtE-Tq-crk" secondAttribute="centerY" type="default" id="GOI-NE-K1B"/>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="top" secondItem="ZtE-Tq-crk" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="HmS-xt-iKM"/>
+                            <constraint firstAttribute="trailing" secondItem="ZtE-Tq-crk" secondAttribute="trailing" constant="63" id="W4N-ZP-my3"/>
                             <constraint firstAttribute="bottom" secondItem="YId-hc-6rS" secondAttribute="bottom" type="user" id="f3t-XY-fVh" userLabel="Bottom constraint"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="leading" secondItem="BbD-cS-44L" secondAttribute="leading" type="default" id="kdk-c3-LGQ"/>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="leading" secondItem="BbD-cS-44L" secondAttribute="leading" type="user" id="lNP-oi-Gl0"/>
                             <constraint firstItem="YId-hc-6rS" firstAttribute="centerX" secondItem="BbD-cS-44L" secondAttribute="centerX" type="user" id="mGN-Uo-qME"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="top" secondItem="BbD-cS-44L" secondAttribute="top" type="user" id="oOd-gG-as3"/>
                             <constraint firstItem="4oV-pL-VeV" firstAttribute="trailing" secondItem="BbD-cS-44L" secondAttribute="trailing" type="default" id="rT7-ct-34s"/>
-                            <constraint firstAttribute="trailing" secondItem="ZtE-Tq-crk" secondAttribute="trailing" constant="55" id="vlt-Ns-00i"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yy4-vH-kCP"/>
@@ -350,8 +350,8 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVy-hN-DzY">
                                 <items>
-                                    <navigationItem title="Settings" id="k8o-BX-44h">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="d9E-WL-Seh">
+                                    <navigationItem title="Configurações" id="k8o-BX-44h">
+                                        <barButtonItem key="rightBarButtonItem" title="Ok" style="done" id="d9E-WL-Seh">
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="HMg-eT-agC" id="vyz-bK-uB7"/>
                                             </connections>
@@ -359,12 +359,104 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3v-Oh-zsN">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="09j-4H-lSK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal" title="Logout" backgroundImage="button_red.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOutButtonPressed:" destination="HMg-eT-agC" eventType="touchUpInside" id="0nR-Zg-U53"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="stig_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="qmW-IN-NWM">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="t2I-6k-FFG"/>
+                                    <constraint firstAttribute="width" constant="240" id="wxy-Fx-IEs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Saia para o lugar certo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31A-9b-Avq">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="202" id="5bB-tC-9Xz"/>
+                                    <constraint firstAttribute="height" constant="21" id="PaH-nC-29T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJW-mO-x6y">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Contato: contact@stigapp.co">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="contactButtonPressed:" destination="HMg-eT-agC" eventType="touchUpInside" id="tZe-78-ZQo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ET-LZ-nAP">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="www.stigapp.co">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="websiteButtonPressed:" destination="HMg-eT-agC" eventType="touchUpInside" id="PDF-1l-DrF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="© 2013 Stig Co." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2c-ZE-clY">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="STp-9m-aCf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Projeto desenvolvido no Centro de Informática da UFPE." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJ8-Uf-EgB">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="0CZ-jy-VZf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="vJ8-Uf-EgB" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="1Lf-JS-Wh3"/>
+                            <constraint firstAttribute="bottom" secondItem="H2c-ZE-clY" secondAttribute="bottom" constant="29" id="8r9-db-rN9"/>
+                            <constraint firstItem="T3v-Oh-zsN" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="229" id="Ah3-kJ-9m9"/>
+                            <constraint firstAttribute="trailing" secondItem="vJ8-Uf-EgB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Dpp-px-pge"/>
+                            <constraint firstAttribute="trailing" secondItem="FJW-mO-x6y" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EDW-Uz-W4w"/>
+                            <constraint firstItem="9ET-LZ-nAP" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="F3S-mE-btj"/>
+                            <constraint firstAttribute="trailing" secondItem="H2c-ZE-clY" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HcZ-gB-D5n"/>
+                            <constraint firstAttribute="trailing" secondItem="9ET-LZ-nAP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="O5V-2R-RVn"/>
                             <constraint firstItem="tVy-hN-DzY" firstAttribute="trailing" secondItem="lMP-3y-0DS" secondAttribute="trailing" type="default" id="OYp-L3-gZW"/>
+                            <constraint firstItem="FJW-mO-x6y" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="295" type="user" id="VF6-qs-7h6"/>
+                            <constraint firstAttribute="bottom" secondItem="vJ8-Uf-EgB" secondAttribute="bottom" constant="13" id="aYd-uz-qYA"/>
+                            <constraint firstItem="H2c-ZE-clY" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="arM-Ej-lox"/>
+                            <constraint firstItem="31A-9b-Avq" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="191" id="bha-PN-8BR"/>
+                            <constraint firstAttribute="trailing" secondItem="T3v-Oh-zsN" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="btE-EP-SAF"/>
+                            <constraint firstItem="T3v-Oh-zsN" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcB-FQ-cVb"/>
                             <constraint firstItem="tVy-hN-DzY" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" type="default" id="jXZ-ie-AaT"/>
                             <constraint firstItem="tVy-hN-DzY" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="-1" id="mGJ-ch-LYg"/>
+                            <constraint firstItem="9ET-LZ-nAP" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="353" type="user" id="mzh-ex-PA3"/>
+                            <constraint firstItem="qmW-IN-NWM" firstAttribute="top" secondItem="lMP-3y-0DS" secondAttribute="top" constant="80" id="nC2-Q7-dfu"/>
+                            <constraint firstItem="FJW-mO-x6y" firstAttribute="leading" secondItem="lMP-3y-0DS" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nYE-Nb-erE"/>
+                            <constraint firstItem="31A-9b-Avq" firstAttribute="centerX" secondItem="qmW-IN-NWM" secondAttribute="centerX" type="default" id="pxa-lL-rYt"/>
+                            <constraint firstItem="31A-9b-Avq" firstAttribute="centerX" secondItem="T3v-Oh-zsN" secondAttribute="centerX" type="default" id="uOG-DN-f2E"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -483,7 +575,7 @@
                                     <outlet property="delegate" destination="QU2-fv-szg" id="0eq-gM-ol6"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" barStyle="blackOpaque" placeholder="Search a place" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-GY-M1b">
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" placeholder="Pesquisar pelo nome…" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-GY-M1b">
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="QU2-fv-szg" id="pmA-Oi-xf9"/>
@@ -702,7 +794,7 @@
             <objects>
                 <viewController storyboardIdentifier="STLogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZGL-TH-VUU" customClass="STLogInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Twg-t3-JPM">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8se-Si-Bsf">
@@ -732,7 +824,7 @@
                                     <constraint firstAttribute="height" constant="35" type="user" id="xBQ-8A-chX"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="connect with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCE-0f-Dv5">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="entrar com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCE-0f-Dv5">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="8cK-ip-UxR"/>
                                     <constraint firstAttribute="width" constant="104" id="r0N-4B-BsX"/>
@@ -809,138 +901,13 @@
         <image name="barras_connect_with.png" width="640" height="70"/>
         <image name="button_back.png" width="44" height="44"/>
         <image name="button_login_fb.png" width="424" height="80"/>
+        <image name="button_red.png" width="301" height="43"/>
         <image name="callout.png" width="640" height="1150"/>
         <image name="icon_list_white.png" width="44" height="44"/>
         <image name="placeholder_user.png" width="40" height="40"/>
         <image name="stig_logo.png" width="644" height="376"/>
         <image name="suggest_me_50.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="CircularButtonDisposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CircularButtonDisposerView.h"/>
-        </class>
-        <class className="MMDrawerController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMDrawerController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="STBoardCommentView" superclassName="STSwipeView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardCommentView.h"/>
-        </class>
-        <class className="STBoardViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STBoardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="directionsButtonPressed:"/>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="stickersView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="topBatTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STCalloutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCalloutViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="driveButtonPressed:"/>
-                <relationship kind="outlet" name="animationView" candidateClass="STCheckInAnimationView"/>
-                <relationship kind="outlet" name="checkinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="placeNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stickerSelector" candidateClass="STStickerPickerView"/>
-            </relationships>
-        </class>
-        <class className="STCheckInAnimationView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STCheckInAnimationView.h"/>
-        </class>
-        <class className="STComposePostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STComposePostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeButtonPressed:"/>
-                <relationship kind="action" name="postButtonPressed:"/>
-                <relationship kind="outlet" name="bottomConstraint" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="charsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="postButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="stickerComposerView" candidateClass="STStickerComposerView"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="userImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="STConfigViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STConfigViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="networkSwitchChanged:" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="STDraggerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDraggerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="drawerButtonPressed:"/>
-                <relationship kind="action" name="toggleDragger:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="draggedView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mainView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="verticalSpaceConstraint" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="STDrawerViewController" superclassName="MMDrawerController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STDrawerViewController.h"/>
-        </class>
-        <class className="STLogInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STLogInViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="logInButtonPressed:"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="barsImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="connectWithLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STPlacesListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchDisplay" candidateClass="UISearchDisplayController"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="STPlacesMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STPlacesMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="suggestionButtonPressed:"/>
-                <relationship kind="outlet" name="filterDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="optionsDisposerView" candidateClass="CircularButtonDisposerView"/>
-                <relationship kind="outlet" name="suggestionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="STProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
-                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="userImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="STStickerComposerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerComposerView.h"/>
-        </class>
-        <class className="STStickerPickerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStickerPickerView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="delegate"/>
-            </relationships>
-        </class>
-        <class className="STSwipeView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STSwipeView.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -948,6 +915,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="7w3-Gs-Ncy"/>
-        <segue reference="FaR-sn-Tgm"/>
+        <segue reference="JcO-f9-ND9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -299,6 +299,7 @@
 - (void) signOutWithCompletion: (void (^)()) completionBlock
                          error: (void (^) (NSError* error)) errorBlock{
     _user = nil;
+    [_client clearAuthorizationHeader];
     dispatch_async(dispatch_get_main_queue(), ^(){
         completionBlock();
     });

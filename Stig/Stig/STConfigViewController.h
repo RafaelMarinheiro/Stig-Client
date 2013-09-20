@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "STOverlord.h"
 @interface STConfigViewController : UIViewController
-- (IBAction)networkSwitchChanged:(UISwitch *)sender;
 - (IBAction)doneButtonPressed:(UIButton *)sender;
+- (IBAction)signOutButtonPressed:(id)sender;
+- (IBAction)contactButtonPressed:(id)sender;
+- (IBAction)websiteButtonPressed:(id)sender;
 
 @end

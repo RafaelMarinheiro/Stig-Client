@@ -44,12 +44,12 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Futura" size:20.0];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"Profile";
+    label.text = @"Perfil";
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.customNavigationItem.titleView = label;
     self.userLabel.text = self.user.userName;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%@ points", self.user.points];
+    self.pointsLabel.text = [NSString stringWithFormat:@"%@ pontos", self.user.points];
     [self.pointsLabel sizeToFit];
     [self.userImage setImageWithURL:[NSURL URLWithString:self.user.userImageURL]];
 

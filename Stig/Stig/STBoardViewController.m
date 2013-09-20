@@ -39,10 +39,10 @@
     
     [self refreshData:^(BOOL completed) {
         if (completed) {
-            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Puxe para atualizar"];
             [self.refreshControl endRefreshing];
         }else {
-            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Failed to load data"];
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Falha ao carregar os dados"];
         }
     }];
 }
@@ -66,7 +66,7 @@
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     refresh.tintColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
-    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Loading"];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Carregando…"];
     [refresh addTarget:self
                 action:@selector(refreshView:)
       forControlEvents:UIControlEventValueChanged];
@@ -195,7 +195,7 @@
             if (completed) {
                 [self refreshData:nil];
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error on comment post"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Erro ao postar comentário!"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [alert show];
             }
         };
@@ -247,9 +247,9 @@
     }
 }
 - (IBAction)directionsButtonPressed:(id)sender {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Which app do you want to use?"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Qual mapa você quer usar??"
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel"
+                                              cancelButtonTitle:@"Cancelar"
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Waze",@"Google Maps",@"Apple Maps", nil];
     sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;

@@ -102,7 +102,7 @@
 }
 - (UITableViewCell *) placeCellForIndexPath:(NSIndexPath *) indexPath tableView:(UITableView *) tableView{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-    cell.textLabel.text = @"Loading ...";
+    cell.textLabel.text = @"Carregando…";
     [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
         UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];
         currentCell.selectionStyle = UITableViewCellSelectionStyleGray;

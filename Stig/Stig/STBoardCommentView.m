@@ -94,7 +94,7 @@
 - (void) prepareForReuse {
     [super prepareForReuse];
     self.currentComment = nil;
-    self.commentLabel.text = @"Loading...";
+    self.commentLabel.text = @"Carregando…";
     self.stickersView.stickers = nil;
     [self.userImageView setImage:[UIImage imageNamed:@"placeholder_user"]];
     _cellHeight = 80.0;
@@ -164,18 +164,18 @@
     NSUInteger intTime = time;
     
     if (time < 60) {
-        return [NSString stringWithFormat:@"%d seconds ago",intTime];
+        return [NSString stringWithFormat:@"%d segundos atrás",intTime];
     } else {
         NSUInteger minutes = intTime / 60;
         if (minutes < 60) {
-            return [NSString stringWithFormat:@"%d minutes ago",minutes];
+            return [NSString stringWithFormat:@"%d minutos atrás",minutes];
         } else{
             NSUInteger hours = minutes / 60;
             if (hours < 24) {
-                return [NSString stringWithFormat:@"%d hours ago", hours];
+                return [NSString stringWithFormat:@"%d horas atrás", hours];
             }else {
                 NSUInteger days = hours / 24;
-                return [NSString stringWithFormat:@"%d days ago", days];
+                return [NSString stringWithFormat:@"%d dias atrás", days];
             }
         }
     }

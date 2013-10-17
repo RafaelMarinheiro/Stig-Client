@@ -216,6 +216,7 @@
 		0F5FF5C917C2A60F000B3530 /* STPlacesQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5FF5C817C2A60F000B3530 /* STPlacesQueryContext.m */; };
 		0FD1162817BEAEE2009C4081 /* STBoardCommentQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */; };
 		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
+		1A297D0C180EF47B007D65C3 /* STAPIConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A297D0B180EF47B007D65C3 /* STAPIConsumer.m */; };
 		BB26124917EC776300233819 /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124717EC776300233819 /* button_red@2x.png */; };
 		BB26124A17EC776300233819 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124817EC776300233819 /* button_red.png */; };
 		BB26124D17EC786F00233819 /* tableViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124B17EC786F00233819 /* tableViewBackground@2x.png */; };
@@ -504,6 +505,8 @@
 		0FD1162617BEAEE2009C4081 /* STBoardCommentQueryContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBoardCommentQueryContext.h; sourceTree = "<group>"; };
 		0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBoardCommentQueryContext.m; sourceTree = "<group>"; };
 		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
+		1A297D0A180EF47B007D65C3 /* STAPIConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPIConsumer.h; sourceTree = "<group>"; };
+		1A297D0B180EF47B007D65C3 /* STAPIConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPIConsumer.m; sourceTree = "<group>"; };
 		BB26124717EC776300233819 /* button_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red@2x.png"; sourceTree = "<group>"; };
 		BB26124817EC776300233819 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
 		BB26124B17EC786F00233819 /* tableViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableViewBackground@2x.png"; sourceTree = "<group>"; };
@@ -911,6 +914,8 @@
 				0202F43517A05EDA0071D95C /* STOverlord.m */,
 				0F5FF5C617C2A1A5000B3530 /* Query Context */,
 				0254407517D7A694006ABC28 /* NetworkManager */,
+				1A297D0A180EF47B007D65C3 /* STAPIConsumer.h */,
+				1A297D0B180EF47B007D65C3 /* STAPIConsumer.m */,
 			);
 			name = Overlord;
 			sourceTree = "<group>";
@@ -1336,6 +1341,7 @@
 				0254407417D7A687006ABC28 /* STNetworkManager.m in Sources */,
 				0254407817D7A6AA006ABC28 /* STNetworkOperation.m in Sources */,
 				020BA33A17DACC3600388ED2 /* UIColor+Stig.m in Sources */,
+				1A297D0C180EF47B007D65C3 /* STAPIConsumer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

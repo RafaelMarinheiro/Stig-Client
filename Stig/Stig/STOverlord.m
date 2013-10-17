@@ -40,6 +40,7 @@
 #import "STOverlord.h"
 #import "STFakeOverlord.h"
 #import "STNetworkingOverlord.h"
+#import "STAPIConsumer.h"
 
 static STOverlordType _defaultType = STOverlordTypeNetworked;
 static id<STOverlord> _overlords[STOverlordTypeNumbers];
@@ -55,10 +56,16 @@ static dispatch_once_t onceToken[STOverlordTypeNumbers];
     return [STHiveCluster spawnOverlordWithType:_defaultType];
 }
 
++ (id<STOverlord>) spawnAPIConsumer{
+    return [STHiveCluster spawnOverlordWithType:STOverlordTypeSimple];
+}
+
 + (id<STOverlord>) spawnOverlordWithType:(STOverlordType) type{
     if(_overlords[type] == nil){
         dispatch_once(&onceToken[type], ^{
-            if(type == STOverlordTypeLocalJson){
+            if(type == STOverlordTypeSimple){
+                _overlords[type] = [[STAPIConsumer alloc] init];
+            } else if(type == STOverlordTypeLocalJson){
                 _overlords[type] = [[STFakeOverlord alloc] init];
             } else if(type == STOverlordTypeNetworked){
                 _overlords[type] = [[STNetworkingOverlord alloc] init];

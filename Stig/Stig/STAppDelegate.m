@@ -34,7 +34,7 @@
 //                                                             diskPath:nil];
 //    [NSURLCache setSharedURLCache:URLCache];
 
-
+    
     [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
         
     } error:^(NSError *error) {
@@ -46,6 +46,11 @@
     //[attributes setValue:[UIColor whiteColor] forKey:UITextAttributeTextShadowColor];
     NSDictionary * attributes = @{UITextAttributeTextColor:[UIColor stigWhite],UITextAttributeTextShadowColor:[UIColor clearColor]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [[STHiveCluster spawnAPIConsumer] resolvePlaceById:@(1) completion:^(STPlace *place) {
+        NSLog(@"%@", place);
+    } error:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
     return YES;
 }
 							

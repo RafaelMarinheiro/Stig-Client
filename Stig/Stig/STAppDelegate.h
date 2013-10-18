@@ -12,5 +12,5 @@
 @interface STAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic) STOverlordToken currentSearchToken;
+@property (strong, nonatomic) NSArray * places;
 @end

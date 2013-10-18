@@ -89,7 +89,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 - (void) setPlaces:(NSArray *)places {
     _places = places;
     if (self.mapViewController) {
-        self.mapViewController.places = _places;
+    //    self.mapViewController.places = _places;
     }
 }
 - (void) placesMapViewControllerMapDidMove:(STPlacesMapViewController *)placesMapViewController {

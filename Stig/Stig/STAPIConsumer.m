@@ -236,9 +236,9 @@
     };
     
     if(openUI){
-        
-        if(![FBSession.activeSession isOpen]){
-            [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent
+        if(!FBSession.activeSession || ![FBSession.activeSession isOpen]){
+            FBSession.activeSession = [[FBSession alloc] init];
+            [FBSession.activeSession openWithBehavior:FBSessionLoginBehaviorForcingWebView
                                     completionHandler:^(FBSession *session,
                                                         FBSessionState status,
                                                         NSError *error) {
@@ -256,7 +256,8 @@
              umnomebom];
         }
     } else{
-        if(![FBSession.activeSession isOpen]){
+        if(!FBSession.activeSession || ![FBSession.activeSession isOpen]){
+            FBSession.activeSession = [[FBSession alloc] init];
             [FBSession openActiveSessionWithAllowLoginUI:NO];
         }
         if ([FBSession.activeSession isOpen]) {
@@ -270,6 +271,14 @@
                          error: (void (^) (NSError* error)) errorBlock{
     _user = nil;
     [_client clearAuthorizationHeader];
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    FBSession.activeSession = nil;
+    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie* cookie in
+         [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        [cookies deleteCookie:cookie];
+    }
     if(completionBlock) dispatch_async(dispatch_get_main_queue(), ^(){
         completionBlock();
     });
@@ -423,7 +432,7 @@
     } else{
         path = [@"places/?page=" stringByAppendingString:[pageN stringValue]];
     }
-    
+    NSLog(@"%@", path);
     [_manager requestFromPath:path completion:^(AFHTTPRequestOperation *operation, id data){
         NSError * error;
         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
@@ -434,7 +443,7 @@
             NSArray * result = dic[@"results"];
             NSMutableArray * results = [NSMutableArray arrayWithCapacity:result.count];
             BOOL err = NO;
-            for(int i = 0; i < result.count; i++){
+            for(NSUInteger i = 0; i < result.count; i++){
                 STPlace * place = [STPlace placeFromServerJSONData:result[i]];
                 if(place){
                     results[i] = place;

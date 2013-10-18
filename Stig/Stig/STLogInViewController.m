@@ -66,7 +66,7 @@
             [self.activityIndicator stopAnimating];
             [self dismissViewControllerAnimated:YES completion:nil];
         } error:^(NSError *error) {
-            NSLog(@"ERROR LOGIN : %@", error);
+            NSLog(@"ERROR LOGIN222 : %@", error);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Erro ao fazer login" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
             [self changeToInteraction];

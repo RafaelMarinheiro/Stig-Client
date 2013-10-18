@@ -10,6 +10,7 @@
 #import "STBoardViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "STDraggerViewController.h"
+#import "NSString+Common.h"
 
 @implementation STPlacesListViewController {
     id <STOverlord> _overlord;
@@ -19,8 +20,13 @@
 
 
     NSOperationQueue *_searchQueue;
-    STOverlordToken _searchToken;
+    NSArray * _searchResults;
     NSUInteger _numberOfResults;
+}
+
+- (NSArray *) appPlaces {
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    return app.places;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,18 +37,19 @@
     }
     return self;
 }
-- (void) setPlaces:(NSArray *)places {
-    _places = places;
-    [self.tableView reloadData];
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _loadedPlaces = NO;
     STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app addObserver:self forKeyPath:@"currentSearchToken" options:NSKeyValueObservingOptionNew context:nil];
+    [app addObserver:self forKeyPath:@"places" options:NSKeyValueObservingOptionNew context:nil];
     _searchQueue = [NSOperationQueue new];
     [_searchQueue setMaxConcurrentOperationCount:1];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,25 +58,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) setOverlordToken:(STOverlordToken)overlordToken {
-    _overlordToken = overlordToken;
-    [self reloadPlaces];
-}
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSNumber *test = change[NSKeyValueChangeNewKey];
-    self.overlordToken = [test integerValue];
-}
 - (void) reloadPlaces {
     _loadedPlaces = NO;
-    _overlord = [STHiveCluster spawnOverlord];
-    [_overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
-        _numberOfPlaces = numberOfPlaces;
-        _loadedPlaces = YES;
-        //_loadedIndexPath = [NSMutableDictionary dictionaryWithCapacity:numberOfPlaces];
-        [self.tableView reloadData];
-    } error:^(NSError *error) {
-        
-    }];
 }
 #pragma mark - Table View Data Source Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -78,12 +68,12 @@
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        if (_loadedPlaces) {
-            return _numberOfPlaces;
+        if(self.appPlaces){
+            return [self.appPlaces count];
         }
     }
-    if (_searchToken != 0) {
-        return _numberOfResults;
+    if(_searchResults){
+        return _searchResults.count;
     }
     return 0;
 }
@@ -92,41 +82,33 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchresultscell"];
     }
-    [_overlord getPlaceForToken:_searchToken andPosition:indexPath.row completion:^(STPlace *place) {
-        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-        [currentCell.textLabel setText:place.placeName];
-        [currentCell setNeedsLayout];
-        [currentCell layoutIfNeeded];
-    } error:^(NSError *error){NSLog(@"Error loading searchResult:%@", error);}];
+    STPlace * place = _searchResults[indexPath.row];
+    [cell.textLabel setText:place.placeName];
     return cell;
 }
 - (UITableViewCell *) placeCellForIndexPath:(NSIndexPath *) indexPath tableView:(UITableView *) tableView{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-    cell.textLabel.text = @"Carregando…";
-    [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
-        UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexPath];
-        currentCell.selectionStyle = UITableViewCellSelectionStyleGray;
-        UIImage *placeIcon;
-        if (place.mostRelevantSticker) {
-            placeIcon = [place.mostRelevantSticker stickerIconWithPlace:@"selector"];
-        }else{
-            placeIcon = [UIImage imageNamed:@"icon_neutro_empty"];
-        }
-        [currentCell.imageView setImage:placeIcon];
-        [currentCell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
-        [currentCell.textLabel setBackgroundColor:[UIColor clearColor]];
-        [currentCell.textLabel setText:place.placeName];
-        [currentCell.textLabel setTextColor:[UIColor whiteColor]];
-        [currentCell setNeedsLayout];
-    } error:^(NSError *error) {
+    UITableViewCell *currentCell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
 
-    }];
-    return cell;
+    STPlace * place = [self.appPlaces objectAtIndex:indexPath.row];
+    currentCell.selectionStyle = UITableViewCellSelectionStyleGray;
+    UIImage *placeIcon;
+    if (place.mostRelevantSticker) {
+        placeIcon = [place.mostRelevantSticker stickerIconWithPlace:@"selector"];
+    }else{
+        placeIcon = [UIImage imageNamed:@"icon_neutro_empty"];
+    }
+    [currentCell.imageView setImage:placeIcon];
+    [currentCell.textLabel setFont:[UIFont fontWithName:@"Futura" size:16.0]];
+    [currentCell.textLabel setBackgroundColor:[UIColor clearColor]];
+    [currentCell.textLabel setText:place.placeName];
+    [currentCell.textLabel setTextColor:[UIColor whiteColor]];
+
+    return currentCell;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    STPlace *place = self.places[path.row];
+    STPlace *place = self.appPlaces[path.row];
     STBoardViewController *vc = segue.destinationViewController;
     vc.place = place;
 }
@@ -146,46 +128,35 @@
     if (tableView == self.tableView) {
         UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
         STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
-        [_overlord getPlaceForToken:_overlordToken andPosition:indexPath.row completion:^(STPlace *place) {
-            [dragger.mapViewController selectPlace:place];
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-            [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
-
-        } error:^(NSError *error) {
-            
-        }];
+        STPlace * place = [self.appPlaces objectAtIndex:indexPath.row];
+        [dragger.mapViewController selectPlace:place];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
     } else {
         UINavigationController *nav =(UINavigationController *) self.mm_drawerController.centerViewController;
         STDraggerViewController *dragger =(STDraggerViewController *) nav.topViewController;
-        [_overlord getPlaceForToken:_searchToken andPosition:indexPath.row completion:^(STPlace *place) {
-            [self.searchDisplayController.searchBar resignFirstResponder];
-            [dragger.mapViewController selectPlace:place];
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-            [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
-        } error:^(NSError *error) {
-
-        }];
+        STPlace * place = [_searchResults objectAtIndex:indexPath.row];
+        [dragger.mapViewController selectPlace:place];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.searchBar resignFirstResponder];
+        [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
     }
 }
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
 
-    if (![searchString isEqualToString:@""]) {
-        [_searchQueue cancelAllOperations];
-        [_searchQueue addOperationWithBlock:^{
-            STOverlordToken newToken = [_overlord requestTokenForPlacesWithSearchTerm:searchString];
-            [_overlord getNumberOfPlacesForToken:newToken completion:^(NSUInteger numberOfPlaces) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    _numberOfResults = numberOfPlaces;
-                    _searchToken = newToken;
-                    [self.searchDisplayController.searchResultsTableView reloadData];
-                }];
-            } error: ^ (NSError *error) {
-                NSLog(@"Error requesting token: %@", error);
-            }];
-        }];
-        return NO;
+    if (![searchString isBlank]) {
+        NSMutableArray * res = [NSMutableArray array];
+            for(int i = 0; i < self.appPlaces.count; i++){
+                STPlace * place = self.appPlaces[i];
+                if([[[place.placeName lowercaseString] stringByStrippingWhitespace] contains:[[searchString lowercaseString] stringByStrippingWhitespace]]){
+                    [res addObject:place];
+                }
+            }
+            _searchResults = res;
+           
+        return YES;
     } else {
-        _searchToken = 0;
+        _searchResults = [NSArray array];
         return YES;
     }
 }

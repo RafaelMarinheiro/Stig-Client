@@ -217,6 +217,7 @@
 		0FD1162817BEAEE2009C4081 /* STBoardCommentQueryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD1162717BEAEE2009C4081 /* STBoardCommentQueryContext.m */; };
 		0FEE9E8417A4691E00722EA6 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEE9E8317A4691E00722EA6 /* callout.png */; };
 		1A297D0C180EF47B007D65C3 /* STAPIConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A297D0B180EF47B007D65C3 /* STAPIConsumer.m */; };
+		1A7329D818107CCF005E28FE /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7329D718107CCF005E28FE /* NSString+Common.m */; };
 		BB26124917EC776300233819 /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124717EC776300233819 /* button_red@2x.png */; };
 		BB26124A17EC776300233819 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124817EC776300233819 /* button_red.png */; };
 		BB26124D17EC786F00233819 /* tableViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB26124B17EC786F00233819 /* tableViewBackground@2x.png */; };
@@ -507,6 +508,8 @@
 		0FEE9E8317A4691E00722EA6 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
 		1A297D0A180EF47B007D65C3 /* STAPIConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPIConsumer.h; sourceTree = "<group>"; };
 		1A297D0B180EF47B007D65C3 /* STAPIConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPIConsumer.m; sourceTree = "<group>"; };
+		1A7329D618107CCF005E28FE /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		1A7329D718107CCF005E28FE /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		BB26124717EC776300233819 /* button_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red@2x.png"; sourceTree = "<group>"; };
 		BB26124817EC776300233819 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
 		BB26124B17EC786F00233819 /* tableViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableViewBackground@2x.png"; sourceTree = "<group>"; };
@@ -591,6 +594,7 @@
 		0202F41717A05E920071D95C /* Stig */ = {
 			isa = PBXGroup;
 			children = (
+				1A7329D218107C77005E28FE /* Util */,
 				0202F42017A05E920071D95C /* STAppDelegate.h */,
 				0202F42117A05E920071D95C /* STAppDelegate.m */,
 				0264D7A117B9B2AE00C5399B /* Overlord */,
@@ -1067,6 +1071,15 @@
 			name = CircularButtonDisposer;
 			sourceTree = "<group>";
 		};
+		1A7329D218107C77005E28FE /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				1A7329D618107CCF005E28FE /* NSString+Common.h */,
+				1A7329D718107CCF005E28FE /* NSString+Common.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1342,6 +1355,7 @@
 				0254407817D7A6AA006ABC28 /* STNetworkOperation.m in Sources */,
 				020BA33A17DACC3600388ED2 /* UIColor+Stig.m in Sources */,
 				1A297D0C180EF47B007D65C3 /* STAPIConsumer.m in Sources */,
+				1A7329D818107CCF005E28FE /* NSString+Common.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

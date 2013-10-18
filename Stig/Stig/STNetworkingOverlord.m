@@ -21,6 +21,7 @@
     self = [super init];
     if(self){
         _apiConsumer = [STHiveCluster spawnAPIConsumer];
+        NSLog(@"%@", _apiConsumer);
         _users = [[NSCache alloc] init];
         _places = [[NSCache alloc] init];
         _commentsByPlaces = [[NSCache alloc] init];
@@ -233,7 +234,6 @@
 - (void) postCommentWithText: (NSString*) text
                  andStickers: (NSArray*) stickers
                toPlaceWithId: (NSNumber *) placeId
-                  usingToken: (STOverlordToken) token
                   completion: (void (^)(STBoardComment * comment)) completionBlock
                        error: (void (^)(NSError *error)) errorBlock{
     [_apiConsumer postCommentWithText:text andStickers:stickers toPlaceWithId:placeId completion:^(STBoardComment *comment) {

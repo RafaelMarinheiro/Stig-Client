@@ -18,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.places = [NSArray array];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     // Override point for customization after application launch.
     UIFont *testFont = [UIFont fontWithName:@"Futura" size:20.0];
@@ -46,11 +47,7 @@
     //[attributes setValue:[UIColor whiteColor] forKey:UITextAttributeTextShadowColor];
     NSDictionary * attributes = @{UITextAttributeTextColor:[UIColor stigWhite],UITextAttributeTextShadowColor:[UIColor clearColor]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [[STHiveCluster spawnAPIConsumer] resolvePlaceById:@(1) completion:^(STPlace *place) {
-        NSLog(@"%@", place);
-    } error:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
+
     return YES;
 }
 							

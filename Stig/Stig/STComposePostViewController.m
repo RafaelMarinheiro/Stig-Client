@@ -83,7 +83,7 @@ static NSUInteger _MAX_CHAR_COUNT = 200;
 }
 - (IBAction)postButtonPressed:(id)sender {
     id<STOverlord> overlord = [STHiveCluster spawnOverlord];
-    [overlord postCommentWithText:self.textView.text andStickers:self.stickerComposerView.selectedStickers toPlaceWithId: self.place.placeId usingToken:self.overlordToken completion:^(STBoardComment *comment) {
+    [overlord postCommentWithText:self.textView.text andStickers:self.stickerComposerView.selectedStickers toPlaceWithId: self.place.placeId completion:^(STBoardComment *comment) {
         if (self.completionHandler) {
             self.completionHandler(YES);
         }

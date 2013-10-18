@@ -17,8 +17,14 @@
 @end
 
 @implementation STPlacesMapViewController {
+    BOOL _first;
+    NSTimer * _timer;
+    NSMutableDictionary * __places;
     STPlace *_selectedPlace;
-    STOverlordToken _overlordToken;
+    id<STOverlord> _overlord;
+    NSUInteger _totalCount;
+    NSUInteger _totalPage;
+    NSUInteger _lastPage;
     CLLocationManager *_locationManager;
     CLLocation *_currentLocation;
     BOOL _locationLoaded;
@@ -28,25 +34,50 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
+}
+
+- (void) config{
+    _overlord = [STHiveCluster spawnOverlord];
 }
 - (STPlace *) selectedPlace {
     return _selectedPlace;
 }
+
+- (NSArray *) appPlaces {
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    return app.places;
+}
+
+- (void) setAppPlaces: (NSArray *) places {
+    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.places = places;
+}
+
 - (void) setPlaces:(NSArray *)places {
-    _places = places;
+    [self setAppPlaces:places];
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView setDelegate:self];
-    [self.mapView addAnnotations:self.places];
-    [self.mapView addOverlays:self.places];
-    [self.mapView setRegion:[self regionFromAnnotations:self.places]];
+    [self.mapView addAnnotations:places];
+    [self.mapView addOverlays:places];
+}
+
+- (void) addPlaces:(NSArray *)places{
+    NSMutableArray * temp = [NSMutableArray arrayWithArray:[self appPlaces]];
+    [temp addObjectsFromArray:places];
+    [self.mapView addAnnotations:places];
+    [self.mapView addOverlays:places];
+    [self setAppPlaces:temp];
+    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _first = YES;
+    __places = [NSMutableDictionary dictionary];
     _locationLoaded = NO;
     _rankingCriteria = ST_OVERALL;
     [self startLocationServices];
@@ -68,15 +99,14 @@
     self.optionsDisposerView.delegate = self;
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
+    [self config];
+    [self reloadData];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
 }
 
 - (void) startLocationServices {
     if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        [self loadPlaces];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Localização" message:@"Você deve ativar os serviços de localização para que nós possamos encontrar os melhores lugares para você!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-        [alert show];
     } else if(![CLLocationManager significantLocationChangeMonitoringAvailable]){
-        [self loadPlaces];
     }
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -85,34 +115,63 @@
 }
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     _currentLocation = locations[0];
-    [[STHiveCluster spawnOverlord] setUserLocation:[STLocation locationFromCLLocationCoordinate2D:_currentLocation.coordinate]];
-    NSLog(@"Location update : %@", _currentLocation);
+    [_overlord setUserLocation:[STLocation locationFromCLLocationCoordinate2D:_currentLocation.coordinate]];
+    
     if (!_locationLoaded) {
         _locationLoaded = YES;
+        [_timer invalidate];
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
         [self centerMapOnLocation:_currentLocation.coordinate];
-        [self loadPlaces];
     }
 }
-- (void) loadPlaces {
-    id <STOverlord> overlord = [STHiveCluster spawnOverlord];
-    _overlordToken = [overlord requestTokenForPlacesWithSearchTerm:nil];
-    [overlord getNumberOfPlacesForToken:_overlordToken completion:^(NSUInteger numberOfPlaces) {
-        for (int i =0; i < numberOfPlaces; i++) {
-            [overlord getPlaceForToken:_overlordToken andPosition:i completion:^(STPlace *place) {
-                [self.mapView addAnnotation:place];
-                [self.mapView addOverlay:place];
-            } error:^(NSError *error) {
-                NSLog(@"Error loading place %@", error);
-            }];
+
+- (void) reloadData{
+    [self loadPlacesInPage:1];
+}
+
+- (void) loadPlacesInPage: (NSUInteger) page {
+    _totalCount = 0;
+    _totalPage = 0;
+    _lastPage = page;
+    
+    [_overlord getPlacesInPage:_lastPage filteringWithSearchTerm:nil completion:^(NSArray *places, NSUInteger count, NSUInteger pageCount) {
+            _totalCount = count;
+            _totalPage = pageCount;
+        
+            for(int i = 0; i < places.count; i++){
+                STPlace * place = places[i];
+                [__places setObject:place forKey:place.placeId];
+            }
+        
+            [self setPlaces:[__places allValues]];
+            if(_first){
+                [self.mapView setRegion:[self regionFromAnnotations:[__places allValues]]];
+                _first = NO;
+            }
+        
+            if(_lastPage < pageCount){
+                [self loadPlacesInPage:_lastPage+1];
+            }
         }
-    } error:^(NSError *error) {
-        NSLog(@"Error loading places %@", error);
-    }];
-    STPlacesListViewController *vc = (STPlacesListViewController *)self.mm_drawerController.leftDrawerViewController;
-    vc.overlordToken = _overlordToken;
-    NSLog(@"%@ %@",self.mm_drawerController,vc);
-    STAppDelegate *app = (STAppDelegate *)[[UIApplication sharedApplication] delegate];
-    app.currentSearchToken = _overlordToken;
+        error:^(NSError *error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro de rede" message:@"Ocorreu um erro ao tentar carregar os locais! Verifique a sua conexão com a internet." delegate:self cancelButtonTitle:@"Cancelar!" otherButtonTitles:@"Tentar novamente", nil];
+            [alert show];
+            [_timer invalidate];
+            _timer = nil;
+            NSLog(@"ERROR %@", error);
+        }
+     ];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
+        _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
+    } else{
+        [self loadPlacesInPage:_lastPage];
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
+    }
 }
 - (void)didReceiveMemoryWarning
 {

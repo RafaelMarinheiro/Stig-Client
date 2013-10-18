@@ -12,13 +12,15 @@
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface STProfileViewController ()
-
-@end
-
 @implementation STProfileViewController {
-    STOverlordToken _currentToken;
-    NSUInteger _numberOfChekins;
+    id<STOverlord> _overlord;
+    NSLock * _lock;
+    BOOL _loading;
+    NSArray * _placeID;
+    NSCache * _places;
+    NSUInteger _checkinCount;
+    NSUInteger _pageCount;
+    NSUInteger _lastPage;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,10 +34,17 @@
 
 - (void)viewDidLoad
 {
+    _overlord = [STHiveCluster spawnOverlord];
     if (!self.user) {
-        self.user = [STHiveCluster spawnOverlord].user;
+        self.user = _overlord.user;
     }
     [super viewDidLoad];
+    _placeID = [NSArray array];
+    _lock = [[NSLock alloc] init];
+    _places = [[NSCache alloc] init];
+    _checkinCount = 0;
+    _pageCount = 0;
+    _lastPage = 0;
     [self.userImage.layer setCornerRadius:5.0];
     [self.userImage.layer setMasksToBounds:YES];
 
@@ -53,17 +62,35 @@
     [self.pointsLabel sizeToFit];
     [self.userImage setImageWithURL:[NSURL URLWithString:self.user.userImageURL]];
 
-    id <STOverlord> overlord = [STHiveCluster spawnOverlord];
-    STOverlordToken token = [overlord requestTokenForCheckInHistoryOfUser:self.user];
-    [overlord getNumberOfCheckinsForToken:token completion:^(NSUInteger numberOfCheckins) {
-        _currentToken = token;
-        _numberOfChekins = numberOfCheckins;
-        [self.tableView reloadData];
-    } error:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    // Do any additional setup after loading the view.
+    [self refreshData:nil];
 }
+
+- (void) refreshData:(void(^)(BOOL completed))completion {
+    [_overlord getCheckInHistoryPlacesInPage:1 forUser:self.user completion:^(NSArray *places, NSArray *dates, NSUInteger count, NSUInteger pages) {
+        if(count == _checkinCount){
+            if(completion) completion(YES);
+        } else{
+            _checkinCount = count;
+            _pageCount = pages;
+            
+            for(int i = 0; i < places.count; i++){
+                NSNumber * number = places[i];
+                [_overlord resolvePlaceById:number completion:^(STPlace *place) {
+                    [_places setObject:place forKey:place.placeId];
+                } error:^(NSError *error) {
+                    NSLog(@"ERROR %@", error);
+                }];
+            }
+            _placeID = places;
+            _lastPage = 1;
+            [self.tableView reloadData];
+        }
+    } error:^(NSError *error) {
+        NSLog(@"ERROR: %@", error);
+    }];
+}
+
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     STBoardViewController *vc =  (STBoardViewController *)segue.destinationViewController;
     vc.place = sender;
@@ -74,36 +101,79 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_currentToken != 0) {
-        return _numberOfChekins;
-    }
-    return 0;
+    return _checkinCount;
 }
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CheckinCellIdentifier"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CheckinCellIdentifier"];
     }
-    [[STHiveCluster spawnOverlord] getCheckInHistoryPlaceForToken:_currentToken andPosition:_numberOfChekins - indexPath.row - 1  completion:^(STPlace *place) {
-        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-        [currentCell.textLabel setText:place.placeName];
-        [currentCell setNeedsLayout];
-        [currentCell layoutIfNeeded];
-        currentCell.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
-    } error:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
+    [cell.textLabel setText:@"Carregando"];
+    cell.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
+    if(indexPath.row < _placeID.count){
+        NSNumber * pId = _placeID[indexPath.row];
+        STPlace * _place = [_places objectForKey:pId];
+        if(_place){
+            [cell.textLabel setText:_place.placeName];
+            [cell setNeedsLayout];
+            [cell layoutIfNeeded];
+        } else{
+            [_overlord resolvePlaceById:pId completion:^(STPlace *place) {
+                [_places setObject:place forKey:place.placeId];
+                UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+                currentCell.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
+                [currentCell.textLabel setText:place.placeName];
+                [currentCell setNeedsLayout];
+                [currentCell layoutIfNeeded];
+            } error:^(NSError *error) {
+                NSLog(@"ERROR %@", error);
+            }];
+        }
+    }
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[STHiveCluster spawnOverlord] getCheckInHistoryPlaceForToken:_currentToken andPosition:_numberOfChekins - indexPath.row - 1  completion:^(STPlace *place) {
-        [self performSegueWithIdentifier:@"HistoryToBoardSegue" sender:place];
-    } error:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
+    if(indexPath.row < _placeID.count){
+        NSNumber * pID = _placeID[indexPath.row];
+        STPlace * place = [_places objectForKey:pID];
+        if(place){
+            [self performSegueWithIdentifier:@"HistoryToBoardSegue" sender:place];
+        }
+    }
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row > _placeID.count){
+        [_lock lock];
+        if(_loading){
+            [_lock unlock];
+            return;
+        } else{
+            _loading = YES;
+            [_lock unlock];
+        }
+        [_overlord getCheckInHistoryPlacesInPage:_lastPage+1 forUser:self.user completion:^(NSArray *places, NSArray *dates, NSUInteger count, NSUInteger pages) {
+            for(int i = 0; i < places.count; i++){
+                NSNumber * number = places[i];
+                [_overlord resolvePlaceById:number completion:^(STPlace *place) {
+                    [_places setObject:place forKey:place.placeId];
+                } error:^(NSError *error) {
+                    NSLog(@"ERROR %@", error);
+                }];
+            }
+            NSMutableArray * arr = [NSMutableArray arrayWithArray:_placeID];
+            [arr addObjectsFromArray:places];
+            [_lock lock];
+            _lastPage++;
+            _loading = NO;
+            [_lock unlock];
+            [self.tableView reloadData];
+        } error:^(NSError *error) {
+            NSLog(@"ERROR %@", error);
+        }];
+    }
 }
 - (void)didReceiveMemoryWarning
 {

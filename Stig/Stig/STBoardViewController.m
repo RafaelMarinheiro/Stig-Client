@@ -14,11 +14,15 @@
 @end
 
 @implementation STBoardViewController{
-    NSMutableDictionary *_heightsDictionary;
+    NSCache *_heightsDictionary;
     id<STOverlord> _overlord;
-    NSUInteger _currentToken;
-    NSUInteger _numberOfCommentsForToken;
-    BOOL _loadedMetadata;
+    NSLock * _lock;
+    BOOL _loading;
+    NSArray * _comments;
+    NSCache * _users;
+    NSUInteger _commentCount;
+    NSUInteger _pageCount;
+    NSUInteger _lastPage;
     BOOL _viewAppearing;
 }
 - (void) viewWillAppear:(BOOL)animated {
@@ -30,19 +34,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _heightsDictionary = [[NSCache alloc] init];
+    _viewAppearing = YES;
+    _loading = NO;
+    _lock = [[NSLock alloc] init];
+    _users = [[NSCache alloc] init];
+    _comments = [NSArray array];
+    _commentCount = 0;
+    _pageCount = 0;
+    _lastPage = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _overlord = [STHiveCluster spawnOverlord];
     
     [self setupViews];
     self.title = self.place.placeName;
-    _loadedMetadata = NO;
     
     [self refreshData:^(BOOL completed) {
         if (completed) {
             self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Puxe para atualizar"];
+            [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         }else {
             self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Falha ao carregar os dados"];
+            [self.tableView reloadData];
         }
     }];
 }
@@ -83,23 +97,44 @@
 #pragma mark - Overlord Communication
 
 - (void) refreshData:(void(^)(BOOL completed))completion {
-    NSUInteger token = [_overlord requestTokenForBoard:self.place filteringWithStickers:self.selectedStickers];
-    _currentToken = token;
-    [_overlord getNumberOfCommentsForToken:token completion:^(NSUInteger numberOfCommentsForToken){
-        if (_viewAppearing) {
-            _numberOfCommentsForToken = numberOfCommentsForToken;
-            _loadedMetadata = YES;
-            _heightsDictionary = [[NSMutableDictionary alloc] initWithCapacity:30];
-            [self.tableView reloadData];
-            if (completion) {
-                completion(YES);
+    [_overlord getCommentsInPage:1 ForPlace:self.place filteringWithStickers:self.selectedStickers completion:^(NSArray *comments, NSUInteger count, NSUInteger pageCount) {
+        if(count == _commentCount){
+            if(completion) completion(YES);
+        } else{
+            _commentCount = count;
+            _pageCount = pageCount;
+            for(int i = 0; i < comments.count; i++){
+                STBoardComment * comment = comments[i];
+                [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
+                    [_users setObject:user forKey:user.userId];
+                } error:^(NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
+            }
+            _lastPage = _pageCount;
+            if(_lastPage <= 1){
+                _comments = comments;
+                if(completion) completion(YES);
+            } else{
+                [_overlord getCommentsInPage:_lastPage ForPlace:self.place filteringWithStickers:self.selectedStickers completion:^(NSArray *comments, NSUInteger count, NSUInteger pageCount) {
+                    for(int i = 0; i < comments.count; i++){
+                        STBoardComment * comment = comments[i];
+                        [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
+                            [_users setObject:user forKey:user.userId];
+                        } error:^(NSError *error) {
+                            NSLog(@"Error: %@", error);
+                        }];
+                    }
+                    _comments = comments;
+                    if(completion) completion(YES);
+                } error:^(NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
             }
         }
-    }error:^(NSError *error) {
-        NSLog(@"REquesting data! AND BIG ERROR %@ %@", error, self.place);
-        if (completion) {
-            completion(NO);
-        }
+    } error:^(NSError *error) {
+        NSLog(@"ERROR: %@", error);
+        if(completion) completion(NO);
     }];
 }
 - (UITableViewCell *) getHeaderCellFromTableView:(UITableView *) tableView{
@@ -116,27 +151,49 @@
     [cell.contentView sendSubviewToBack:imageView];
     return cell;
 }
+
 - (UITableViewCell *) getCommentCellFromTableView:(UITableView *) tableView andIndexPath:(NSIndexPath *) indexPath{
     static NSString *CellIdentifier = @"STBoardCommentIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    STBoardCommentView *reuse = (STBoardCommentView *) [cell.contentView viewWithTag:100];
-    [reuse prepareForReuse];
-        [_overlord getCommentAndUserForToken:_currentToken andPosition:_numberOfCommentsForToken - indexPath.row-1 completion:^(STBoardComment *comment, STUser *user){
-            if (_viewAppearing) {
-                UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
-                STBoardCommentView *commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
-                commentView.delegate = self;
-                [commentView populateWithComment:comment andUser:user];
-                NSNumber *position = @(indexPath.row);
-                if (!_heightsDictionary[position]) {
-                    [self setHeight:commentView.cellHeight forPosition:position];
-                    //[tableView reloadData];
-                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
+    STBoardCommentView *commentView = (STBoardCommentView *) [cell.contentView viewWithTag:100];
+    [commentView prepareForReuse];
+    if(indexPath.row < _comments.count){
+        STBoardComment * comment = _comments[_comments.count - 1 - indexPath.row];
+        STUser * _user = [_users objectForKey:comment.userId];
+        if(_user){
+            commentView.delegate = self;
+            [commentView populateWithComment:comment andUser:_user];
+            NSNumber * height = [_heightsDictionary objectForKey:comment.commentId];
+            if(!height){
+                [_heightsDictionary setObject:@(commentView.cellHeight) forKey:comment.commentId];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                });
             }
-        }error:^(NSError *error){
-            
-        }];
+            return cell;
+        } else{
+            [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
+                [_users setObject:user forKey:user.userId];
+                    UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+                    if(currentCell){
+                        STBoardCommentView * commentView = (STBoardCommentView *) [currentCell.contentView viewWithTag:100];
+                        commentView.delegate = self;
+                        [commentView populateWithComment:comment andUser:user];
+                        NSNumber * height = [_heightsDictionary objectForKey:comment.commentId];
+                        if(!height){
+                            [_heightsDictionary setObject:@(commentView.cellHeight) forKey:comment.commentId];
+                        }
+                        NSLog(@"%d", indexPath.row);
+                        [commentView setNeedsDisplay];
+                        [commentView setNeedsLayout];
+                        [commentView layoutIfNeeded];
+                        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+            } error:^(NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+        }
+    }
     return cell;
 }
 #pragma mark - Table view data source
@@ -151,10 +208,7 @@
     if (section == 0) {
         return 1;
     } else {
-        if (_loadedMetadata) {
-            return _numberOfCommentsForToken;
-        }
-        return 0;
+        return _commentCount;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,21 +222,63 @@
 - (void) setHeight:(CGFloat) height forPosition:(NSNumber *) position {
     [_heightsDictionary setObject:@(height) forKey:position];
 }
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row > _comments.count){
+        [_lock lock];
+        if (_loading){
+            [_lock unlock];
+            return;
+        } else{
+            _loading = YES;
+            [_lock unlock];
+        }
+        [_overlord getCommentsInPage:_lastPage-1 ForPlace:self.place filteringWithStickers:self.selectedStickers completion:^(NSArray *comments, NSUInteger count, NSUInteger pageCount) {
+            for(int i = 0; i < comments.count; i++){
+                STBoardComment * comment = comments[i];
+                [_overlord resolveUserById:comment.userId completion:^(STUser *user) {
+                    [_users setObject:user forKey:user.userId];
+                } error:^(NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
+            }
+            NSMutableArray * arr = [NSMutableArray arrayWithArray:comments];
+            [arr addObjectsFromArray:_comments];
+            _comments = arr;
+            [_lock lock];
+            _lastPage--;
+            _loading = NO;
+            [_lock unlock];
+            [self.tableView reloadData];
+        } error:^(NSError *error) {
+            [_lock lock];
+            _loading = NO;
+            [_lock unlock];
+            NSLog(@"ERROR: %@", error);
+        }];
+    }
+}
 #pragma mark - Table view delegate
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 100.0;
     }
-    NSNumber *height = [_heightsDictionary objectForKey:@(indexPath.row)];
-    if (height) {
-        return [height floatValue];
+    
+    if(indexPath.row < _comments.count){
+        STBoardComment * comment = _comments[_comments.count - 1 - indexPath.row];
+        NSNumber *height = [_heightsDictionary objectForKey:comment.commentId];
+        if (height) {
+            return [height floatValue];
+        }
     }
     return 80.0;
 }
 #pragma mark - Callbacks
 - (void) stickerPickerSelectionDidChange:(STStickerPickerView *)stickerPicker {
     self.selectedStickers = stickerPicker.selectedStickers;
-    [self refreshData:nil];
+    [self refreshData:^(BOOL completed) {
+        [self.tableView reloadData];
+    }];
 }
 - (void) backButtonPressed:(id) sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -193,13 +289,14 @@
         STComposePostViewController * vc = [sb instantiateViewControllerWithIdentifier:@"STComposePostViewController"];
         vc.completionHandler = ^(BOOL completed) {
             if (completed) {
-                [self refreshData:nil];
+                [self refreshData:^(BOOL completed) {
+                    [self.tableView reloadData];
+                }];
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Erro ao postar comentário!"delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [alert show];
             }
         };
-        vc.overlordToken = _currentToken;
         vc.place = self.place;
         [self presentViewController:vc animated:YES completion:nil];
     } else {
@@ -306,4 +403,6 @@
         NSLog(@"Error on dislike: %@", error);
     }];
 }
+
+
 @end

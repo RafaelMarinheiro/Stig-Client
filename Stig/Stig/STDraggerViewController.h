@@ -20,7 +20,7 @@ typedef enum {
 } STDraggerState;
 @protocol STDraggerViewControllerDelegate;
 
-@interface STDraggerViewController : UIViewController <STPlacesMapViewControllerDelegate>
+@interface STDraggerViewController : UIViewController <STPlacesMapViewControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalSpaceConstraint;
 @property (nonatomic, strong) UIPanGestureRecognizer *dragGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIView *mainView;

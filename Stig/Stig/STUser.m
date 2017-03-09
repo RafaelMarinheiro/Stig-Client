@@ -18,6 +18,7 @@
         user.userName = dictionary[@"name"];
         user.location = [STLocation locationFromJSONData:dictionary[@"location"]];
         user.userPlaceId = dictionary[@"place"];
+        user.points = dictionary[@"points"];
         return user;
     }
     return nil;
@@ -25,7 +26,7 @@
 
 +(STUser *) userFromServerJSONData:(id)json {
     if ([json isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"HI");
+        NSLog(@"USER CREATION FROM SERVER!");
         NSDictionary *dictionary = json;
         STUser *user = [[STUser alloc] init];
         user.userId = dictionary[@"id"];
@@ -33,6 +34,7 @@
         user.userName = [[dictionary[@"first_name"] stringByAppendingString:@" "] stringByAppendingString:dictionary[@"last_name"]];
         user.location = nil;
         user.userPlaceId = dictionary[@"place"];
+        user.points = dictionary[@"points"];
         return user;
     }
     return nil;

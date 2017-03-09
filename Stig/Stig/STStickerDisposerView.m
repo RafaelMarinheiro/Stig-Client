@@ -206,13 +206,11 @@
             deltaTiming *= 2*M_PI;
             
             [UIView animateWithDuration:0.1+deltaTiming  delay:0.0  options: UIViewAnimationOptionBeginFromCurrentState animations:^{
-                NSLog(@"HIDER :Animate  %d", self.stickerType);
                 button.transform = CGAffineTransformIdentity;
                 if (button.tag != tag) {
                     button.alpha = 0.0;
                 }
             }  completion:^(BOOL completed){
-                NSLog(@"HIDER :Completed  %d", self.stickerType);
                 if ([button isEqual:[_buttons lastObject]]) {
                     _animating = NO;
                     [self didHide];

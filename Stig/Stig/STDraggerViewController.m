@@ -10,10 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MMDrawerController.h"
 #import "UIViewController+MMDrawerController.h"
+#import <MapKit/MapKit.h>
 
-static CGFloat const STDraggerShowingHeight = 100.0;
-static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
-static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
+
+//static CGFloat const STDraggerShowingHeight = 100.0;
+//static CGFloat const STDraggerPercentageInitial = STDraggerShowingHeight + 50.0;
+//static CGFloat const STDraggerPercentageFinal = STDraggerPercentageInitial + 130.0;
 static CGFloat const STDraggerBounceDelta = 5.0;
 
 //static CGFloat const STDraggerTotalHeight = 501.0;
@@ -31,7 +33,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 }
 - (CGFloat) animationFinalHeight {
     CGFloat totalFrameHeight = self.view.frame.size.height;
-    return totalFrameHeight * 1.03;
+    return totalFrameHeight * 0.8;
 }
 - (CGFloat) animationPercentage {
     CGFloat constraintConstant = -self.verticalSpaceConstraint.constant;
@@ -53,13 +55,16 @@ static CGFloat const STDraggerBounceDelta = 5.0;
 }
 - (void) viewWillAppear:(BOOL)animated {
     self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"barra_logostig"] forBarMetrics:UIBarMetricsDefault];
 }
 - (void) viewWillDisappear:(BOOL)animated {
     self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"";
     _state = STDraggerStateHidden;
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                   initWithTarget:self action:@selector(respondToPanGesture:)];
@@ -112,7 +117,7 @@ static CGFloat const STDraggerBounceDelta = 5.0;
             }];
         };
 
-        self.verticalSpaceConstraint.constant = -(translation.y + STDraggerShowingHeight);
+        self.verticalSpaceConstraint.constant = -(translation.y + [self showingHeight]);
         [self.view layoutIfNeeded];
 
         CGFloat percentage = [self animationPercentage];
@@ -142,10 +147,10 @@ static CGFloat const STDraggerBounceDelta = 5.0;
         _state = STDraggerStateAnimating;
         [self draggerWillShowCallout];
         [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.verticalSpaceConstraint.constant = -(STDraggerShowingHeight + STDraggerBounceDelta);
+            self.verticalSpaceConstraint.constant = -([self showingHeight] + STDraggerBounceDelta);
             [self.view layoutIfNeeded];
         }completion:^(BOOL completed){
-            self.verticalSpaceConstraint.constant = -STDraggerShowingHeight;
+            self.verticalSpaceConstraint.constant = -[self showingHeight];
             [UIView animateWithDuration:0.10 animations:^{
                 [self.view layoutIfNeeded];
             }completion:^(BOOL completed){
@@ -185,10 +190,10 @@ static CGFloat const STDraggerBounceDelta = 5.0;
         _state = STDraggerStateAnimating;
         
         [UIView animateWithDuration:0.20 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.verticalSpaceConstraint.constant = -(STDraggerShowingHeight - STDraggerBounceDelta);
+            self.verticalSpaceConstraint.constant = -([self showingHeight] - STDraggerBounceDelta);
             [self.view layoutIfNeeded];
         }completion:^(BOOL completed){
-            self.verticalSpaceConstraint.constant = -STDraggerShowingHeight;
+            self.verticalSpaceConstraint.constant = -[self showingHeight];
             [UIView animateWithDuration:0.10 animations:^{
                 [self.view layoutIfNeeded];
             }completion:^(BOOL completed){
@@ -201,10 +206,43 @@ static CGFloat const STDraggerBounceDelta = 5.0;
     }
 }
 
+- (double) distanceInMetersToPlace: (STPlace *) place{
+    id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+    STLocation * location = [overlord userLocation];
+    CLLocationCoordinate2D coord = [location locationCoordinate];
+    CLLocation * userLocation = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+    CLLocationCoordinate2D pcoord = [[place location] locationCoordinate];
+    CLLocation * placeLocation = [[CLLocation alloc]initWithLatitude:pcoord.latitude longitude:pcoord.longitude];
+    double dist = [userLocation distanceFromLocation:placeLocation];
+    return dist;
+}
+
+#pragma mark - Action Sheet Delegate
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        if([self distanceInMetersToPlace:self.mapViewController.selectedPlace] < 300){
+            id<STOverlord> overlord = [STHiveCluster spawnOverlord];
+            [overlord checkInPlace:self.mapViewController.selectedPlace completion:^(STUser *user, STPlace *place) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!" message:[NSString stringWithFormat:@"Check in feito em: %@", place.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+                [alert show];
+            } error:^(NSError *error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Falha ao fazer check-in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+            }];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Você está muito longe desse lugar!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+}
+
+
 #pragma mark - Delegate Notification
 - (void) draggerCompletedCheckin {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Checkin!" message:[NSString stringWithFormat:@"Checkin at: %@", self.mapViewController.selectedPlace.placeName] delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-    [alert show];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Confirmar check-in?" delegate:self cancelButtonTitle:@"Não" destructiveButtonTitle:nil otherButtonTitles: @"Sim",nil];
+    [sheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+
+    [sheet showInView:self.view];
 }
 - (void) draggerSliderButtonPressed {
     if (self.delegate && [self.delegate respondsToSelector:@selector(draggerViewControllerSliderButtonPressed:)]) {

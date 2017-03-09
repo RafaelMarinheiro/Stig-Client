@@ -123,7 +123,11 @@
         [self setSticker:sticker];
     }
 }
-
+- (void) setStickers:(NSArray *) stickers {
+    for (STSticker *sticker in stickers) {
+        [self setSticker:sticker];
+    }
+}
 #pragma mark - User interaction
 - (void) stickerButtonPressed:(UIButton *) button {
     STSticker *s = [self stickerForButton:button];

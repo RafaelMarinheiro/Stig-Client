@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet STStickerPickerView *stickerSelector;
 @property (weak, nonatomic) IBOutlet STCheckInAnimationView *animationView;
 - (void) changeForPercentage:(CGFloat) percentage;
+- (IBAction)driveButtonPressed:(id)sender;
 
 @end

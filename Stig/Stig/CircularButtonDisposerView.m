@@ -29,7 +29,8 @@
     }
     return self;
 }
-- (void) config {
+
+- (void) configWithNumberOfButtons: (NSUInteger) numberOfButtons{
     _shouldRotateMainButton = NO;
     _disposeToTheRight = YES;
     _disposeToTheBottom = NO;
@@ -37,15 +38,22 @@
     _animating = NO;
     _collapsesAfterButtonPress = YES;
     self.disposeRadius = @70.0;
-    self.disposeAngle = @(M_PI/2.0);
+    if(numberOfButtons == 2){
+        self.disposeRadius = @60.0;
+    }
+    if(numberOfButtons == 2){
+        self.disposeAngle = @(M_PI/3);
+    } else{
+        self.disposeAngle = @(M_PI/2);
+    }
     self.disposeCenter = CGPointMake(30.0, 30.0);
-    self.numberOfButtons = 3;
+    self.numberOfButtons = numberOfButtons;
     self.bounceRadiusDelta = 3.0;
     
     CGRect frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
-
+    
     NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:self.numberOfButtons];
-
+    
     for (int i =0; i < self.numberOfButtons; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i;
@@ -58,15 +66,18 @@
         button.hidden = YES;
     }
     self.buttons = buttons;
-
+    
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
- 
+    
     self.mainButton.frame = frame;
     [self.mainButton setEnabled:YES];
     [self.mainButton setUserInteractionEnabled:YES];
     [self.mainButton addTarget:self action:@selector(mainButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.mainButton];
     self.userInteractionEnabled = YES;
+}
+- (void) config {
+//    [self configWithNumberOfButtons:3];
 }
 #pragma mark -
 #pragma mark User Reaction
@@ -118,7 +129,11 @@
 #pragma mark -
 #pragma mark Transform Calculation
 - (CGAffineTransform) transformForPosition:(NSUInteger) position withDisposeRadius: (float) disposeRadius disposeAngle:(float) disposeAngle andAnimationCenter:(CGPoint) center {
+    
     float theta = (disposeAngle / (self.numberOfButtons - 1)) * position;
+    if(self.numberOfButtons == 2){
+        theta += M_PI/12;
+    }
     float deltaX = cosf(theta) * disposeRadius;
     float deltaY = - sinf(theta) * disposeRadius;
 

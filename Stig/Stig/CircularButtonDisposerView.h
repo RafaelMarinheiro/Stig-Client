@@ -27,6 +27,7 @@
 @property (nonatomic) BOOL collapsesAfterButtonPress;
 
 -(void) toggleDispose;
+-(void) configWithNumberOfButtons: (NSUInteger) numberOfButtons;
 
 @end
 

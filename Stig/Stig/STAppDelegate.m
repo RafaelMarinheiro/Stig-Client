@@ -9,16 +9,43 @@
 #import "STAppDelegate.h"
 #import "STSticker.h"
 #import <QuartzCore/QuartzCore.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import "AFNetworking.h"
+#import "STOverlord.h"
+#import "UIColor+Stig.h"
+
 @implementation STAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     // Override point for customization after application launch.
     UIFont *testFont = [UIFont fontWithName:@"Futura" size:20.0];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont:testFont,UITextAttributeTextColor:[UIColor whiteColor],
                           UITextAttributeTextShadowColor:[UIColor clearColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"barra_topo_stig"] forBarMetrics:UIBarMetricsDefault];
+
+    NSDictionary *barButtonAppearanceDict = @{UITextAttributeFont : [UIFont fontWithName:@"Futura" size:14.0]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
     //self.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+
+//    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+//                                                         diskCapacity:20 * 1024 * 1024
+//                                                             diskPath:nil];
+//    [NSURLCache setSharedURLCache:URLCache];
+
+
+    [[STHiveCluster spawnOverlord] authenticateUserOpeningUI:NO completion:^(STUser *user) {
+        
+    } error:^(NSError *error) {
+        
+    }];
+
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"border-button.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //[attributes setValue:[UIColor whiteColor] forKey:UITextAttributeTextShadowColor];
+    NSDictionary * attributes = @{UITextAttributeTextColor:[UIColor stigWhite],UITextAttributeTextShadowColor:[UIColor clearColor]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
     return YES;
 }
 							
@@ -47,6 +74,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [FBSession.activeSession handleOpenURL: url];
 }
 
 @end

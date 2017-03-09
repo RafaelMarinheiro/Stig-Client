@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STProfileViewController : UIViewController
+@interface STProfileViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
+@property (strong, nonatomic) STUser *user;
 - (IBAction)backButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

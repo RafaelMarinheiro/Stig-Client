@@ -21,7 +21,7 @@
 
     UIViewController *left = [storyboard instantiateViewControllerWithIdentifier:@"STPlacesListViewController"];
     if (self = [super initWithCenterViewController:center leftDrawerViewController:left rightDrawerViewController:nil]) {
-        [self setMaximumLeftDrawerWidth:240.0];
+        [self setMaximumLeftDrawerWidth:270.0];
         [self setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
         [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
 

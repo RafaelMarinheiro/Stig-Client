@@ -12,18 +12,13 @@
 #import "UIImageView+AFNetworking.h"
 #import "STBoardCommentView.h"
 #import "STStickerPickerView.h"
-@interface STBoardViewController : UIViewController <UITextFieldDelegate,STStickerPickerViewDelegate>
+@interface STBoardViewController : UITableViewController <UITextFieldDelegate,STStickerPickerViewDelegate, STSwipeDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) STPlace *place;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UIFont *commentFont;
-@property (nonatomic, strong) UIFont *userNameFont;
 @property (weak, nonatomic) IBOutlet UIView *stickersView;
 @property (weak, nonatomic) IBOutlet UILabel *topBatTitle;
 @property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
-- (IBAction)stickerButtonPressed:(UIButton *)sender;
-- (IBAction)backButtonPressed:(UIButton *)sender;
+@property (nonatomic, strong) NSArray *selectedStickers;
 - (IBAction)postButtonPressed:(id)sender;
-
-
+- (IBAction)directionsButtonPressed:(id)sender;
 @end

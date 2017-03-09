@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "STLocation.h"
 #import "STRanking.h"
+#import "STSticker.h"
 
 @interface STPlace : NSObject <MKOverlay>
 
@@ -18,8 +19,9 @@
 @property (nonatomic, strong) NSString *placeDescription;
 @property (nonatomic, strong) STLocation *location;
 @property (nonatomic, strong) NSArray *friends;
-@property (nonatomic, strong) NSDictionary *stickers;
+@property (nonatomic, strong) NSArray *stickers;
 @property (nonatomic, strong) STRanking *ranking;
+@property (nonatomic, strong) STSticker *mostRelevantSticker;
 + (STPlace *) placeFromJSONData:(id) json;
 + (STPlace *) placeFromServerJSONData:(id) json;
 - (CLLocationCoordinate2D) coordinate;

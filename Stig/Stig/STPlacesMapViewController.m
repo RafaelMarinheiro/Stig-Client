@@ -20,6 +20,8 @@
     STPlace *_selectedPlace;
     STOverlordToken _overlordToken;
     CLLocationManager *_locationManager;
+    CLLocation *_currentLocation;
+    BOOL _locationLoaded;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,32 +47,51 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _locationLoaded = NO;
     _rankingCriteria = ST_OVERALL;
-
+    [self startLocationServices];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
+    [self.filterDisposerView configWithNumberOfButtons:3];
     [self.filterDisposerView.mainButton setImage:[UIImage imageNamed:@"filter_yellow_50"] forState:UIControlStateNormal];
-    [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-intercalation"] forState:UIControlStateNormal];
+    [self.filterDisposerView.buttons[0] setImage:[UIImage imageNamed:@"filter-trophy-44"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[1] setImage:[UIImage imageNamed:@"filter-buzz-44"] forState:UIControlStateNormal];
     [self.filterDisposerView.buttons[2] setImage:[UIImage imageNamed:@"filter-social-44"] forState:UIControlStateNormal];
     self.filterDisposerView.delegate = self;
 
+    [self.optionsDisposerView configWithNumberOfButtons:2];
+    
     [self.optionsDisposerView.mainButton setImage:[UIImage imageNamed:@"plus_yellow_50.png"] forState:UIControlStateNormal];
     [self.optionsDisposerView.buttons[0] setImage:[UIImage imageNamed:@"plus-config-44.png"] forState:UIControlStateNormal];
-    [self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-historico-44.png"] forState:UIControlStateNormal];
-    [self.optionsDisposerView.buttons[2] setImage:[UIImage imageNamed:@"plus-me-44.png"] forState:UIControlStateNormal];
+    //[self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-historico-44.png"] forState:UIControlStateNormal];
+    [self.optionsDisposerView.buttons[1] setImage:[UIImage imageNamed:@"plus-me-44.png"] forState:UIControlStateNormal];
     self.optionsDisposerView.delegate = self;
     self.optionsDisposerView.shouldRotateMainButton = YES;
     self.optionsDisposerView.disposeToTheRight = NO;
-    [self loadPlaces];
 }
 
 - (void) startLocationServices {
-    if (![CLLocationManager locationServicesEnabled]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location" message:@"You should enable the location services so we can help you find the best place to go!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
-    [alert show];
+    if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        [self loadPlaces];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Localização" message:@"Você deve ativar os serviços de localização para que nós possamos encontrar os melhores lugares para você!" delegate:nil cancelButtonTitle:@"OK!" otherButtonTitles: nil];
+        [alert show];
+    } else if(![CLLocationManager significantLocationChangeMonitoringAvailable]){
+        [self loadPlaces];
     }
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
     
+}
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    _currentLocation = locations[0];
+    [[STHiveCluster spawnOverlord] setUserLocation:[STLocation locationFromCLLocationCoordinate2D:_currentLocation.coordinate]];
+    NSLog(@"Location update : %@", _currentLocation);
+    if (!_locationLoaded) {
+        _locationLoaded = YES;
+        [self centerMapOnLocation:_currentLocation.coordinate];
+        [self loadPlaces];
+    }
 }
 - (void) loadPlaces {
     id <STOverlord> overlord = [STHiveCluster spawnOverlord];
@@ -101,23 +122,32 @@
 - (IBAction)suggestionButtonPressed:(id)sender {
     double k = -1;
 
-    for(int i = 0; i < [self.places count]; i++){
-        STPlace * place = [self.places objectAtIndex:i];
-        if([place.ranking.buzz floatValue] + [place.ranking.social floatValue] > k){
-            k = [place.ranking.buzz floatValue] + [place.ranking.social floatValue];
-            _selectedPlace = place;
+    for(int i = 0; i < [self.mapView.annotations count]; i++){
+        STPlace * place = [self.mapView.annotations objectAtIndex: i];
+        if([place isKindOfClass: [STPlace class]]){
+            if([place.ranking.overall floatValue] > k){
+                k = [place.ranking.overall floatValue];
+                _selectedPlace = place;
+            }
         }
     }
-    [self selectPlace:_selectedPlace];
+
+    if (k != -1){
+        [self selectPlace:_selectedPlace];
+    }
 }
-#pragma mark - Setters
-- (void) selectPlace:(STPlace *) place {
-    _selectedPlace = place;
-    [self.mapView selectAnnotation:place animated:NO];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_selectedPlace.coordinate, 1000, 1000);
+- (void) centerMapOnLocation:(CLLocationCoordinate2D) location {
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location, 1000, 1000);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
     [self.mapView setRegion:adjustedRegion animated:YES];
 }
+- (void) selectPlace:(STPlace *) place {
+    _selectedPlace = place;
+    [self.mapView selectAnnotation:place animated:NO];
+    [self centerMapOnLocation:_selectedPlace.coordinate];
+}
+#pragma mark - Setters
+
 - (void) setRankingCriteria:(STRankingCriteria)rankingCriteria {
     _rankingCriteria = rankingCriteria;
     
@@ -134,16 +164,24 @@
 #pragma mark - Circular Disposer Delegate
 - (void) circularButtonDisposerViewWillDispose:(CircularButtonDisposerView *)disposer {
     if (self.filterDisposerView == disposer) {
-        self.optionsDisposerView.alpha = 0.2;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.optionsDisposerView.alpha = 0.2;
+        }];
     }else {
-        self.filterDisposerView.alpha = 0.2;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.filterDisposerView.alpha = 0.2;
+        }];
     }
-    self.suggestionButton.alpha = 0.2;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.suggestionButton.alpha = 0.2;
+    }];
 }
 - (void) circularButtonDisposerViewWillHide:(CircularButtonDisposerView *)disposer {
-    self.filterDisposerView.alpha = 1.0;
-    self.optionsDisposerView.alpha = 1.0;
-    self.suggestionButton.alpha = 1.0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.filterDisposerView.alpha = 1.0;
+        self.optionsDisposerView.alpha = 1.0;
+        self.suggestionButton.alpha = 1.0;
+    }];
 }
 - (void) circularButtonDisposerView:(CircularButtonDisposerView *)disposer buttonPressed:(NSUInteger)buttonTag {
     if (disposer == self.filterDisposerView) {
@@ -157,13 +195,17 @@
         }
         [self setRankingCriteria:crit];
     }else {
-        if (buttonTag == 0) {
-            STConfigViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STConfig"];
-            [self presentViewController:vc animated:YES completion:nil];
-        }else if (buttonTag == 2) {
-            STProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"STProfileViewController"];
-            [self.navigationController pushViewController:vc animated:YES];
+        id <STOverlord> overlord = [STHiveCluster spawnOverlord];
+        if (overlord.user) {
+            if (buttonTag == 0) {
+                [self performSegueWithIdentifier:@"settingsSegue" sender:nil];
+            }else if (buttonTag == 1) {
+                [self performSegueWithIdentifier:@"profileSegue" sender:nil];
+            }
+        } else {
+            [self performSegueWithIdentifier:@"logInMapSegue" sender:nil];
         }
+        
     }
 }
 #pragma mark - MapView Delegate
@@ -187,10 +229,10 @@
 
         if(!pin){
             pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            //pin.image = [UIImage imageNamed:@"pin_intercalation"];
             [((MKPinAnnotationView *)pin) setPinColor:MKPinAnnotationColorRed];
-            pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            //pin = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            //pin.image = [UIImage imageNamed:@"icon_pin"];
+            
         }
         return pin;
     }
